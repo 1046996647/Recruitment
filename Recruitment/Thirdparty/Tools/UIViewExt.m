@@ -229,12 +229,9 @@ CGRect CGRectMoveToCenter(CGRect rect, CGPoint center)
 }
 
 // UITextField
-+ (UITextField *)textFieldWithframe:(CGRect)frame placeholder:(NSString *)placeholder font:(UIFont *)font leftFrame:(CGRect)leftFrame leftIcon:(NSString *)leftIcon
++ (UITextField *)textFieldWithframe:(CGRect)frame placeholder:(NSString *)placeholder font:(UIFont *)font leftView:(UIView *)leftView backgroundColor:(NSString *)backColor
 {
     
-    UIImageView *leftView = [[UIImageView alloc] initWithFrame:leftFrame];
-    leftView.contentMode = UIViewContentModeScaleAspectFit;
-    leftView.image = [UIImage imageNamed:leftIcon];
     
     UITextField *tf = [[UITextField alloc] initWithFrame:frame];
     
@@ -244,17 +241,19 @@ CGRect CGRectMoveToCenter(CGRect rect, CGPoint center)
 //    tf.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
     tf.leftViewMode = UITextFieldViewModeAlways;
     tf.leftView = leftView;
-    
+    tf.backgroundColor = [UIColor colorWithHexString:backColor];
+
     return tf;
 }
 
 // UITableView
 + (UITableView *)tableViewWithframe:(CGRect)frame 
 {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+    UITableView *tableView = [[self alloc] initWithFrame:frame style:UITableViewStylePlain];
     //        _tableView.scrollEnabled = NO;
     tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;// 滑动时收起键盘
     tableView.tableFooterView = [[UIView alloc] init];
+    tableView.backgroundColor = [UIColor clearColor];
     
     return tableView;
 }

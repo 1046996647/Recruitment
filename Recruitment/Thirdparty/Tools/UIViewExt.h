@@ -40,7 +40,7 @@ CGRect  CGRectMoveToCenter(CGRect rect, CGPoint center);
 + (UIButton *)buttonWithframe:(CGRect)frame text:(NSString *)text font:(UIFont *)font textColor:(NSString *)color backgroundColor:(NSString *)backColor normal:(NSString *)normal selected:(NSString *)selected;
 
 // UITextField
-+ (UITextField *)textFieldWithframe:(CGRect)frame placeholder:(NSString *)placeholder font:(UIFont *)font leftFrame:(CGRect)leftFrame leftIcon:(NSString *)leftIcon;
++ (UITextField *)textFieldWithframe:(CGRect)frame placeholder:(NSString *)placeholder font:(UIFont *)font leftView:(UIView *)leftView backgroundColor:(NSString *)backColor;
 
 // UITableView
 + (UITableView *)tableViewWithframe:(CGRect)frame;

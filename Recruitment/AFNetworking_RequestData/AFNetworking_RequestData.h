@@ -23,12 +23,14 @@ typedef void(^Failure)(NSError *error);
 #pragma GET请求--------------
 +(void)requestMethodGetUrl:(NSString*)url
                        dic:(NSMutableDictionary*)dic
+                   showHUD:(BOOL)hud
                     Succed:(Success)succed
                    failure:(Failure)failure;
 
 #pragma POST请求--------------
 +(void)requestMethodPOSTUrl:(NSString*)url
-                  dic:(NSMutableDictionary*)dic
-               Succed:(Success)succed
-              failure:(Failure)failure;
+                        dic:(NSMutableDictionary*)dic
+                    showHUD:(BOOL)hud
+                     Succed:(Success)succed
+                    failure:(Failure)failure;
 @end
