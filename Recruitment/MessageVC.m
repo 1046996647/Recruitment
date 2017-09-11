@@ -8,6 +8,9 @@
 
 #import "MessageVC.h"
 #import "MessageCell.h"
+#import "InvitedVC.h"
+#import "SubscriptionJobVC.h"
+#import "SystemMassageVC.h"
 
 @interface MessageVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -50,6 +53,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0) {
+        SystemMassageVC *vc = [[SystemMassageVC alloc] init];
+        vc.title = @"系统消息";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (indexPath.row == 1) {
+        SubscriptionJobVC *vc = [[SubscriptionJobVC alloc] init];
+        vc.title = @"订阅职位";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (indexPath.row == 2) {
+        InvitedVC *vc = [[InvitedVC alloc] init];
+        vc.title = @"面试邀请";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 

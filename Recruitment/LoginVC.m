@@ -70,7 +70,7 @@
     
     UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12+13, _phone.height)];
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(0, 0, 12, 5);
+    rightBtn.frame = CGRectMake(0, 0, 12, 20);
     rightBtn.center = rightView.center;
     [rightBtn setImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
     [rightBtn setImage:[UIImage imageNamed:@"14"] forState:UIControlStateSelected];

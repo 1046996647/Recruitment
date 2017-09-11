@@ -13,6 +13,8 @@
 #import "JobTableView.h"
 #import "SearchVC.h"
 #import "ApplyJobVC.h"
+#import "PlaceView.h"
+
 
 @interface HomeVC ()
 
@@ -20,11 +22,21 @@
 @property(nonatomic,strong) UIButton *forgetBtn1;
 @property(nonatomic,strong) JobTableView *tableView;
 @property(nonatomic,strong) UITextField *searchTF;
+@property(nonatomic,strong) PlaceView *placeView;
+@property(nonatomic,strong) UIImageView *imgView;
 
 
 @end
 
 @implementation HomeVC
+
+- (PlaceView *)placeView
+{
+    if (!_placeView) {
+        _placeView = [[PlaceView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64)];
+    }
+    return _placeView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,12 +46,15 @@
     
     UIButton *placeBtn = [UIButton buttonWithframe:CGRectMake(16, (44-17)/2, 26+17, 17) text:@"永康" font:[UIFont systemFontOfSize:12] textColor:@"FFFFFF" backgroundColor:nil normal:nil selected:nil];
     placeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    [forgetBtn addTarget:self action:@selector(forgetAction) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:placeBtn];
+    [placeBtn addTarget:self action:@selector(placeAction:) forControlEvents:UIControlEventTouchUpInside];
+
     
     UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(placeBtn.width-12, 0, 12, placeBtn.height) icon:@"55"];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     [placeBtn addSubview:imgView];
+    self.imgView = imgView;
+    self.placeView.imgView = imgView;
     
     UIImageView *imgView1 = [UIImageView imgViewWithframe:CGRectMake(0, 0, 22, 12) icon:@"39"];
     imgView1.contentMode = UIViewContentModeScaleAspectFit;
@@ -68,6 +83,21 @@
     SearchVC *vc = [[SearchVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+- (void)placeAction:(UIButton *)btn
+{
+    btn.selected = !btn.selected;
+    
+    if (btn.selected) {
+        [self.view addSubview:self.placeView];
+        self.imgView.image = [UIImage imageNamed:@"箭头"];
+    }
+    else {
+        [self.placeView removeFromSuperview];
+        self.imgView.image = [UIImage imageNamed:@"55"];
+
+    }
 }
 
 - (void)initHeaderView

@@ -7,6 +7,7 @@
 //
 
 #import "RegisterVC.h"
+#import "PersonalMessageVC.h"
 
 @interface RegisterVC ()
 
@@ -101,6 +102,7 @@
     [leftView addSubview:leftView1];
     
     rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 68+13, _phone.height)];
+    
     rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     rightBtn.frame = CGRectMake(0, 0, 68, 16);
     rightBtn.center = rightView.center;
@@ -123,13 +125,14 @@
     _validate.rightView = rightView;
     _validate.leftViewMode = UITextFieldViewModeAlways;
     _validate.leftView = leftView;
-    _validate.secureTextEntry = YES;
+//    _validate.secureTextEntry = YES;
     
     UIButton *loginBtn = [UIButton buttonWithframe:CGRectMake(_password.left, _validate.bottom+23, _phone.width, _phone.height) text:@"下一步" font:[UIFont systemFontOfSize:13] textColor:@"FFFFFF" backgroundColor:@"#FDA326" normal:nil selected:nil];
     loginBtn.layer.cornerRadius = 7;
-    //    [tf addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventEditingChanged];
     loginBtn.layer.masksToBounds = YES;
     [self.view addSubview:loginBtn];
+    [loginBtn addTarget:self action:@selector(nextAction) forControlEvents:UIControlEventTouchUpInside];
+
     
     if ([self.title isEqualToString:@"注册"]) {
         UILabel *agreeLabel = [UILabel labelWithframe:CGRectMake(_password.left, loginBtn.bottom+16, 90, 14) text:@"注册即表示同意" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#FFFFFF"];
@@ -143,6 +146,19 @@
 
     }
 
+}
+
+- (void)nextAction
+{
+    if ([self.title isEqualToString:@"注册"]) {
+
+        PersonalMessageVC *vc = [[PersonalMessageVC alloc] init];
+        vc.title = @"个人信息";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else {
+        
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {

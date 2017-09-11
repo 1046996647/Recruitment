@@ -68,8 +68,8 @@
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     layout.itemSize = CGSizeMake(width, 26);
 //    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.minimumLineSpacing = 5;
-    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, line.bottom+11, kScreen_Width,26*2+10) collectionViewLayout:layout];
+    layout.minimumLineSpacing = 12;
+    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, line.bottom+11, kScreen_Width,26*2+12) collectionViewLayout:layout];
     collectionView.backgroundColor = [UIColor whiteColor];
     collectionView.delegate = self;
     collectionView.dataSource = self;

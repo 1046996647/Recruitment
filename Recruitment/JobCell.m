@@ -31,7 +31,7 @@
         _kmLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-37-12, _moneyLab.bottom+6, 37, 17) text:@"5.2km" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:@"#999999"];
         [self.contentView addSubview:_kmLab];
         
-        _addressView = [UIImageView imgViewWithframe:CGRectMake(_kmLab.left-10-7, _kmLab.center.y-7, 10, 13) icon:@""];
+        _addressView = [UIImageView imgViewWithframe:CGRectMake(_kmLab.left-10-7, _kmLab.center.y-7, 10, 13) icon:@"40"];
         _addressView.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:_addressView];
         

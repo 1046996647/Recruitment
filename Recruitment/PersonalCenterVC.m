@@ -9,6 +9,9 @@
 #import "PersonalCenterVC.h"
 #import "PersonalCell.h"
 #import "LoginVC.h"
+#import "MyCollectionVC.h"
+#import "OpinionVC.h"
+#import "SettingVC.h"
 
 @interface PersonalCenterVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -81,6 +84,59 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0) {
+        
+        if (indexPath.row == 0) {
+            
+            MyCollectionVC *vc = [[MyCollectionVC alloc] init];
+            vc.title = @"我的收藏";
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        if (indexPath.row == 1) {
+            
+        }
+    }
+    if (indexPath.section == 1) {
+        
+        if (indexPath.row == 0) {
+            
+//            MyCollectionVC *vc = [[MyCollectionVC alloc] init];
+//            vc.title = @"我的收藏";
+//            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        if (indexPath.row == 1) {
+            
+        }
+    }
+    if (indexPath.section == 2) {
+        
+        if (indexPath.row == 0) {
+            
+
+            
+        }
+        if (indexPath.row == 1) {
+            
+            OpinionVC *vc = [[OpinionVC alloc] init];
+            vc.title = @"意见反馈";
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+    }
+    if (indexPath.section == 3) {
+        
+        if (indexPath.row == 0) {
+            
+            SettingVC *vc = [[SettingVC alloc] init];
+            vc.title = @"设置";
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+  
+    }
     
 }
 

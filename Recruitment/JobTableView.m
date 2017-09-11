@@ -52,9 +52,20 @@
         cell = [[JobCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         
     }
+    
+    if (_cellType == 1) {
+        cell.timeLab.hidden = YES;
+    }
 
     
     return cell;
+}
+
+- (void)setCellType:(NSInteger)cellType
+{
+    _cellType = cellType;
+    
+    [self reloadData];
 }
 
 @end

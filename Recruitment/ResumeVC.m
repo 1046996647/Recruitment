@@ -7,6 +7,9 @@
 //
 
 #import "ResumeVC.h"
+#import "EditResumeVC.h"
+#import "SendHistoryVC.h"
+#import "CheckedVC.h"
 
 @interface ResumeVC ()
 
@@ -56,6 +59,9 @@
         UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(i*kScreen_Width/2, imgView.bottom, kScreen_Width/2, 52) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
         [self.view addSubview:forgetBtn];
         self.forgetBtn = forgetBtn;
+        forgetBtn.tag = i;
+        [forgetBtn addTarget:self action:@selector(btnAction1:) forControlEvents:UIControlEventTouchUpInside];
+
         
         UILabel *label1 = [UILabel labelWithframe:CGRectMake(0, 4, forgetBtn.width, 25) text:@"0" font:[UIFont systemFontOfSize:18] textAlignment:NSTextAlignmentCenter textColor:@"#333333"];
         [forgetBtn addSubview:label1];
@@ -79,6 +85,8 @@
         UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(i*kScreen_Width/3, self.forgetBtn.bottom+14, kScreen_Width/3, 64) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
         [self.view addSubview:forgetBtn];
         self.forgetBtn1 = forgetBtn;
+        [forgetBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+        forgetBtn.tag = i;
 
         UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake((forgetBtn.width-20)/2, 11, 20, 20) icon:imgArr[i]];
         imgView.contentMode = UIViewContentModeScaleAspectFit;
@@ -102,6 +110,40 @@
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(14, forgetBtn.height-.5, kScreen_Width-14, .5)];
         line.backgroundColor = [UIColor colorWithHexString:@"#D3D3D3"];
         [forgetBtn addSubview:line];
+        
+    }
+}
+
+- (void)btnAction1:(UIButton *)btn
+{
+    if (btn.tag == 0) {
+        CheckedVC *vc = [[CheckedVC alloc] init];
+        vc.title = @"简历被查看";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else {
+        SendHistoryVC *vc = [[SendHistoryVC alloc] init];
+        vc.title = @"投递历史";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
+}
+
+- (void)btnAction:(UIButton *)btn
+{
+    if (btn.tag == 0) {
+        EditResumeVC *vc = [[EditResumeVC alloc] init];
+        vc.title = @"简历";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (btn.tag == 1) {
+        
+        EditResumeVC *vc = [[EditResumeVC alloc] init];
+        vc.title = @"预览";
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    if (btn.tag == 2) {
         
     }
 }

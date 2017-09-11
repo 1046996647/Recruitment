@@ -14,6 +14,7 @@
 @interface JobTableView : UITableView<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray *dataArr;
+@property(nonatomic,assign) NSInteger cellType;
 
 
 @end
