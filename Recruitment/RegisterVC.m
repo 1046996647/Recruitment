@@ -152,14 +152,65 @@
 {
     if ([self.title isEqualToString:@"注册"]) {
 
-        PersonalMessageVC *vc = [[PersonalMessageVC alloc] init];
-        vc.title = @"个人信息";
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        [self.view endEditing:YES];
+        
+        
+        if (self.phone.text.length == 0 || self.password.text == 0) {
+            [self.view makeToast:@"您还有内容未填写完整"];
+            return;
+        }
+        
+        NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+        [paramDic  setValue:self.phone.text forKey:@"phone"];
+        [paramDic  setValue:self.password.text forKey:@"passwd"];
+        
+        NSString *registStr = nil;
+        
+        if ([self.title isEqualToString:@"注册"]) {
+            
+            registStr = Regist;
+        
+            
+        } else if ([self.title isEqualToString:@"忘记密码"])
+        {
+//            registStr = ResetUserPassword;
+            
+        }
+        
+        [AFNetworking_RequestData requestMethodPOSTUrl:registStr dic:paramDic showHUD:YES Succed:^(id responseObject) {
+            
+            [InfoCache archiveObject:self.phone.text toFile:@"userid"];
+            [InfoCache archiveObject:self.password.text toFile:@"password"];
+            [InfoCache archiveObject:responseObject[@"token"] toFile:@"token"];
+            
+            
+            // 登录通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginNotification" object:self.title];
+            
+            PersonalMessageVC *vc = [[PersonalMessageVC alloc] init];
+            vc.title = @"个人信息";
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+            
+        } failure:^(NSError *error) {
+            
+        }];
+        
+        
+//        PersonalMessageVC *vc = [[PersonalMessageVC alloc] init];
+//        vc.title = @"个人信息";
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+
     }
     else {
         
     }
 }
+
+
 
 -(void)viewWillAppear:(BOOL)animated {
     

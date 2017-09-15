@@ -7,6 +7,7 @@
 //
 
 #import "EditResumeCell.h"
+#import "ResumeManageVC.h"
 
 @implementation EditResumeCell
 
@@ -14,6 +15,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        
         
         _imgView = [UIImageView imgViewWithframe:CGRectMake(10, (self.contentView.height-14)/2.0, 12, 12) icon:@"91"];
         [self.contentView addSubview:_imgView];
@@ -29,21 +31,30 @@
         
         _responsibilityLab = [UILabel labelWithframe:CGRectMake(_jobLab.left, _companyLab.bottom+6, kScreen_Width-12-(_jobLab.left), _timeLab.height) text:@"独立完成项目，从交互原型到效果图设计、切图标注等工作。" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
         [self.contentView addSubview:_responsibilityLab];
+    
         
+        UIButton *jobEditBtn = [UIButton buttonWithframe:CGRectMake(kScreen_Width-20-10, 8, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"95" selected:nil];
+        [jobEditBtn addTarget:self action:@selector(jobEditAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:jobEditBtn];
+        self.jobEditBtn = jobEditBtn;
         
         _line = [[UIView alloc] initWithFrame:CGRectMake(_imgView.center.x-.5, _imgView.bottom, 1, 71)];
         _line.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
         [self.contentView addSubview:_line];
         
-        UIButton *jobEditBtn = [UIButton buttonWithframe:CGRectMake(kScreen_Width-20-10, 8, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"95" selected:nil];
-//        [jobEditBtn addTarget:self action:@selector(wantAction) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:jobEditBtn];
-        self.jobEditBtn = jobEditBtn;
+//        _view = [[UIView alloc] initWithFrame:CGRectMake(_jobLab.left, lin.bottom+9, kScreen_Width-38, 1)];
+//        _view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
+//        [self.contentView addSubview:_view];
         
     }
     return self;
 }
 
-
+- (void)jobEditAction
+{
+    ResumeManageVC *vc = [[ResumeManageVC alloc] init];
+    vc.title = @"工作经历";
+    [self.viewController.navigationController pushViewController:vc animated:YES];
+}
 
 @end

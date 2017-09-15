@@ -28,7 +28,7 @@
     return self;
 }
 
-- (void)setModel:(PersonalModel *)model
+- (void)setModel:(PersonModel *)model
 {
     _model = model;
     
@@ -49,20 +49,61 @@
     });
     
     if ([_model.title isEqualToString:@"最高学历"]) {
-        self.dataSource = @[@"初中", @"高中|中专", @"大专",@"本科", @"硕士", @"博士"];
+        
+        for (NSDictionary *dic in self.selectArr) {
+            if ([dic[@"name"] isEqualToString:@"comp_edu"]) {
+                
+                NSString *str = dic[@"data"];
+                self.dataSource = [str componentsSeparatedByString:@","];
+                break;
+            }
+        }
     }
     if ([_model.title isEqualToString:@"工作年限"]) {
-        self.dataSource = @[@"应届毕业生", @"一年", @"两年",@"三年", @"四年", @"五年",@"六年", @"七年", @"八年",@"九年", @"十年以上", @"十五年以上"];
+        NSMutableArray *arrM = [NSMutableArray array];
+        for (NSDictionary *dic in self.selectArr) {
+            if ([dic[@"name"] isEqualToString:@"comp_years"]) {
+                
+                NSString *str = dic[@"data"];
+                NSArray *arr = [str componentsSeparatedByString:@","];
+                
+                for (NSString *s in arr) {
+                    NSString *s1 = [NSString stringWithFormat:@"%@年",s];
+                    [arrM addObject:s1];
+                }
+                self.dataSource = arrM;
+                break;
+            }
+        }
+
     }
     if ([_model.title isEqualToString:@"期望薪资"]) {
-        self.dataSource = @[@"面议", @"1k以下", @"1-1.5k",@"1.5-2k", @"2.5-3k", @"3.5-4k",@"4-5k", @"5-6k", @"6-7k",@"7-8k", @"8-12k", @"12k以上"];
+        for (NSDictionary *dic in self.selectArr) {
+            if ([dic[@"name"] isEqualToString:@"comp_pay"]) {
+                
+                NSString *str = dic[@"data"];
+                self.dataSource = [str componentsSeparatedByString:@","];
+                break;
+            }
+        }
     }
     if ([_model.title isEqualToString:@"意向城市"]) {
-        self.dataSource = @[@"义乌市", @"金华市", @"杭州市",];
+        self.dataSource = @[@"义乌市", @"东阳市", @"金华市",@"浦江县",@"永康市",@"慈溪市",@"余姚市"];
     }
 
-    [BRStringPickerView showStringPickerWithTitle:nil dataSource:self.dataSource defaultSelValue:self.dataSource[0] isAutoSelect:YES resultBlock:^(id selectValue) {
-//        weakSelf.genderTF.text = selectValue;
+    [BRStringPickerView showStringPickerWithTitle:nil dataSource:self.dataSource defaultSelValue:self.dataSource[0] isAutoSelect:NO resultBlock:^(id selectValue) {
+        
+        _tf.text = selectValue;
+        
+        if ([_model.title isEqualToString:@"意向城市"]) {
+            
+            _model.text = selectValue;
+            
+        }
+        else {
+            _model.text = [NSString stringWithFormat:@"%ld",[self.dataSource indexOfObject:selectValue]+1];
+            
+        }
     }];
     
 
@@ -76,7 +117,7 @@
 
 - (void)changeAction:(UITextField *)tf
 {
-    
+    _model.text = tf.text;
 }
 
 

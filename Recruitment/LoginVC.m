@@ -89,9 +89,10 @@
     
     UIButton *loginBtn = [UIButton buttonWithframe:CGRectMake(_password.left, _password.bottom+23, _phone.width, _phone.height) text:@"登录" font:[UIFont systemFontOfSize:13] textColor:@"FFFFFF" backgroundColor:@"#FDA326" normal:nil selected:nil];
     loginBtn.layer.cornerRadius = 7;
-    //    [tf addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventEditingChanged];
     loginBtn.layer.masksToBounds = YES;
     [self.view addSubview:loginBtn];
+    [loginBtn addTarget:self action:@selector(loginAction1) forControlEvents:UIControlEventTouchUpInside];
+
     
     UIButton *registerBtn = [UIButton buttonWithframe:CGRectMake(loginBtn.left+5, loginBtn.bottom+16, 50, 14) text:@"立即注册" font:[UIFont systemFontOfSize:12] textColor:@"FFFFFF" backgroundColor:nil normal:nil selected:nil];
     [self.view addSubview:registerBtn];
@@ -100,8 +101,73 @@
     UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(loginBtn.right-registerBtn.width-5, registerBtn.top, registerBtn.width, registerBtn.height) text:@"忘记密码" font:[UIFont systemFontOfSize:12] textColor:@"FFFFFF" backgroundColor:nil normal:nil selected:nil];
     [self.view addSubview:forgetBtn];
     [forgetBtn addTarget:self action:@selector(forgetAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 登录通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifLoginAction:) name:@"kLoginNotification" object:nil];
 
 }
+
+// 通知动作
+- (void)notifLoginAction:(NSNotification *)notification
+{
+    self.phone.text = [InfoCache unarchiveObjectWithFile:@"userid"];
+    self.password.text = [InfoCache unarchiveObjectWithFile:@"password"];
+    [self loginAction:notification];
+}
+
+- (void)loginAction1
+{
+    [self loginAction:nil];
+
+}
+
+- (void)loginAction:(NSNotification *)notification
+{
+    
+    [self.view endEditing:YES];
+    
+    if (self.phone.text.length == 0 || self.password.text == 0) {
+        [self.view makeToast:@"您还有内容未填写完整"];
+        return;
+    }
+    
+    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    [paramDic  setValue:self.phone.text forKey:@"userid"];// userid和手机一样
+    [paramDic  setValue:self.password.text forKey:@"passwd"];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Login dic:paramDic showHUD:YES Succed:^(id responseObject) {
+        
+        [InfoCache archiveObject:self.phone.text toFile:@"userid"];
+        [InfoCache archiveObject:responseObject[@"token"] toFile:@"token"];
+        
+        [self get_user_info:notification];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+// 返回用户表该用户相关信息
+- (void)get_user_info:(NSNotification *)notification
+{
+
+    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_user_info dic:paramDic showHUD:YES Succed:^(id responseObject) {
+        
+        PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
+        [InfoCache archiveObject:model toFile:Person];
+        
+        if (![notification.object isEqualToString:@"注册"]) {
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 - (void)forgetAction
 {

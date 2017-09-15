@@ -80,14 +80,22 @@
     
     headView.height = timeLabel.bottom+12;
     
+    // UITableViewStyleGrouped无粘滞效果
+    if ([self.title isEqualToString:@"预览"]) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64) style:UITableViewStylePlain];
+    }
+    else {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64) style:UITableViewStyleGrouped];
+
+    }
     
-    _tableView = [UITableView tableViewWithframe:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64-49)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     _tableView.tableHeaderView = headView;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    _tableView.backgroundColor = [UIColor clearColor];
+
     // 预览
     UIButton *preBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 30, 17) text:@"预览" font:[UIFont systemFontOfSize:14] textColor:@"#030303" backgroundColor:nil normal:nil selected:nil];
     [preBtn addTarget:self action:@selector(preAction) forControlEvents:UIControlEventTouchUpInside];
@@ -98,6 +106,7 @@
         jobEditBtn.hidden = YES;
         self.navigationItem.rightBarButtonItem = nil;
     }
+
 
 }
 
@@ -174,7 +183,6 @@
     if ([self.title isEqualToString:@"预览"]) {
         return 0;
 
-        
     }
     else {
         return 62;
@@ -184,19 +192,26 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    NSArray *titleArr1 = @[@"+ 增加工作经历",@"+ 增加教育经历"];
-    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 62)];
-    footView.backgroundColor = [UIColor whiteColor];
-    
-    UIButton *btn = [UIButton buttonWithframe:CGRectMake(12, 14, kScreen_Width-24, 35) text:titleArr1[section] font:[UIFont systemFontOfSize:14] textColor:@"#FF9123" backgroundColor:nil normal:@"" selected:nil];
-    btn.layer.cornerRadius = 5;
-    btn.layer.masksToBounds = YES;
-    btn.layer.borderColor = [UIColor colorWithHexString:@"#FF9123"].CGColor;
-    btn.layer.borderWidth = 1;
-    [footView addSubview:btn];
-    btn.tag = section;
-    [btn addTarget:self action:@selector(footAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+
+    UIView *footView = nil;
+    if ([self.title isEqualToString:@"预览"]) {
+        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 0)];
+    }
+    else {
+        
+        NSArray *titleArr1 = @[@"+ 增加工作经历",@"+ 增加教育经历"];
+        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 62)];
+        footView.backgroundColor = [UIColor whiteColor];
+        
+        UIButton *btn = [UIButton buttonWithframe:CGRectMake(12, 14, kScreen_Width-24, 35) text:titleArr1[section] font:[UIFont systemFontOfSize:14] textColor:@"#FF9123" backgroundColor:nil normal:@"" selected:nil];
+        btn.layer.cornerRadius = 5;
+        btn.layer.masksToBounds = YES;
+        btn.layer.borderColor = [UIColor colorWithHexString:@"#FF9123"].CGColor;
+        btn.layer.borderWidth = 1;
+        [footView addSubview:btn];
+        btn.tag = section;
+        [btn addTarget:self action:@selector(footAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
     return footView;
 }
 
@@ -217,6 +232,7 @@
         cell.jobEditBtn.hidden = NO;
         
     }
+    
     
     return cell;
 }

@@ -48,7 +48,6 @@
 		F72FF8C21F62755C00E3AA92 /* JobDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8C11F62755C00E3AA92 /* JobDetailVC.m */; };
 		F72FF8C51F6282EB00E3AA92 /* JobDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8C41F6282EB00E3AA92 /* JobDetailCell.m */; };
 		F72FF8C81F628D5C00E3AA92 /* CompanyDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8C71F628D5C00E3AA92 /* CompanyDetailVC.m */; };
-		F73C37B11F60CF3D00027289 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37B01F60CF3D00027289 /* RegisterVC.m */; };
 		F73C37B41F60EFCA00027289 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37B31F60EFCA00027289 /* MessageCell.m */; };
 		F73C37BD1F61134500027289 /* NSString+WJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37B81F61134500027289 /* NSString+WJExtension.m */; };
 		F73C37BE1F61134500027289 /* UIView+WJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37BA1F61134500027289 /* UIView+WJExtension.m */; };
@@ -61,7 +60,7 @@
 		F73C37D51F613D1B00027289 /* HotJobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37D41F613D1B00027289 /* HotJobCell.m */; };
 		F741975C1F63706900AD5F2C /* PersonalMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F741975B1F63706900AD5F2C /* PersonalMessageVC.m */; };
 		F74197621F63781E00AD5F2C /* PersonalMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F74197611F63781E00AD5F2C /* PersonalMessageCell.m */; };
-		F74197651F63797100AD5F2C /* PersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F74197641F63797100AD5F2C /* PersonalModel.m */; };
+		F74197651F63797100AD5F2C /* PersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F74197641F63797100AD5F2C /* PersonModel.m */; };
 		F741977E1F63895C00AD5F2C /* BRAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F74197691F63895C00AD5F2C /* BRAddressModel.m */; };
 		F741977F1F63895C00AD5F2C /* BRAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F741976B1F63895C00AD5F2C /* BRAddressPickerView.m */; };
 		F74197801F63895C00AD5F2C /* BRCity.plist in Resources */ = {isa = PBXBuildFile; fileRef = F741976C1F63895C00AD5F2C /* BRCity.plist */; };
@@ -76,6 +75,7 @@
 		F741979A1F63CD3B00AD5F2C /* EditJobMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F74197991F63CD3B00AD5F2C /* EditJobMsgCell.m */; };
 		F741979D1F63CD4E00AD5F2C /* EditJobMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F741979C1F63CD4E00AD5F2C /* EditJobMsgModel.m */; };
 		F74197A01F63E15E00AD5F2C /* EditEducationMsgVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F741979F1F63E15E00AD5F2C /* EditEducationMsgVC.m */; };
+		F74243111F68F959009AA2E5 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37B01F60CF3D00027289 /* RegisterVC.m */; };
 		F74F4AA61F66210A007736BA /* SendHistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AA51F66210A007736BA /* SendHistoryVC.m */; };
 		F74F4AA91F66220E007736BA /* CheckedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AA81F66220E007736BA /* CheckedVC.m */; };
 		F74F4AAC1F6622C4007736BA /* CheckedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AAB1F6622C4007736BA /* CheckedCell.m */; };
@@ -94,6 +94,9 @@
 		F74F4AD91F66609A007736BA /* AboutUsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AD81F66609A007736BA /* AboutUsVC.m */; };
 		F74F4AE71F667C81007736BA /* SubscriptionManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AE61F667C81007736BA /* SubscriptionManageCell.m */; };
 		F74F4AEA1F667DEC007736BA /* SubscriptionManageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AE91F667DEC007736BA /* SubscriptionManageModel.m */; };
+		F75A453D1F67B6DC00B0790C /* ResumeManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453C1F67B6DC00B0790C /* ResumeManageVC.m */; };
+		F75A45401F67BD4F00B0790C /* JobRecommandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */; };
+		F75A45431F67BEA000B0790C /* JobRecommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A45421F67BEA000B0790C /* JobRecommandCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,7 +150,6 @@
 		F70EF51B1F5F8631001C65A7 /* RegexTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexTool.h; sourceTree = "<group>"; };
 		F70EF51C1F5F8631001C65A7 /* RegexTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexTool.m; sourceTree = "<group>"; };
 		F70EF51E1F5F875A001C65A7 /* Recruitment.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recruitment.pch; sourceTree = "<group>"; };
-		F70EF51F1F5F8770001C65A7 /* RequestUrl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestUrl.h; sourceTree = "<group>"; };
 		F70EF5241F5FBA75001C65A7 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		F70EF5251F5FBA75001C65A7 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		F70EF5271F5FBA7C001C65A7 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
@@ -205,8 +207,8 @@
 		F741975B1F63706900AD5F2C /* PersonalMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalMessageVC.m; sourceTree = "<group>"; };
 		F74197601F63781E00AD5F2C /* PersonalMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalMessageCell.h; sourceTree = "<group>"; };
 		F74197611F63781E00AD5F2C /* PersonalMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalMessageCell.m; sourceTree = "<group>"; };
-		F74197631F63797100AD5F2C /* PersonalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalModel.h; sourceTree = "<group>"; };
-		F74197641F63797100AD5F2C /* PersonalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalModel.m; sourceTree = "<group>"; };
+		F74197631F63797100AD5F2C /* PersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonModel.h; sourceTree = "<group>"; };
+		F74197641F63797100AD5F2C /* PersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonModel.m; sourceTree = "<group>"; };
 		F74197681F63895C00AD5F2C /* BRAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddressModel.h; sourceTree = "<group>"; };
 		F74197691F63895C00AD5F2C /* BRAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddressModel.m; sourceTree = "<group>"; };
 		F741976A1F63895C00AD5F2C /* BRAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddressPickerView.h; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 		F741979C1F63CD4E00AD5F2C /* EditJobMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditJobMsgModel.m; sourceTree = "<group>"; };
 		F741979E1F63E15E00AD5F2C /* EditEducationMsgVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEducationMsgVC.h; sourceTree = "<group>"; };
 		F741979F1F63E15E00AD5F2C /* EditEducationMsgVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEducationMsgVC.m; sourceTree = "<group>"; };
+		F74243101F68D5FD009AA2E5 /* UrlFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlFile.h; sourceTree = "<group>"; };
 		F74F4AA41F66210A007736BA /* SendHistoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendHistoryVC.h; sourceTree = "<group>"; };
 		F74F4AA51F66210A007736BA /* SendHistoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendHistoryVC.m; sourceTree = "<group>"; };
 		F74F4AA71F66220E007736BA /* CheckedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckedVC.h; sourceTree = "<group>"; };
@@ -270,6 +273,12 @@
 		F74F4AE61F667C81007736BA /* SubscriptionManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionManageCell.m; sourceTree = "<group>"; };
 		F74F4AE81F667DEC007736BA /* SubscriptionManageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionManageModel.h; sourceTree = "<group>"; };
 		F74F4AE91F667DEC007736BA /* SubscriptionManageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionManageModel.m; sourceTree = "<group>"; };
+		F75A453B1F67B6DC00B0790C /* ResumeManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResumeManageVC.h; sourceTree = "<group>"; };
+		F75A453C1F67B6DC00B0790C /* ResumeManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResumeManageVC.m; sourceTree = "<group>"; };
+		F75A453E1F67BD4F00B0790C /* JobRecommandVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobRecommandVC.h; sourceTree = "<group>"; };
+		F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobRecommandVC.m; sourceTree = "<group>"; };
+		F75A45411F67BEA000B0790C /* JobRecommandCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobRecommandCell.h; sourceTree = "<group>"; };
+		F75A45421F67BEA000B0790C /* JobRecommandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobRecommandCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,7 +361,6 @@
 			children = (
 				F70EF4751F5F7F8E001C65A7 /* main.m */,
 				F70EF48C1F5F854E001C65A7 /* DefineFile.h */,
-				F70EF51F1F5F8770001C65A7 /* RequestUrl.h */,
 				F70EF51E1F5F875A001C65A7 /* Recruitment.pch */,
 			);
 			name = "Supporting Files";
@@ -489,8 +497,6 @@
 				F74F4AC71F664F34007736BA /* Controller */,
 				F74F4AC61F664F2F007736BA /* View */,
 				F74F4AC51F664F2B007736BA /* Model */,
-				F70EF5391F5FC7E2001C65A7 /* PersonalCell.h */,
-				F70EF53A1F5FC7E2001C65A7 /* PersonalCell.m */,
 			);
 			name = "我的";
 			sourceTree = "<group>";
@@ -536,8 +542,9 @@
 				F741975B1F63706900AD5F2C /* PersonalMessageVC.m */,
 				F74197601F63781E00AD5F2C /* PersonalMessageCell.h */,
 				F74197611F63781E00AD5F2C /* PersonalMessageCell.m */,
-				F74197631F63797100AD5F2C /* PersonalModel.h */,
-				F74197641F63797100AD5F2C /* PersonalModel.m */,
+				F74197631F63797100AD5F2C /* PersonModel.h */,
+				F74197641F63797100AD5F2C /* PersonModel.m */,
+				F74243101F68D5FD009AA2E5 /* UrlFile.h */,
 			);
 			name = "登录注册";
 			sourceTree = "<group>";
@@ -590,6 +597,8 @@
 				F72FF8C41F6282EB00E3AA92 /* JobDetailCell.m */,
 				F74197861F63AB8E00AD5F2C /* PlaceView.h */,
 				F74197871F63AB8E00AD5F2C /* PlaceView.m */,
+				F75A45411F67BEA000B0790C /* JobRecommandCell.h */,
+				F75A45421F67BEA000B0790C /* JobRecommandCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -607,6 +616,8 @@
 				F72FF8C11F62755C00E3AA92 /* JobDetailVC.m */,
 				F72FF8C61F628D5C00E3AA92 /* CompanyDetailVC.h */,
 				F72FF8C71F628D5C00E3AA92 /* CompanyDetailVC.m */,
+				F75A453E1F67BD4F00B0790C /* JobRecommandVC.h */,
+				F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -710,6 +721,8 @@
 				F74F4AA51F66210A007736BA /* SendHistoryVC.m */,
 				F74F4AA71F66220E007736BA /* CheckedVC.h */,
 				F74F4AA81F66220E007736BA /* CheckedVC.m */,
+				F75A453B1F67B6DC00B0790C /* ResumeManageVC.h */,
+				F75A453C1F67B6DC00B0790C /* ResumeManageVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -766,6 +779,8 @@
 		F74F4AC61F664F2F007736BA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F70EF5391F5FC7E2001C65A7 /* PersonalCell.h */,
+				F70EF53A1F5FC7E2001C65A7 /* PersonalCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -921,13 +936,15 @@
 				F73C37BE1F61134500027289 /* UIView+WJExtension.m in Sources */,
 				F72FF8C81F628D5C00E3AA92 /* CompanyDetailVC.m in Sources */,
 				F72FF8B61F62314100E3AA92 /* ApplyJobVC.m in Sources */,
+				F74243111F68F959009AA2E5 /* RegisterVC.m in Sources */,
 				F73C37BF1F61134500027289 /* CustomerScrollView.m in Sources */,
 				F73C37C81F61252E00027289 /* JobTableView.m in Sources */,
 				F72FF8B91F6234F000E3AA92 /* JobModel.m in Sources */,
 				F741977F1F63895C00AD5F2C /* BRAddressPickerView.m in Sources */,
 				F70EF51D1F5F8631001C65A7 /* RegexTool.m in Sources */,
+				F75A45431F67BEA000B0790C /* JobRecommandCell.m in Sources */,
 				F70EF53F1F5FD964001C65A7 /* LoginVC.m in Sources */,
-				F74197651F63797100AD5F2C /* PersonalModel.m in Sources */,
+				F74197651F63797100AD5F2C /* PersonModel.m in Sources */,
 				F72FF8C21F62755C00E3AA92 /* JobDetailVC.m in Sources */,
 				F74197621F63781E00AD5F2C /* PersonalMessageCell.m in Sources */,
 				F74F4AAF1F6626CD007736BA /* InvitedVC.m in Sources */,
@@ -980,6 +997,7 @@
 				F73C37CF1F6129BA00027289 /* HXTagsView.m in Sources */,
 				F70EF5161F5F8616001C65A7 /* TAPageControl.m in Sources */,
 				F70EF5141F5F8616001C65A7 /* TAAnimatedDotView.m in Sources */,
+				F75A453D1F67B6DC00B0790C /* ResumeManageVC.m in Sources */,
 				F73C37D51F613D1B00027289 /* HotJobCell.m in Sources */,
 				F74F4AA61F66210A007736BA /* SendHistoryVC.m in Sources */,
 				F74197911F63B97E00AD5F2C /* EditResumeCell.m in Sources */,
@@ -993,8 +1011,8 @@
 				F74197941F63C2FE00AD5F2C /* HeaderView.m in Sources */,
 				F74F4ABC1F6630BB007736BA /* SubscriptionManageVC.m in Sources */,
 				F74197A01F63E15E00AD5F2C /* EditEducationMsgVC.m in Sources */,
+				F75A45401F67BD4F00B0790C /* JobRecommandVC.m in Sources */,
 				F70EF5291F5FBA7C001C65A7 /* NavigationController.m in Sources */,
-				F73C37B11F60CF3D00027289 /* RegisterVC.m in Sources */,
 				F70EF5261F5FBA75001C65A7 /* BaseViewController.m in Sources */,
 				F70EF4EF1F5F85F7001C65A7 /* UITableView+EmptyData.m in Sources */,
 			);

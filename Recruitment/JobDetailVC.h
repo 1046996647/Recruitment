@@ -10,4 +10,7 @@
 
 @interface JobDetailVC : BaseViewController
 
+@property(nonatomic,assign) NSInteger type;
+
+
 @end

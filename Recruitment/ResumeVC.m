@@ -10,6 +10,7 @@
 #import "EditResumeVC.h"
 #import "SendHistoryVC.h"
 #import "CheckedVC.h"
+#import "LoginVC.h"
 
 @interface ResumeVC ()
 
@@ -35,6 +36,9 @@
     view.layer.borderColor = [UIColor colorWithHexString:@"#FF9938"].CGColor;
     view.layer.borderWidth = 1;
     [self.view addSubview:view];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [view addGestureRecognizer:tap];
     
     UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
     view1.layer.cornerRadius = view1.height/2;
@@ -103,6 +107,8 @@
         UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(0, self.forgetBtn1.bottom+14+i*38, kScreen_Width, 38) text:titleArr2[i] font:[UIFont systemFontOfSize:13] textColor:@"#333333" backgroundColor:@"#FFFFFF" normal:nil selected:nil];
         forgetBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [self.view addSubview:forgetBtn];
+        [forgetBtn addTarget:self action:@selector(btnAction2:) forControlEvents:UIControlEventTouchUpInside];
+        forgetBtn.tag = i;
         
         UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(forgetBtn.width-5.4-14.6, 11, 5.4, 12.6) icon:@"98"];
         [forgetBtn addSubview:imgView];
@@ -114,8 +120,93 @@
     }
 }
 
+- (void)tapAction
+{
+    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
+    if (!userid) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
+}
+
+- (void)btnAction2:(UIButton *)btn
+{
+    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
+    if (!userid) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
+    
+    if (btn.tag == 0) {
+        
+        NSArray *arr = @[@"3天",@"7天",@"14天",@"取消"];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"设置委托投递后系统会根据你的求职意向自动投递，1小时候生效。" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        for (int i=0; i<arr.count; i++) {
+            
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:arr[i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                if ([action.title isEqualToString:@"3天"]) {
+                    
+                    
+                }
+                
+            }];
+            
+            if (i<arr.count-1) {
+                [defaultAction setValue:[UIColor colorWithHexString:@"#333333"] forKey:@"_titleTextColor"];
+
+            }
+            else {
+                [defaultAction setValue:[UIColor colorWithHexString:@"#0076FF"] forKey:@"_titleTextColor"];
+
+            }
+            
+            [alertController addAction:defaultAction];
+        }
+        
+
+//        [alertController addAction:[UIAlertAction actionWithTitle:@"3天" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            
+//            
+//        }]];
+
+
+//        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//            
+//            NSLog(@"添加一个textField就会调用 这个block");
+//            
+//        }];
+        // 由于它是一个控制器 直接modal出来就好了
+        [self presentViewController:alertController animated:YES completion:nil];
+
+    }
+    else {
+
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确定简历保密吗" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"简历保密" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:cancelAction];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+}
+
 - (void)btnAction1:(UIButton *)btn
 {
+    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
+    if (!userid) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
+    
     if (btn.tag == 0) {
         CheckedVC *vc = [[CheckedVC alloc] init];
         vc.title = @"简历被查看";
@@ -131,6 +222,14 @@
 
 - (void)btnAction:(UIButton *)btn
 {
+    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
+    if (!userid) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
+    
     if (btn.tag == 0) {
         EditResumeVC *vc = [[EditResumeVC alloc] init];
         vc.title = @"简历";

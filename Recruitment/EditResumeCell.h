@@ -16,6 +16,8 @@
 @property(nonatomic,strong) UILabel *responsibilityLab;
 @property(nonatomic,strong) UILabel *timeLab;
 @property(nonatomic,strong) UIView *line;
+@property(nonatomic,strong) UIView *view;
 @property(nonatomic,strong) UIButton *jobEditBtn;
+
 
 @end

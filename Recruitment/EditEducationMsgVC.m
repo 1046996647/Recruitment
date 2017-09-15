@@ -56,7 +56,7 @@
         
         for (NSDictionary *dic in arr) {
             
-            EditJobMsgModel *model = [EditJobMsgModel yy_modelWithJSON:dic];
+            PersonModel *model = [PersonModel yy_modelWithJSON:dic];
             [arrM1 addObject:model];
         }
         
@@ -108,6 +108,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    
     return 10;
     
 }
@@ -121,7 +122,7 @@
         cell = [[EditJobMsgCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         
     }
-    EditJobMsgModel *model = self.dataArr[indexPath.section][indexPath.row];
+    PersonModel *model = self.dataArr[indexPath.section][indexPath.row];
     cell.model = model;
     
     return cell;

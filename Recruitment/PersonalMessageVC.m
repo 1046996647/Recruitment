@@ -13,7 +13,7 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSArray *dataArr;
-
+@property (nonatomic,strong) NSArray *selectArr;
 @end
 
 @implementation PersonalMessageVC
@@ -22,12 +22,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.dataArr = @[@[@{@"image":@"3",@"title":@"姓名"},
-                       @{@"image":@"4",@"title":@"最高学历"},
-                       @{@"image":@"6",@"title":@"工作年限"}],
-                     @[@{@"image":@"5",@"title":@"意向岗位"},
-                       @{@"image":@"2",@"title":@"期望薪资"},
-                       @{@"image":@"1",@"title":@"意向城市"}]
+    self.dataArr = @[@[@{@"image":@"3",@"title":@"姓名",@"key":@"name"},
+                       @{@"image":@"4",@"title":@"最高学历",@"key":@"education"},
+                       @{@"image":@"6",@"title":@"工作年限",@"key":@"jobyear"}],
+                     @[@{@"image":@"5",@"title":@"意向岗位",@"key":@"hopepostion"},
+                       @{@"image":@"2",@"title":@"期望薪资",@"key":@"requestsalary"},
+                       @{@"image":@"1",@"title":@"意向城市",@"key":@"hopelocation"}]
                      ];
     
     NSMutableArray *arrM = [NSMutableArray array];
@@ -37,7 +37,7 @@
 
         for (NSDictionary *dic in arr) {
             
-            PersonalModel *model = [PersonalModel yy_modelWithJSON:dic];
+            PersonModel *model = [PersonModel yy_modelWithJSON:dic];
             [arrM1 addObject:model];
         }
         
@@ -57,10 +57,51 @@
     upBtn.layer.cornerRadius = 7;
     upBtn.layer.masksToBounds = YES;
     [footerView addSubview:upBtn];
+    [upBtn addTarget:self action:@selector(upAction:) forControlEvents:UIControlEventTouchUpInside];
+
     
     _tableView.tableFooterView = footerView;
+    
+    // 选择项数据
+    NSArray *selectArr = [InfoCache unarchiveObjectWithFile:SelectItem];;
+    self.selectArr = selectArr;
 
 }
+
+- (void)upAction:(UIButton *)btn
+{
+    [self.view endEditing:YES];
+
+    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+
+    for (NSArray *arr in self.dataArr) {
+        
+        for (PersonModel *model in arr) {
+            
+            
+            if (model.text.length == 0) {
+                [self.view makeToast:@"您还有内容未填写完整"];
+                return;
+            }
+            
+            [paramDic  setValue:model.text forKey:model.key];
+
+        }
+        
+    }
+    
+    NSLog(@"%@",paramDic);
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Update_peronal_info dic:paramDic showHUD:YES Succed:^(id responseObject) {
+        
+        // 登录通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginNotification" object:self.title];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -104,9 +145,9 @@
         cell = [[PersonalMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
 
     }
-    PersonalModel *model = self.dataArr[indexPath.section][indexPath.row];
+    PersonModel *model = self.dataArr[indexPath.section][indexPath.row];
     cell.model = model;
-    
+    cell.selectArr = self.selectArr;
     return cell;
 }
 

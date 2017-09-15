@@ -5,5 +5,6 @@ target 'Recruitment' do
     pod 'SVProgressHUD'
     pod 'MJRefresh'
     pod 'YYModel'
-    
+    pod 'IQKeyboardManager'
+
 end

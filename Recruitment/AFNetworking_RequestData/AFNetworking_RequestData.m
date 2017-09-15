@@ -67,34 +67,43 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/json", @"text/javascript",@"text/html", nil];
     
 //    PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
+    NSString *token = [InfoCache unarchiveObjectWithFile:@"token"];
+    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
     
     //======POST=====
     if ([Method isEqualToString:@"POST"]) {
+
         
-//        [dic  setValue:person.Token forKey:@"Token"];
-//        [dic  setValue:person.UserId forKey:@"UserId"];
-        
+        if (userid && dic) {
+            [dic  setValue:userid forKey:@"userid"];
+            [dic  setValue:token forKey:@"token"];
+
+        }
+
         [manager POST:url parameters:dic progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
+            NSLog(@"%@",responseObject);
+
             if (hud) {
                 [SVProgressHUD dismiss];
             }
-//            NSNumber *code = [responseObject objectForKey:@"HttpCode"];
-//            
-//            if (200 != [code integerValue] && 300 != [code integerValue]) {
-//                
-//                NSString *message = [responseObject objectForKey:@"Message"];
-//                
-//                if (message) {
-//                    [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:message];
-//
-//                }
-//            }
+            NSNumber *code = [responseObject objectForKey:@"status"];
+            if (0 == [code integerValue]) {
+                
+                NSString *message = [responseObject objectForKey:@"message"];
+                
+                if (message) {
+                    [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:message];
+
+                }
+            }
+            else {
+                Succed(responseObject);
+
+            }
             
-            Succed(responseObject);
-            NSLog(@"%@",responseObject);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
@@ -107,7 +116,8 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
                 [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:@"网络似乎已断开!"];
 
             }
-            
+            NSLog(@"%@",error);
+
             failure(error);
             
 
@@ -136,7 +146,8 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
             [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:@"网络似乎已断开!"];
 
             failure(error);
-            
+            NSLog(@"%@",error);
+
         }];
     }
     

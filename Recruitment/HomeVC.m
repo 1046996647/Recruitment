@@ -14,6 +14,7 @@
 #import "SearchVC.h"
 #import "ApplyJobVC.h"
 #import "PlaceView.h"
+#import "JobRecommandVC.h"
 
 
 @interface HomeVC ()
@@ -75,6 +76,10 @@
     
 
     [self initHeaderView];
+    
+    
+     // 选择项数据
+    [self getSelectItems];
 
 }
 
@@ -136,13 +141,16 @@
     NSArray *titleArr2 = @[@"来和老板直接聊offer吧!",@"没什么比急聘能更快入职"];
     for (int i=0; i<titleArr1.count; i++) {
         
-        
         UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(i*kScreen_Width/2, _btnScrollView.bottom+8, kScreen_Width/2, 69) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
         [headView addSubview:forgetBtn];
         self.forgetBtn1 = forgetBtn;
+        forgetBtn.tag = i;
+        [forgetBtn addTarget:self action:@selector(pushAction:) forControlEvents:UIControlEventTouchUpInside];
+
         
         UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake((forgetBtn.width-(86+52+19))/2, (forgetBtn.height-(20+13+14))/2, 86+52+19, 20+13+14)];
         [forgetBtn addSubview:baseView];
+        baseView.userInteractionEnabled = NO;
 
         UILabel *label1 = [UILabel labelWithframe:CGRectMake(0, 0, 86, 20) text:titleArr1[i] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#000000"];
         [baseView addSubview:label1];
@@ -185,6 +193,19 @@
 
 }
 
+- (void)pushAction:(UIButton *)btn
+{
+    if (btn.tag == 0) {
+        
+        JobRecommandVC *vc = [[JobRecommandVC alloc] init];
+        vc.title = @"可直接沟通的职位推荐";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else {
+        
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -207,6 +228,20 @@
 //
 //    self.searchTF.backgroundColor = [UIColor clearColor];
 
+}
+
+- (void)getSelectItems
+{
+
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_setting dic:nil showHUD:NO Succed:^(id responseObject) {
+        
+        NSArray *selectArr = responseObject[@"data"];
+        [InfoCache archiveObject:selectArr toFile:SelectItem];
+
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 
 @end

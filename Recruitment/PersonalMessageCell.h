@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PersonalModel.h"
+#import "PersonModel.h"
 #import "BRPickerView.h"
 
 
 @interface PersonalMessageCell : UITableViewCell
 
 @property(nonatomic,strong) UITextField *tf;
-@property(nonatomic,strong) PersonalModel *model;
+@property(nonatomic,strong) PersonModel *model;
 @property(nonatomic,strong) NSArray *dataSource;
+@property (nonatomic,strong) NSArray *selectArr;
 
 
 @end

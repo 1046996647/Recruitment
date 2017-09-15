@@ -9,6 +9,8 @@
 #import "SettingVC.h"
 #import "MyCountVC.h"
 #import "AboutUsVC.h"
+#import "AppDelegate.h"
+
 
 @interface SettingVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -30,6 +32,7 @@
     btn.layer.cornerRadius = 5;
     btn.layer.masksToBounds = YES;
     [baseView addSubview:btn];
+    [btn addTarget:self action:@selector(exitAction) forControlEvents:UIControlEventTouchUpInside];
     
     self.dataArr = @[@[@"我的账号"],
                      @[@"清除缓存"],
@@ -46,6 +49,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)exitAction
+{
+    [InfoCache archiveObject:nil toFile:@"userid"];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
+//    AppDelegate *appDelegate = [AppDelegate share];
+//    [appDelegate.tabVC selectController:0];
+    
 }
 
 #pragma mark - UITableViewDataSource

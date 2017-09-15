@@ -12,11 +12,13 @@
 #import "MyCollectionVC.h"
 #import "OpinionVC.h"
 #import "SettingVC.h"
+#import "SubscriptionManageVC.h"
 
 @interface PersonalCenterVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSArray *dataArr;
+@property (nonatomic,strong) UILabel *label;
 
 
 @end
@@ -29,12 +31,13 @@
     
     
     UIButton *btn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width, 90) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
-    [btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
 
     
     UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(9, 9, 72, 72) icon:@"96"];
     
     UILabel *label = [UILabel labelWithframe:CGRectMake(imgView.right+12, (btn.height-18)/2, 100, 18) text:@"登录/注册" font:[UIFont systemFontOfSize:17] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+    self.label = label;
     
     [btn addSubview:imgView];
     [btn addSubview:label];
@@ -50,13 +53,26 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     _tableView.tableHeaderView = btn;
+    
+
 }
 
-- (void)btnAction
+- (void)btnAction:(UIButton *)btn
 {
-    LoginVC *vc = [[LoginVC alloc] init];
-    vc.title = @"登录";
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
+    if (!userid) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
+    self.label.text = person.name;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +101,14 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
+    if (!userid) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
+    
     if (indexPath.section == 0) {
         
         if (indexPath.row == 0) {
@@ -102,9 +126,9 @@
         
         if (indexPath.row == 0) {
             
-//            MyCollectionVC *vc = [[MyCollectionVC alloc] init];
-//            vc.title = @"我的收藏";
-//            [self.navigationController pushViewController:vc animated:YES];
+            SubscriptionManageVC *vc = [[SubscriptionManageVC alloc] init];
+            vc.title = @"订阅管理";
+            [self.navigationController pushViewController:vc animated:YES];
             
         }
         if (indexPath.row == 1) {
