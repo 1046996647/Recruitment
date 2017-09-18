@@ -10,4 +10,7 @@
 
 @interface EditJobMsgVC : BaseViewController
 
+@property(nonatomic,strong) PersonModel *model;
+
+
 @end

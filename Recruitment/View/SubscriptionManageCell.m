@@ -27,7 +27,7 @@
         _selectBtn = [UIButton buttonWithframe:CGRectZero text:nil font:nil textColor:nil backgroundColor:nil normal:@"Group 3" selected:@""];
         [baseView addSubview:_selectBtn];
         
-        _jobBtn = [UIButton buttonWithframe:CGRectMake(11, 5, kScreen_Width-11, 16) text:@"UI设计师" font:[UIFont systemFontOfSize:13] textColor:@"#999999" backgroundColor:nil normal:@"66" selected:@""];
+        _jobBtn = [UIButton buttonWithframe:CGRectMake(11, 5, kScreen_Width-11, 16) text:@"UI设计师" font:[UIFont systemFontOfSize:13] textColor:@"#999999" backgroundColor:nil normal:@"94" selected:@""];
         _jobBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _jobBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
         [baseView addSubview:_jobBtn];

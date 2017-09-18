@@ -33,4 +33,11 @@ typedef void(^Failure)(NSError *error);
                     showHUD:(BOOL)hud
                      Succed:(Success)succed
                     failure:(Failure)failure;
+
+#pragma 上传图片
++(void)uploadImageUrl:(NSString*)url
+                  dic:(NSMutableDictionary*)dic
+                 data:(NSData*)data
+               Succed:(Success)succed
+              failure:(Failure)failure;
 @end

@@ -24,15 +24,45 @@
 // 1.4	更新基本信息
 #define Update_basic_info  [NSString stringWithFormat:@"%@User/update_basic_info",BaseUrl]
 
+// 1.4	更新联系方式
+#define Update_contact_info  [NSString stringWithFormat:@"%@User/update_contact_info",BaseUrl]
 
-// 选择项
+// 1.4	更新求职意向
+#define Update_hope_info  [NSString stringWithFormat:@"%@User/update_hope_info",BaseUrl]
+
+// 1.4	更新技能特长
+#define Update_skill_info  [NSString stringWithFormat:@"%@User/update_skill_info",BaseUrl]
+
+// 1.10	更新教育经历
+#define Update_educate_info  [NSString stringWithFormat:@"%@User/update_educate_info",BaseUrl]
+
+// 1.11	新增工作经历
+#define Add_jobhistory_info  [NSString stringWithFormat:@"%@User/add_jobhistory_info",BaseUrl]
+
+// 1.12	删除工作经历
+#define Delete_jobhistory_info  [NSString stringWithFormat:@"%@User/delete_jobhistory_info",BaseUrl]
+
+// 1.13	修改工作经历
+#define Update_jobhistory_info  [NSString stringWithFormat:@"%@User/update_jobhistory_info",BaseUrl]
+
+
+// 选择项(个人信息)
 #define Get_setting  [NSString stringWithFormat:@"%@Tool/get_setting",BaseUrl]
+
+// 选择项(岗位)
+#define Get_jobs_cate  [NSString stringWithFormat:@"%@User/get_jobs_cate",BaseUrl]
 
 // 登录
 #define Login  [NSString stringWithFormat:@"%@User/login",BaseUrl]
 
 // 返回用户表该用户相关信息
 #define Get_user_info  [NSString stringWithFormat:@"%@User/get_user_info",BaseUrl]
+
+// 获取部分用户信息
+#define Get_ui_info  [NSString stringWithFormat:@"%@User/get_ui_info",BaseUrl]
+
+// 1.16	上传头像
+#define Upload_user_img  [NSString stringWithFormat:@"%@User/upload_user_img",BaseUrl]
 
 
 #endif /* UrlFile_h */

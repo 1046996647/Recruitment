@@ -14,6 +14,8 @@
 
 #define Person @"Person"
 #define SelectItem @"SelectItem"
+#define SelectItemJob @"SelectItemJob"
+
 
 #import "UIColor+Expend.h"
 #import "UIViewExt.h"                   //视图位置工具

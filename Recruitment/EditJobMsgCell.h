@@ -20,6 +20,7 @@
 @property(nonatomic,strong) NSArray *dataSource;
 
 @property (nonatomic,strong) NSArray *selectArr;
+@property (nonatomic,strong) NSArray *selectJobArr;
 
 
 @end

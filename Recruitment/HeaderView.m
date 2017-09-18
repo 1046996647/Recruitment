@@ -26,6 +26,7 @@
         hopeLabel.layer.borderColor = [UIColor colorWithHexString:@"#FF9123"].CGColor;
         hopeLabel.layer.borderWidth = 1;
         [self addSubview:hopeLabel];
+        self.hopeLabel = hopeLabel;
     }
     
     

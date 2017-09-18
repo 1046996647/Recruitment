@@ -9,10 +9,14 @@
 #import "EditEducationMsgVC.h"
 #import "EditJobMsgCell.h"
 
-@interface EditEducationMsgVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface EditEducationMsgVC ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate>
 
 @property (nonatomic,strong) NSArray *dataArr;
 @property(nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) NSArray *selectArr;
+@property (nonatomic,strong) NSArray *selectJobArr;
+@property(nonatomic,strong) UILabel *remindLab1;
+@property(nonatomic,strong) UITextView *textView;
 
 
 @end
@@ -23,30 +27,91 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // 尾视图
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 0)];
+    footerView.backgroundColor = [UIColor whiteColor];
+    
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 8)];
+    view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
+    [footerView addSubview:view];
+    
+    UILabel *remindLab = [UILabel labelWithframe:CGRectMake(13, view.bottom+12, 200, 16) text:@"" font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+    [footerView addSubview:remindLab];
+    
+    view = [[UIView alloc] initWithFrame:CGRectMake(remindLab.left, remindLab.bottom+12, kScreen_Width-remindLab.left*2, 95)];
+    view.layer.cornerRadius = 8;
+    view.layer.masksToBounds = YES;
+    view.layer.borderColor = [UIColor colorWithHexString:@"#EFEFEF"].CGColor;
+    view.layer.borderWidth = 1;
+    [footerView addSubview:view];
+    
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(8, 0, view.width-8, 72)];
+    textView.font = [UIFont systemFontOfSize:12];
+    [view addSubview:textView];
+    textView.delegate = self;
+    self.textView = textView;
+    
+    UILabel *remindLab1 = [UILabel labelWithframe:CGRectMake(textView.left+4, textView.top+5, view.width-(textView.left+4), 16) text:@"" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+    [view addSubview:remindLab1];
+    self.remindLab1 = remindLab1;
+    
+//    UILabel *countLab = [UILabel labelWithframe:CGRectMake(view.width-100-10, view.height-12-6, 100, 12) text:@"0/500" font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentRight textColor:@"#333333"];
+//    [view addSubview:countLab];
+    
+    footerView.height = view.bottom+17;
     
     if ([self.title isEqualToString:@"求职意向"]) {
-        self.dataArr = @[@[@{@"image":@"68",@"title":@"意向岗位"},
-                           @{@"image":@"68",@"title":@"工作类型"}],
-                         @[@{@"image":@"67",@"title":@"意向城市"},
-                           @{@"image":@"67",@"title":@"期望月薪"}],
-                         @[@{@"image":@"67",@"title":@"到岗时间"}]
+        self.dataArr = @[@[@{@"image":@"68",@"title":@"求职类型",@"text":@"",@"key":@"requestjobtype"},
+                           @{@"image":@"68",@"title":@"岗位类别",@"text":@"",@"key":@"no"}],
+                         @[@{@"image":@"67",@"title":@"期望地区",@"text":@"",@"key":@"hopelocation"},
+                           @{@"image":@"67",@"title":@"期望职位",@"text":@"",@"key":@"hopepostion"},
+                           @{@"image":@"67",@"title":@"待遇要求",@"text":@"",@"key":@"requestsalary"}],
+                         @[@{@"image":@"67",@"title":@"住房要求",@"text":@"",@"key":@"requeststay"},
+                           @{@"image":@"67",@"title":@"到岗状况",@"text":@"",@"key":@"jobstatus"}]
                          ];
+        footerView  = [UIView new];
     }
-    else if ([self.title isEqualToString:@"增加订阅"]) {
-        self.dataArr = @[@[@{@"image":@"68",@"title":@"关键字"}],
-                         @[@{@"image":@"67",@"title":@"工作地点"},
-                           @{@"image":@"67",@"title":@"工作经验"},
-                           @{@"image":@"67",@"title":@"学历要求"}]
+    else if ([self.title isEqualToString:@"教育经历"]) {
+        self.dataArr = @[@[@{@"image":@"68",@"title":@"学校名称",@"text":@"",@"key":@"graduatedfrom"},
+                           @{@"image":@"67",@"title":@"专业名称",@"text":@"",@"key":@"speciality"}],
+                         @[@{@"image":@"67",@"title":@"入学时间",@"key":@"no"},
+                           @{@"image":@"67",@"title":@"毕业时间",@"text":@"",@"key":@"graduatetime"}],
+                         @[@{@"image":@"67",@"title":@"学历",@"text":@"",@"key":@"education"}]
                          ];
-    }
-    else {
-        self.dataArr = @[@[@{@"image":@"68",@"title":@"学校名称"},
-                           @{@"image":@"68",@"title":@"专业名称"}],
-                         @[@{@"image":@"67",@"title":@"入学时间"},
-                           @{@"image":@"67",@"title":@"毕业时间"}],
-                         @[@{@"image":@"67",@"title":@"文凭"}]
+        remindLab.text = @"教育培训经历";
+        remindLab1.text = @"格式：年 月 至 年 月 学校/培训机构名称 专业/科目名称 获得和中证书";
+    }else if ([self.title isEqualToString:@"技能特长"]) {
+        self.dataArr = @[@[@{@"image":@"67",@"title":@"第一外语",@"text":@"",@"key":@"foreignlanguage"},
+                           @{@"image":@"67",@"title":@"外语水平",@"text":@"",@"key":@"foreignlanguagelevel"},
+                           @{@"image":@"67",@"title":@"计算机水平",@"text":@"",@"key":@"computerlevel"},
+                           @{@"image":@"68",@"title":@"相关证书(选填)",@"text":@"",@"key":@"certificate"},
+                           @{@"image":@"68",@"title":@"其他能力(选填)",@"text":@"",@"key":@"otherability"}]
                          ];
+        remindLab.text = @"自我评价";
+        remindLab1.text = @"请输入自我评价";
+    }else if ([self.title isEqualToString:@"联系方式"]) {
+        self.dataArr = @[@[@{@"image":@"68",@"title":@"手机",@"text":@"",@"key":@"phone"},
+                           @{@"image":@"67",@"title":@"电话(选填)",@"text":@"",@"key":@"tele"}],
+                         @[@{@"image":@"67",@"title":@"QQ号码(选填)",@"text":@"",@"key":@"qq"},
+                           @{@"image":@"67",@"title":@"邮箱(选填)",@"text":@"",@"key":@"email"}],
+                         @[@{@"image":@"67",@"title":@"联系地址",@"text":@"",@"key":@"address"}]
+                         ];
+        footerView  = [UIView new];
+        
+    }else if ([self.title isEqualToString:@"编辑工作经历"]) {
+        self.dataArr = @[@[@{@"image":@"68",@"title":@"公司名称",@"text":@"",@"key":@"company_name"},
+                           @{@"image":@"67",@"title":@"职位",@"text":@"",@"key":@"position"}],
+                         @[@{@"image":@"67",@"title":@"入职时间",@"text":@"",@"key":@"begin_time"},
+                           @{@"image":@"67",@"title":@"离职时间",@"text":@"",@"key":@"end_time"}],
+                         @[@{@"image":@"67",@"title":@"工作经验",@"text":@"",@"key":@"no"},
+                           @{@"image":@"67",@"title":@"公司性质",@"text":@"",@"key":@"company_nature"}]
+                         ];
+        remindLab.text = @"工作描述";
+        remindLab1.text = @"你的工作职责，具体负责的事情";
+        
     }
+
 
     
     NSMutableArray *arrM = [NSMutableArray array];
@@ -65,19 +130,121 @@
     }
     
     self.dataArr = arrM;
+
     
     _tableView = [UITableView tableViewWithframe:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
-    
+    _tableView.tableFooterView = footerView;
     
     UIButton *saveBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 30, 17) text:@"保存" font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:nil selected:nil];
-    //    [saveBtn addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
+    [saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     //    self.cancelBtn = saveBtn;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:saveBtn];
     
+    // 选择项数据
+    NSArray *selectArr = [InfoCache unarchiveObjectWithFile:SelectItem];;
+    self.selectArr = selectArr;
+    
+    NSArray *selectJobArr = [InfoCache unarchiveObjectWithFile:SelectItemJob];;
+    self.selectJobArr = selectJobArr;
+    
 }
+
+- (void)saveAction
+{
+    [self.view endEditing:YES];
+    
+    NSString *urlStr = nil;
+    
+    if ([self.title isEqualToString:@"求职意向"]) {
+        urlStr = Update_hope_info;
+
+    }
+    else if ([self.title isEqualToString:@"教育经历"]) {
+        
+        urlStr = Update_educate_info;
+
+
+    }else if ([self.title isEqualToString:@"技能特长"]) {
+        urlStr = Update_skill_info;
+
+    }else if ([self.title isEqualToString:@"联系方式"]) {
+        urlStr = Update_contact_info;
+
+        
+    }else if ([self.title isEqualToString:@"编辑工作经历"]) {
+        urlStr = Add_jobhistory_info;
+
+    }
+    
+    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    
+    for (NSArray *arr in self.dataArr) {
+        
+        for (PersonModel *model in arr) {
+
+            if (!([model.title isEqualToString:@"电话(选填)"]||
+                  [model.title isEqualToString:@"QQ号码(选填)"]||
+                  [model.title isEqualToString:@"邮箱(选填)"]||
+                  [model.title isEqualToString:@"相关证书(选填)"]||
+                  [model.title isEqualToString:@"其他能力(选填)"])) {
+                
+                if (model.text.length == 0) {
+                    [self.view makeToast:@"您还有必填项未填写"];
+                    return;
+                }
+            }
+            
+            if (model.text.length > 0) {
+                [paramDic  setValue:model.text forKey:model.key];
+                
+            }
+            
+        }
+        
+    }
+    
+    NSLog(@"%@",paramDic);
+    
+    // 个人评价
+    [paramDic  setValue:self.textView.text forKey:@"selfevaluation"];
+    
+    // 教育经历
+    [paramDic  setValue:self.textView.text forKey:@"educationhistory"];
+    
+    // 工作内容
+    [paramDic  setValue:self.textView.text forKey:@"skill"];
+
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:urlStr dic:paramDic showHUD:YES Succed:^(id responseObject) {
+        
+//        [self get_user_info];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
+//// 返回用户表该用户相关信息
+//- (void)get_user_info
+//{
+//    
+//    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+//    
+//    [AFNetworking_RequestData requestMethodPOSTUrl:Get_user_info dic:paramDic showHUD:YES Succed:^(id responseObject) {
+//        
+//        PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
+//        [InfoCache archiveObject:model toFile:Person];
+//        
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -124,7 +291,58 @@
     }
     PersonModel *model = self.dataArr[indexPath.section][indexPath.row];
     cell.model = model;
-    
+    cell.selectArr = _selectArr;
+    cell.selectJobArr = _selectJobArr;
     return cell;
 }
+
+/**
+ 内容将要发生改变编辑 限制输入文本长度 监听TextView 点击了ReturnKey 按钮
+
+ @param textView textView
+ @param range    范围
+ @param text     text
+
+ @return BOOL
+ */
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (range.location < 500)
+    {
+        return  YES;
+
+    } else  if ([textView.text isEqualToString:@"\n"]) {
+
+        //这里写按了ReturnKey 按钮后的代码
+        return NO;
+    }
+
+    if (textView.text.length == 500) {
+
+        return NO;
+    }
+
+    return YES;
+
+}
+
+
+/**
+ 内容发生改变编辑 自定义文本框placeholder
+ 有时候我们要控件自适应输入的文本的内容的高度，只要在textViewDidChange的代理方法中加入调整控件大小的代理即可
+ @param textView textView
+ */
+- (void)textViewDidChange:(UITextView *)textView
+{
+
+    if (textView.text.length < 1) {
+        self.remindLab1.hidden = NO;
+    }
+    else {
+        self.remindLab1.hidden = YES;
+
+    }
+//    count.text = [NSString stringWithFormat:@"%lu/100", textView.text.length  ];
+}
+
 @end

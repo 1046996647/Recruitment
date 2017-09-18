@@ -10,6 +10,7 @@
 
 #import "SubscriptionManageCell.h"
 #import "EditJobMsgVC.h"
+#import "EditEducationMsgVC.h"
 
 @interface ResumeManageVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -65,7 +66,7 @@
 
 - (void)btnAction
 {
-    EditJobMsgVC *vc = [[EditJobMsgVC alloc] init];
+    EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
     vc.title = @"编辑工作经历";
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -85,7 +86,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    EditJobMsgVC *vc = [[EditJobMsgVC alloc] init];
+    EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
     vc.title = @"编辑工作经历";
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -100,7 +101,7 @@
         cell = [[SubscriptionManageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [cell.jobBtn setImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];
+    [cell.jobBtn setImage:[UIImage imageNamed:@"94"] forState:UIControlStateNormal];
     [cell.jobBtn1 setImage:[UIImage imageNamed:@"93"] forState:UIControlStateNormal];
     [cell.addressBtn setImage:[UIImage imageNamed:@"92"] forState:UIControlStateNormal];
     

@@ -11,11 +11,14 @@
 #import "SendHistoryVC.h"
 #import "CheckedVC.h"
 #import "LoginVC.h"
+#import "NSStringExt.h"
 
 @interface ResumeVC ()
 
 @property(nonatomic,strong) UIButton *forgetBtn;
 @property(nonatomic,strong) UIButton *forgetBtn1;
+@property(nonatomic,strong) UILabel *perLabel;
+@property(nonatomic,strong) UILabel *remindLabel;
 
 
 
@@ -50,12 +53,14 @@
     UILabel *perLabel = [UILabel labelWithframe:CGRectMake(0, 0, view1.width, 25) text:@"0%" font:[UIFont systemFontOfSize:18] textAlignment:NSTextAlignmentCenter textColor:@"#FFFFFF"];
     perLabel.center = view1.center;
     [self.view addSubview:perLabel];
+    self.perLabel = perLabel;
     
     UILabel *remindLabel = [UILabel labelWithframe:CGRectMake((kScreen_Width-111)/2, view.bottom+11, 111, 15) text:@"登入后可编辑简历" font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentCenter textColor:@"#FFFFFF"];
     remindLabel.backgroundColor = [UIColor colorWithHexString:@"#FF9634"];
     remindLabel.layer.cornerRadius = remindLabel.height/2;
     remindLabel.layer.masksToBounds = YES;
     [self.view addSubview:remindLabel];
+    self.remindLabel = remindLabel;
     
     NSArray *titleArr = @[@"HR查看",@"投递简历"];
     for (int i=0; i<titleArr.count; i++) {
@@ -118,6 +123,39 @@
         [forgetBtn addSubview:line];
         
     }
+    
+    
+}
+
+
+- (void)get_ui_info
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_ui_info dic:dic showHUD:NO Succed:^(id responseObject) {
+        
+        PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
+        
+        self.perLabel.text = [NSString stringWithFormat:@"%@%%",model.form_percent];
+
+        if (model.form_percent.integerValue < 60) {
+            
+            
+            self.remindLabel.text = [NSString stringWithFormat:@"亲，完善度需要60%%才可以投递"];
+        }
+        else {
+            self.remindLabel.text = @"完善的简历会更加吸引公司的关注";
+        }
+        
+        CGSize size = [NSString textLength:self.remindLabel.text font:self.remindLabel.font];
+        
+        self.remindLabel.width = size.width+20;
+        self.remindLabel.left = (kScreen_Width-self.remindLabel.width)/2;
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 
 - (void)tapAction
@@ -260,6 +298,13 @@
     
     //带动画结果在切换tabBar的时候viewController会有闪动的效果不建议这样写
     //    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
+    if (userid) {
+        [self get_ui_info];
+
+    }
+
     
 }
 
