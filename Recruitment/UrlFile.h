@@ -61,6 +61,12 @@
 // 获取部分用户信息
 #define Get_ui_info  [NSString stringWithFormat:@"%@User/get_ui_info",BaseUrl]
 
+// 获取用户工作经历
+#define Get_work_exp  [NSString stringWithFormat:@"%@QuickGet/get_work_exp",BaseUrl]
+
+// 1.13	删除工作经历
+#define Delete_jobhistory_info  [NSString stringWithFormat:@"%@User/delete_jobhistory_info",BaseUrl]
+
 // 1.16	上传头像
 #define Upload_user_img  [NSString stringWithFormat:@"%@User/upload_user_img",BaseUrl]
 

@@ -62,56 +62,128 @@
     footerView.height = view.bottom+17;
     
     if ([self.title isEqualToString:@"求职意向"]) {
-        self.dataArr = @[@[@{@"image":@"68",@"title":@"求职类型",@"text":@"",@"key":@"requestjobtype"},
-                           @{@"image":@"68",@"title":@"岗位类别",@"text":@"",@"key":@"no"}],
-                         @[@{@"image":@"67",@"title":@"期望地区",@"text":@"",@"key":@"hopelocation"},
-                           @{@"image":@"67",@"title":@"期望职位",@"text":@"",@"key":@"hopepostion"},
-                           @{@"image":@"67",@"title":@"待遇要求",@"text":@"",@"key":@"requestsalary"}],
-                         @[@{@"image":@"67",@"title":@"住房要求",@"text":@"",@"key":@"requeststay"},
-                           @{@"image":@"67",@"title":@"到岗状况",@"text":@"",@"key":@"jobstatus"}]
-                         ];
+        
+        if (_model) {
+            self.dataArr = @[@[@{@"image":@"68",@"title":@"求职类型",@"text":_model.requestjobtype,@"key":@"requestjobtype"},
+                               @{@"image":@"68",@"title":@"岗位类别",@"text":@"",@"key":@"no"}],
+                             @[@{@"image":@"67",@"title":@"期望地区",@"text":_model.hopelocation,@"key":@"hopelocation"},
+                               @{@"image":@"67",@"title":@"期望职位",@"text":_model.hopepostion,@"key":@"hopepostion"},
+                               @{@"image":@"67",@"title":@"待遇要求",@"text":_model.requestsalary,@"key":@"requestsalary"}],
+                             @[@{@"image":@"67",@"title":@"住房要求",@"text":_model.requeststay,@"key":@"requeststay"},
+                               @{@"image":@"67",@"title":@"到岗状况",@"text":_model.jobstatus,@"key":@"jobstatus"}]
+                             ];
+        }
+        else {
+            self.dataArr = @[@[@{@"image":@"68",@"title":@"求职类型",@"text":@"",@"key":@"requestjobtype"},
+                               @{@"image":@"68",@"title":@"岗位类别",@"text":@"",@"key":@"no"}],
+                             @[@{@"image":@"67",@"title":@"期望地区",@"text":@"",@"key":@"hopelocation"},
+                               @{@"image":@"67",@"title":@"期望职位",@"text":@"",@"key":@"hopepostion"},
+                               @{@"image":@"67",@"title":@"待遇要求",@"text":@"",@"key":@"requestsalary"}],
+                             @[@{@"image":@"67",@"title":@"住房要求",@"text":@"",@"key":@"requeststay"},
+                               @{@"image":@"67",@"title":@"到岗状况",@"text":@"",@"key":@"jobstatus"}]
+                             ];
+        }
+
         footerView  = [UIView new];
+        self.textView = nil;
     }
     else if ([self.title isEqualToString:@"教育经历"]) {
-        self.dataArr = @[@[@{@"image":@"68",@"title":@"学校名称",@"text":@"",@"key":@"graduatedfrom"},
-                           @{@"image":@"67",@"title":@"专业名称",@"text":@"",@"key":@"speciality"}],
-                         @[@{@"image":@"67",@"title":@"入学时间",@"key":@"no"},
-                           @{@"image":@"67",@"title":@"毕业时间",@"text":@"",@"key":@"graduatetime"}],
-                         @[@{@"image":@"67",@"title":@"学历",@"text":@"",@"key":@"education"}]
-                         ];
+        
+        if (_model) {
+            self.dataArr = @[@[@{@"image":@"68",@"title":@"学校名称",@"text":_model.graduatedfrom,@"key":@"graduatedfrom"},
+                               @{@"image":@"67",@"title":@"专业名称",@"text":_model.speciality,@"key":@"speciality"}],
+                             @[@{@"image":@"67",@"title":@"入学时间",@"text":@"",@"key":@"no"},
+                               @{@"image":@"67",@"title":@"毕业时间",@"text":_model.graduatetime,@"key":@"graduatetime"}],
+                             @[@{@"image":@"67",@"title":@"学历",@"text":_model.education,@"key":@"education"}]
+                             ];
+            self.textView.text = _model.educationhistory;
+
+        }
+        else {
+            self.dataArr = @[@[@{@"image":@"68",@"title":@"学校名称",@"text":@"",@"key":@"graduatedfrom"},
+                               @{@"image":@"67",@"title":@"专业名称",@"text":@"",@"key":@"speciality"}],
+                             @[@{@"image":@"67",@"title":@"入学时间",@"text":@"",@"key":@"no"},
+                               @{@"image":@"67",@"title":@"毕业时间",@"text":@"",@"key":@"graduatetime"}],
+                             @[@{@"image":@"67",@"title":@"学历",@"text":@"",@"key":@"education"}]
+                             ];
+            self.textView.text = @"";
+        }
+
         remindLab.text = @"教育培训经历";
         remindLab1.text = @"格式：年 月 至 年 月 学校/培训机构名称 专业/科目名称 获得和中证书";
+        
+
     }else if ([self.title isEqualToString:@"技能特长"]) {
-        self.dataArr = @[@[@{@"image":@"67",@"title":@"第一外语",@"text":@"",@"key":@"foreignlanguage"},
-                           @{@"image":@"67",@"title":@"外语水平",@"text":@"",@"key":@"foreignlanguagelevel"},
-                           @{@"image":@"67",@"title":@"计算机水平",@"text":@"",@"key":@"computerlevel"},
-                           @{@"image":@"68",@"title":@"相关证书(选填)",@"text":@"",@"key":@"certificate"},
-                           @{@"image":@"68",@"title":@"其他能力(选填)",@"text":@"",@"key":@"otherability"}]
-                         ];
+        
+        if (_model) {
+            self.dataArr = @[@[@{@"image":@"67",@"title":@"第一外语",@"text":_model.foreignlanguage,@"key":@"foreignlanguage"},
+                               @{@"image":@"67",@"title":@"外语水平",@"text":_model.foreignlanguagelevel,@"key":@"foreignlanguagelevel"},
+                               @{@"image":@"67",@"title":@"计算机水平",@"text":_model.computerlevel,@"key":@"computerlevel"},
+                               @{@"image":@"68",@"title":@"相关证书(选填)",@"text":_model.certificate,@"key":@"certificate"},
+                               @{@"image":@"68",@"title":@"其他能力(选填)",@"text":_model.otherability,@"key":@"otherability"}]
+                             ];
+
+        }
+        else {
+            self.dataArr = @[@[@{@"image":@"67",@"title":@"第一外语",@"text":@"",@"key":@"foreignlanguage"},
+                               @{@"image":@"67",@"title":@"外语水平",@"text":@"",@"key":@"foreignlanguagelevel"},
+                               @{@"image":@"67",@"title":@"计算机水平",@"text":@"",@"key":@"computerlevel"},
+                               @{@"image":@"68",@"title":@"相关证书(选填)",@"text":@"",@"key":@"certificate"},
+                               @{@"image":@"68",@"title":@"其他能力(选填)",@"text":@"",@"key":@"otherability"}]
+                             ];
+        }
+
         remindLab.text = @"自我评价";
         remindLab1.text = @"请输入自我评价";
+        self.textView.text = _model.selfevaluation;
+
     }else if ([self.title isEqualToString:@"联系方式"]) {
-        self.dataArr = @[@[@{@"image":@"68",@"title":@"手机",@"text":@"",@"key":@"phone"},
-                           @{@"image":@"67",@"title":@"电话(选填)",@"text":@"",@"key":@"tele"}],
-                         @[@{@"image":@"67",@"title":@"QQ号码(选填)",@"text":@"",@"key":@"qq"},
-                           @{@"image":@"67",@"title":@"邮箱(选填)",@"text":@"",@"key":@"email"}],
-                         @[@{@"image":@"67",@"title":@"联系地址",@"text":@"",@"key":@"address"}]
+        
+        self.dataArr = @[@[@{@"image":@"68",@"title":@"手机",@"text":_model.phone,@"key":@"phone"},
+                           @{@"image":@"67",@"title":@"电话(选填)",@"text":_model.tele,@"key":@"tele"}],
+                         @[@{@"image":@"67",@"title":@"QQ号码(选填)",@"text":_model.qq,@"key":@"qq"},
+                           @{@"image":@"67",@"title":@"邮箱(选填)",@"text":_model.email,@"key":@"email"}],
+                         @[@{@"image":@"67",@"title":@"联系地址",@"text":_model.address,@"key":@"address"}]
                          ];
+
         footerView  = [UIView new];
+        self.textView = nil;
+
         
     }else if ([self.title isEqualToString:@"编辑工作经历"]) {
-        self.dataArr = @[@[@{@"image":@"68",@"title":@"公司名称",@"text":@"",@"key":@"company_name"},
-                           @{@"image":@"67",@"title":@"职位",@"text":@"",@"key":@"position"}],
-                         @[@{@"image":@"67",@"title":@"入职时间",@"text":@"",@"key":@"begin_time"},
-                           @{@"image":@"67",@"title":@"离职时间",@"text":@"",@"key":@"end_time"}],
-                         @[@{@"image":@"67",@"title":@"工作经验",@"text":@"",@"key":@"no"},
-                           @{@"image":@"67",@"title":@"公司性质",@"text":@"",@"key":@"company_nature"}]
-                         ];
+        
+        if (_model) {
+            self.dataArr = @[@[@{@"image":@"68",@"title":@"公司名称",@"text":_model.company_name,@"key":@"company_name"},
+                               @{@"image":@"67",@"title":@"职位",@"text":_model.position,@"key":@"position"}],
+                             @[@{@"image":@"67",@"title":@"入职时间",@"text":_model.begin_time,@"key":@"begin_time"},
+                               @{@"image":@"67",@"title":@"离职时间",@"text":_model.end_time,@"key":@"end_time"}],
+                             @[@{@"image":@"67",@"title":@"工作经验",@"text":@"",@"key":@"no"},
+                               @{@"image":@"67",@"title":@"公司性质",@"text":_model.company_nature,@"key":@"company_nature"}]
+                             ];
+            self.textView.text = _model.skill;
+        }
+        else {
+            self.dataArr = @[@[@{@"image":@"68",@"title":@"公司名称",@"text":@"",@"key":@"company_name"},
+                               @{@"image":@"67",@"title":@"职位",@"text":@"",@"key":@"position"}],
+                             @[@{@"image":@"67",@"title":@"入职时间",@"text":@"",@"key":@"begin_time"},
+                               @{@"image":@"67",@"title":@"离职时间",@"text":@"",@"key":@"end_time"}],
+                             @[@{@"image":@"67",@"title":@"工作经验",@"text":@"",@"key":@"no"},
+                               @{@"image":@"67",@"title":@"公司性质",@"text":@"",@"key":@"company_nature"}]
+                             ];
+            self.textView.text = @"";
+        }
+
         remindLab.text = @"工作描述";
         remindLab1.text = @"你的工作职责，具体负责的事情";
         
-    }
 
+
+    }
+    
+    if (self.textView.text.length > 0) {
+        remindLab.hidden = YES;
+        remindLab1.hidden = YES;
+    }
 
     
     NSMutableArray *arrM = [NSMutableArray array];
@@ -156,6 +228,8 @@
 {
     [self.view endEditing:YES];
     
+    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    
     NSString *urlStr = nil;
     
     if ([self.title isEqualToString:@"求职意向"]) {
@@ -175,11 +249,18 @@
 
         
     }else if ([self.title isEqualToString:@"编辑工作经历"]) {
-        urlStr = Add_jobhistory_info;
+        
+        if (_model) {
+            urlStr = Update_jobhistory_info;
+            [paramDic  setValue:@(_index+1) forKey:@"orderNum"];
+
+        }
+        else {
+            urlStr = Add_jobhistory_info;
+
+        }
 
     }
-    
-    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
     
     for (NSArray *arr in self.dataArr) {
         
@@ -191,7 +272,7 @@
                   [model.title isEqualToString:@"相关证书(选填)"]||
                   [model.title isEqualToString:@"其他能力(选填)"])) {
                 
-                if (model.text.length == 0) {
+                if (model.text.length == 0 || (self.textView && self.textView.text.length == 0)) {
                     [self.view makeToast:@"您还有必填项未填写"];
                     return;
                 }
@@ -221,6 +302,9 @@
     [AFNetworking_RequestData requestMethodPOSTUrl:urlStr dic:paramDic showHUD:YES Succed:^(id responseObject) {
         
 //        [self get_user_info];
+        if (self.block) {
+            self.block();
+        }
         [self.navigationController popViewControllerAnimated:YES];
         
     } failure:^(NSError *error) {

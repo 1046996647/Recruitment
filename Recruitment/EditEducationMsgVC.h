@@ -8,6 +8,14 @@
 
 #import "BaseViewController.h"
 
+typedef void(^ResumeReloadBlock)(void);
+
+
 @interface EditEducationMsgVC : BaseViewController
+
+@property(nonatomic,copy) ResumeReloadBlock block;
+@property(nonatomic,strong) PersonModel *model;
+@property(nonatomic,assign) NSInteger index;
+
 
 @end

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SubscriptionManageModel.h"
 
+typedef void(^ResumeDeleteBlock)(NSInteger tag);
+
 
 @interface SubscriptionManageCell : UITableViewCell
 
@@ -25,5 +27,7 @@
 
 @property(nonatomic,strong) SubscriptionManageModel *model;
 @property(nonatomic,assign) NSInteger type;
+@property(nonatomic,copy) ResumeDeleteBlock block;
+
 
 @end

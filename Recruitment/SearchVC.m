@@ -8,12 +8,17 @@
 
 #import "SearchVC.h"
 #import "HotJobCell.h"
+#import "SearchCell.h"
 
-@interface SearchVC ()<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate>
+#define HistoryPath @"HistoryPath"
+
+
+@interface SearchVC ()<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) UISearchBar *searchBar;
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UIButton *cancelBtn;
+@property(nonatomic,strong) NSMutableArray *hisArr;
 
 
 
@@ -82,9 +87,18 @@
     
     footView.height = collectionView.bottom;
     
+    // 搜索历史记录
+    _hisArr = [[InfoCache getValueForKey:HistoryPath] mutableCopy];
+    if (!_hisArr) {
+        _hisArr = [NSMutableArray array];
+        
+    }
+    
     _tableView = [UITableView tableViewWithframe:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64)];
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = footView;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
 
 }
 
@@ -98,6 +112,76 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)deleteAction:(UIButton *)btn
+{
+    
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+//    return [self.dataArr count];
+    return 1;
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+    
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 12+28;
+    
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 12+28)];
+    UIButton *delBtn = [UIButton buttonWithframe:CGRectMake((kScreen_Width-150)/2, 0, 150, 28) text:@"删除所有记录" font:[UIFont systemFontOfSize:12] textColor:@"#C70000" backgroundColor:@"#FFFFFF" normal:@"37" selected:nil];
+    delBtn.layer.cornerRadius = 5;
+    delBtn.layer.masksToBounds = YES;
+    delBtn.layer.borderColor = [UIColor colorWithHexString:@"#C70000"].CGColor;
+    delBtn.layer.borderWidth = 1;
+    [view addSubview:delBtn];
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
+    line.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
+    [view addSubview:line];
+
+    return view;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    SearchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (cell == nil) {
+        
+        cell = [[SearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.delBtn addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    }
+    
+    cell.delBtn.tag = indexPath.row;
+    
+    return cell;
+}
+
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -106,7 +190,10 @@
     return 6;
 }
 
-
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HotJobCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellID" forIndexPath:indexPath];
@@ -118,10 +205,31 @@
 #pragma mark - UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    if (searchBar.text.length == 0) {
+        [searchBar resignFirstResponder];
+        
+        return;
+    }
     
+    [searchBar resignFirstResponder];
+    //    [self pushAction:textField.text];
+    if (![self.hisArr containsObject:searchBar.text]) {
+        [self.hisArr addObject:searchBar.text];
+        [InfoCache saveValue:_hisArr forKey:HistoryPath];
+        [self.tableView reloadData];
+    }
 }
 
-
+// 搜索结果
+//- (void)pushAction:(NSString *)text
+//{
+//    SearchResultVC *vc = [[SearchResultVC alloc] init];
+//    vc.title = @"搜索结果";
+//    vc.longitude = self.longitude;
+//    vc.latitude = self.latitude;
+//    vc.searchText = text;
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 
 @end

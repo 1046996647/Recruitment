@@ -27,11 +27,11 @@
         [_tf addTarget:self action:@selector(beginAction:) forControlEvents:UIControlEventEditingDidBegin];
         [_tf addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventEditingChanged];
         
-//        UIButton *saveBtn = [UIButton buttonWithframe:_tf.bounds text:nil font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:nil selected:nil];
-//        [saveBtn addTarget:self action:@selector(pushAction) forControlEvents:UIControlEventTouchUpInside];
-//        [self.contentView addSubview:saveBtn];
-//        saveBtn.hidden = YES;
-//        self.saveBtn = saveBtn;
+        UIButton *saveBtn = [UIButton buttonWithframe:_tf.bounds text:nil font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:nil selected:nil];
+        [saveBtn addTarget:self action:@selector(pushAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:saveBtn];
+        saveBtn.hidden = YES;
+        self.saveBtn = saveBtn;
 
     }
     return self;
@@ -44,15 +44,16 @@
     self.imageView.image = [UIImage imageNamed:model.image];
     _tf.placeholder = model.title;
     _tf.text = model.text;
-//    if ([_model.title isEqualToString:@"手机"]) {
-//        
-//        self.saveBtn.hidden = NO;
-//        
-//    }
-//    else {
-//        self.saveBtn.hidden = YES;
-//
-//    }
+    
+    if ([_model.title isEqualToString:@"手机"]) {
+        
+        self.saveBtn.hidden = NO;
+        
+    }
+    else {
+        self.saveBtn.hidden = YES;
+
+    }
 }
 
 - (void)pushAction
@@ -82,7 +83,7 @@
         [_model.title isEqualToString:@"期望职位"]||
         [_model.title isEqualToString:@"相关证书(选填)"]||
         [_model.title isEqualToString:@"其他能力(选填)"]||
-        [_model.title isEqualToString:@"手机"]||
+//        [_model.title isEqualToString:@"手机"]||
         [_model.title isEqualToString:@"电话(选填)"]||
         [_model.title isEqualToString:@"QQ号码(选填)"]||
         [_model.title isEqualToString:@"邮箱(选填)"]||

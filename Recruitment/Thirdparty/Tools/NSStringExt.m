@@ -172,6 +172,13 @@
     
 }
 
+// 文本高度
++ (CGSize)textHeight:(NSString *)content font:(UIFont *)font width:(NSInteger)width
+{
+     CGSize titleSize = [content boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+    return titleSize;
+}
+
 // 富文本
 + (NSMutableAttributedString *)text:(NSString *)text  fullText:(NSString *)fullText location:(NSInteger)location color:(UIColor *)color font:(UIFont *)font
 {

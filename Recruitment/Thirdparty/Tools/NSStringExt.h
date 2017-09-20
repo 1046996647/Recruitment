@@ -29,6 +29,10 @@
 // 文本宽度
 + (CGSize)textLength:(NSString *)content font:(UIFont *)font;
 
+// 文本高度
++ (CGSize)textHeight:(NSString *)content font:(UIFont *)font width:(NSInteger)width;
+
+
 // 富文本
 + (NSMutableAttributedString *)text:(NSString *)text  fullText:(NSString *)fullText location:(NSInteger)location color:(UIColor *)color font:(UIFont *)font;
 

@@ -26,6 +26,7 @@
         
         _selectBtn = [UIButton buttonWithframe:CGRectZero text:nil font:nil textColor:nil backgroundColor:nil normal:@"Group 3" selected:@""];
         [baseView addSubview:_selectBtn];
+        [_selectBtn addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
         
         _jobBtn = [UIButton buttonWithframe:CGRectMake(11, 5, kScreen_Width-11, 16) text:@"UI设计师" font:[UIFont systemFontOfSize:13] textColor:@"#999999" backgroundColor:nil normal:@"94" selected:@""];
         _jobBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -78,6 +79,14 @@
         self.view.frame = CGRectMake(_jobBtn.left+20, _jobBtn.bottom+6, self.baseView.width-12-(_jobBtn.left+20), 1);
         _jobBtn1.left = _jobBtn.left;
         _addressBtn.left = _jobBtn.left;
+    }
+}
+
+
+- (void)deleteAction:(UIButton *)btn
+{
+    if (self.block) {
+        self.block(btn.tag);
     }
 }
 

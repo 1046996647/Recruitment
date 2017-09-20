@@ -19,7 +19,8 @@
 
 @property(nonatomic,strong) NSString *userid;// 电话
 @property(nonatomic,strong) NSString *passwd;
-@property(nonatomic,strong) NSString *phone;// 电话
+@property(nonatomic,strong) NSString *phone;// 手机
+@property(nonatomic,strong) NSString *tele;// 手机
 @property(nonatomic,strong) NSString *name;// 姓名
 @property(nonatomic,strong) NSString *political;// 政治面貌
 @property(nonatomic,strong) NSString *img;// 姓名

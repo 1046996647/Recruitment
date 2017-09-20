@@ -8,6 +8,9 @@
 
 #import "BaseViewController.h"
 
+
 @interface ResumeManageVC : BaseViewController
+
+
 
 @end

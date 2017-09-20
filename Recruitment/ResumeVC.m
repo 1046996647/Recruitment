@@ -128,18 +128,17 @@
 }
 
 
-- (void)get_ui_info
+- (void)get_ui_info:(BOOL)isShow
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
-    [AFNetworking_RequestData requestMethodPOSTUrl:Get_ui_info dic:dic showHUD:NO Succed:^(id responseObject) {
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_ui_info dic:dic showHUD:YES Succed:^(id responseObject) {
         
         PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
         
         self.perLabel.text = [NSString stringWithFormat:@"%@%%",model.form_percent];
 
         if (model.form_percent.integerValue < 60) {
-            
             
             self.remindLabel.text = [NSString stringWithFormat:@"亲，完善度需要60%%才可以投递"];
         }
@@ -151,6 +150,10 @@
         
         self.remindLabel.width = size.width+20;
         self.remindLabel.left = (kScreen_Width-self.remindLabel.width)/2;
+        
+        if (isShow) {
+            [self.view makeToast:@"简历刷新成功"];
+        }
         
     } failure:^(NSError *error) {
         
@@ -282,6 +285,7 @@
     }
     if (btn.tag == 2) {
         
+        [self get_ui_info:YES];
     }
 }
 
@@ -301,7 +305,7 @@
     
     NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
     if (userid) {
-        [self get_ui_info];
+        [self get_ui_info:NO];
 
     }
 

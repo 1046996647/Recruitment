@@ -175,15 +175,18 @@
         
         NSMutableArray *arrM = [NSMutableArray array];
         NSArray *arr = responseObject[@"data"][@"jobhistory"];
-        for (NSDictionary *dic in arr) {
-            PersonModel *model1 = [PersonModel yy_modelWithJSON:dic];
-            [arrM addObject:model1];
-        }
         
+        if ([arr isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *dic in arr) {
+                PersonModel *model1 = [PersonModel yy_modelWithJSON:dic];
+                [arrM addObject:model1];
+            }
+        }
+
         self.dataArr = @[@[model],arrM,@[model],@[model],@[model]];
         [_tableView reloadData];
         
-        [self.userBtn sd_setImageWithURL:[NSURL URLWithString:self.model.img] forState:UIControlStateNormal];
+        [self.userBtn sd_setImageWithURL:[NSURL URLWithString:self.model.img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"96"]];
 
         
         CGSize size = [NSString textLength:model.name font:self.signLabel.font];
@@ -221,9 +224,6 @@
 }
 
 
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -241,9 +241,39 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 //    return 1;
-    return [self.dataArr[section] count];
+    if (section == 0) {
+        
+        if (self.model.requestjobtype.length == 0) {
+            return 0;
+        }
 
-    
+
+    } else if (section == 1) {
+        
+        return [self.dataArr[section] count];
+
+        
+    } else if (section == 2) {
+        if (self.model.graduatedfrom.length == 0) {
+            return 0;
+        }
+
+        
+    } else if (section == 3) {
+        
+        if (self.model.foreignlanguage.length == 0) {
+            return 0;
+        }
+
+        
+    } else if (section == 4) {
+        if (self.model.phone.length == 0) {
+            return 0;
+        }
+
+    }
+    return 1;
+
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -260,7 +290,50 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 25;
+    
+    if ([self.title isEqualToString:@"预览"]) {
+        if (section == 0) {
+            
+            if (self.model.requestjobtype.length == 0) {
+                return 0.0001;
+            }
+            
+            
+        }  else if (section == 1) {
+            
+            if ([self.dataArr[section] count] == 0) {
+                return 0.0001;
+
+            }
+            
+            
+        }  else if (section == 2) {
+            if (self.model.graduatedfrom.length == 0) {
+                return 0.0001;
+            }
+            
+            
+        } else if (section == 3) {
+            
+            if (self.model.foreignlanguage.length == 0) {
+                return 0.0001;
+            }
+            
+            
+        } else if (section == 4) {
+            if (self.model.phone.length == 0) {
+                return 0.0001;
+            }
+            
+        }
+        
+        return 25;
+        
+    }
+    else {
+        
+        return 25;
+    }
     
 }
 
@@ -278,17 +351,93 @@
         headerView.hopeLabel.hidden = NO;
 
     }
-    return headerView;
+    
+    if ([self.title isEqualToString:@"预览"]) {
+        if (section == 0) {
+            
+            if (self.model.requestjobtype.length == 0) {
+                return nil;
+            }
+            
+            
+        }  else if (section == 1) {
+            
+            if ([self.dataArr[section] count] == 0) {
+                return nil;
+                
+            }
+            
+            
+        }  else if (section == 2) {
+            if (self.model.graduatedfrom.length == 0) {
+                return nil;
+            }
+            
+            
+        } else if (section == 3) {
+            
+            if (self.model.foreignlanguage.length == 0) {
+                return nil;
+            }
+            
+            
+        } else if (section == 4) {
+            if (self.model.phone.length == 0) {
+                return nil;
+            }
+            
+        }
+        
+        return headerView;
+        
+    }
+    else {
+        
+        return headerView;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if ([self.title isEqualToString:@"预览"] || ![self.titleArr1[section] isEqualToString:@"工作经历"]) {
-        return 0.0001;
+    if ([self.title isEqualToString:@"预览"]) {
+        return 0.0001;// Group不能设置0
 
     }
     else {
-        return 62;
+        
+        if (section == 0) {
+            
+            if (self.model.requestjobtype.length == 0) {
+                return 62;
+            }
+
+            
+        }  else if (section == 1) {
+            
+            return 62;
+
+            
+        }  else if (section == 2) {
+            if (self.model.graduatedfrom.length == 0) {
+                return 62;
+            }
+            
+            
+        } else if (section == 3) {
+            
+            if (self.model.foreignlanguage.length == 0) {
+                return 62;
+            }
+
+            
+        } else if (section == 4) {
+            if (self.model.phone.length == 0) {
+                return 62;
+            }
+
+        }
+
+        return 0.0001;
 
     }
 }
@@ -296,17 +445,17 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
 
-    UIView *footView = nil;
-    if ([self.title isEqualToString:@"预览"] || ![self.titleArr1[section] isEqualToString:@"工作经历"]) {
-        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 0)];
+    if ([self.title isEqualToString:@"预览"]) {
+//        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 0)];
+        return nil;
     }
     else {
         
-//        NSArray *titleArr1 = @[@"+ 增加工作经历",@"+ 增加教育经历"];
-        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 62)];
+        NSArray *titleArr = @[@"+ 增加求职意向",@"+ 增加工作经历",@"+ 增加教育经历",@"+ 增加技能特长",@"+ 增加联系方式"];
+        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 62)];
         footView.backgroundColor = [UIColor whiteColor];
         
-        UIButton *btn = [UIButton buttonWithframe:CGRectMake(12, 14, kScreen_Width-24, 35) text:@"+ 增加工作经历" font:[UIFont systemFontOfSize:14] textColor:@"#FF9123" backgroundColor:nil normal:@"" selected:nil];
+        UIButton *btn = [UIButton buttonWithframe:CGRectMake(12, 14, kScreen_Width-24, 35) text:titleArr[section] font:[UIFont systemFontOfSize:14] textColor:@"#FF9123" backgroundColor:nil normal:@"" selected:nil];
         btn.layer.cornerRadius = 5;
         btn.layer.masksToBounds = YES;
         btn.layer.borderColor = [UIColor colorWithHexString:@"#FF9123"].CGColor;
@@ -314,8 +463,43 @@
         [footView addSubview:btn];
         btn.tag = section;
         [btn addTarget:self action:@selector(footAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (section == 0) {
+            
+            if (self.model.requestjobtype.length == 0) {
+                return footView;
+            }
+            
+            
+        }  else if (section == 1) {
+            return footView;
+
+            
+        }else if (section == 2) {
+            if (self.model.graduatedfrom.length == 0) {
+                return footView;
+            }
+            
+            
+        } else if (section == 3) {
+            
+            if (self.model.foreignlanguage.length == 0) {
+                return footView;
+            }
+            
+            
+        } else if (section == 4) {
+            if (self.model.phone.length == 0) {
+                return footView;
+            }
+            
+        }
+        
+        return nil;
+
     }
-    return footView;
+    
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -337,16 +521,37 @@
         
     }
 
-    
-    
     return cell;
 }
 
 - (void)footAction:(UIButton *)btn
 {
     EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
-    vc.title = @"编辑工作经历";
+    
+    if (btn.tag == 0) {
+        vc.title = @"求职意向";
+
+        
+    }  else if (btn.tag == 1) {
+        
+        vc.title = @"编辑工作经历";
+
+    }else if (btn.tag == 2) {
+
+        vc.title = @"教育经历";
+
+        
+    } else if (btn.tag == 3) {
+        vc.title = @"技能特长";
+
+    } else if (btn.tag == 4) {
+
+        vc.title = @"联系方式";
+
+    }
+    
     [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 #pragma mark - UIImagePickerControllerDelegate

@@ -39,9 +39,11 @@
         [self.contentView addSubview:_companyLab];
         
         _responsibilityLab = [UILabel labelWithframe:CGRectMake(_jobLab.left, _companyLab.bottom+6, kScreen_Width-12-(_jobLab.left), _timeLab.height) text:@"独立完成项目，从交互原型到效果图设计、切图标注等工作。" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+        _responsibilityLab.numberOfLines = 0;
         [self.contentView addSubview:_responsibilityLab];
         
         _extraLab = [UILabel labelWithframe:CGRectMake(_jobLab.left, _responsibilityLab.bottom+6, kScreen_Width-12-(_jobLab.left), _timeLab.height) text:@"自我评价" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+        _extraLab.numberOfLines = 0;
         [self.contentView addSubview:_extraLab];
     
         _hLine1 = [[UIView alloc] initWithFrame:CGRectZero];
@@ -67,7 +69,9 @@
     if (self.indexPath.section == 0) {
         EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
         vc.title = @"求职意向";
+        vc.model = self.model;
         [self.viewController.navigationController pushViewController:vc animated:YES];
+        
     }
     if (self.indexPath.section == 1) {
         ResumeManageVC *vc = [[ResumeManageVC alloc] init];
@@ -77,18 +81,21 @@
     if (self.indexPath.section == 2) {
         EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
         vc.title = @"教育经历";
+        vc.model = self.model;
 
         [self.viewController.navigationController pushViewController:vc animated:YES];
     }
     if (self.indexPath.section == 3) {
         EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
         vc.title = @"技能特长";
+        vc.model = self.model;
 
         [self.viewController.navigationController pushViewController:vc animated:YES];
     }
     if (self.indexPath.section == 4) {
         EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
         vc.title = @"联系方式";
+        vc.model = self.model;
 
         [self.viewController.navigationController pushViewController:vc animated:YES];
     }
@@ -157,6 +164,9 @@
         _timeLab.text = [NSString stringWithFormat:@"%@-%@",beginTime,endTime];
         _jobLab.text = model.position;
         _companyLab.text = [NSString stringWithFormat:@"%@ %@",model.company_name,model.company_nature];
+        
+        CGSize size = [NSString textHeight:model.skill font:_responsibilityLab.font width:_responsibilityLab.width];
+        _responsibilityLab.height = size.height;
         _responsibilityLab.text = model.skill;
         
         model.cellHeight = _responsibilityLab.bottom+12;
@@ -183,6 +193,8 @@
         NSString *graduatetime = [model.graduatetime stringByReplacingOccurrencesOfString:@"-" withString:@"."];
         _companyLab.text = graduatetime;
         
+        CGSize size = [NSString textHeight:model.educationhistory font:_responsibilityLab.font width:_responsibilityLab.width];
+        _responsibilityLab.height = size.height;
         _responsibilityLab.text = model.educationhistory;
         
         model.cellHeight = _responsibilityLab.bottom+12;
@@ -208,6 +220,8 @@
         _companyLab.text = [NSString stringWithFormat:@"相关证书：%@",model.certificate];
         _responsibilityLab.text = [NSString stringWithFormat:@"其他能力：%@",model.otherability];
 
+        CGSize size = [NSString textHeight:model.selfevaluation font:_extraLab.font width:_extraLab.width];
+        _extraLab.height = size.height;
         _extraLab.text = model.selfevaluation;
         
         model.cellHeight = _extraLab.bottom+12;

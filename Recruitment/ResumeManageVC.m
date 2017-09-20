@@ -14,7 +14,7 @@
 
 @interface ResumeManageVC ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong) NSArray *dataArr;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,assign) NSInteger type;
 
@@ -48,12 +48,55 @@
     [manageBtn setTitle:@"完成" forState:UIControlStateSelected];
     [manageBtn addTarget:self action:@selector(manageAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:manageBtn];
+    
+    [self get_work_exp];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+// 获取用户工作经历
+- (void)get_work_exp
+{
+    
+    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_work_exp dic:paramDic showHUD:YES Succed:^(id responseObject) {
+        
+        NSMutableArray *arrM = [NSMutableArray array];
+        NSArray *arr = responseObject[@"data"];
+        for (NSDictionary *dic in arr) {
+            PersonModel *model1 = [PersonModel yy_modelWithJSON:dic];
+            [arrM addObject:model1];
+        }
+        
+        self.dataArr = arrM;
+        
+        [_tableView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+// 删除工作经历
+- (void)delete_jobhistory_info:(NSInteger)tag
+{
+    
+    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    
+    [paramDic setValue:@(tag) forKey:@"orderNum"];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Delete_jobhistory_info dic:paramDic showHUD:YES Succed:^(id responseObject) {
+        
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 - (void)manageAction:(UIButton *)btn
 {
@@ -68,14 +111,18 @@
 {
     EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
     vc.title = @"编辑工作经历";
+
     [self.navigationController pushViewController:vc animated:YES];
+    vc.block = ^{
+        [self get_work_exp];
+    };
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    return self.dataArr.count;
-    return 2;
+        return self.dataArr.count;
+//    return 2;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -88,8 +135,12 @@
     
     EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
     vc.title = @"编辑工作经历";
+    vc.index = indexPath.row;
+    vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
-    
+    vc.block = ^{
+        [self get_work_exp];
+    };
 }
 
 
@@ -100,16 +151,28 @@
         
         cell = [[SubscriptionManageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.block = ^(NSInteger tag) {
+            [self.dataArr removeObjectAtIndex:tag];
+            [_tableView reloadData];
+            
+            [self delete_jobhistory_info:tag+1];
+        };
     }
+    
+    PersonModel *model = self.dataArr[indexPath.row];
+    
     [cell.jobBtn setImage:[UIImage imageNamed:@"94"] forState:UIControlStateNormal];
     [cell.jobBtn1 setImage:[UIImage imageNamed:@"93"] forState:UIControlStateNormal];
     [cell.addressBtn setImage:[UIImage imageNamed:@"92"] forState:UIControlStateNormal];
     
-    [cell.jobBtn setTitle:@"2016.09-2017.09" forState:UIControlStateNormal];
-    [cell.jobBtn1 setTitle:@"杭州晖鸿科技有限公司" forState:UIControlStateNormal];
-    [cell.addressBtn setTitle:@"UI设计师" forState:UIControlStateNormal];
+    NSString *beginTime = [model.begin_time stringByReplacingOccurrencesOfString:@"-" withString:@"."];
+    NSString *endTime = [model.end_time stringByReplacingOccurrencesOfString:@"-" withString:@"."];
+    [cell.jobBtn setTitle:[NSString stringWithFormat:@"%@-%@",beginTime,endTime] forState:UIControlStateNormal];
+    [cell.jobBtn1 setTitle:model.company_name forState:UIControlStateNormal];
+    [cell.addressBtn setTitle:model.position forState:UIControlStateNormal];
 
-    
+    cell.selectBtn.tag = indexPath.row;
     cell.type = self.type;
     cell.model = nil;
     
