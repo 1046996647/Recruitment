@@ -182,8 +182,11 @@
                 [arrM addObject:model1];
             }
         }
+        
+        if (model) {
+            self.dataArr = @[@[model],arrM,@[model],@[model],@[model]];
 
-        self.dataArr = @[@[model],arrM,@[model],@[model],@[model]];
+        }
         [_tableView reloadData];
         
         [self.userBtn sd_setImageWithURL:[NSURL URLWithString:self.model.img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"96"]];

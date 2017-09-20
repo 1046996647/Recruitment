@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        _jobLab = [UILabel labelWithframe:self.contentView.bounds text:@"销售" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentCenter textColor:@"#FF9123"];
+        _jobLab = [UILabel labelWithframe:self.contentView.bounds text:@"" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentCenter textColor:@"#FF9123"];
         _jobLab.layer.cornerRadius = 5;
         _jobLab.layer.masksToBounds = YES;
         _jobLab.layer.borderColor = [UIColor colorWithHexString:@"#FF9123"].CGColor;

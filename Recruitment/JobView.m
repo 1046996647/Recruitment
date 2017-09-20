@@ -7,6 +7,7 @@
 //
 
 #import "JobView.h"
+#import "JobViewModel.h"
 
 @implementation JobView
 
@@ -32,6 +33,9 @@
         okBtn.layer.masksToBounds = YES;
         [bottomView addSubview:okBtn];
         [okBtn addTarget:self action:@selector(okAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        NSArray *selectJobArr = [InfoCache unarchiveObjectWithFile:SelectItemJob];;
+        self.selectJobArr = selectJobArr;
 
     }
     return self;
@@ -48,12 +52,28 @@
 - (void)okAction
 {
     [self removeFromSuperview];
+    
+    NSMutableDictionary *dicM = [NSMutableDictionary dictionary];
+    for (JobViewModel *model in self.lastArr) {
+        
+        [dicM setValue:model.content forKey:model.key];
+    }
+    if (self.block) {
+        self.block(dicM, _aTag);
+    }
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArr.count;
+    if (_aTag == 2) {
+        return self.lastArr.count;
+
+    }
+    else {
+        return self.dataArr.count;
+
+    }
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -66,14 +86,54 @@
     
     if (_aTag == 2) {
         
+        __block JobViewModel *model = self.lastArr[indexPath.row];
+        __weak typeof(self) weakSelf = self;
+        
         _jobview1 = [[JobView1 alloc] initWithFrame:self.bounds];
         [self addSubview:_jobview1];
+        _jobview1.aTag = indexPath.row;
+        _jobview1.block = ^(NSString *text, NSInteger index) {
+            
+            model.subTitle = text;
+
+            if ([model.title isEqualToString:@"公司性质"]) {
+                model.content = text;
+            }
+            else {
+                model.content = [NSString stringWithFormat:@"%ld",index];
+
+            }
+            
+            [weakSelf.tableView reloadData];
+            
+            
+        };
     }
     else {
         
         [self removeFromSuperview];
+        
+        if (_aTag == 0) {
+            
+            NSDictionary *dic = self.selectJobArr[indexPath.row];
+            if (self.block) {
+                
+                self.block(dic[@"id"], _aTag);
+            }
+        }
+        else {
+            
+            NSArray *arr = @[@"add_time",@"pay"];
+            if (self.block) {
+                
+                self.block(arr[indexPath.row], _aTag);
+            }
+        }
+        
+
     }
     
+
 }
 
 
@@ -91,7 +151,11 @@
         }
         cell.detailTextLabel.font = [UIFont systemFontOfSize:10];
         cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-        cell.detailTextLabel.text = @"不限";
+        
+        JobViewModel *model = self.lastArr[indexPath.row];
+        cell.textLabel.text = model.title;
+        cell.detailTextLabel.text = model.subTitle;
+
     }
     else {
         
@@ -102,29 +166,60 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
             
         }
+        cell.textLabel.text = self.dataArr[indexPath.row];
 
     }
     cell.textLabel.font = [UIFont systemFontOfSize:10];
     cell.textLabel.textColor = [UIColor colorWithHexString:@"#333333"];
-    cell.textLabel.text = self.dataArr[indexPath.row];
+
+
     
     return cell;
 }
 
-- (void)setTag:(NSInteger)tag
+
+
+- (void)setATag:(NSInteger)tag
 {
     _aTag = tag;
     
     if (tag == 0) {
-        self.dataArr = @[@"计算机/互联网/通信/电子",@"会计/金融/银行/保险",@"贸易/消费/制造/营运"];
+        
+        NSMutableArray *arrM = [NSMutableArray array];
+        
+        for (NSDictionary *dic in self.selectJobArr) {
+            
+            [arrM addObject:dic[@"name"]];
+            
+        }
+        self.dataArr = arrM;
 
     }
     if (tag == 1) {
-        self.dataArr = @[@"默认排序",@"薪资最高",@"距离最近"];
+        self.dataArr = @[@"默认排序",@"薪资最高"];
 
     }
     if (tag == 2) {
-        self.dataArr = @[@"福利",@"距离",@"发布时间"];
+        
+        if (!self.lastArr) {
+            
+            self.lastArr = @[@{@"title":@"发布时间",@"subTitle":@"不限",@"content":@"0",@"key":@"add_time"},
+                             @{@"title":@"经验要求",@"subTitle":@"不限",@"content":@"0",@"key":@"years"},
+                             @{@"title":@"学历要求",@"subTitle":@"不限",@"content":@"0",@"key":@"eduid"},
+                             @{@"title":@"薪资范围",@"subTitle":@"不限",@"content":@"0",@"key":@"pay"},
+                             @{@"title":@"职位类型",@"subTitle":@"不限",@"content":@"0",@"key":@"jobs"},
+                             @{@"title":@"公司性质",@"subTitle":@"不限",@"content":@"",@"key":@"type"}];
+            
+            NSMutableArray *arrM = [NSMutableArray array];
+            for (NSDictionary *dic in self.lastArr) {
+                
+                JobViewModel *model = [JobViewModel yy_modelWithJSON:dic];
+                [arrM addObject:model];
+            }
+            self.lastArr = arrM;
+            
+        }
+
 
     }
     
@@ -137,7 +232,10 @@
             _tableView.height = self.height;
 
         }
-        _tableView.height = self.dataArr.count*40;
+        else {
+            _tableView.height = self.dataArr.count*40;
+
+        }
         self.backgroundColor = [UIColor colorWithRed:108/255.0 green:108/255.0 blue:108/255.0 alpha:.4];
 
     }

@@ -21,6 +21,14 @@
 // 注册时个人信息
 #define Update_peronal_info  [NSString stringWithFormat:@"%@User/update_peronal_info",BaseUrl]
 
+// 2.3	获取热门职位
+#define Get_hot_jobs  [NSString stringWithFormat:@"%@Jobs/get_hot_jobs",BaseUrl]
+
+// 2.1	搜索职位
+#define Get_jobs_list  [NSString stringWithFormat:@"%@Jobs/get_jobs_list",BaseUrl]
+
+
+
 // 1.4	更新基本信息
 #define Update_basic_info  [NSString stringWithFormat:@"%@User/update_basic_info",BaseUrl]
 

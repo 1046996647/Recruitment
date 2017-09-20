@@ -126,7 +126,6 @@
                 }
             }
 
-//            model.text = @"1";
             
             if (model.text.length > 0) {
                 [paramDic  setValue:model.text forKey:model.key];

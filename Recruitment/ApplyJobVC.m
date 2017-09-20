@@ -18,6 +18,13 @@
 @property(nonatomic,strong) UIButton *lastBtn;
 @property(nonatomic,strong) JobView *jobview;
 
+@property(nonatomic,assign) NSInteger pageNO;
+@property(nonatomic,strong) NSMutableArray *modelArr;
+@property (nonatomic,assign) BOOL isRefresh;
+
+@property(nonatomic,strong) NSString *cate_id;
+@property(nonatomic,strong) NSString *order;
+@property(nonatomic,strong) NSDictionary *data;
 
 @end
 
@@ -26,7 +33,36 @@
 - (JobView *)jobview
 {
     if (!_jobview) {
+        
+        __weak typeof(self) weakSelf = self;
         _jobview = [[JobView alloc] initWithFrame:CGRectMake(0, 31, kScreen_Width, kScreen_Height-(64+31))];
+        _jobview.block = ^(id obj, NSInteger tag) {
+            
+            weakSelf.lastBtn.selected = NO;
+            
+            UILabel *label = [weakSelf.lastBtn viewWithTag:100+weakSelf.lastBtn.tag];
+            UIImageView *imgView = [weakSelf.lastBtn viewWithTag:101+weakSelf.lastBtn.tag];
+            label.textColor = [UIColor colorWithHexString:@"#333333"];
+            imgView.image = [UIImage imageNamed:@"33"];
+
+            
+            if (tag == 0) {
+                
+                weakSelf.cate_id = obj;
+            }
+            if (tag == 1) {
+                weakSelf.order = obj;
+
+            }
+            if (tag == 2) {
+                weakSelf.data = obj;
+
+            }
+            
+            [weakSelf headerRefresh];
+
+            
+        };
     }
     return _jobview;
 }
@@ -43,7 +79,7 @@
     [_searchBar setBackgroundImage:[UIImage new]];
     //    _searchBar.barTintColor = [UIColor colorWithHexString:@"#FFFFFF"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_searchBar];
-
+    _searchBar.text = self.searchText;
 //    self.navigationItem.titleView = _searchBar;
     
     // 边框设置
@@ -64,15 +100,112 @@
     
     UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(selectBtn.right, 0, kScreen_Width-selectBtn.right, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#666666" normal:nil selected:nil];
     [bottomView addSubview:applyBtn];
+    
+    // 下拉刷新
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self headerRefresh];
+    }];
+    // 隐藏时间
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    
+    // 上拉刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        if (self.modelArr.count > 0) {
+            // 饮食文章列表
+            [self get_jobs_list];
+        }
+        
+    }];
+
+    self.pageNO = 1;
+    self.modelArr = [NSMutableArray array];
 
     
+    // 搜索职位
+    [self get_jobs_list];
+    
+
+}
+
+- (void)headerRefresh
+{
+    self.pageNO = 1;
+    if (self.modelArr.count > 0) {
+        [self.modelArr removeAllObjects];
+        
+    }
+    [self get_jobs_list];
+}
+
+- (void)get_jobs_list
+{
+    if (!self.isRefresh) {
+        [SVProgressHUD show];
+        
+    }
+
+    // key/关键字/p/当前页码/size/每页显示条数
+    NSString *urlStr = [NSString stringWithFormat:@"%@/key/%@/p/%ld",Get_jobs_list,self.searchText,self.pageNO];
+    
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    if (self.cate_id) {
+        [paraDic setValue:self.cate_id forKey:@"cateid"];
+    }
+    if (self.order) {
+        [paraDic setValue:self.order forKey:@"order"];
+    }
+    if (self.data) {
+        [paraDic setValue:self.data forKey:@"data"];
+    }
+//    [paraDic setValue:@87 forKey:@"cateid"];
+
+    NSLog(@"paraDic:%@",paraDic);
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:urlStr dic:paraDic showHUD:NO Succed:^(id responseObject) {
+        
+        self.isRefresh = YES;
+        [SVProgressHUD dismiss];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        NSArray *arr = responseObject[@"data"];
+        if ([arr isKindOfClass:[NSArray class]]) {
+            
+            NSMutableArray *arrM = [NSMutableArray array];
+            for (NSDictionary *dic in arr) {
+                JobModel *model = [JobModel yy_modelWithJSON:dic];
+                [arrM addObject:model];
+            }
+            
+            [self.modelArr addObjectsFromArray:arrM]; ;
+            [self.tableView reloadData];
+            
+            self.pageNO++;
+        }
+        else {
+            
+            // 拿到当前的上拉刷新控件，变为没有更多数据的状态
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        
+    } failure:^(NSError *error) {
+        
+        [SVProgressHUD dismiss];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
 }
 
 - (void)btnAction:(UIButton *)btn
 {
     
     [self.view addSubview:self.jobview];
-    self.jobview.tag = btn.tag;
+    self.jobview.aTag = btn.tag;
     
     if (self.lastBtn != btn) {
         
@@ -120,8 +253,8 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return [self.dataArr[section] count];
-    return 20;
+    return [self.modelArr count];
+//    return 20;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -165,7 +298,7 @@
             self.lastBtn = forgetBtn;
             
             label1.frame = CGRectMake(forgetBtn.width/2-46+10, 0, 46, view.height);
-            imgView.frame = CGRectMake(forgetBtn.width/2+10, (forgetBtn.height-5)/2, 8, 5);
+            imgView.frame = CGRectMake(forgetBtn.width/2+15, (forgetBtn.height-5)/2, 8, 5);
         }
         else {
             label1.frame = CGRectMake(forgetBtn.width/2-24, 0, 24, view.height);
@@ -205,8 +338,12 @@
     }
 
     cell.type = 1;
-    cell.model = nil;
     
+    if (self.modelArr.count > 0) {
+        JobModel *model = self.modelArr[indexPath.row];
+        cell.model = model;
+    }
+
     return cell;
 }
 

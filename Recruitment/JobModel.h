@@ -10,4 +10,16 @@
 
 @interface JobModel : NSObject
 
+@property (nonatomic,strong) NSString *company_name;
+@property (nonatomic,strong) NSString *gender;
+@property (nonatomic,strong) NSString *ID;
+@property (nonatomic,strong) NSString *info;// 岗位要求
+@property (nonatomic,strong) NSString *job_name;
+@property (nonatomic,strong) NSString *pay;
+@property (nonatomic,strong) NSString *nums;
+@property (nonatomic,strong) NSString *update_time;
+@property (nonatomic,assign) BOOL isSelected;
+
+
+
 @end

@@ -9,6 +9,7 @@
 #import "SearchVC.h"
 #import "HotJobCell.h"
 #import "SearchCell.h"
+#import "ApplyJobVC.h"
 
 #define HistoryPath @"HistoryPath"
 
@@ -18,7 +19,10 @@
 @property(nonatomic,strong) UISearchBar *searchBar;
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UIButton *cancelBtn;
+@property(nonatomic,strong) NSArray *dataArr;
 @property(nonatomic,strong) NSMutableArray *hisArr;
+
+@property(nonatomic,strong) UICollectionView *collectionView;
 
 
 
@@ -34,6 +38,7 @@
     
 //    self.backButton = nil;
 
+//    self.dataArr = @[@"销售",@"会计",@"电商"];
     
     UIButton *cancelBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 26, 17) text:@"取消" font:[UIFont systemFontOfSize:12] textColor:@"#333333" backgroundColor:nil normal:nil selected:nil];
     [cancelBtn addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
@@ -84,6 +89,7 @@
     [collectionView registerClass:[HotJobCell class] forCellWithReuseIdentifier:@"cellID"];
     collectionView.contentInset = UIEdgeInsetsMake(0, 12, 0, 12);
     [footView addSubview:collectionView];
+    self.collectionView = collectionView;
     
     footView.height = collectionView.bottom;
     
@@ -99,7 +105,31 @@
     _tableView.tableFooterView = footView;
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    
+    // 2.3	获取热门职位
+    [self get_hot_jobs];
 
+}
+
+- (void)get_hot_jobs
+{
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_hot_jobs dic:nil showHUD:NO Succed:^(id responseObject) {
+        
+        NSArray *arr = responseObject[@"data"];
+        if ([arr isKindOfClass:[NSArray class]]) {
+            
+
+            self.dataArr = arr;
+            [self.collectionView reloadData];
+        }
+
+
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 - (void)cancelAction
@@ -114,21 +144,31 @@
 }
 - (void)deleteAction:(UIButton *)btn
 {
-    
+    [self.hisArr removeObjectAtIndex:btn.tag];
+    [InfoCache saveValue:_hisArr forKey:HistoryPath];
+    [self.tableView reloadData];
 }
+
+- (void)deleteAllAction
+{
+    [self.hisArr removeAllObjects];
+    [self.tableView reloadData];
+
+}
+
+
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    return [self.dataArr count];
     return 1;
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return [self.hisArr count];
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -139,31 +179,42 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+    NSString *keyword = self.hisArr[indexPath.row];
+    [self pushAction:keyword];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
+    if (self.hisArr.count == 0) {
+        return 0;
+    }
     return 12+28;
     
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 12+28)];
-    UIButton *delBtn = [UIButton buttonWithframe:CGRectMake((kScreen_Width-150)/2, 0, 150, 28) text:@"删除所有记录" font:[UIFont systemFontOfSize:12] textColor:@"#C70000" backgroundColor:@"#FFFFFF" normal:@"37" selected:nil];
-    delBtn.layer.cornerRadius = 5;
-    delBtn.layer.masksToBounds = YES;
-    delBtn.layer.borderColor = [UIColor colorWithHexString:@"#C70000"].CGColor;
-    delBtn.layer.borderWidth = 1;
-    [view addSubview:delBtn];
-    
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
-    line.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
-    [view addSubview:line];
+    if (self.hisArr.count == 0) {
+        return nil;
+    }
+    else {
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 12+28)];
+        UIButton *delBtn = [UIButton buttonWithframe:CGRectMake((kScreen_Width-150)/2, 12, 150, 28) text:@"删除所有记录" font:[UIFont systemFontOfSize:12] textColor:@"#C70000" backgroundColor:@"#FFFFFF" normal:@"37" selected:nil];
+        delBtn.layer.cornerRadius = 5;
+        delBtn.layer.masksToBounds = YES;
+        delBtn.layer.borderColor = [UIColor colorWithHexString:@"#C70000"].CGColor;
+        delBtn.layer.borderWidth = 1;
+        [view addSubview:delBtn];
+        [delBtn addTarget:self action:@selector(deleteAllAction) forControlEvents:UIControlEventTouchUpInside];
 
-    return view;
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
+        line.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
+        [view addSubview:line];
+        
+        return view;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -178,7 +229,9 @@
     }
     
     cell.delBtn.tag = indexPath.row;
-    
+    cell.textLabel.text = self.hisArr[indexPath.row];
+    cell.textLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+    cell.textLabel.font = [UIFont systemFontOfSize:12];
     return cell;
 }
 
@@ -186,18 +239,29 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    return self.model.images.count;
-    return 6;
+    return self.dataArr.count;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+
+
+    NSString *keyword = self.dataArr[indexPath.item][@"name"];
+    [self pushAction:keyword];
+    
+    if (![self.hisArr containsObject:keyword]) {
+        [self.hisArr addObject:keyword];
+        [InfoCache saveValue:_hisArr forKey:HistoryPath];
+        [self.tableView reloadData];
+    }
     
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HotJobCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellID" forIndexPath:indexPath];
-//    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:self.model.images[indexPath.item]]];
+    
+    NSDictionary *dic = self.dataArr[indexPath.item];
+    cell.jobLab.text = dic[@"name"];
     return cell;
     
 }
@@ -212,24 +276,22 @@
     }
     
     [searchBar resignFirstResponder];
-    //    [self pushAction:textField.text];
     if (![self.hisArr containsObject:searchBar.text]) {
         [self.hisArr addObject:searchBar.text];
         [InfoCache saveValue:_hisArr forKey:HistoryPath];
         [self.tableView reloadData];
     }
+    [self pushAction:searchBar.text];
+
 }
 
 // 搜索结果
-//- (void)pushAction:(NSString *)text
-//{
-//    SearchResultVC *vc = [[SearchResultVC alloc] init];
-//    vc.title = @"搜索结果";
-//    vc.longitude = self.longitude;
-//    vc.latitude = self.latitude;
-//    vc.searchText = text;
-//    [self.navigationController pushViewController:vc animated:YES];
-//}
+- (void)pushAction:(NSString *)text
+{
+    ApplyJobVC *vc = [[ApplyJobVC alloc] init];
+    vc.searchText = text;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 @end

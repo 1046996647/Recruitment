@@ -10,4 +10,7 @@
 
 @interface ApplyJobVC : BaseViewController
 
+@property(nonatomic,copy) NSString *searchText;
+
+
 @end

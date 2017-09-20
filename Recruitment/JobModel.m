@@ -10,4 +10,18 @@
 
 @implementation JobModel
 
++ (NSDictionary *)modelCustomPropertyMapper
+{
+    return @{@"ID" : @"id"};
+}
+
+- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
+    
+    NSString *timeStr = [[dic[@"update_time"] componentsSeparatedByString:@" "] firstObject];
+    timeStr = [timeStr substringFromIndex:5];
+    _update_time = timeStr;
+
+    return YES;
+}
+
 @end

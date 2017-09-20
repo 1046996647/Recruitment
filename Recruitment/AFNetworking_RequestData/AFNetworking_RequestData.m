@@ -25,6 +25,10 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
     //1.数据请求接口 2.请求方法 3.参数
     //请求成功   返回数据
     //请求失败   返回错误
+    
+    // 编码以防崩溃
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+
     [AFNetworking_RequestData Manager:url Method:@"GET"  dic:dic showHUD:(BOOL)hud requestSucced:^(id responseObject) {
         
         succed(responseObject);
@@ -32,7 +36,7 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
     } requestfailure:^(NSError *error) {
         
         failure(error);
-        
+
     }];
 }
 #pragma POST请求--------------
@@ -41,6 +45,9 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
               showHUD:(BOOL)hud
                Succed:(Success)succed
               failure:(Failure)failure{
+    
+    // 编码以防崩溃
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     [AFNetworking_RequestData Manager:url Method:@"POST"  dic:dic showHUD:hud requestSucced:^(id responseObject) {
         
@@ -86,9 +93,12 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
             
             NSLog(@"%@",responseObject);
 
-            if (hud) {
-                [SVProgressHUD dismiss];
-            }
+//            if (hud) {
+//                [SVProgressHUD dismiss];
+//            }
+            
+            [SVProgressHUD dismiss];
+
             NSNumber *code = [responseObject objectForKey:@"status"];
             if (0 == [code integerValue]) {
                 
@@ -103,7 +113,7 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
                 Succed(responseObject);
 
             }
-            
+
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
@@ -136,7 +146,8 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
             }
             
             Succed(responseObject);
-            
+            NSLog(@"%@",responseObject);
+
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             if (hud) {

@@ -48,6 +48,7 @@
 		F72FF8C21F62755C00E3AA92 /* JobDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8C11F62755C00E3AA92 /* JobDetailVC.m */; };
 		F72FF8C51F6282EB00E3AA92 /* JobDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8C41F6282EB00E3AA92 /* JobDetailCell.m */; };
 		F72FF8C81F628D5C00E3AA92 /* CompanyDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8C71F628D5C00E3AA92 /* CompanyDetailVC.m */; };
+		F73382DA1F72370A0097158C /* JobViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F73382D91F72370A0097158C /* JobViewModel.m */; };
 		F73907B31F71165C00103809 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73907B21F71165C00103809 /* SearchCell.m */; };
 		F73C37B41F60EFCA00027289 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37B31F60EFCA00027289 /* MessageCell.m */; };
 		F73C37BD1F61134500027289 /* NSString+WJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37B81F61134500027289 /* NSString+WJExtension.m */; };
@@ -184,6 +185,8 @@
 		F72FF8C41F6282EB00E3AA92 /* JobDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDetailCell.m; sourceTree = "<group>"; };
 		F72FF8C61F628D5C00E3AA92 /* CompanyDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyDetailVC.h; sourceTree = "<group>"; };
 		F72FF8C71F628D5C00E3AA92 /* CompanyDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyDetailVC.m; sourceTree = "<group>"; };
+		F73382D81F72370A0097158C /* JobViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobViewModel.h; sourceTree = "<group>"; };
+		F73382D91F72370A0097158C /* JobViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobViewModel.m; sourceTree = "<group>"; };
 		F73907B11F71165C00103809 /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
 		F73907B21F71165C00103809 /* SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
 		F73C37AF1F60CF3D00027289 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
@@ -582,6 +585,8 @@
 			children = (
 				F72FF8B71F6234F000E3AA92 /* JobModel.h */,
 				F72FF8B81F6234F000E3AA92 /* JobModel.m */,
+				F73382D81F72370A0097158C /* JobViewModel.h */,
+				F73382D91F72370A0097158C /* JobViewModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -991,6 +996,7 @@
 				F73907B31F71165C00103809 /* SearchCell.m in Sources */,
 				F741975C1F63706900AD5F2C /* PersonalMessageVC.m in Sources */,
 				F74F4ACA1F664FA1007736BA /* MyCollectionVC.m in Sources */,
+				F73382DA1F72370A0097158C /* JobViewModel.m in Sources */,
 				F70EF4791F5F7F8E001C65A7 /* AppDelegate.m in Sources */,
 				F73C37BD1F61134500027289 /* NSString+WJExtension.m in Sources */,
 				F74F4AA91F66220E007736BA /* CheckedVC.m in Sources */,
