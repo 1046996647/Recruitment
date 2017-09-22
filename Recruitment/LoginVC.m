@@ -57,6 +57,9 @@
     _phone.leftViewMode = UITextFieldViewModeAlways;
     _phone.leftView = leftView;
     
+    _phone.text = [InfoCache unarchiveObjectWithFile:@"userid"];
+
+    
     leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45+10, 35)];
     leftView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 35)];
     leftView1.backgroundColor = [UIColor colorWithHexString:@"#FDA326"];
@@ -140,7 +143,7 @@
         [InfoCache archiveObject:self.phone.text toFile:@"userid"];
         [InfoCache archiveObject:responseObject[@"token"] toFile:@"token"];
         
-        [self get_user_info:notification];
+        [self get_ui_info:notification];
         
     } failure:^(NSError *error) {
         
@@ -148,19 +151,23 @@
 }
 
 // 返回用户表该用户相关信息
-- (void)get_user_info:(NSNotification *)notification
+- (void)get_ui_info:(NSNotification *)notification
 {
 
     NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
     
-    [AFNetworking_RequestData requestMethodPOSTUrl:Get_user_info dic:paramDic showHUD:YES Succed:^(id responseObject) {
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_ui_info dic:paramDic showHUD:YES Succed:^(id responseObject) {
         
         PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
         [InfoCache archiveObject:model toFile:Person];
         
         if (![notification.object isEqualToString:@"注册"]) {
             
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            NSNumber *code = [responseObject objectForKey:@"status"];
+            if (1 == [code integerValue]) {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+
+            }
         }
         
     } failure:^(NSError *error) {

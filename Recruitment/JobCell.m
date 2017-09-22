@@ -70,6 +70,10 @@
 {
     _model.isSelected = !_model.isSelected;
     btn.selected = _model.isSelected;
+    
+    if (self.block) {
+        self.block(_model);
+    }
 }
 
 - (void)setModel:(JobModel *)model
@@ -90,6 +94,9 @@
         _moneyLab.text = [NSString stringWithFormat:@"%@k",model.pay];
 
     }
+    
+    _selectBtn.selected = _model.isSelected;
+
 }
 
 @end

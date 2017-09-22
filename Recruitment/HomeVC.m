@@ -77,11 +77,26 @@
 
     [self initHeaderView];
     
+//    // 下拉刷新
+//    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        
+//        [self headerRefresh];
+//    }];
+//    // 隐藏时间
+//    header.lastUpdatedTimeLabel.hidden = YES;
+//    self.tableView.mj_header = header;
+    
     
      // 选择项数据
     [self getSelectItems];
     [self getSelectItemJob];
 
+}
+
+- (void)headerRefresh
+{
+//    [self getTitlePage];
+//    self.isRefresh = YES;
 }
 
 - (void)searchTFAction
@@ -149,17 +164,17 @@
         [forgetBtn addTarget:self action:@selector(pushAction:) forControlEvents:UIControlEventTouchUpInside];
 
         
-        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake((forgetBtn.width-(86+52+19))/2, (forgetBtn.height-(20+13+14))/2, 86+52+19, 20+13+14)];
+        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake((forgetBtn.width-(86+52+19)*scaleWidth)/2, (forgetBtn.height-(20+13+14))/2, (86+52+19)*scaleWidth, 20+13+14)];
         [forgetBtn addSubview:baseView];
         baseView.userInteractionEnabled = NO;
-
-        UILabel *label1 = [UILabel labelWithframe:CGRectMake(0, 0, 86, 20) text:titleArr1[i] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#000000"];
+        
+        UILabel *label1 = [UILabel labelWithframe:CGRectMake(0, 0, baseView.width, 20) text:titleArr1[i] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#000000"];
         [baseView addSubview:label1];
         
-        UILabel *label2 = [UILabel labelWithframe:CGRectMake(label1.left, label1.bottom+13, 114, 14) text:titleArr2[i] font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+        UILabel *label2 = [UILabel labelWithframe:CGRectMake(label1.left, label1.bottom+13, baseView.width, 14) text:titleArr2[i] font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
         [baseView addSubview:label2];
         
-        UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(label2.right+23, 23, 19, 19) icon:imgArr[i]];
+        UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(baseView.width-19, 18, 19, 19) icon:imgArr[i]];
         imgView.contentMode = UIViewContentModeScaleAspectFit;
         [baseView addSubview:imgView];
         

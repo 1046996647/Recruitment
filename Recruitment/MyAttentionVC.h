@@ -1,15 +1,13 @@
 //
-//  JobRecommandVC.h
+//  MyAttentionVC.h
 //  Recruitment
 //
-//  Created by ZhangWeiLiang on 2017/9/12.
+//  Created by ZhangWeiLiang on 2017/9/21.
 //  Copyright © 2017年 ZhangWeiLiang. All rights reserved.
 //
 
 #import "BaseViewController.h"
 
-@interface JobRecommandVC : BaseViewController
-
-
+@interface MyAttentionVC : BaseViewController
 
 @end

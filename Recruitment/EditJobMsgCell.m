@@ -23,6 +23,7 @@
         _tf.font = [UIFont systemFontOfSize:13];
         [_tf setValue:[UIFont systemFontOfSize:13] forKeyPath:@"_placeholderLabel.font"];// 设置这里时searchTF.font也要设置不然会偏上
         [_tf setValue:[UIColor colorWithHexString:@"#999999"] forKeyPath:@"_placeholderLabel.textColor"];
+
         [self.contentView addSubview:_tf];
         [_tf addTarget:self action:@selector(beginAction:) forControlEvents:UIControlEventEditingDidBegin];
         [_tf addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventEditingChanged];

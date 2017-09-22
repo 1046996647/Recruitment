@@ -124,7 +124,6 @@
             [self.collectionView reloadData];
         }
 
-
         
     } failure:^(NSError *error) {
         

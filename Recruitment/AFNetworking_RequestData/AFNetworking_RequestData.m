@@ -109,10 +109,8 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
 
                 }
             }
-            else {
-                Succed(responseObject);
+            Succed(responseObject);
 
-            }
 
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

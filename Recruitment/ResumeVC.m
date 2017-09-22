@@ -12,6 +12,8 @@
 #import "CheckedVC.h"
 #import "LoginVC.h"
 #import "NSStringExt.h"
+#import "MWWaveProgressView.h"
+
 
 @interface ResumeVC ()
 
@@ -19,6 +21,7 @@
 @property(nonatomic,strong) UIButton *forgetBtn1;
 @property(nonatomic,strong) UILabel *perLabel;
 @property(nonatomic,strong) UILabel *remindLabel;
+@property(nonatomic,strong) MWWaveProgressView *waterWave;
 
 
 
@@ -40,8 +43,6 @@
     view.layer.borderWidth = 1;
     [self.view addSubview:view];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
-    [view addGestureRecognizer:tap];
     
     UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
     view1.layer.cornerRadius = view1.height/2;
@@ -49,6 +50,22 @@
     view1.backgroundColor = [UIColor colorWithHexString:@"#FF9634"];
     view1.center = view.center;
     [self.view addSubview:view1];
+    
+    MWWaveProgressView *waterWave = [[MWWaveProgressView alloc] init];
+    waterWave.frame = CGRectMake(0, 0, 80, 80);
+    waterWave.center = view.center;
+    waterWave.percent = 0.0;
+    waterWave.firstWaveColor = [UIColor colorWithHexString:@"#FF4B0D"];
+    waterWave.secondWaveColor = [UIColor colorWithHexString:@"#FF6D20"];
+    waterWave.speed = 0.07;
+    waterWave.peak = 3;
+    waterWave.backgroundColor = [UIColor colorWithHexString:@"#FF9634"];
+    [self.view addSubview:waterWave];
+    self.waterWave = waterWave;
+    [waterWave startWave];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [waterWave addGestureRecognizer:tap];
     
     UILabel *perLabel = [UILabel labelWithframe:CGRectMake(0, 0, view1.width, 25) text:@"0%" font:[UIFont systemFontOfSize:18] textAlignment:NSTextAlignmentCenter textColor:@"#FFFFFF"];
     perLabel.center = view1.center;
@@ -127,7 +144,7 @@
     
 }
 
-
+// 获取部分用户信息
 - (void)get_ui_info:(BOOL)isShow
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -135,8 +152,11 @@
     [AFNetworking_RequestData requestMethodPOSTUrl:Get_ui_info dic:dic showHUD:YES Succed:^(id responseObject) {
         
         PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
+        [InfoCache archiveObject:model toFile:Person];
+
         
         self.perLabel.text = [NSString stringWithFormat:@"%@%%",model.form_percent];
+        self.waterWave.percent = model.form_percent.integerValue / 100.0;
 
         if (model.form_percent.integerValue < 60) {
             
@@ -163,19 +183,23 @@
 
 - (void)tapAction
 {
-    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
-    if (!userid) {
+    PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
+    if (!person) {
         LoginVC *vc = [[LoginVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         
         return;
     }
+    
+    EditResumeVC *vc = [[EditResumeVC alloc] init];
+    vc.title = @"简历";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)btnAction2:(UIButton *)btn
 {
-    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
-    if (!userid) {
+    PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
+    if (!person) {
         LoginVC *vc = [[LoginVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -240,8 +264,8 @@
 
 - (void)btnAction1:(UIButton *)btn
 {
-    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
-    if (!userid) {
+    PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
+    if (!person) {
         LoginVC *vc = [[LoginVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -263,8 +287,8 @@
 
 - (void)btnAction:(UIButton *)btn
 {
-    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
-    if (!userid) {
+    PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
+    if (!person) {
         LoginVC *vc = [[LoginVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -303,10 +327,20 @@
     //带动画结果在切换tabBar的时候viewController会有闪动的效果不建议这样写
     //    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
-    NSString *userid = [InfoCache unarchiveObjectWithFile:@"userid"];
-    if (userid) {
+    PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
+    
+    if (person) {
         [self get_ui_info:NO];
 
+    }
+    else {
+        self.perLabel.text = [NSString stringWithFormat:@"0%%"];
+        
+        self.remindLabel.text = [NSString stringWithFormat:@"登入后可编辑简历"];
+        
+        CGSize size = [NSString textLength:self.remindLabel.text font:self.remindLabel.font];
+        self.remindLabel.width = size.width+20;
+        self.remindLabel.left = (kScreen_Width-self.remindLabel.width)/2;
     }
 
     

@@ -7,10 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import "JobModel.h"
 
 @interface JobDetailVC : BaseViewController
 
 @property(nonatomic,assign) NSInteger type;
 
+@property (nonatomic,strong) JobModel *model;
 
 @end

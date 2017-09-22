@@ -7,10 +7,13 @@
 //
 
 #import "OpinionVC.h"
+#import "UIImage+UIImageExt.h"
 
-@interface OpinionVC ()<UITextViewDelegate>
+@interface OpinionVC ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property(nonatomic,strong) UILabel *remindLab1;
+@property (nonatomic,strong) UIButton *imgBtn;
+@property (nonatomic,strong) UILabel *countLab;
 
 
 @end
@@ -44,16 +47,73 @@
     
     UILabel *countLab = [UILabel labelWithframe:CGRectMake(view.width-100-10, view.height-12-6, 100, 12) text:@"0/160" font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentRight textColor:@"#333333"];
     [view addSubview:countLab];
+    self.countLab = countLab;
     
     UIButton *imgBtn = [UIButton buttonWithframe:CGRectMake(27, view.bottom+21, 40, 40) text:nil font:nil textColor:nil backgroundColor:nil normal:@"103" selected:@""];
     [footerView addSubview:imgBtn];
+    [imgBtn addTarget:self action:@selector(imgAction) forControlEvents:UIControlEventTouchUpInside];
+    self.imgBtn = imgBtn;
     
     footerView.height = imgBtn.bottom+19;
     
-    UIButton *saveBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 30, 17) text:@"保存" font:[UIFont systemFontOfSize:14] textColor:@"#999999" backgroundColor:nil normal:nil selected:nil];
+    UIButton *saveBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 30, 17) text:@"保存" font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:nil selected:nil];
     //    [saveBtn addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
     //    self.cancelBtn = saveBtn;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:saveBtn];
+
+}
+
+- (void)imgAction
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"相册选择" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        // 创建相册控制器
+        UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+        
+        // 设置代理对象
+        pickerController.delegate = self;
+        // 设置选择后的图片可以被编辑
+        //            pickerController.allowsEditing=YES;
+        // 设置类型
+        pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        // 设置为静态图像类型
+        pickerController.mediaTypes = @[@"public.image"];
+        // 跳转到相册页面
+        [self presentViewController:pickerController animated:YES completion:nil];
+        
+    }];
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"手机拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        // 创建相册控制器
+        UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+        
+        // 设置代理对象
+        pickerController.delegate = self;
+        // 设置选择后的图片可以被编辑
+        //            pickerController.allowsEditing=YES;
+        
+        // 跳转到相册页面
+        [self presentViewController:pickerController animated:YES completion:nil];
+        
+        // 判断当前设备是否有摄像头
+        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear] || [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
+            
+            // 设置类型
+            pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+        }
+        
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertController addAction:albumAction];
+    [alertController addAction:cameraAction];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 
 }
 
@@ -108,7 +168,49 @@
         self.remindLab1.hidden = YES;
         
     }
-    //    count.text = [NSString stringWithFormat:@"%lu/100", textView.text.length  ];
+    self.countLab.text = [NSString stringWithFormat:@"%lu/160", textView.text.length];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+//选取后调用
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSLog(@"info:%@",info[UIImagePickerControllerOriginalImage]);
+    UIImage *img = info[UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    //通过判断picker的sourceType，如果是拍照则保存到相册去
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        UIImageWriteToSavedPhotosAlbum(img, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }
+    
+//    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    NSData *data = [UIImage imageOrientation:img];
+    [self.imgBtn setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
+
+//    [AFNetworking_RequestData uploadImageUrl:Upload_user_img dic:paramDic data:data Succed:^(id responseObject) {
+//        
+//        [self.userBtn sd_setImageWithURL:[NSURL URLWithString:responseObject[@"img"]] forState:UIControlStateNormal];
+//        
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
+    
+    
+}
+
+//取消后调用
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+//此方法就在UIImageWriteToSavedPhotosAlbum的上方
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    NSLog(@"已保存");
 }
 
 @end

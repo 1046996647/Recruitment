@@ -17,6 +17,7 @@
 @property(nonatomic,strong) UISearchBar *searchBar;
 @property(nonatomic,strong) UIButton *lastBtn;
 @property(nonatomic,strong) JobView *jobview;
+@property(nonatomic,strong) UIButton *applyBtn;
 
 @property(nonatomic,assign) NSInteger pageNO;
 @property(nonatomic,strong) NSMutableArray *modelArr;
@@ -25,6 +26,9 @@
 @property(nonatomic,strong) NSString *cate_id;
 @property(nonatomic,strong) NSString *order;
 @property(nonatomic,strong) NSDictionary *data;
+
+@property(nonatomic,strong) NSMutableArray *selectedArr;// 选择数组
+
 
 @end
 
@@ -59,8 +63,8 @@
 
             }
             
-            [weakSelf headerRefresh];
-
+            // 进入刷新状态
+            [weakSelf.tableView.mj_header beginRefreshing];
             
         };
     }
@@ -97,9 +101,11 @@
 
     UIButton *selectBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 100, bottomView.height) text:@"全选" font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:@"#FFFFFF" normal:nil selected:nil];
     [bottomView addSubview:selectBtn];
+    [selectBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(selectBtn.right, 0, kScreen_Width-selectBtn.right, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#666666" normal:nil selected:nil];
     [bottomView addSubview:applyBtn];
+    self.applyBtn = applyBtn;
     
     // 下拉刷新
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -122,12 +128,42 @@
 
     self.pageNO = 1;
     self.modelArr = [NSMutableArray array];
+    self.selectedArr = [NSMutableArray array];
 
     
     // 搜索职位
     [self get_jobs_list];
     
 
+}
+
+- (void)selectAction:(UIButton *)btn
+{
+    if ([btn.currentTitle isEqualToString:@"全选"]) {
+        [btn setTitle:@"全不选" forState:UIControlStateNormal];
+        
+        for (JobModel *model in self.modelArr) {
+            model.isSelected = YES;
+            
+            if (![self.selectedArr containsObject:model]) {
+                [self.selectedArr addObject:model];
+            }
+        }
+        self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"#FDA326"];
+
+    }
+    else {
+        [btn setTitle:@"全选" forState:UIControlStateNormal];
+        for (JobModel *model in self.modelArr) {
+            model.isSelected = NO;
+            
+        }
+        [self.selectedArr removeAllObjects];
+        self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"#666666"];
+
+    }
+
+    [_tableView reloadData];
 }
 
 - (void)headerRefresh
@@ -153,7 +189,7 @@
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     
     if (self.cate_id) {
-        [paraDic setValue:self.cate_id forKey:@"cateid"];
+        [paraDic setValue:self.cate_id forKey:@"cateId"];
     }
     if (self.order) {
         [paraDic setValue:self.order forKey:@"order"];
@@ -265,8 +301,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    JobModel *model = self.modelArr[indexPath.row];
+
     JobDetailVC *vc = [[JobDetailVC alloc] init];
     vc.title = @"职位详情";
+    vc.model = model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -335,6 +374,23 @@
         
         cell = [[JobCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.block = ^(JobModel *model) {
+            if (model.isSelected) {
+                [self.selectedArr addObject:model];
+
+            }
+            else {
+                [self.selectedArr removeObject:model];
+            }
+            
+            if (self.selectedArr.count>0) {
+                self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"#FDA326"];
+            }
+            else {
+                self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"#666666"];
+            }
+
+        };
     }
 
     cell.type = 1;

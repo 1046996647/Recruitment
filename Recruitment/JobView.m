@@ -203,7 +203,7 @@
         
         if (!self.lastArr) {
             
-            self.lastArr = @[@{@"title":@"发布时间",@"subTitle":@"不限",@"content":@"0",@"key":@"add_time"},
+            self.lastArr = @[@{@"title":@"发布时间",@"subTitle":@"不限",@"content":@"0",@"key":@"order"},
                              @{@"title":@"经验要求",@"subTitle":@"不限",@"content":@"0",@"key":@"years"},
                              @{@"title":@"学历要求",@"subTitle":@"不限",@"content":@"0",@"key":@"eduid"},
                              @{@"title":@"薪资范围",@"subTitle":@"不限",@"content":@"0",@"key":@"pay"},

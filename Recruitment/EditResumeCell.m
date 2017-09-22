@@ -114,7 +114,7 @@
         _hLine.hidden = NO;
         _extraLab.hidden = YES;
         
-        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12-50, 14);
+        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 14);
         _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 1);
         _jobLab.frame = CGRectMake(_timeLab.left, _hLine.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
@@ -136,7 +136,7 @@
         _hLine.hidden = YES;
         _extraLab.hidden = YES;
 
-        _timeLab.frame = CGRectMake(_imgView.right+12, 10, kScreen_Width-(_imgView.right+12)-50, 14);
+        _timeLab.frame = CGRectMake(_imgView.right+12, 10, kScreen_Width-(_imgView.right+12), 14);
 //        _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 14);
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
@@ -180,7 +180,7 @@
         _hLine1.hidden = YES;
         _extraLab.hidden = YES;
 
-        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12-50, 14);
+        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 14);
         //        _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 14);
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
@@ -207,7 +207,7 @@
         _hLine1.hidden = YES;
         _extraLab.hidden = NO;
 
-        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12-50, 14);
+        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 14);
         //        _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 14);
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
@@ -235,7 +235,7 @@
         _hLine1.hidden = YES;
         _extraLab.hidden = YES;
 
-        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12-50, 14);
+        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 14);
         //        _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 14);
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);

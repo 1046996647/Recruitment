@@ -10,6 +10,7 @@
 
 @interface JobModel : NSObject
 
+// 职位
 @property (nonatomic,strong) NSString *company_name;
 @property (nonatomic,strong) NSString *gender;
 @property (nonatomic,strong) NSString *ID;
@@ -20,6 +21,21 @@
 @property (nonatomic,strong) NSString *update_time;
 @property (nonatomic,assign) BOOL isSelected;
 
+// 职位详情
+@property (nonatomic,strong) NSString *area;
+@property (nonatomic,strong) NSString *edu;
+@property (nonatomic,strong) NSString *cate_name;
+@property (nonatomic,strong) NSString *jobs;// 职业类型
+@property (nonatomic,strong) NSString *tele;
+@property (nonatomic,strong) NSString *logo;
+@property (nonatomic,strong) NSString *years;
+@property (nonatomic,strong) NSString *persons;
+@property (nonatomic,strong) NSString *address;
+@property (nonatomic,strong) NSString *companyId;
 
+// 公司详情
+@property (nonatomic,strong) NSString *type;
+@property (nonatomic,strong) NSString *web;
+//@property (nonatomic,strong) NSString *companyId;
 
 @end

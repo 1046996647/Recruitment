@@ -10,7 +10,7 @@
 #define UrlFile_h
 
 // 服务器
-#define BaseUrl  @"http://106.14.212.85:8080/52dyjob/index.php/"
+#define BaseUrl  @"http://api.52ykjob.com:8080/52dyjob/index.php/"
 
 // 调试
 //#define BaseUrl  @"http://106.14.212.85:8080/52dyjob/index.php/"
@@ -27,7 +27,11 @@
 // 2.1	搜索职位
 #define Get_jobs_list  [NSString stringWithFormat:@"%@Jobs/get_jobs_list",BaseUrl]
 
+// 2.2	职位详情
+#define Get_jobs_detail  [NSString stringWithFormat:@"%@Jobs/detail",BaseUrl]
 
+// 3.1	公司详情
+#define Get_company_detail  [NSString stringWithFormat:@"%@Company/detail",BaseUrl]
 
 // 1.4	更新基本信息
 #define Update_basic_info  [NSString stringWithFormat:@"%@User/update_basic_info",BaseUrl]
@@ -63,7 +67,7 @@
 // 登录
 #define Login  [NSString stringWithFormat:@"%@User/login",BaseUrl]
 
-// 返回用户表该用户相关信息
+// 返回用户表该用户所有信息
 #define Get_user_info  [NSString stringWithFormat:@"%@User/get_user_info",BaseUrl]
 
 // 获取部分用户信息

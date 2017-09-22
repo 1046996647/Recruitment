@@ -11,6 +11,7 @@
 #import "HXTagsView.h"
 #import "JobModel.h"
 
+typedef void(^JobSendModelBlock)(JobModel *model);
 
 @interface JobCell : UITableViewCell
 
@@ -27,5 +28,6 @@
 @property(nonatomic,strong) JobModel *model;
 @property(nonatomic,assign) NSInteger type;
 
+@property(nonatomic,copy) JobSendModelBlock block;
 
 @end

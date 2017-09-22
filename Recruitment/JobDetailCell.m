@@ -43,5 +43,18 @@
     return self;
 }
 
-
+- (void)setModel:(JobModel *)model
+{
+    _model = model;
+    
+//    _jobLab.left = 12;
+//    _companyLab.left = _jobLab.left;
+    //        _tagsView.left = _jobLab.left;
+    
+    _jobLab.text = model.job_name;
+    _companyLab.text = model.company_name;
+    _timeLab.text = model.update_time;
+    _moneyLab.text = [NSString stringWithFormat:@"%@k",model.pay];
+    
+}
 @end

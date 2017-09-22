@@ -53,7 +53,7 @@
 
 - (void)exitAction
 {
-    [InfoCache archiveObject:nil toFile:@"userid"];
+    [InfoCache archiveObject:nil toFile:Person];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 
@@ -98,14 +98,22 @@
         
         if (indexPath.row == 0) {
             
-            //            MyCollectionVC *vc = [[MyCollectionVC alloc] init];
-            //            vc.title = @"我的收藏";
-            //            [self.navigationController pushViewController:vc animated:YES];
+            [SVProgressHUD showWithStatus:@"缓存清除中..."];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD showSuccessWithStatus:@"缓存清除成功!"];
+
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+                    [SVProgressHUD dismiss];
+                    
+                    
+                });
+            });
+            
             
         }
-        if (indexPath.row == 1) {
-            
-        }
+
     }
     if (indexPath.section == 2) {
         

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5945D95BFF5ABC906AC8BCE4 /* libPods-Recruitment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E27941E1587E8AC96BF6F25B /* libPods-Recruitment.a */; };
+		F702531F1F73A09100F5E025 /* MyAttentionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F702531E1F73A09100F5E025 /* MyAttentionVC.m */; };
+		F70253221F73A13900F5E025 /* MyAttentionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F70253211F73A13900F5E025 /* MyAttentionCell.m */; };
+		F70253251F73B27100F5E025 /* ShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F70253241F73B27100F5E025 /* ShareVC.m */; };
 		F70EF4761F5F7F8E001C65A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF4751F5F7F8E001C65A7 /* main.m */; };
 		F70EF4791F5F7F8E001C65A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF4781F5F7F8E001C65A7 /* AppDelegate.m */; };
 		F70EF47F1F5F7F8E001C65A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70EF47D1F5F7F8E001C65A7 /* Main.storyboard */; };
@@ -49,6 +52,9 @@
 		F72FF8C51F6282EB00E3AA92 /* JobDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8C41F6282EB00E3AA92 /* JobDetailCell.m */; };
 		F72FF8C81F628D5C00E3AA92 /* CompanyDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8C71F628D5C00E3AA92 /* CompanyDetailVC.m */; };
 		F73382DA1F72370A0097158C /* JobViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F73382D91F72370A0097158C /* JobViewModel.m */; };
+		F7353DBA1F74A9CF009F086E /* MWWaveCycleAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7353DB61F74A9CF009F086E /* MWWaveCycleAnimationView.m */; };
+		F7353DBB1F74A9CF009F086E /* MWWaveProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7353DB81F74A9CF009F086E /* MWWaveProgressView.m */; };
+		F7353DBC1F74A9CF009F086E /* wave.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7353DB91F74A9CF009F086E /* wave.bundle */; };
 		F73907B31F71165C00103809 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73907B21F71165C00103809 /* SearchCell.m */; };
 		F73C37B41F60EFCA00027289 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37B31F60EFCA00027289 /* MessageCell.m */; };
 		F73C37BD1F61134500027289 /* NSString+WJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37B81F61134500027289 /* NSString+WJExtension.m */; };
@@ -106,6 +112,12 @@
 		7C157134079D20305100C898 /* Pods-Recruitment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recruitment.release.xcconfig"; path = "Pods/Target Support Files/Pods-Recruitment/Pods-Recruitment.release.xcconfig"; sourceTree = "<group>"; };
 		8033F8F664516D663532CDA7 /* Pods-Recruitment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recruitment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Recruitment/Pods-Recruitment.debug.xcconfig"; sourceTree = "<group>"; };
 		E27941E1587E8AC96BF6F25B /* libPods-Recruitment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Recruitment.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F702531D1F73A09100F5E025 /* MyAttentionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAttentionVC.h; sourceTree = "<group>"; };
+		F702531E1F73A09100F5E025 /* MyAttentionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAttentionVC.m; sourceTree = "<group>"; };
+		F70253201F73A13900F5E025 /* MyAttentionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAttentionCell.h; sourceTree = "<group>"; };
+		F70253211F73A13900F5E025 /* MyAttentionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAttentionCell.m; sourceTree = "<group>"; };
+		F70253231F73B27100F5E025 /* ShareVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareVC.h; sourceTree = "<group>"; };
+		F70253241F73B27100F5E025 /* ShareVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareVC.m; sourceTree = "<group>"; };
 		F70EF4711F5F7F8E001C65A7 /* Recruitment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recruitment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70EF4751F5F7F8E001C65A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F70EF4771F5F7F8E001C65A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -187,6 +199,11 @@
 		F72FF8C71F628D5C00E3AA92 /* CompanyDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyDetailVC.m; sourceTree = "<group>"; };
 		F73382D81F72370A0097158C /* JobViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobViewModel.h; sourceTree = "<group>"; };
 		F73382D91F72370A0097158C /* JobViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobViewModel.m; sourceTree = "<group>"; };
+		F7353DB51F74A9CF009F086E /* MWWaveCycleAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWWaveCycleAnimationView.h; sourceTree = "<group>"; };
+		F7353DB61F74A9CF009F086E /* MWWaveCycleAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWWaveCycleAnimationView.m; sourceTree = "<group>"; };
+		F7353DB71F74A9CF009F086E /* MWWaveProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWWaveProgressView.h; sourceTree = "<group>"; };
+		F7353DB81F74A9CF009F086E /* MWWaveProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWWaveProgressView.m; sourceTree = "<group>"; };
+		F7353DB91F74A9CF009F086E /* wave.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = wave.bundle; sourceTree = "<group>"; };
 		F73907B11F71165C00103809 /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
 		F73907B21F71165C00103809 /* SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
 		F73C37AF1F60CF3D00027289 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
@@ -387,6 +404,7 @@
 		F70EF4911F5F85B7001C65A7 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				F7353DB41F74A9CF009F086E /* MWWaterWaveProgressView */,
 				F74197661F63895C00AD5F2C /* BRPickerView */,
 				F73C37CC1F6129BA00027289 /* 标签 */,
 				F70EF51A1F5F862A001C65A7 /* RegexTool */,
@@ -558,6 +576,18 @@
 			name = "登录注册";
 			sourceTree = "<group>";
 		};
+		F7353DB41F74A9CF009F086E /* MWWaterWaveProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				F7353DB51F74A9CF009F086E /* MWWaveCycleAnimationView.h */,
+				F7353DB61F74A9CF009F086E /* MWWaveCycleAnimationView.m */,
+				F7353DB71F74A9CF009F086E /* MWWaveProgressView.h */,
+				F7353DB81F74A9CF009F086E /* MWWaveProgressView.m */,
+				F7353DB91F74A9CF009F086E /* wave.bundle */,
+			);
+			path = MWWaterWaveProgressView;
+			sourceTree = "<group>";
+		};
 		F73C37B51F61130300027289 /* CustomClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -631,6 +661,8 @@
 				F72FF8C71F628D5C00E3AA92 /* CompanyDetailVC.m */,
 				F75A453E1F67BD4F00B0790C /* JobRecommandVC.h */,
 				F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */,
+				F70253231F73B27100F5E025 /* ShareVC.h */,
+				F70253241F73B27100F5E025 /* ShareVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -796,6 +828,8 @@
 			children = (
 				F70EF5391F5FC7E2001C65A7 /* PersonalCell.h */,
 				F70EF53A1F5FC7E2001C65A7 /* PersonalCell.m */,
+				F70253201F73A13900F5E025 /* MyAttentionCell.h */,
+				F70253211F73A13900F5E025 /* MyAttentionCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -807,6 +841,8 @@
 				F70EF5341F5FBB0E001C65A7 /* PersonalCenterVC.m */,
 				F74F4AC81F664FA1007736BA /* MyCollectionVC.h */,
 				F74F4AC91F664FA1007736BA /* MyCollectionVC.m */,
+				F702531D1F73A09100F5E025 /* MyAttentionVC.h */,
+				F702531E1F73A09100F5E025 /* MyAttentionVC.m */,
 				F74F4ACB1F665104007736BA /* OpinionVC.h */,
 				F74F4ACC1F665104007736BA /* OpinionVC.m */,
 				F74F4ACE1F6654A6007736BA /* SettingVC.h */,
@@ -889,6 +925,7 @@
 				F70EF47F1F5F7F8E001C65A7 /* Main.storyboard in Resources */,
 				F73C37C11F61136400027289 /* funKeyboardData.plist in Resources */,
 				F70EF4EC1F5F85F7001C65A7 /* nav-background@2x.png in Resources */,
+				F7353DBC1F74A9CF009F086E /* wave.bundle in Resources */,
 				F74197801F63895C00AD5F2C /* BRCity.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -964,6 +1001,7 @@
 				F72FF8C21F62755C00E3AA92 /* JobDetailVC.m in Sources */,
 				F74197621F63781E00AD5F2C /* PersonalMessageCell.m in Sources */,
 				F74F4AAF1F6626CD007736BA /* InvitedVC.m in Sources */,
+				F7353DBA1F74A9CF009F086E /* MWWaveCycleAnimationView.m in Sources */,
 				F72FF8C51F6282EB00E3AA92 /* JobDetailCell.m in Sources */,
 				F70EF4DC1F5F85ED001C65A7 /* UIView+Toast.m in Sources */,
 				F70EF5191F5F8616001C65A7 /* UIView+SDExtension.m in Sources */,
@@ -983,6 +1021,7 @@
 				F74197831F63895C00AD5F2C /* BRStringPickerView.m in Sources */,
 				F74F4AE71F667C81007736BA /* SubscriptionManageCell.m in Sources */,
 				F70EF5321F5FBAF4001C65A7 /* ResumeVC.m in Sources */,
+				F7353DBB1F74A9CF009F086E /* MWWaveProgressView.m in Sources */,
 				F70EF53B1F5FC7E2001C65A7 /* PersonalCell.m in Sources */,
 				F70EF4D81F5F85E4001C65A7 /* InfoCache.m in Sources */,
 				F73C37B41F60EFCA00027289 /* MessageCell.m in Sources */,
@@ -996,6 +1035,7 @@
 				F73907B31F71165C00103809 /* SearchCell.m in Sources */,
 				F741975C1F63706900AD5F2C /* PersonalMessageVC.m in Sources */,
 				F74F4ACA1F664FA1007736BA /* MyCollectionVC.m in Sources */,
+				F70253251F73B27100F5E025 /* ShareVC.m in Sources */,
 				F73382DA1F72370A0097158C /* JobViewModel.m in Sources */,
 				F70EF4791F5F7F8E001C65A7 /* AppDelegate.m in Sources */,
 				F73C37BD1F61134500027289 /* NSString+WJExtension.m in Sources */,
@@ -1006,6 +1046,7 @@
 				F74197821F63895C00AD5F2C /* BRDatePickerView.m in Sources */,
 				F74F4AB91F662B5E007736BA /* SubscriptionJobVC.m in Sources */,
 				F70EF4F01F5F85F7001C65A7 /* UIImage+UIImageExt.m in Sources */,
+				F70253221F73A13900F5E025 /* MyAttentionCell.m in Sources */,
 				F74F4AD61F665A7E007736BA /* ChangePhoneVC.m in Sources */,
 				F73C37D21F61362200027289 /* SearchVC.m in Sources */,
 				F70EF5151F5F8616001C65A7 /* TADotView.m in Sources */,
@@ -1021,6 +1062,7 @@
 				F74197911F63B97E00AD5F2C /* EditResumeCell.m in Sources */,
 				F741977E1F63895C00AD5F2C /* BRAddressModel.m in Sources */,
 				F70EF4901F5F8591001C65A7 /* AFNetworking_RequestData.m in Sources */,
+				F702531F1F73A09100F5E025 /* MyAttentionVC.m in Sources */,
 				F72FF8BC1F625EA600E3AA92 /* JobView.m in Sources */,
 				F70EF4761F5F7F8E001C65A7 /* main.m in Sources */,
 				F74197971F63CBF200AD5F2C /* EditJobMsgVC.m in Sources */,
