@@ -171,7 +171,7 @@
         PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
         self.model = model;
         
-        [InfoCache archiveObject:model toFile:Person];
+//        [InfoCache archiveObject:model toFile:Person];
         
         NSMutableArray *arrM = [NSMutableArray array];
         NSArray *arr = responseObject[@"data"][@"jobhistory"];

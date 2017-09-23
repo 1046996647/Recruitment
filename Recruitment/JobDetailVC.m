@@ -45,13 +45,12 @@
     [paraDic setValue:self.model.ID forKey:@"id"];
     [paraDic setValue:self.model.job_name forKey:@"key"];
     
-    
     [AFNetworking_RequestData requestMethodPOSTUrl:Get_jobs_detail dic:paraDic showHUD:YES Succed:^(id responseObject) {
         
         JobModel *model = [JobModel yy_modelWithJSON:responseObject[@"data"]];
         self.model = model;
         
-        NSArray *arr = responseObject[@"related_work"];
+        NSArray *arr = model.related_work;
         if ([arr isKindOfClass:[NSArray class]]) {
             
             NSMutableArray *arrM = [NSMutableArray array];
@@ -212,6 +211,8 @@
     
     UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(shareBtn.right, shareBtn.top, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:nil];
     [rightView addSubview:cellctionBtn];
+    [cellctionBtn addTarget:self action:@selector(cellctionAction) forControlEvents:UIControlEventTouchUpInside];
+
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightView];
     
@@ -229,7 +230,6 @@
 
 }
 
-
 - (void)shareAction
 {
     ShareVC *vc  = [[ShareVC alloc] init];
@@ -242,6 +242,23 @@
     vc.clickBlock = ^(NSInteger indexRow) {
         
     };
+}
+
+- (void)cellctionAction
+
+{
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    [paraDic setValue:self.model.ID forKey:@"id"];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Favs_job dic:paraDic showHUD:YES Succed:^(id responseObject) {
+        
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+
 }
 
 - (void)callAction

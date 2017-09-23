@@ -32,6 +32,8 @@
 @property (nonatomic,strong) NSString *persons;
 @property (nonatomic,strong) NSString *address;
 @property (nonatomic,strong) NSString *companyId;
+@property (nonatomic,strong) NSString *favs;
+@property (nonatomic,strong) NSArray *related_work;
 
 // 公司详情
 @property (nonatomic,strong) NSString *type;

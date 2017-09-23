@@ -17,7 +17,7 @@
 #import "JobRecommandVC.h"
 
 
-@interface HomeVC ()
+@interface HomeVC ()<UITextFieldDelegate>
 
 @property (nonatomic,strong) CustomerScrollView * btnScrollView;
 @property(nonatomic,strong) UIButton *forgetBtn1;
@@ -45,17 +45,22 @@
     
     self.navigationItem.title = nil;
     
-    UIButton *placeBtn = [UIButton buttonWithframe:CGRectMake(16, (44-17)/2, 26+17, 17) text:@"永康" font:[UIFont systemFontOfSize:12] textColor:@"FFFFFF" backgroundColor:nil normal:nil selected:nil];
-    placeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:placeBtn];
-    [placeBtn addTarget:self action:@selector(placeAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 26+17, 17)];
 
+    UIButton *placeBtn = [UIButton buttonWithframe:CGRectMake(0, 0, baseView.width, baseView.height) text:@"永康" font:[UIFont systemFontOfSize:12] textColor:@"FFFFFF" backgroundColor:nil normal:nil selected:nil];
+    placeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [baseView addSubview:placeBtn];
     
-    UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(placeBtn.width-12, 0, 12, placeBtn.height) icon:@"55"];
+    UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(baseView.width-12, 0, 12, placeBtn.height) icon:@"55"];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
-    [placeBtn addSubview:imgView];
+    [baseView addSubview:imgView];
+
     self.imgView = imgView;
     self.placeView.imgView = imgView;
+
+    // iOS11的原因不能直接用UIButton，得用UIView
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:baseView];
+    [placeBtn addTarget:self action:@selector(placeAction:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *imgView1 = [UIImageView imgViewWithframe:CGRectMake(0, 0, 22, 12) icon:@"39"];
     imgView1.contentMode = UIViewContentModeScaleAspectFit;
@@ -66,13 +71,10 @@
     [searchTF setValue:[UIColor colorWithHexString:@"#FFB261"] forKeyPath:@"_placeholderLabel.textColor"];
     searchTF.layer.cornerRadius = searchTF.height/2;
     searchTF.layer.masksToBounds = YES;
-    searchTF.enabled = NO;
-//    [searchTF addTarget:self action:@selector(searchTFAction:) forControlEvents:UIControlEventEditingDidBegin];
+    searchTF.delegate = self;
     self.searchTF = searchTF;
-    self.navigationItem.titleView = searchTF;
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTFAction)];
-    [self.navigationItem.titleView addGestureRecognizer:tap];
+//    self.navigationItem.titleView = searchTF;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchTF];
     
 
     [self initHeaderView];
@@ -272,6 +274,13 @@
         
     }];
     
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [self searchTFAction];
+    return NO;
 }
 
 @end
