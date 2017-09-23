@@ -142,10 +142,11 @@
     cycleScrollView2.currentPageDotColor = [UIColor colorWithHexString:@"#F78724"]; // 自定义分页控件小圆标颜色
     [headView addSubview:cycleScrollView2];
     cycleScrollView2.imageURLStringsGroup = imagesURLStrings;
-
+    cycleScrollView2.backgroundColor = [UIColor clearColor];
     
     _btnScrollView = [[CustomerScrollView alloc] initWithFrame:CGRectMake(0, cycleScrollView2.bottom, kScreen_Width, 190)];
     [headView addSubview:_btnScrollView];
+    _btnScrollView.dataArr = nil;
     
     __weak typeof(self) weakSelf = self;
     _btnScrollView.block = ^(NSInteger tag) {

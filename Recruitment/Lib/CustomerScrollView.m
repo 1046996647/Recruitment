@@ -42,53 +42,36 @@
         self.numberOfSinglePage = NumberOfSinglePage;
         self.viewGap = leftRightGap;
         self.viewMargin = ViewMargin;
+        
         // 初始化
         [self initDataAndSubviews];
+
     }
     return self;
 }
 
 -(void)initDataAndSubviews{
-    
-    if (!self.dataArr) {
-        // 加载默认测试数据
-        NSLog(@"加载测试数据");
-        NSString * dataPath = [[NSBundle mainBundle] pathForResource:@"funKeyboardData.plist" ofType:nil];
-        _dataArr = [NSArray arrayWithContentsOfFile:dataPath];
-    }
-    
-    NSInteger pageCount = self.dataArr.count / self.numberOfSinglePage;
-    if (self.dataArr.count % self.numberOfSinglePage > 0) {
-        pageCount += 1;
-    }
-    
-    NSLog(@"pageCount:%ld",pageCount);
+
     
     UIScrollView * contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     _contentScrollView = contentScrollView;
     _contentScrollView.delegate = self;
     contentScrollView.backgroundColor = [UIColor whiteColor];
-    contentScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * pageCount, self.frame.size.height);
     contentScrollView.pagingEnabled = YES;
     contentScrollView.showsVerticalScrollIndicator = NO;
     contentScrollView.showsHorizontalScrollIndicator = NO;
-
-    for (int i = 0; i < pageCount; i++) {
-        [self addBtnsWithPageNum:i];
-    }
-    
     [self addSubview:contentScrollView];
 
-    // 添加pageControl
-    UIPageControl * pageControl = [[UIPageControl alloc] init];
-    pageControl.frame = CGRectMake(SCREEN_WIDTH/2, self.height-20, 0, 0);
-    pageControl.pageIndicatorTintColor = [UIColor whiteColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
-    pageControl.hidesForSinglePage = YES;
-    pageControl.numberOfPages = pageCount;
-    _pageControl = pageControl;
-    [self addSubview:_pageControl];
-    [self bringSubviewToFront:_pageControl];
+//    // 添加pageControl
+//    UIPageControl * pageControl = [[UIPageControl alloc] init];
+//    pageControl.frame = CGRectMake(SCREEN_WIDTH/2, self.height-20, 0, 0);
+//    pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+//    pageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
+//    pageControl.hidesForSinglePage = YES;
+//    pageControl.numberOfPages = pageCount;
+//    _pageControl = pageControl;
+//    [self addSubview:_pageControl];
+//    [self bringSubviewToFront:_pageControl];
     
 }
 
@@ -163,6 +146,38 @@
     if (self.block) {
         self.block(btn.tag);
     }
+}
+
+- (void)setDataArr:(NSArray *)dataArr
+{
+    _dataArr = dataArr;
+    
+    for (UIView *view in _contentScrollView.subviews) {
+        [view removeFromSuperview];
+        NSLog(@"%@",view);
+    }
+    
+    if (!self.dataArr) {
+        // 加载默认测试数据
+        NSLog(@"加载测试数据");
+        NSString * dataPath = [[NSBundle mainBundle] pathForResource:@"funKeyboardData.plist" ofType:nil];
+        _dataArr = [NSArray arrayWithContentsOfFile:dataPath];
+    }
+    
+    NSInteger pageCount = self.dataArr.count / self.numberOfSinglePage;
+    if (self.dataArr.count % self.numberOfSinglePage > 0) {
+        pageCount += 1;
+    }
+    
+    NSLog(@"pageCount:%ld",pageCount);
+    
+    _contentScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * pageCount, self.frame.size.height);
+    
+    for (int i = 0; i < pageCount; i++) {
+        [self addBtnsWithPageNum:i];
+    }
+    
+
 }
 
 #pragma mark - scroll delegate 

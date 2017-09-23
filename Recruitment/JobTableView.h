@@ -13,7 +13,7 @@
 
 @interface JobTableView : UITableView<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong) NSArray *dataArr;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 @property(nonatomic,assign) NSInteger cellType;
 
 

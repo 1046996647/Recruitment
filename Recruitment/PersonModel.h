@@ -59,6 +59,7 @@
 @property(nonatomic,strong) NSString *is_locks;// 是否锁定
 @property(nonatomic,strong) NSString *is_hide;// 是否隐藏
 @property(nonatomic,strong) NSString *form_percent;// 简历完善度
+@property(nonatomic,strong) NSString *resumeNum;// 投递过的简历数量
 
 
 @property(nonatomic,strong) NSArray *jobhistory;// 工作经历

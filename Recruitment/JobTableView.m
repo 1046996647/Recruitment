@@ -22,11 +22,29 @@
     return self;
 }
 
+- (void)cellctionAction:(JobModel *)model
+
+{
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setValue:model.ID forKey:@"id"];
+    [paraDic setValue:@"1" forKey:@"del"];// 取消收藏
+
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Favs_job dic:paraDic showHUD:YES Succed:^(id responseObject) {
+
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return self.dataArr.count;
-    return 10;
+    return self.dataArr.count;
+//    return 10;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -37,8 +55,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    JobModel *model = self.dataArr[indexPath.row];
+    
     JobDetailVC *vc = [[JobDetailVC alloc] init];
     vc.title = @"职位详情";
+    vc.model = model;
     [self.viewController.navigationController pushViewController:vc animated:YES];
     
 }
@@ -53,12 +74,35 @@
         
     }
     
-    if (_cellType == 1) {
-        cell.timeLab.hidden = YES;
-    }
-
+//    if (_cellType == 1) {
+//        cell.timeLab.hidden = YES;
+//    }
+    cell.model = self.dataArr[indexPath.row];
     
     return cell;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_cellType == 0) {
+        return UITableViewCellEditingStyleNone;
+
+    }
+    return UITableViewCellEditingStyleDelete;
+}
+
+//修改左滑的按钮的字
+-(NSString*)tableView:(UITableView*)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexpath {
+    
+    return @"删除";
+    
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self cellctionAction:self.dataArr[indexPath.row]];
+    [self.dataArr removeObjectAtIndex:indexPath.row];
+    [self reloadData];
 }
 
 - (void)setCellType:(NSInteger)cellType

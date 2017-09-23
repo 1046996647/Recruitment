@@ -50,6 +50,10 @@
     userBtn.layer.cornerRadius = userBtn.height/2;
     userBtn.layer.masksToBounds = YES;
     
+    if ([self.title isEqualToString:@"预览"]) {
+        userBtn.userInteractionEnabled = NO;
+        
+    }
     
     UILabel *signLabel = [UILabel labelWithframe:CGRectMake(userBtn.right+16, 11, 40, 18) text:@"天天" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
     [headView addSubview:signLabel];

@@ -27,6 +27,8 @@
 
         _timeLab = [UILabel labelWithframe:CGRectMake(_imgView.right+11, 10, 97, 14) text:@"2016.09-2017.09" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
         [self.contentView addSubview:_timeLab];
+//        _timeLab.backgroundColor = [UIColor greenColor];
+
         
         _hLine = [[UIView alloc] initWithFrame:CGRectZero];
         _hLine.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
@@ -50,11 +52,10 @@
         _hLine1.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
         [self.contentView addSubview:_hLine1];
         
-        UIButton *jobEditBtn = [UIButton buttonWithframe:CGRectMake(kScreen_Width-20-10, 8, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"95" selected:nil];
-        [jobEditBtn addTarget:self action:@selector(jobEditAction) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:jobEditBtn];
-        self.jobEditBtn = jobEditBtn;
-        
+        _jobEditBtn = [UIButton buttonWithframe:CGRectMake(kScreen_Width-20-10, 8, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"95" selected:nil];
+        [_jobEditBtn addTarget:self action:@selector(jobEditAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:_jobEditBtn];
+//        self.jobEditBtn = jobEditBtn;
         
 //        _view = [[UIView alloc] initWithFrame:CGRectMake(_jobLab.left, lin.bottom+9, kScreen_Width-38, 1)];
 //        _view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
@@ -107,6 +108,8 @@
 {
     _model = model;
     
+    _jobEditBtn.hidden = NO;
+
     if (self.indexPath.section == 0) {
         _imgView.hidden = YES;
         _line.hidden = YES;

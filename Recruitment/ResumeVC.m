@@ -22,6 +22,7 @@
 @property(nonatomic,strong) UILabel *perLabel;
 @property(nonatomic,strong) UILabel *remindLabel;
 @property(nonatomic,strong) MWWaveProgressView *waterWave;
+@property(nonatomic,strong) NSMutableArray *labelArr;
 
 
 
@@ -79,6 +80,7 @@
     [self.view addSubview:remindLabel];
     self.remindLabel = remindLabel;
     
+    _labelArr = [NSMutableArray array];
     NSArray *titleArr = @[@"HR查看",@"投递简历"];
     for (int i=0; i<titleArr.count; i++) {
         
@@ -87,10 +89,11 @@
         self.forgetBtn = forgetBtn;
         forgetBtn.tag = i;
         [forgetBtn addTarget:self action:@selector(btnAction1:) forControlEvents:UIControlEventTouchUpInside];
-
         
         UILabel *label1 = [UILabel labelWithframe:CGRectMake(0, 4, forgetBtn.width, 25) text:@"0" font:[UIFont systemFontOfSize:18] textAlignment:NSTextAlignmentCenter textColor:@"#333333"];
         [forgetBtn addSubview:label1];
+        [_labelArr addObject:label1];
+
 
         UILabel *label2 = [UILabel labelWithframe:CGRectMake(0, label1.bottom, forgetBtn.width, 20) text:titleArr[i] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentCenter textColor:@"#666666"];
         [forgetBtn addSubview:label2];
@@ -141,7 +144,8 @@
         
     }
     
-    
+//    [self get_ui_info:NO];
+
 }
 
 // 获取部分用户信息
@@ -149,7 +153,7 @@
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
-    [AFNetworking_RequestData requestMethodPOSTUrl:Get_ui_info dic:dic showHUD:YES Succed:^(id responseObject) {
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_ui_info dic:dic showHUD:isShow Succed:^(id responseObject) {
         
         PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
         [InfoCache archiveObject:model toFile:Person];
@@ -170,6 +174,13 @@
         
         self.remindLabel.width = size.width+20;
         self.remindLabel.left = (kScreen_Width-self.remindLabel.width)/2;
+        
+        NSArray *titleArr = @[@"0",model.resumeNum];
+        int i=0;
+        for (UILabel *label in _labelArr) {
+            label.text = titleArr[i];
+            i++;
+        }
         
         if (isShow) {
             [self.view makeToast:@"简历刷新成功"];
@@ -341,6 +352,13 @@
         CGSize size = [NSString textLength:self.remindLabel.text font:self.remindLabel.font];
         self.remindLabel.width = size.width+20;
         self.remindLabel.left = (kScreen_Width-self.remindLabel.width)/2;
+        
+        NSArray *titleArr = @[@"0",@"0"];
+        int i=0;
+        for (UILabel *label in _labelArr) {
+            label.text = titleArr[i];
+            i++;
+        }
     }
 
     

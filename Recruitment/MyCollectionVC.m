@@ -11,6 +11,7 @@
 
 @interface MyCollectionVC ()
 @property(nonatomic,strong) JobTableView *tableView;
+@property(nonatomic,strong) NSMutableArray *modelArr;
 
 @end
 
@@ -22,7 +23,8 @@
     
     _tableView = (JobTableView *)[JobTableView tableViewWithframe:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64)];
     [self.view addSubview:_tableView];
-    _tableView.cellType = 1;
+    
+    [self get_favs_job];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,14 +32,33 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+- (void)get_favs_job
+{
+    
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_favs_job dic:paraDic showHUD:YES Succed:^(id responseObject) {
+        
+        NSArray *arr = responseObject[@"data"];
+        if ([arr isKindOfClass:[NSArray class]]) {
+            
+            NSMutableArray *arrM = [NSMutableArray array];
+            for (NSDictionary *dic in arr) {
+                JobModel *model = [JobModel yy_modelWithJSON:dic];
+                [arrM addObject:model];
+            }
+            
+            _tableView.dataArr = arrM;
+            _tableView.cellType = 1;
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+        }
+
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
-*/
+
 
 @end

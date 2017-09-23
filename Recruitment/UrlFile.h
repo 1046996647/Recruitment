@@ -27,11 +27,20 @@
 // 2.1	搜索职位
 #define Get_jobs_list  [NSString stringWithFormat:@"%@Jobs/get_jobs_list",BaseUrl]
 
+// 2.1    申请职位
+#define Send_resume  [NSString stringWithFormat:@"%@Resume/send_resume",BaseUrl]
+
+// 2.7    查看已投递简历
+#define Get_resume  [NSString stringWithFormat:@"%@Resume/get_resume",BaseUrl]
+
 // 2.2	职位详情
 #define Get_jobs_detail  [NSString stringWithFormat:@"%@Jobs/detail",BaseUrl]
 
 // 2.4    收藏职位
 #define Favs_job  [NSString stringWithFormat:@"%@Jobs/favs_job",BaseUrl]
+
+// 2.5    查看收藏职位
+#define Get_favs_job  [NSString stringWithFormat:@"%@Jobs/get_favs_job",BaseUrl]
 
 // 2.5    查看收藏职位
 #define Get_favs_job  [NSString stringWithFormat:@"%@Jobs/get_favs_job",BaseUrl]

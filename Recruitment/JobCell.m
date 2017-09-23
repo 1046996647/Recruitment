@@ -88,13 +88,13 @@
         _companyLab.left = _jobLab.left;
 //        _tagsView.left = _jobLab.left;
         
-        _jobLab.text = model.job_name;
-        _companyLab.text = model.company_name;
-        _timeLab.text = model.update_time;
-        _moneyLab.text = [NSString stringWithFormat:@"%@k",model.pay];
 
     }
     
+    _jobLab.text = model.job_name;
+    _companyLab.text = model.company_name;
+    _timeLab.text = model.update_time;
+    _moneyLab.text = [NSString stringWithFormat:@"%@k",model.pay];
     _selectBtn.selected = _model.isSelected;
 
 }

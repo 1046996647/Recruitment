@@ -10,8 +10,9 @@
 #import "JobCell.h"
 #import "JobView.h"
 #import "JobDetailVC.h"
+#import "LoginVC.h"
 
-@interface ApplyJobVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface ApplyJobVC ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property(nonatomic,strong) UIButton *forgetBtn1;
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UISearchBar *searchBar;
@@ -76,7 +77,7 @@
     // Do any additional setup after loading the view.
     
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width-14-54, 21)];
-//    _searchBar.delegate = self;
+    _searchBar.delegate = self;
 //    _searchBar.placeholder = @"搜索";
     //    _searchBar.showsCancelButton = YES;
     //    _searchBar.tintColor = [UIColor colorWithHexString:@"#f99740"];// "取消"字体颜色和光标颜色
@@ -84,7 +85,6 @@
     //    _searchBar.barTintColor = [UIColor colorWithHexString:@"#FFFFFF"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_searchBar];
     _searchBar.text = self.searchText;
-//    self.navigationItem.titleView = _searchBar;
     
     // 边框设置
     UITextField *searchField = [_searchBar valueForKey:@"searchField"];
@@ -106,6 +106,9 @@
     UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(selectBtn.right, 0, kScreen_Width-selectBtn.right, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#666666" normal:nil selected:nil];
     [bottomView addSubview:applyBtn];
     self.applyBtn = applyBtn;
+    applyBtn.userInteractionEnabled = NO;
+    [applyBtn addTarget:self action:@selector(applyAction) forControlEvents:UIControlEventTouchUpInside];
+
     
     // 下拉刷新
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -137,6 +140,36 @@
 
 }
 
+- (void)applyAction
+{
+    PersonModel *model = [InfoCache unarchiveObjectWithFile:Person];
+    if (!model) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
+    
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setValue:@"0" forKey:@"cid"];
+    
+    NSMutableArray *idArr = [NSMutableArray array];
+    for (JobModel *model in self.selectedArr) {
+        [idArr addObject:model.ID];
+    }
+    NSString *string = [idArr componentsJoinedByString:@","]; //,为分隔符
+    [paraDic setValue:string forKey:@"id"];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Send_resume dic:paraDic showHUD:YES Succed:^(id responseObject) {
+
+
+    } failure:^(NSError *error) {
+
+
+    }];
+
+}
+
 - (void)selectAction:(UIButton *)btn
 {
     if ([btn.currentTitle isEqualToString:@"全选"]) {
@@ -150,6 +183,7 @@
             }
         }
         self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"#FDA326"];
+        self.applyBtn.userInteractionEnabled = YES;
 
     }
     else {
@@ -160,6 +194,7 @@
         }
         [self.selectedArr removeAllObjects];
         self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"#666666"];
+        self.applyBtn.userInteractionEnabled = NO;
 
     }
 
@@ -217,7 +252,7 @@
                 [arrM addObject:model];
             }
             
-            [self.modelArr addObjectsFromArray:arrM]; ;
+            [self.modelArr addObjectsFromArray:arrM];
             [self.tableView reloadData];
             
             self.pageNO++;
@@ -385,9 +420,13 @@
             
             if (self.selectedArr.count>0) {
                 self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"#FDA326"];
+                self.applyBtn.userInteractionEnabled = YES;
+
             }
             else {
                 self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"#666666"];
+                self.applyBtn.userInteractionEnabled = NO;
+
             }
 
         };
@@ -401,6 +440,22 @@
     }
 
     return cell;
+}
+
+#pragma mark - UISearchBarDelegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    if (searchBar.text.length == 0) {
+        [searchBar resignFirstResponder];
+        
+        return;
+    }
+    
+    [searchBar resignFirstResponder];
+
+    self.searchText = searchBar.text;
+    // 进入刷新状态
+    [self.tableView.mj_header beginRefreshing];
 }
 
 

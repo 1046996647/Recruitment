@@ -13,6 +13,7 @@
 #import "JobModel.h"
 #import "NSStringExt.h"
 #import "ShareVC.h"
+#import "LoginVC.h"
 
 
 @interface JobDetailVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -22,6 +23,8 @@
 @property(nonatomic,strong) HXTagsView *tagsView;
 @property(nonatomic,strong) UIButton *okBtn;
 @property(nonatomic,strong) NSMutableArray *modelArr;
+@property(nonatomic,strong) UIButton *cellctionBtn;
+@property(nonatomic,strong) UIButton *applyBtn;
 
 
 @end
@@ -209,10 +212,18 @@
     [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
 
     
-    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(shareBtn.right, shareBtn.top, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:nil];
+    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(shareBtn.right, shareBtn.top, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:@"18"];
     [rightView addSubview:cellctionBtn];
     [cellctionBtn addTarget:self action:@selector(cellctionAction) forControlEvents:UIControlEventTouchUpInside];
+    self.cellctionBtn = cellctionBtn;
+    
+    if (_model.favs.integerValue == 0) {
+        cellctionBtn.selected = NO;
+    }
+    else {
+        cellctionBtn.selected = YES;
 
+    }
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightView];
     
@@ -227,7 +238,14 @@
     UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(phoneBtn.width, phoneBtn.top, phoneBtn.width, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
     [bottomView addSubview:applyBtn];
     [applyBtn addTarget:self action:@selector(applyAction) forControlEvents:UIControlEventTouchUpInside];
+    applyBtn.userInteractionEnabled = YES;
+    self.applyBtn = applyBtn;
+    
+    if (self.model.resume.integerValue == 1) {
+        applyBtn.userInteractionEnabled = NO;
+        applyBtn.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
 
+    }
 }
 
 - (void)shareAction
@@ -247,12 +265,39 @@
 - (void)cellctionAction
 
 {
-    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    PersonModel *model = [InfoCache unarchiveObjectWithFile:Person];
+    if (!model) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
     
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setValue:self.model.ID forKey:@"id"];
+    
+    if (_model.favs.integerValue == 0) {
+//        [paraDic setValue:@"0" forKey:@"del"];
+    }
+    else {
+        [paraDic setValue:@(1) forKey:@"del"];// 取消收藏
+
+    }
     
     [AFNetworking_RequestData requestMethodPOSTUrl:Favs_job dic:paraDic showHUD:YES Succed:^(id responseObject) {
         
+        if ([responseObject[@"message"] isEqualToString:@"收藏成功"]) {
+            self.cellctionBtn.selected = YES;
+            _model.favs = @"1";
+        }
+        else {
+            self.cellctionBtn.selected = NO;
+            _model.favs = @"0";
+
+        }
+        
+        [self.view makeToast:responseObject[@"message"]];
+
         
     } failure:^(NSError *error) {
         
@@ -272,7 +317,27 @@
 
 - (void)applyAction
 {
+    PersonModel *model = [InfoCache unarchiveObjectWithFile:Person];
+    if (!model) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
     
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setValue:@"0" forKey:@"cid"];
+    [paraDic setValue:_model.ID forKey:@"id"];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Send_resume dic:paraDic showHUD:YES Succed:^(id responseObject) {
+        
+        self.applyBtn.userInteractionEnabled = NO;
+        self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 - (void)inAction

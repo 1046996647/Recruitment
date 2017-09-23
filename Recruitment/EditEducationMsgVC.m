@@ -181,7 +181,6 @@
     }
     
     if (self.textView.text.length > 0) {
-        remindLab.hidden = YES;
         remindLab1.hidden = YES;
     }
 

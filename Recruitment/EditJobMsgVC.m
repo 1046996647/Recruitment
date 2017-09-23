@@ -203,12 +203,35 @@
     return 10;
 
 }
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 0)];
+    view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
+    
+    if (section == 0) {
+        view.height = .5;// 为0无效
+        
+    }
+    else {
+        view.height = 10;// 为0无效
+
+    }
+    return view;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.00001;// 为0无效
 
 }
 
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.00001)];
+    view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
+    return view;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     

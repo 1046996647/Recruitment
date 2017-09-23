@@ -132,15 +132,16 @@
     [super viewWillAppear:animated];
     
     PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
-    self.label.text = person.name;
-    [self.userBtn sd_setImageWithURL:[NSURL URLWithString:person.img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"96"]];
 
     if (person) {
+        self.label.text = person.name;
+        [self.userBtn sd_setImageWithURL:[NSURL URLWithString:person.img] forState:UIControlStateNormal];
         self.userBtn.userInteractionEnabled = YES;
     }
     else {
         self.userBtn.userInteractionEnabled = NO;
-//        [self.userBtn setImage:[UIImage imageNamed:@"96"] forState:UIControlStateNormal];
+        [self.userBtn setImage:[UIImage imageNamed:@"96"] forState:UIControlStateNormal];
+        self.label.text = @"登录/注册";
     }
 
 }
@@ -190,9 +191,9 @@
         }
         if (indexPath.row == 1) {
             
-            MyAttentionVC *vc = [[MyAttentionVC alloc] init];
-            vc.title = @"我的关注";
-            [self.navigationController pushViewController:vc animated:YES];
+//            MyAttentionVC *vc = [[MyAttentionVC alloc] init];
+//            vc.title = @"我的关注";
+//            [self.navigationController pushViewController:vc animated:YES];
             
         }
     }
@@ -242,6 +243,13 @@
 {
     return 10;
 
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 10)];
+    view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
+    return view;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

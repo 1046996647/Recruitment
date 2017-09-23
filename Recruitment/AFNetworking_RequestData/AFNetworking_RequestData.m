@@ -108,7 +108,7 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
                 
                 NSString *message = [responseObject objectForKey:@"message"];
                 
-                if (message) {
+                if (message.length > 0) {
                     [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:message];
 
                 }
