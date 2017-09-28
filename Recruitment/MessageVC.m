@@ -11,6 +11,7 @@
 #import "InvitedVC.h"
 #import "SubscriptionJobVC.h"
 #import "SystemMassageVC.h"
+#import "LoginVC.h"
 
 @interface MessageVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -59,12 +60,30 @@
         vc.title = @"系统消息";
         [self.navigationController pushViewController:vc animated:YES];
     }
+    
+    PersonModel *model = [InfoCache unarchiveObjectWithFile:Person];
+
     if (indexPath.row == 1) {
+        
+        if (!model) {
+            LoginVC *vc = [[LoginVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            return;
+        }
+        
         SubscriptionJobVC *vc = [[SubscriptionJobVC alloc] init];
         vc.title = @"订阅职位";
         [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row == 2) {
+        
+        if (!model) {
+            LoginVC *vc = [[LoginVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            return;
+        }
         InvitedVC *vc = [[InvitedVC alloc] init];
         vc.title = @"面试邀请";
         [self.navigationController pushViewController:vc animated:YES];

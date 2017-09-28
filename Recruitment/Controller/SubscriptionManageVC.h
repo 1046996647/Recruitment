@@ -7,7 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import "EditEducationMsgVC.h"
+
 
 @interface SubscriptionManageVC : BaseViewController
+
+@property(nonatomic,copy) ResumeReloadBlock block;
+
 
 @end

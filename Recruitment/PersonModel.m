@@ -18,4 +18,9 @@
     return [self yy_modelInitWithCoder:aDecoder];
 }
 
++ (NSDictionary *)modelCustomPropertyMapper
+{
+    return @{@"ID" : @"id"};
+}
+
 @end

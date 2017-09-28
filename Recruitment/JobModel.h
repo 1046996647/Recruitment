@@ -13,7 +13,7 @@
 // 职位
 @property (nonatomic,strong) NSString *company_name;
 @property (nonatomic,strong) NSString *gender;
-@property (nonatomic,strong) NSString *ID;
+@property (nonatomic,strong) NSString *ID;// 职位id
 @property (nonatomic,strong) NSString *info;// 岗位要求
 @property (nonatomic,strong) NSString *job_name;
 @property (nonatomic,strong) NSString *pay;
@@ -36,9 +36,10 @@
 @property (nonatomic,strong) NSArray *related_work;
 @property (nonatomic,strong) NSString *resume; // 1已投递  0 未投递
 
+
 // 公司详情
 @property (nonatomic,strong) NSString *type;
 @property (nonatomic,strong) NSString *web;
-//@property (nonatomic,strong) NSString *companyId;
+//@property (nonatomic,strong) NSString *cid;
 
 @end

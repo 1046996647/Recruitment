@@ -7,12 +7,11 @@
 //
 
 #import "SubscriptionManageVC.h"
-#import "EditEducationMsgVC.h"
 #import "SubscriptionManageCell.h"
 
 @interface SubscriptionManageVC ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong) NSArray *dataArr;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,assign) NSInteger type;
 
@@ -46,11 +45,60 @@
     [manageBtn setTitle:@"完成" forState:UIControlStateSelected];
     [manageBtn addTarget:self action:@selector(manageAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:manageBtn];
+    
+    [self get_ordered_jobs];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)get_ordered_jobs
+{
+
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_ordered_jobs dic:paraDic showHUD:YES Succed:^(id responseObject) {
+        
+        NSArray *arr = responseObject[@"data"];
+        if ([arr isKindOfClass:[NSArray class]]) {
+            
+            NSMutableArray *arrM = [NSMutableArray array];
+            for (NSDictionary *dic in arr) {
+                PersonModel *model1 = [PersonModel yy_modelWithJSON:dic];
+                [arrM addObject:model1];
+            }
+            self.dataArr = arrM;
+            
+            [_tableView reloadData];
+
+            
+            
+        }
+
+        
+    } failure:^(NSError *error) {
+        
+
+    }];
+}
+
+// 删除订阅职位
+- (void)udpate_ordered_jobs:(NSInteger)tag
+{
+    PersonModel *model = self.dataArr[tag];
+    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    
+    [paramDic setValue:model.ID forKey:@"id"];
+    [paramDic setValue:@"delete" forKey:@"act"];
+
+    [AFNetworking_RequestData requestMethodPOSTUrl:Udpate_ordered_jobs dic:paramDic showHUD:YES Succed:^(id responseObject) {
+        
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)manageAction:(UIButton *)btn
@@ -64,16 +112,27 @@
 
 - (void)btnAction
 {
+    self.type = 0;
+    [_tableView reloadData];
+    
     EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
     vc.title = @"增加订阅";
     [self.navigationController pushViewController:vc animated:YES];
+    vc.block = ^{
+        
+        [self get_ordered_jobs];
+        
+        if (self.block) {
+            self.block();
+        }
+    };
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    return self.dataArr.count;
-    return 2;
+    return self.dataArr.count;
+//    return 2;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -86,7 +145,16 @@
     
     EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
     vc.title = @"增加订阅";
+    vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
+    vc.block = ^{
+        [self get_ordered_jobs];
+        
+        if (self.block) {
+            self.block();
+        }
+    };
+    
     
 }
 
@@ -98,7 +166,21 @@
         
         cell = [[SubscriptionManageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.block = ^(NSInteger tag) {
+            
+            [self udpate_ordered_jobs:tag];
+            
+            [self.dataArr removeObjectAtIndex:tag];
+            [_tableView reloadData];
+            
+        };
     }
+    
+    PersonModel *model = self.dataArr[indexPath.row];
+    
+    [cell.jobBtn setTitle:model.key forState:UIControlStateNormal];
+    [cell.jobBtn1 setTitle:model.key forState:UIControlStateNormal];
+    [cell.addressBtn setTitle:model.area forState:UIControlStateNormal];
     
     cell.type = self.type;
     cell.model = nil;

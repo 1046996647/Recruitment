@@ -84,7 +84,7 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
         if (person) {
             [dic  setValue:person.uid forKey:@"uid"];
         }
-        
+
         if (token) {
             [dic  setValue:token forKey:@"token"];
             [dic  setValue:userid forKey:@"userid"];

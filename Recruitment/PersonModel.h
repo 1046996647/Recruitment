@@ -70,6 +70,14 @@
 @property(nonatomic,strong) NSString *skill;// 工作内容
 @property(nonatomic,strong) NSString *company_nature;// 公司性质
 
+// 订阅职位
+//@property(nonatomic,strong) NSString *key;// 关键词
+@property(nonatomic,strong) NSString *area;// 工作地点
+@property(nonatomic,strong) NSString *years;// 工作经验
+@property(nonatomic,strong) NSString *edu;// 学历要求
+@property(nonatomic,strong) NSString *ID;
+
+
 @property(nonatomic,assign) NSInteger cellHeight;
 
 @end

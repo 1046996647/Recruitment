@@ -15,16 +15,22 @@
 #import "ApplyJobVC.h"
 #import "PlaceView.h"
 #import "JobRecommandVC.h"
+#import "HomeModel.h"
 
 
-@interface HomeVC ()<UITextFieldDelegate>
+@interface HomeVC ()<UITextFieldDelegate,SDCycleScrollViewDelegate>
 
+@property (nonatomic,strong) SDCycleScrollView *cycleScrollView2;
 @property (nonatomic,strong) CustomerScrollView * btnScrollView;
 @property(nonatomic,strong) UIButton *forgetBtn1;
 @property(nonatomic,strong) JobTableView *tableView;
 @property(nonatomic,strong) UITextField *searchTF;
 @property(nonatomic,strong) PlaceView *placeView;
 @property(nonatomic,strong) UIImageView *imgView;
+@property (nonatomic,assign) BOOL isRefresh;
+
+@property(nonatomic,strong) NSMutableArray *urlArr;
+
 
 
 @end
@@ -79,16 +85,17 @@
 
     [self initHeaderView];
     
-//    // 下拉刷新
-//    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        
-//        [self headerRefresh];
-//    }];
-//    // 隐藏时间
-//    header.lastUpdatedTimeLabel.hidden = YES;
-//    self.tableView.mj_header = header;
+    // 下拉刷新
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self headerRefresh];
+    }];
+    // 隐藏时间
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
     
-    
+    [self homepage_info];
+
      // 选择项数据
     [self getSelectItems];
     [self getSelectItemJob];
@@ -97,8 +104,65 @@
 
 - (void)headerRefresh
 {
-//    [self getTitlePage];
-//    self.isRefresh = YES;
+    [self homepage_info];
+    self.isRefresh = YES;
+}
+
+- (void)homepage_info
+{
+    if (!self.isRefresh) {
+        [SVProgressHUD show];
+        
+    }
+    
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Homepage_info dic:paraDic showHUD:NO Succed:^(id responseObject) {
+        
+        self.isRefresh = YES;
+        [SVProgressHUD dismiss];
+        [self.tableView.mj_header endRefreshing];
+        
+        NSNumber *code = [responseObject objectForKey:@"status"];
+        if (1 == [code integerValue]) {
+            
+            // carousel
+            NSMutableArray *imgArr = [NSMutableArray array];
+            NSMutableArray *urlArr = [NSMutableArray array];
+            for (NSDictionary *dic in responseObject[@"data"][@"carousel"]) {
+                HomeModel *model = [HomeModel yy_modelWithJSON:dic];
+                [imgArr addObject:model.img];
+                [urlArr addObject:model.url];
+            }
+            self.urlArr = urlArr;
+            self.cycleScrollView2.imageURLStringsGroup = imgArr;
+            
+            // button
+            
+            //        NSMutableArray *arrM1 = [NSMutableArray array];
+            //        for (NSDictionary *dic in responseObject[@"data"][@"button"]) {
+            //            HomeModel *model = [HomeModel yy_modelWithJSON:dic];
+            //            [arrM1 addObject:model];
+            //        }
+            _btnScrollView.dataArr = responseObject[@"data"][@"button"];
+            
+            
+            // like
+            NSMutableArray *arrM2 = [NSMutableArray array];
+            for (NSDictionary *dic in responseObject[@"data"][@"like"]) {
+                JobModel *model = [JobModel yy_modelWithJSON:dic];
+                [arrM2 addObject:model];
+            }
+            self.tableView.dataArr = arrM2;
+            [self.tableView reloadData];
+        }
+
+        
+    } failure:^(NSError *error) {
+        
+        [SVProgressHUD dismiss];
+        [self.tableView.mj_header endRefreshing];
+    }];
 }
 
 - (void)searchTFAction
@@ -137,21 +201,22 @@
                                   ];
     
     // 网络加载 --- 创建带标题的图片轮播器
-    SDCycleScrollView *cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreen_Width, 100) delegate:nil placeholderImage:[UIImage imageNamed:@""]];
+    SDCycleScrollView *cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreen_Width, 100) delegate:self placeholderImage:[UIImage imageNamed:@""]];
     cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     cycleScrollView2.currentPageDotColor = [UIColor colorWithHexString:@"#F78724"]; // 自定义分页控件小圆标颜色
     [headView addSubview:cycleScrollView2];
     cycleScrollView2.imageURLStringsGroup = imagesURLStrings;
     cycleScrollView2.backgroundColor = [UIColor clearColor];
+    self.cycleScrollView2 = cycleScrollView2;
     
     _btnScrollView = [[CustomerScrollView alloc] initWithFrame:CGRectMake(0, cycleScrollView2.bottom, kScreen_Width, 190)];
     [headView addSubview:_btnScrollView];
-    _btnScrollView.dataArr = nil;
     
     __weak typeof(self) weakSelf = self;
-    _btnScrollView.block = ^(NSInteger tag) {
+    _btnScrollView.block = ^(NSDictionary *dic) {
         
         ApplyJobVC *vc = [[ApplyJobVC alloc] init];
+        vc.searchText = dic[@"name"];
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     
@@ -249,31 +314,12 @@
 
 }
 
-- (void)getSelectItems
+
+#pragma mark - SDCycleScrollViewDelegate
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
-
-    [AFNetworking_RequestData requestMethodPOSTUrl:Get_setting dic:nil showHUD:NO Succed:^(id responseObject) {
-        
-        NSArray *selectArr = responseObject[@"data"];
-        [InfoCache archiveObject:selectArr toFile:SelectItem];
-
-    } failure:^(NSError *error) {
-        
-    }];
-    
-}
-
-- (void)getSelectItemJob
-{
-    
-    [AFNetworking_RequestData requestMethodPOSTUrl:Get_jobs_cate dic:nil showHUD:NO Succed:^(id responseObject) {
-        
-        NSArray *selectArr = responseObject[@"data"];
-        [InfoCache archiveObject:selectArr toFile:SelectItemJob];
-        
-    } failure:^(NSError *error) {
-        
-    }];
+    NSLog(@"---点击了第%ld张图片", (long)index);
     
 }
 
@@ -283,5 +329,33 @@
     [self searchTFAction];
     return NO;
 }
+    
+    - (void)getSelectItems
+    {
+        
+        [AFNetworking_RequestData requestMethodPOSTUrl:Get_setting dic:nil showHUD:NO Succed:^(id responseObject) {
+            
+            NSArray *selectArr = responseObject[@"data"];
+            [InfoCache archiveObject:selectArr toFile:SelectItem];
+            
+        } failure:^(NSError *error) {
+            
+        }];
+        
+    }
+    
+    - (void)getSelectItemJob
+    {
+        
+        [AFNetworking_RequestData requestMethodPOSTUrl:Get_jobs_cate dic:nil showHUD:NO Succed:^(id responseObject) {
+            
+            NSArray *selectArr = responseObject[@"data"];
+            [InfoCache archiveObject:selectArr toFile:SelectItemJob];
+            
+        } failure:^(NSError *error) {
+            
+        }];
+        
+    }
 
 @end

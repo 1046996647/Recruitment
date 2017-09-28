@@ -8,6 +8,8 @@
 
 #import "SystemMassageVC.h"
 #import "SystemMassageCell.h"
+#import "SystemModel.h"
+#import "SystemMsgDetailVC.h"
 
 @interface SystemMassageVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -26,8 +28,36 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self system_message_list];
 
+}
+
+// 4.1    系统消息
+- (void)system_message_list
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:System_message_list dic:dic showHUD:YES Succed:^(id responseObject) {
+        
+        NSArray *arr = responseObject[@"data"];
+        if ([arr isKindOfClass:[NSArray class]]) {
+            NSMutableArray *arrM = [NSMutableArray array];
+            for (NSDictionary *dic in arr) {
+                SystemModel *model1 = [SystemModel yy_modelWithJSON:dic];
+                [arrM addObject:model1];
+            }
+            
+            self.dataArr = arrM;
+            [_tableView reloadData];
+
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,34 +68,43 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    return self.dataArr.count;
-    return 10;
+    return self.dataArr.count;
+//    return 10;
     
 }
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 16+228;
+//}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 16+228;
+    return 44;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    //    JobDetailVC *vc = [[JobDetailVC alloc] init];
-    //    vc.title = @"职位详情";
-    //    [self.viewController.navigationController pushViewController:vc animated:YES];
+    SystemModel *model = self.dataArr[indexPath.row];
+
+    SystemMsgDetailVC *vc = [[SystemMsgDetailVC alloc] init];
+    vc.title = model.title;
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    SystemMassageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         
-        cell = [[SystemMassageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell.textLabel.textColor = [UIColor colorWithHexString:@"#333333"];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
     }
-    
+    SystemModel *model = self.dataArr[indexPath.row];
+    cell.textLabel.text = model.title;
     
     return cell;
 }

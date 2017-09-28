@@ -23,14 +23,15 @@
         baseView.layer.masksToBounds = YES;
         [self.contentView addSubview:baseView];
 
-        _companyLab = [UILabel labelWithframe:CGRectMake(14, 10, baseView.width-28, 17) text:@"个人APP新版上线" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+        // 个人APP新版上线
+        _companyLab = [UILabel labelWithframe:CGRectMake(14, 10, baseView.width-28, 17) text:@"" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
         [baseView addSubview:_companyLab];
         
         _imgView = [UIImageView imgViewWithframe:CGRectMake(_companyLab.left, _companyLab.bottom+9, _companyLab.width, 113) icon:@"long"];
         [baseView addSubview:_imgView];
         
-        
-        _typeLab = [UILabel labelWithframe:CGRectMake(_companyLab.left, _imgView.bottom+13, _companyLab.width, 13) text:@"个人新版上线" font:[UIFont systemFontOfSize:11] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+        // 个人新版上线
+        _typeLab = [UILabel labelWithframe:CGRectMake(_companyLab.left, _imgView.bottom+13, _companyLab.width, 13) text:@"" font:[UIFont systemFontOfSize:11] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
         [baseView addSubview:_typeLab];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, _typeLab.bottom+14, baseView.width, 1)];

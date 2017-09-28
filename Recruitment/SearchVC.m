@@ -10,13 +10,14 @@
 #import "HotJobCell.h"
 #import "SearchCell.h"
 #import "ApplyJobVC.h"
+#import "DiySearchBar.h"
 
 #define HistoryPath @"HistoryPath"
 
 
 @interface SearchVC ()<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
-@property(nonatomic,strong) UISearchBar *searchBar;
+@property(nonatomic,strong) DiySearchBar *searchBar;
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UIButton *cancelBtn;
 @property(nonatomic,strong) NSArray *dataArr;
@@ -46,15 +47,15 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
 
     
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width-12-54, 21)];
+    _searchBar = [[DiySearchBar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width-12-54, 30)];
     _searchBar.delegate = self;
     _searchBar.placeholder = @"搜索";
 //    _searchBar.showsCancelButton = YES;
 //    _searchBar.tintColor = [UIColor colorWithHexString:@"#f99740"];// "取消"字体颜色和光标颜色
     [_searchBar setBackgroundImage:[UIImage new]];
 //    _searchBar.barTintColor = [UIColor colorWithHexString:@"#FFFFFF"];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_searchBar];
-    
+    [_searchBar becomeFirstResponder];
+
     // 边框设置
     UITextField *searchField = [_searchBar valueForKey:@"searchField"];
     searchField.layer.cornerRadius = _searchBar.height/2;
@@ -62,6 +63,9 @@
     searchField.font = [UIFont systemFontOfSize:12];
     [searchField setValue:[UIFont systemFontOfSize:12] forKeyPath:@"_placeholderLabel.font"];// 设置这里时searchTF.font也要设置不然会偏上
 
+    UIView *view = [[UIView alloc] initWithFrame:_searchBar.bounds];
+    [view addSubview:_searchBar];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:view];
     
     // 尾视图
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 0)];
@@ -133,7 +137,7 @@
 
 - (void)cancelAction
 {
-
+    [_searchBar resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

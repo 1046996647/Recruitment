@@ -77,7 +77,10 @@
 //    if (_cellType == 1) {
 //        cell.timeLab.hidden = YES;
 //    }
-    cell.model = self.dataArr[indexPath.row];
+    if (self.dataArr.count > 0) {
+        cell.model = self.dataArr[indexPath.row];
+
+    }
     
     return cell;
 }

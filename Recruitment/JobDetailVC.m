@@ -84,13 +84,14 @@
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 0)];
     headView.backgroundColor = [UIColor whiteColor];
     
-    // 职位 配货包装工
-    UILabel *jobLab = [UILabel labelWithframe:CGRectMake(14, 9, 120, 17) text:self.model.job_name font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
-    [headView addSubview:jobLab];
     
     // 6-7k
     UILabel *moneyLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-47-12, 9, 47, 18) text:[NSString stringWithFormat:@"%@k",self.model.pay] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentRight textColor:@"#CE4A12"];
     [headView addSubview:moneyLab];
+    
+    // 职位 配货包装工
+    UILabel *jobLab = [UILabel labelWithframe:CGRectMake(14, 9, moneyLab.left-14-10, 17) text:self.model.job_name font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+    [headView addSubview:jobLab];
     
     if (![self.model.years isEqualToString:@"不限"]) {
         self.model.years = [NSString stringWithFormat:@"%@年",self.model.years];

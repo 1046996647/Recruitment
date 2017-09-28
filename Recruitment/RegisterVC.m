@@ -23,11 +23,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    CGFloat screenHeight = 0;
+    CGFloat statusBar = 0;
     
-    UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(0, 0, kScreen_Width, kScreen_Height) icon:@"110"];
+    if (Device_Is_iPhoneX) {
+        screenHeight  = kScreen_Height+24;
+        statusBar  = 44;
+    }
+    else {
+        screenHeight  = kScreen_Height;
+        statusBar  = 20;
+        
+    }
+    
+    UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(0, 0, kScreen_Width, screenHeight) icon:@"110"];
     [self.view addSubview:imgView];
     
-    UIButton *backBtn = [UIButton buttonWithframe:CGRectMake(20, 20+(44-30)/2, 30, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"11" selected:nil];
+    UIButton *backBtn = [UIButton buttonWithframe:CGRectMake(20, statusBar+(44-30)/2, 30, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"11" selected:nil];
     [self.view addSubview:backBtn];
     backBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
@@ -49,7 +61,7 @@
     [leftView1 addSubview:imgView1];
     [leftView addSubview:leftView1];
     
-    _phone = [UITextField textFieldWithframe:CGRectMake(25, 91, kScreen_Width-50, 35) placeholder:@"请输入手机号" font:nil leftView:leftView backgroundColor:@"#FFFFFF"];
+    _phone = [UITextField textFieldWithframe:CGRectMake(25, label.bottom+41, kScreen_Width-50, 35) placeholder:@"请输入手机号" font:nil leftView:leftView backgroundColor:@"#FFFFFF"];
     _phone.keyboardType = UIKeyboardTypeNumberPad;
     _phone.layer.cornerRadius = 7;
     //    [tf addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventEditingChanged];
@@ -72,11 +84,13 @@
     
     UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12+13, _phone.height)];
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(0, 0, 12, 5);
-    rightBtn.center = rightView.center;
+    rightBtn.frame = rightView.bounds;
+//    rightBtn.center = rightView.center;
     [rightBtn setImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
     [rightBtn setImage:[UIImage imageNamed:@"14"] forState:UIControlStateSelected];
     [rightView addSubview:rightBtn];
+    [rightBtn addTarget:self action:@selector(viewAction:) forControlEvents:UIControlEventTouchUpInside];
+
     
     _password = [UITextField textFieldWithframe:CGRectMake(_phone.left, _phone.bottom+10, _phone.width, _phone.height) placeholder:@"请输入6-16位密码" font:nil leftView:leftView backgroundColor:@"#FFFFFF"];
     _password.layer.cornerRadius = 7;
@@ -148,6 +162,18 @@
 
 }
 
+- (void)viewAction:(UIButton *)btn
+{
+    btn.selected = !btn.selected;
+    if (btn.selected) {
+        _password.secureTextEntry = NO;
+    }
+    else {
+        _password.secureTextEntry = YES;
+
+    }
+}
+
 - (void)nextAction
 {
     if ([self.title isEqualToString:@"注册"]) {
@@ -180,28 +206,24 @@
         
         [AFNetworking_RequestData requestMethodPOSTUrl:registStr dic:paramDic showHUD:YES Succed:^(id responseObject) {
             
-            [InfoCache archiveObject:self.phone.text toFile:@"userid"];
-            [InfoCache archiveObject:self.password.text toFile:@"password"];
-            [InfoCache archiveObject:responseObject[@"token"] toFile:@"token"];
-            
-            
-            // 登录通知
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginNotification" object:self.title];
-            
-            PersonalMessageVC *vc = [[PersonalMessageVC alloc] init];
-            vc.title = @"个人信息";
-            [self.navigationController pushViewController:vc animated:YES];
-            
-            
-            
+            NSNumber *code = [responseObject objectForKey:@"status"];
+            if (1 == [code integerValue]) {
+                
+                [InfoCache archiveObject:self.phone.text toFile:@"userid"];
+                [InfoCache archiveObject:self.password.text toFile:@"password"];
+                [InfoCache archiveObject:responseObject[@"token"] toFile:@"token"];
+                
+                // 登录通知
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginNotification" object:self.title];
+                
+                PersonalMessageVC *vc = [[PersonalMessageVC alloc] init];
+                vc.title = @"个人信息";
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+  
         } failure:^(NSError *error) {
             
         }];
-        
-        
-//        PersonalMessageVC *vc = [[PersonalMessageVC alloc] init];
-//        vc.title = @"个人信息";
-//        [self.navigationController pushViewController:vc animated:YES];
         
 
     }

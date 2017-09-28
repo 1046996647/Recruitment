@@ -59,6 +59,8 @@
 
 - (void)pushAction
 {
+    // 收起键盘有效
+//    [self.viewController.view endEditing:YES];
     
     ChangePhoneVC *vc = [[ChangePhoneVC alloc] init];
     vc.title = @"修改手机";
@@ -88,7 +90,8 @@
         [_model.title isEqualToString:@"电话(选填)"]||
         [_model.title isEqualToString:@"QQ号码(选填)"]||
         [_model.title isEqualToString:@"邮箱(选填)"]||
-        [_model.title isEqualToString:@"联系地址"]) {
+        [_model.title isEqualToString:@"联系地址"]||
+        [_model.title isEqualToString:@"关键词"]) {
         return;
     }
 
@@ -305,7 +308,14 @@
         
         _tf.text = selectValue;
         _model.text = selectValue;
+        
+        if ([_model.title isEqualToString:@"工作年限"]||
+            [_model.title isEqualToString:@"工作经验"]) {
+            
+            _model.text = [_model.text substringToIndex:_model.text.length-1];
+            NSLog(@"-----%@",selectValue);
 
+        }
 ////        if ([_model.title isEqualToString:@"性别"] ||
 ////            [_model.title isEqualToString:@"人才类型"]||
 ////            [_model.title isEqualToString:@"意向城市"]||

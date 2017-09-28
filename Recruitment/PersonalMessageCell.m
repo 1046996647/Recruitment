@@ -95,15 +95,25 @@
         
         _tf.text = selectValue;
         
-        if ([_model.title isEqualToString:@"意向城市"]) {
+        if ([_model.title isEqualToString:@"工作年限"]||
+            [_model.title isEqualToString:@"工作经验"]) {
             
-            _model.text = selectValue;
-            
-        }
-        else {
-            _model.text = [NSString stringWithFormat:@"%ld",[self.dataSource indexOfObject:selectValue]+1];
+            _model.text = [_model.text substringToIndex:_model.text.length-1];
+            NSLog(@"-----%@",selectValue);
             
         }
+        
+//        if ([_model.title isEqualToString:@"意向城市"]) {
+//
+//            _model.text = selectValue;
+//
+//        }
+//        else {
+//            _model.text = [NSString stringWithFormat:@"%ld",[self.dataSource indexOfObject:selectValue]+1];
+//
+//        }
+        
+        
     }];
     
 

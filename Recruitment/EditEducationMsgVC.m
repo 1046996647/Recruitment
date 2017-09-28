@@ -178,6 +178,28 @@
         
 
 
+    } else if ([self.title isEqualToString:@"增加订阅"]) {
+        
+        if (_model) {
+            
+            self.dataArr = @[@[@{@"image":@"68",@"title":@"关键词",@"text":_model.key,@"key":@"key"}],
+                             @[@{@"image":@"67",@"title":@"期望地区",@"text":_model.area,@"key":@"area"},
+                               @{@"image":@"67",@"title":@"工作经验",@"text":[NSString stringWithFormat:@"%@年",_model.years],@"key":@"years"},
+                               @{@"image":@"67",@"title":@"学历",@"text":_model.edu,@"key":@"edu"}]
+                             ];
+            
+        }
+        else {
+            self.dataArr = @[@[@{@"image":@"68",@"title":@"关键词",@"text":@"",@"key":@"key"}],
+                             @[@{@"image":@"67",@"title":@"期望地区",@"text":@"",@"key":@"area"},
+                               @{@"image":@"67",@"title":@"工作经验",@"text":@"",@"key":@"years"},
+                               @{@"image":@"67",@"title":@"学历",@"text":@"",@"key":@"edu"}]
+                             ];
+        }
+        
+        footerView  = [UIView new];
+        self.textView = nil;
+        
     }
     
     if (self.textView.text.length > 0) {
@@ -259,6 +281,18 @@
 
         }
 
+    } else if ([self.title isEqualToString:@"增加订阅"]) {
+        
+        if (_model) {
+            urlStr = Udpate_ordered_jobs;
+            [paramDic setValue:_model.ID forKey:@"id"];
+            [paramDic setValue:@"update" forKey:@"act"];
+            
+        }
+        else {
+            urlStr = Add_ordered_jobs;
+            
+        }
     }
     
     for (NSArray *arr in self.dataArr) {
@@ -300,11 +334,16 @@
     
     [AFNetworking_RequestData requestMethodPOSTUrl:urlStr dic:paramDic showHUD:YES Succed:^(id responseObject) {
         
-//        [self get_user_info];
-        if (self.block) {
-            self.block();
+
+        NSNumber *code = [responseObject objectForKey:@"status"];
+        if (1 == [code integerValue]) {
+            
+            if (self.block) {
+                self.block();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
         }
-        [self.navigationController popViewControllerAnimated:YES];
+        
         
     } failure:^(NSError *error) {
         
@@ -361,6 +400,13 @@
     
     return 10;
     
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 10)];
+    view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
+    return view;
 }
 
 

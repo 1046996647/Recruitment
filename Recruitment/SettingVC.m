@@ -54,7 +54,8 @@
 - (void)exitAction
 {
     [InfoCache archiveObject:nil toFile:Person];
-    
+    [InfoCache archiveObject:nil toFile:@"token"];
+
     [self.navigationController popToRootViewControllerAnimated:YES];
 
 //    AppDelegate *appDelegate = [AppDelegate share];

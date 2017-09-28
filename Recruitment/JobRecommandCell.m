@@ -17,11 +17,13 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 135)];
+//        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 135)];
+        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 95)];
         baseView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:baseView];
         
-        UIButton *topBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width, 70) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
+//        UIButton *topBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width, 70) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
+        UIButton *topBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width, 35) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
         topBtn.tag = 0;
         [self.contentView addSubview:topBtn];
         [topBtn addTarget:self action:@selector(pushAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -37,25 +39,25 @@
         _moneyLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-34-12, 12, 34, 18) text:@"6-7k" font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentRight textColor:@"#CE4A12"];
         [self.contentView addSubview:_moneyLab];
         
-        //单行滚动  ===============
-        NSArray *tagAry = @[@"薪假",@"公游",@"保险"];
-        //    单行不需要设置高度,内部根据初始化参数自动计算高度
-        _tagsView = [[HXTagsView alloc] initWithFrame:CGRectMake(_jobLab.left, _moneyLab.bottom, 150, 0)];
-        _tagsView.type = 1;
-        _tagsView.tagHorizontalSpace = 5.0;
-        _tagsView.showsHorizontalScrollIndicator = NO;
-        _tagsView.tagHeight = 15.0;
-        _tagsView.titleSize = 10.0;
-        _tagsView.tagOriginX = 0.0;
-        _tagsView.titleColor = [UIColor colorWithHexString:@"#666666"];
-        _tagsView.cornerRadius = _tagsView.tagHeight/2;
-        _tagsView.userInteractionEnabled = NO;
-        _tagsView.backgroundColor = [UIColor clearColor];
-        _tagsView.borderColor = [UIColor colorWithHexString:@"#FFDDB0"];
-        [_tagsView setTagAry:tagAry delegate:nil];
-        [self.contentView addSubview:_tagsView];
+//        //单行滚动  ===============
+//        NSArray *tagAry = @[@"薪假",@"公游",@"保险"];
+//        //    单行不需要设置高度,内部根据初始化参数自动计算高度
+//        _tagsView = [[HXTagsView alloc] initWithFrame:CGRectMake(_jobLab.left, _moneyLab.bottom, 150, 0)];
+//        _tagsView.type = 1;
+//        _tagsView.tagHorizontalSpace = 5.0;
+//        _tagsView.showsHorizontalScrollIndicator = NO;
+//        _tagsView.tagHeight = 15.0;
+//        _tagsView.titleSize = 10.0;
+//        _tagsView.tagOriginX = 0.0;
+//        _tagsView.titleColor = [UIColor colorWithHexString:@"#666666"];
+//        _tagsView.cornerRadius = _tagsView.tagHeight/2;
+//        _tagsView.userInteractionEnabled = NO;
+//        _tagsView.backgroundColor = [UIColor clearColor];
+//        _tagsView.borderColor = [UIColor colorWithHexString:@"#FFDDB0"];
+//        [_tagsView setTagAry:tagAry delegate:nil];
+//        [self.contentView addSubview:_tagsView];
         
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(_jobLab.left, _tagsView.bottom+5, kScreen_Width-_jobLab.left*2, 1)];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(_jobLab.left, _moneyLab.bottom+5, kScreen_Width-_jobLab.left*2, 1)];
         line.backgroundColor = [UIColor colorWithHexString:@"#979797"];
         [self.contentView addSubview:line];
 

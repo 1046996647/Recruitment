@@ -11,11 +11,12 @@
 #import "JobView.h"
 #import "JobDetailVC.h"
 #import "LoginVC.h"
+#import "DiySearchBar.h"
 
 @interface ApplyJobVC ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property(nonatomic,strong) UIButton *forgetBtn1;
 @property(nonatomic,strong) UITableView *tableView;
-@property(nonatomic,strong) UISearchBar *searchBar;
+@property(nonatomic,strong) DiySearchBar *searchBar;
 @property(nonatomic,strong) UIButton *lastBtn;
 @property(nonatomic,strong) JobView *jobview;
 @property(nonatomic,strong) UIButton *applyBtn;
@@ -76,20 +77,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width-14-54, 21)];
+    _searchBar = [[DiySearchBar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width-14-54, 30)];
     _searchBar.delegate = self;
 //    _searchBar.placeholder = @"搜索";
     //    _searchBar.showsCancelButton = YES;
     //    _searchBar.tintColor = [UIColor colorWithHexString:@"#f99740"];// "取消"字体颜色和光标颜色
     [_searchBar setBackgroundImage:[UIImage new]];
     //    _searchBar.barTintColor = [UIColor colorWithHexString:@"#FFFFFF"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_searchBar];
+
     _searchBar.text = self.searchText;
+//    _searchBar.backgroundColor = [UIColor redColor];
     
     // 边框设置
     UITextField *searchField = [_searchBar valueForKey:@"searchField"];
     searchField.layer.cornerRadius = _searchBar.height/2;
     searchField.layer.masksToBounds = YES;
+    searchField.font = [UIFont systemFontOfSize:12];
+    [searchField setValue:[UIFont systemFontOfSize:12] forKeyPath:@"_placeholderLabel.font"];// 设置这里时searchTF.font也要设置不然会偏上
+    
+    UIView *view = [[UIView alloc] initWithFrame:_searchBar.bounds];
+    [view addSubview:_searchBar];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:view];
+
     
     _tableView = [UITableView tableViewWithframe:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64-40)];
     _tableView.delegate = self;
@@ -140,6 +149,7 @@
 
 }
 
+
 - (void)applyAction
 {
     PersonModel *model = [InfoCache unarchiveObjectWithFile:Person];
@@ -151,14 +161,23 @@
     }
     
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
-    [paraDic setValue:@"0" forKey:@"cid"];
     
+//    NSMutableArray *cidArr = [NSMutableArray array];
+//    for (JobModel *model in self.selectedArr) {
+//        [cidArr addObject:model.ID];
+//    }
+//    NSString *string = [cidArr componentsJoinedByString:@","]; //,为分隔符
+//    [paraDic setValue:@"0" forKey:@"cid"];
+
     NSMutableArray *idArr = [NSMutableArray array];
     for (JobModel *model in self.selectedArr) {
         [idArr addObject:model.ID];
     }
     NSString *string = [idArr componentsJoinedByString:@","]; //,为分隔符
+
     [paraDic setValue:string forKey:@"id"];
+    
+    
     
     [AFNetworking_RequestData requestMethodPOSTUrl:Send_resume dic:paraDic showHUD:YES Succed:^(id responseObject) {
 
@@ -253,7 +272,6 @@
             }
             
             [self.modelArr addObjectsFromArray:arrM];
-            [self.tableView reloadData];
             
             self.pageNO++;
         }
@@ -262,6 +280,9 @@
             // 拿到当前的上拉刷新控件，变为没有更多数据的状态
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
         }
+        
+        [self.tableView reloadData];
+
         
     } failure:^(NSError *error) {
         

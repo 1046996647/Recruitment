@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "IQKeyboardManager.h"
 
-
 @interface AppDelegate ()
 
 @end
@@ -24,13 +23,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    // 键盘遮盖处理第三方库
-    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    manager.enable = YES;
-    manager.shouldResignOnTouchOutside = YES;
-    manager.shouldToolbarUsesTextFieldTintColor = YES;
-    manager.enableAutoToolbar = NO;
-    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2"];
     [self.window makeKeyAndVisible];
@@ -38,6 +30,20 @@
     TabBarController *tabVC = [[TabBarController alloc] init];
     self.tabVC = tabVC;
     self.window.rootViewController = tabVC;
+    
+    // 键盘遮盖处理第三方库
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = NO;
+    
+    
+    // 适配iOS11
+    if (@available(iOS 11.0, *)){
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        
+    }
     
     
     return YES;

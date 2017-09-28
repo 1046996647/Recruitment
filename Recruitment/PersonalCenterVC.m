@@ -104,10 +104,7 @@
         pickerController.delegate = self;
         // 设置选择后的图片可以被编辑
         //            pickerController.allowsEditing=YES;
-        
-        // 跳转到相册页面
-        [self presentViewController:pickerController animated:YES completion:nil];
-        
+    
         // 判断当前设备是否有摄像头
         if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear] || [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
             
@@ -115,6 +112,9 @@
             pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
             
         }
+        
+        // 跳转页面，该行代码必须放最后
+        [self presentViewController:pickerController animated:YES completion:nil];
         
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -135,7 +135,7 @@
 
     if (person) {
         self.label.text = person.name;
-        [self.userBtn sd_setImageWithURL:[NSURL URLWithString:person.img] forState:UIControlStateNormal];
+        [self.userBtn sd_setImageWithURL:[NSURL URLWithString:person.img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"96"]];
         self.userBtn.userInteractionEnabled = YES;
     }
     else {

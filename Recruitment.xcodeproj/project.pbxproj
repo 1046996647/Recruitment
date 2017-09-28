@@ -52,6 +52,8 @@
 		F72FF8C51F6282EB00E3AA92 /* JobDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8C41F6282EB00E3AA92 /* JobDetailCell.m */; };
 		F72FF8C81F628D5C00E3AA92 /* CompanyDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8C71F628D5C00E3AA92 /* CompanyDetailVC.m */; };
 		F73382DA1F72370A0097158C /* JobViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F73382D91F72370A0097158C /* JobViewModel.m */; };
+		F73507651F78C91500F4F4A2 /* SystemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F73507641F78C91500F4F4A2 /* SystemModel.m */; };
+		F73507681F78CC0C00F4F4A2 /* SystemMsgDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F73507671F78CC0C00F4F4A2 /* SystemMsgDetailVC.m */; };
 		F7353DBA1F74A9CF009F086E /* MWWaveCycleAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7353DB61F74A9CF009F086E /* MWWaveCycleAnimationView.m */; };
 		F7353DBB1F74A9CF009F086E /* MWWaveProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7353DB81F74A9CF009F086E /* MWWaveProgressView.m */; };
 		F7353DBC1F74A9CF009F086E /* wave.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7353DB91F74A9CF009F086E /* wave.bundle */; };
@@ -103,9 +105,11 @@
 		F74F4AD91F66609A007736BA /* AboutUsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AD81F66609A007736BA /* AboutUsVC.m */; };
 		F74F4AE71F667C81007736BA /* SubscriptionManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AE61F667C81007736BA /* SubscriptionManageCell.m */; };
 		F74F4AEA1F667DEC007736BA /* SubscriptionManageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AE91F667DEC007736BA /* SubscriptionManageModel.m */; };
+		F75624BA1F79EA2E006D4174 /* DiySearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F75624B91F79EA2D006D4174 /* DiySearchBar.m */; };
 		F75A453D1F67B6DC00B0790C /* ResumeManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453C1F67B6DC00B0790C /* ResumeManageVC.m */; };
 		F75A45401F67BD4F00B0790C /* JobRecommandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */; };
 		F75A45431F67BEA000B0790C /* JobRecommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A45421F67BEA000B0790C /* JobRecommandCell.m */; };
+		F76EDA251F7C9BB0006B9627 /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F76EDA241F7C9BB0006B9627 /* HomeModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,6 +203,10 @@
 		F72FF8C71F628D5C00E3AA92 /* CompanyDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyDetailVC.m; sourceTree = "<group>"; };
 		F73382D81F72370A0097158C /* JobViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobViewModel.h; sourceTree = "<group>"; };
 		F73382D91F72370A0097158C /* JobViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobViewModel.m; sourceTree = "<group>"; };
+		F73507631F78C91500F4F4A2 /* SystemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemModel.h; sourceTree = "<group>"; };
+		F73507641F78C91500F4F4A2 /* SystemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemModel.m; sourceTree = "<group>"; };
+		F73507661F78CC0C00F4F4A2 /* SystemMsgDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemMsgDetailVC.h; sourceTree = "<group>"; };
+		F73507671F78CC0C00F4F4A2 /* SystemMsgDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemMsgDetailVC.m; sourceTree = "<group>"; };
 		F7353DB51F74A9CF009F086E /* MWWaveCycleAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWWaveCycleAnimationView.h; sourceTree = "<group>"; };
 		F7353DB61F74A9CF009F086E /* MWWaveCycleAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWWaveCycleAnimationView.m; sourceTree = "<group>"; };
 		F7353DB71F74A9CF009F086E /* MWWaveProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWWaveProgressView.h; sourceTree = "<group>"; };
@@ -299,12 +307,16 @@
 		F74F4AE61F667C81007736BA /* SubscriptionManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionManageCell.m; sourceTree = "<group>"; };
 		F74F4AE81F667DEC007736BA /* SubscriptionManageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionManageModel.h; sourceTree = "<group>"; };
 		F74F4AE91F667DEC007736BA /* SubscriptionManageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionManageModel.m; sourceTree = "<group>"; };
+		F75624B81F79EA2D006D4174 /* DiySearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiySearchBar.h; sourceTree = "<group>"; };
+		F75624B91F79EA2D006D4174 /* DiySearchBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiySearchBar.m; sourceTree = "<group>"; };
 		F75A453B1F67B6DC00B0790C /* ResumeManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResumeManageVC.h; sourceTree = "<group>"; };
 		F75A453C1F67B6DC00B0790C /* ResumeManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResumeManageVC.m; sourceTree = "<group>"; };
 		F75A453E1F67BD4F00B0790C /* JobRecommandVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobRecommandVC.h; sourceTree = "<group>"; };
 		F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobRecommandVC.m; sourceTree = "<group>"; };
 		F75A45411F67BEA000B0790C /* JobRecommandCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobRecommandCell.h; sourceTree = "<group>"; };
 		F75A45421F67BEA000B0790C /* JobRecommandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobRecommandCell.m; sourceTree = "<group>"; };
+		F76EDA231F7C9BB0006B9627 /* HomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
+		F76EDA241F7C9BB0006B9627 /* HomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -591,6 +603,8 @@
 		F73C37B51F61130300027289 /* CustomClass */ = {
 			isa = PBXGroup;
 			children = (
+				F75624B81F79EA2D006D4174 /* DiySearchBar.h */,
+				F75624B91F79EA2D006D4174 /* DiySearchBar.m */,
 				F73C37B61F61132C00027289 /* Lib */,
 			);
 			name = CustomClass;
@@ -663,6 +677,8 @@
 				F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */,
 				F70253231F73B27100F5E025 /* ShareVC.h */,
 				F70253241F73B27100F5E025 /* ShareVC.m */,
+				F76EDA231F7C9BB0006B9627 /* HomeModel.h */,
+				F76EDA241F7C9BB0006B9627 /* HomeModel.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -803,6 +819,8 @@
 				F74F4ABB1F6630BB007736BA /* SubscriptionManageVC.m */,
 				F74F4ABD1F6634C3007736BA /* SystemMassageVC.h */,
 				F74F4ABE1F6634C3007736BA /* SystemMassageVC.m */,
+				F73507661F78CC0C00F4F4A2 /* SystemMsgDetailVC.h */,
+				F73507671F78CC0C00F4F4A2 /* SystemMsgDetailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -812,6 +830,8 @@
 			children = (
 				F74F4AE81F667DEC007736BA /* SubscriptionManageModel.h */,
 				F74F4AE91F667DEC007736BA /* SubscriptionManageModel.m */,
+				F73507631F78C91500F4F4A2 /* SystemModel.h */,
+				F73507641F78C91500F4F4A2 /* SystemModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -892,7 +912,7 @@
 					F70EF4701F5F7F8E001C65A7 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = D59VU3JG9L;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1027,6 +1047,7 @@
 				F73C37B41F60EFCA00027289 /* MessageCell.m in Sources */,
 				F70EF4F21F5F85F7001C65A7 /* UIViewExt.m in Sources */,
 				F72FF8BF1F6270BF00E3AA92 /* JobView1.m in Sources */,
+				F73507681F78CC0C00F4F4A2 /* SystemMsgDetailVC.m in Sources */,
 				F70EF5131F5F8616001C65A7 /* TAAbstractDotView.m in Sources */,
 				F70EF4F11F5F85F7001C65A7 /* UIViewController+UIViewControllerExt.m in Sources */,
 				F74F4AC21F6634DA007736BA /* SystemMassageCell.m in Sources */,
@@ -1042,6 +1063,7 @@
 				F74F4AA91F66220E007736BA /* CheckedVC.m in Sources */,
 				F74F4AB61F662773007736BA /* InvitedCell.m in Sources */,
 				F74F4ABF1F6634C3007736BA /* SystemMassageVC.m in Sources */,
+				F75624BA1F79EA2E006D4174 /* DiySearchBar.m in Sources */,
 				F70EF4F61F5F85FE001C65A7 /* UIColor+Expend.m in Sources */,
 				F74197821F63895C00AD5F2C /* BRDatePickerView.m in Sources */,
 				F74F4AB91F662B5E007736BA /* SubscriptionJobVC.m in Sources */,
@@ -1059,6 +1081,7 @@
 				F75A453D1F67B6DC00B0790C /* ResumeManageVC.m in Sources */,
 				F73C37D51F613D1B00027289 /* HotJobCell.m in Sources */,
 				F74F4AA61F66210A007736BA /* SendHistoryVC.m in Sources */,
+				F73507651F78C91500F4F4A2 /* SystemModel.m in Sources */,
 				F74197911F63B97E00AD5F2C /* EditResumeCell.m in Sources */,
 				F741977E1F63895C00AD5F2C /* BRAddressModel.m in Sources */,
 				F70EF4901F5F8591001C65A7 /* AFNetworking_RequestData.m in Sources */,
@@ -1070,6 +1093,7 @@
 				F73C37CB1F6125BB00027289 /* JobCell.m in Sources */,
 				F74197941F63C2FE00AD5F2C /* HeaderView.m in Sources */,
 				F74F4ABC1F6630BB007736BA /* SubscriptionManageVC.m in Sources */,
+				F76EDA251F7C9BB0006B9627 /* HomeModel.m in Sources */,
 				F74197A01F63E15E00AD5F2C /* EditEducationMsgVC.m in Sources */,
 				F75A45401F67BD4F00B0790C /* JobRecommandVC.m in Sources */,
 				F70EF5291F5FBA7C001C65A7 /* NavigationController.m in Sources */,
@@ -1197,14 +1221,17 @@
 			baseConfigurationReference = 8033F8F664516D663532CDA7 /* Pods-Recruitment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D59VU3JG9L;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Recruitment/Recruitment.pch";
 				INFOPLIST_FILE = Recruitment/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.HongHu.Recruitment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3f31d4a4-947e-422d-a231-7a17f8153def";
+				PROVISIONING_PROFILE_SPECIFIER = 17812;
 			};
 			name = Debug;
 		};
@@ -1213,14 +1240,18 @@
 			baseConfigurationReference = 7C157134079D20305100C898 /* Pods-Recruitment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D59VU3JG9L;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Recruitment/Recruitment.pch";
 				INFOPLIST_FILE = Recruitment/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.HongHu.Recruitment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "af511b27-e362-4c2a-a59d-af351bbcd717";
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_8_11;
 			};
 			name = Release;
 		};

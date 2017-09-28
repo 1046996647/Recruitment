@@ -55,7 +55,8 @@
         
     }
     
-    UILabel *signLabel = [UILabel labelWithframe:CGRectMake(userBtn.right+16, 11, 40, 18) text:@"天天" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+    // 天天
+    UILabel *signLabel = [UILabel labelWithframe:CGRectMake(userBtn.right+16, 11, 40, 18) text:@"" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
     [headView addSubview:signLabel];
     self.signLabel = signLabel;
     
@@ -64,7 +65,8 @@
     [headView addSubview:editBtn];
     self.editBtn = editBtn;
     
-    UILabel *infoLabel = [UILabel labelWithframe:CGRectMake(signLabel.left, editBtn.bottom+5, 300, 14) text:@"女|本科|两年|永嘉" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+    // 女|本科|两年|永嘉
+    UILabel *infoLabel = [UILabel labelWithframe:CGRectMake(signLabel.left, editBtn.bottom+5, 300, 14) text:@"" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
     [headView addSubview:infoLabel];
     self.infoLabel = infoLabel;
     
@@ -72,7 +74,8 @@
     [headView addSubview:phoneLabel];
     self.phoneLabel = phoneLabel;
     
-    UILabel *hopeLabel = [UILabel labelWithframe:CGRectMake(signLabel.left, phoneLabel.bottom+5, 300, 14) text:@"我毕业于杭州大学，希望多多看我的简历哦~" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+    // 我毕业于杭州大学，希望多多看我的简历哦~
+    UILabel *hopeLabel = [UILabel labelWithframe:CGRectMake(signLabel.left, phoneLabel.bottom+5, 300, 14) text:@"" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
     [headView addSubview:hopeLabel];
     self.hopeLabel = hopeLabel;
     

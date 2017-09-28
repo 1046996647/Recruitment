@@ -21,6 +21,9 @@
 // 注册时个人信息
 #define Update_peronal_info  [NSString stringWithFormat:@"%@User/update_peronal_info",BaseUrl]
 
+// 5.1    获取首页信息
+#define Homepage_info  [NSString stringWithFormat:@"%@QuickGet/homepage_info",BaseUrl]
+
 // 2.3	获取热门职位
 #define Get_hot_jobs  [NSString stringWithFormat:@"%@Jobs/get_hot_jobs",BaseUrl]
 
@@ -72,6 +75,24 @@
 // 1.13	修改工作经历
 #define Update_jobhistory_info  [NSString stringWithFormat:@"%@User/update_jobhistory_info",BaseUrl]
 
+// 4.1    系统消息
+#define System_message_list  [NSString stringWithFormat:@"%@message/system_message_list",BaseUrl]
+
+// 4.3    添加订阅职位
+#define Add_ordered_jobs  [NSString stringWithFormat:@"%@message/add_ordered_jobs",BaseUrl]
+
+// 4.6    修改/删除订阅职位
+#define Udpate_ordered_jobs  [NSString stringWithFormat:@"%@message/udpate_ordered_jobs",BaseUrl]
+
+// 4.4    获取已订阅职位(管理)
+#define Get_ordered_jobs  [NSString stringWithFormat:@"%@message/get_ordered_jobs",BaseUrl]
+
+// 4.5    搜索已订阅职位
+#define Search_ordered_jobs  [NSString stringWithFormat:@"%@message/search_ordered_jobs",BaseUrl]
+
+// 4.1    系统消息详情
+#define System_message_detail  [NSString stringWithFormat:@"%@message/system_message_detail",BaseUrl]
+
 
 // 选择项(个人信息)
 #define Get_setting  [NSString stringWithFormat:@"%@Tool/get_setting",BaseUrl]
@@ -92,7 +113,7 @@
 #define Get_work_exp  [NSString stringWithFormat:@"%@QuickGet/get_work_exp",BaseUrl]
 
 // 1.13	删除工作经历
-#define Delete_jobhistory_info  [NSString stringWithFormat:@"%@User/delete_jobhistory_info",BaseUrl]
+//#define Delete_jobhistory_info  [NSString stringWithFormat:@"%@User/delete_jobhistory_info",BaseUrl]
 
 // 1.16	上传头像
 #define Upload_user_img  [NSString stringWithFormat:@"%@User/upload_user_img",BaseUrl]

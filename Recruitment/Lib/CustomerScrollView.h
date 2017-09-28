@@ -10,7 +10,7 @@
 #import "NSString+WJExtension.h"
 #import "UIView+WJExtension.h"
 
-typedef void(^TagBlock)(NSInteger tag);
+typedef void(^TagBlock)(NSDictionary *dic);
 
 
 @interface CustomerScrollView : UIView

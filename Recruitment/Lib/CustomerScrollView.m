@@ -85,7 +85,7 @@
     CGFloat btnW = self.viewSize.width * WIDTH_RATE;
     CGFloat btnH = self.viewSize.height * HEIGHT_RATE;
     CGFloat leftRightMargin = (SCREEN_WIDTH - (maxCol * btnW + (maxCol-1) * leftRightGap))/2; // 左右内边距;
-    CGFloat topBottomMargin = (self.height - (maxRow * btnH + (topBottomGap+30)))/2;
+    CGFloat topBottomMargin = (self.height - (maxRow * btnH + (topBottomGap+0)))/2;
     
     NSInteger count = self.dataArr.count - (number * self.numberOfSinglePage);
     NSInteger indexCount;
@@ -111,13 +111,14 @@
         NSDictionary * btnDic = self.dataArr[index];
         
         //设置图片内容（使图片和文字水平居中显示）
-        btn.contentHorizontalAlignment = UIControlContentVerticalAlignmentCenter;
-        //btn.backgroundColor = [UIColor orangeColor];
-        [btn setTitle:btnDic[@"title"] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:btnDic[@"image"]] forState:UIControlStateNormal];
+//        btn.contentHorizontalAlignment = UIControlContentVerticalAlignmentCenter;
+//        btn.backgroundColor = [UIColor orangeColor];
+//        [btn setTitle:btnDic[@"name"] forState:UIControlStateNormal];
+//        [btn setImage:[UIImage imageNamed:btnDic[@"image"]] forState:UIControlStateNormal];
+//        [btn sd_setImageWithURL:[NSURL URLWithString:btnDic[@"img"]] forState:UIControlStateNormal];
         //[btn setTitle:btnDic[@"title"] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:13];
+//        [btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+//        btn.titleLabel.font = [UIFont systemFontOfSize:13];
         // 设置图片frame
         
         btn.x = col * (btnW + leftRightGap) + leftRightMargin + number * self.width;
@@ -127,10 +128,18 @@
         btn.height = btnH;
         btn.tag = index;
         
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(btn.currentImage.size.height+20 ,-btn.imageView.frame.size.width, 0,0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
-        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, (btn.width - btn.imageView.width)/2 ,0 ,0)];//图片距离右边框距离减少图片的宽度，其它不变
+//        [btn setTitleEdgeInsets:UIEdgeInsetsMake(btn.currentImage.size.height+20 ,-btn.imageView.frame.size.width, 0,0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
+//        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, (btn.width - btn.imageView.width)/2 ,0 ,0)];//图片距离右边框距离减少图片的宽度，其它不变
         
         [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(0, 0, btn.width, btn.height-20) icon:nil];
+        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        [imgView sd_setImageWithURL:[NSURL URLWithString:btnDic[@"img"]]];
+         [btn addSubview:imgView];
+
+         UILabel *lab = [UILabel labelWithframe:CGRectMake(0, btn.height-20, btn.width, 20) text:btnDic[@"name"] font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentCenter textColor:@"#333333"];
+         [btn addSubview:lab];
         
         [_contentScrollView addSubview:btn];
     }
@@ -144,7 +153,7 @@
     NSLog(@"click:%ld",btn.tag);
     
     if (self.block) {
-        self.block(btn.tag);
+        self.block(self.dataArr[btn.tag]);
     }
 }
 
@@ -157,12 +166,12 @@
         NSLog(@"%@",view);
     }
     
-    if (!self.dataArr) {
-        // 加载默认测试数据
-        NSLog(@"加载测试数据");
-        NSString * dataPath = [[NSBundle mainBundle] pathForResource:@"funKeyboardData.plist" ofType:nil];
-        _dataArr = [NSArray arrayWithContentsOfFile:dataPath];
-    }
+//    if (!self.dataArr) {
+//        // 加载默认测试数据
+//        NSLog(@"加载测试数据");
+//        NSString * dataPath = [[NSBundle mainBundle] pathForResource:@"funKeyboardData.plist" ofType:nil];
+//        _dataArr = [NSArray arrayWithContentsOfFile:dataPath];
+//    }
     
     NSInteger pageCount = self.dataArr.count / self.numberOfSinglePage;
     if (self.dataArr.count % self.numberOfSinglePage > 0) {
@@ -182,10 +191,10 @@
 
 #pragma mark - scroll delegate 
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-
-    NSInteger correntCount = (scrollView.contentOffset.x + self.width/2)/self.width;
-    self.pageControl.currentPage = correntCount;
-}
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//
+//    NSInteger correntCount = (scrollView.contentOffset.x + self.width/2)/self.width;
+//    self.pageControl.currentPage = correntCount;
+//}
 
 @end
