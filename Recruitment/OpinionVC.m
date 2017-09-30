@@ -14,6 +14,7 @@
 @property(nonatomic,strong) UILabel *remindLab1;
 @property (nonatomic,strong) UIButton *imgBtn;
 @property (nonatomic,strong) UILabel *countLab;
+@property (nonatomic,strong) UITextView *textView;
 
 
 @end
@@ -40,6 +41,7 @@
     textView.font = [UIFont systemFontOfSize:12];
     [view addSubview:textView];
     textView.delegate = self;
+    self.textView = textView;
     
     UILabel *remindLab1 = [UILabel labelWithframe:CGRectMake(textView.left+4, textView.top+5, view.width-(textView.left+4), 16) text:@"请输入您宝贵的意见" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
     [view addSubview:remindLab1];
@@ -57,10 +59,18 @@
     footerView.height = imgBtn.bottom+19;
     
     UIButton *saveBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 30, 17) text:@"保存" font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:nil selected:nil];
-    //    [saveBtn addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
-    //    self.cancelBtn = saveBtn;
+    [saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
+//        self.cancelBtn = saveBtn;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:saveBtn];
 
+}
+
+- (void)saveAction
+{
+    if (self.textView.text.length == 0) {
+        [self.view makeToast:@"请输入内容"];
+        return;
+    }
 }
 
 - (void)imgAction
@@ -94,9 +104,6 @@
         // 设置选择后的图片可以被编辑
         //            pickerController.allowsEditing=YES;
         
-        // 跳转到相册页面
-        [self presentViewController:pickerController animated:YES completion:nil];
-        
         // 判断当前设备是否有摄像头
         if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear] || [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
             
@@ -104,6 +111,9 @@
             pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
             
         }
+        
+        // 跳转到相册页面
+        [self presentViewController:pickerController animated:YES completion:nil];
         
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {

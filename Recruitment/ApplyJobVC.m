@@ -132,7 +132,7 @@
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
         if (self.modelArr.count > 0) {
-            // 饮食文章列表
+            // 搜索职位
             [self get_jobs_list];
         }
         
@@ -162,23 +162,24 @@
     
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     
-//    NSMutableArray *cidArr = [NSMutableArray array];
-//    for (JobModel *model in self.selectedArr) {
-//        [cidArr addObject:model.ID];
-//    }
-//    NSString *string = [cidArr componentsJoinedByString:@","]; //,为分隔符
-//    [paraDic setValue:@"0" forKey:@"cid"];
+    // 公司id
+    NSMutableArray *cidArr = [NSMutableArray array];
+    for (JobModel *model in self.selectedArr) {
+        [cidArr addObject:model.companyId];
+    }
+    NSString *string1 = [cidArr componentsJoinedByString:@","]; //,为分隔符
+    [paraDic setValue:string1 forKey:@"companyId"];
 
+    // 职位id
     NSMutableArray *idArr = [NSMutableArray array];
     for (JobModel *model in self.selectedArr) {
         [idArr addObject:model.ID];
     }
     NSString *string = [idArr componentsJoinedByString:@","]; //,为分隔符
-
     [paraDic setValue:string forKey:@"id"];
     
     
-    
+    // 有问题：申请成功后 收藏字段还是0
     [AFNetworking_RequestData requestMethodPOSTUrl:Send_resume dic:paraDic showHUD:YES Succed:^(id responseObject) {
 
 
@@ -466,6 +467,9 @@
 #pragma mark - UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    self.lastBtn.selected = NO;
+    [self.jobview removeFromSuperview];
+    
     if (searchBar.text.length == 0) {
         [searchBar resignFirstResponder];
         

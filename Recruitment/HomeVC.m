@@ -53,7 +53,7 @@
     
     UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 26+17, 17)];
 
-    UIButton *placeBtn = [UIButton buttonWithframe:CGRectMake(0, 0, baseView.width, baseView.height) text:@"永康" font:[UIFont systemFontOfSize:12] textColor:@"FFFFFF" backgroundColor:nil normal:nil selected:nil];
+    UIButton *placeBtn = [UIButton buttonWithframe:CGRectMake(0, 0, baseView.width, baseView.height) text:@"永康" font:SystemFont(12) textColor:@"FFFFFF" backgroundColor:nil normal:nil selected:nil];
     placeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [baseView addSubview:placeBtn];
     

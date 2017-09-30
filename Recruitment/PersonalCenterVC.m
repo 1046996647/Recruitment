@@ -134,7 +134,12 @@
     PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
 
     if (person) {
+        
         self.label.text = person.name;
+        if (person.name.length == 0) {
+            self.label.text = @"姓名";
+        }
+        
         [self.userBtn sd_setImageWithURL:[NSURL URLWithString:person.img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"96"]];
         self.userBtn.userInteractionEnabled = YES;
     }
