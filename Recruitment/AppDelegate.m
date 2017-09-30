@@ -39,11 +39,11 @@
     manager.enableAutoToolbar = NO;
     
     
-    // 适配iOS11
-    if (@available(iOS 11.0, *)){
-        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-        
-    }
+    // 适配iOS11(iOS11后隐藏导航栏的MJRefresh下拉刷新控件会漏出来，但以下方法造成UIImagePickerController有问题)
+//    if (@available(iOS 11.0, *)){
+//        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+//
+//    }
     
     
     return YES;

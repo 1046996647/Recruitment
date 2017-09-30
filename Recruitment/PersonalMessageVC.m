@@ -78,7 +78,6 @@
         
         for (PersonModel *model in arr) {
             
-            
             if (model.text.length == 0) {
                 [self.view makeToast:@"您还有内容未填写完整"];
                 return;

@@ -41,13 +41,17 @@
 
 //    self.dataArr = @[@"销售",@"会计",@"电商"];
     
-    UIButton *cancelBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 26, 17) text:@"取消" font:[UIFont systemFontOfSize:12] textColor:@"#333333" backgroundColor:nil normal:nil selected:nil];
+    UIButton *cancelBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 30, 17) text:@"取消" font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:nil selected:nil];
     [cancelBtn addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
     self.cancelBtn = cancelBtn;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
+
+    UIView *baseView = [[UIView alloc] initWithFrame:cancelBtn.bounds];
+    [baseView addSubview:cancelBtn];
+//    baseView.backgroundColor = [UIColor redColor];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:baseView];
 
     
-    _searchBar = [[DiySearchBar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width-12-54, 30)];
+    _searchBar = [[DiySearchBar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width-12-63, 30)];
     _searchBar.delegate = self;
     _searchBar.placeholder = @"搜索";
 //    _searchBar.showsCancelButton = YES;

@@ -71,7 +71,7 @@
     UIImageView *imgView1 = [UIImageView imgViewWithframe:CGRectMake(0, 0, 22, 12) icon:@"39"];
     imgView1.contentMode = UIViewContentModeScaleAspectFit;
     
-    UITextField *searchTF = [UITextField textFieldWithframe:CGRectMake(0, 0, kScreen_Width-66-17, 21) placeholder:@"关键词/职位/公司" font:nil leftView:imgView1 backgroundColor:@"#E95F08"];
+    UITextField *searchTF = [UITextField textFieldWithframe:CGRectMake(0, 0, kScreen_Width-66-22, 21) placeholder:@"关键词/职位/公司" font:nil leftView:imgView1 backgroundColor:@"#E95F08"];
     searchTF.font = [UIFont systemFontOfSize:10];
     [searchTF setValue:[UIFont systemFontOfSize:10] forKeyPath:@"_placeholderLabel.font"];// 设置这里时searchTF.font也要设置不然会偏上
     [searchTF setValue:[UIColor colorWithHexString:@"#FFB261"] forKeyPath:@"_placeholderLabel.textColor"];

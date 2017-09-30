@@ -345,8 +345,9 @@
 
     }
     else {
-        self.perLabel.text = [NSString stringWithFormat:@"0%%"];
         
+        self.perLabel.text = [NSString stringWithFormat:@"0%%"];
+        self.waterWave.percent = 0.0;
         self.remindLabel.text = [NSString stringWithFormat:@"登入后可编辑简历"];
         
         CGSize size = [NSString textLength:self.remindLabel.text font:self.remindLabel.font];

@@ -33,6 +33,7 @@
 //判断iphone6+
 #define IS_iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
 
+//判断iphoneX
 #define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 
 
@@ -50,8 +51,8 @@
 #define scaleX kScreen_Width/320
 #define scaleY kScreen_Height/568
 
-
-
+// 字体大小
+#define SystemFont(size) [UIFont systemFontOfSize:size]
 
 
 // -------------------重写NSLog------------------------

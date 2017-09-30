@@ -94,7 +94,8 @@
     [BRStringPickerView showStringPickerWithTitle:nil dataSource:self.dataSource defaultSelValue:self.dataSource[0] isAutoSelect:NO resultBlock:^(id selectValue) {
         
         _tf.text = selectValue;
-        
+        _model.text = selectValue;
+
         if ([_model.title isEqualToString:@"工作年限"]||
             [_model.title isEqualToString:@"工作经验"]) {
             
@@ -102,6 +103,7 @@
             NSLog(@"-----%@",selectValue);
             
         }
+
         
 //        if ([_model.title isEqualToString:@"意向城市"]) {
 //
