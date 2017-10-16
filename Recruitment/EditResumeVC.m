@@ -70,7 +70,8 @@
     [headView addSubview:infoLabel];
     self.infoLabel = infoLabel;
     
-    UILabel *phoneLabel = [UILabel labelWithframe:CGRectMake(signLabel.left, infoLabel.bottom+5, 300, 14) text:@"188426825" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+    // 188426825
+    UILabel *phoneLabel = [UILabel labelWithframe:CGRectMake(signLabel.left, infoLabel.bottom+5, 300, 14) text:@"" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
     [headView addSubview:phoneLabel];
     self.phoneLabel = phoneLabel;
     
@@ -110,6 +111,7 @@
 {
     [super viewWillAppear:animated];
     
+
     [self get_user_info];
 
 }
@@ -194,8 +196,11 @@
             self.dataArr = @[@[model],arrM,@[model],@[model],@[model]];
 
         }
-        [_tableView reloadData];
         
+        [_tableView reloadData];
+
+
+
         [self.userBtn sd_setImageWithURL:[NSURL URLWithString:self.model.img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"96"]];
 
         
@@ -210,6 +215,8 @@
         self.phoneLabel.text = [NSString stringWithFormat:@"%@  户籍：%@  所在地：%@",model.phone,model.jiguan,model.home];
 
         self.hopeLabel.text = [NSString stringWithFormat:@"%@ %@ %@",model.marry,model.political,model.jobyear];
+        
+
 
         
     } failure:^(NSError *error) {
@@ -288,8 +295,16 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     PersonModel *model = self.dataArr[indexPath.section][indexPath.row];
-    return model.cellHeight;
-//    return 94;
+
+    if (model.cellHeight < 1) {
+        return 96;// 默认值
+
+    }
+    else {
+        return model.cellHeight;
+
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

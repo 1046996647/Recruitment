@@ -18,6 +18,9 @@
 // 注册
 #define Regist  [NSString stringWithFormat:@"%@User/regist",BaseUrl]
 
+// 1.3    修改密码
+#define Alter_passwd  [NSString stringWithFormat:@"%@User/alter_passwd",BaseUrl]
+
 // 注册时个人信息
 #define Update_peronal_info  [NSString stringWithFormat:@"%@User/update_peronal_info",BaseUrl]
 

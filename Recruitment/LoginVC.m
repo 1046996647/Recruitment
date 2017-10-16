@@ -166,10 +166,16 @@
     
     [AFNetworking_RequestData requestMethodPOSTUrl:Login dic:paramDic showHUD:YES Succed:^(id responseObject) {
         
-        [InfoCache archiveObject:self.phone.text toFile:@"userid"];
-        [InfoCache archiveObject:responseObject[@"token"] toFile:@"token"];
+        NSNumber *code = [responseObject objectForKey:@"status"];
+        if (1 == [code integerValue]) {
+            
+            [InfoCache archiveObject:self.phone.text toFile:@"userid"];
+            [InfoCache archiveObject:responseObject[@"token"] toFile:@"token"];
+            
+            [self get_ui_info:notification];
+        }
         
-        [self get_ui_info:notification];
+
         
     } failure:^(NSError *error) {
         
@@ -191,7 +197,7 @@
             
             NSNumber *code = [responseObject objectForKey:@"status"];
             if (1 == [code integerValue]) {
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
 
             }
         }

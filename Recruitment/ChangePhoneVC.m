@@ -60,28 +60,80 @@
     _validate.rightView = rightView;
     _validate.leftViewMode = UITextFieldViewModeAlways;
     
-    UIButton *loginBtn = [UIButton buttonWithframe:CGRectMake(13, baseView.bottom+18, kScreen_Width-26, 35) text:@"确认" font:[UIFont systemFontOfSize:14] textColor:@"FFFFFF" backgroundColor:@"#FDA326" normal:nil selected:nil];
+    UIButton *loginBtn = [UIButton buttonWithframe:CGRectMake(13, baseView.bottom+18, kScreen_Width-26, 35) text:@"确认" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FDA326" normal:nil selected:nil];
     loginBtn.layer.cornerRadius = 7;
     loginBtn.layer.masksToBounds = YES;
     [self.view addSubview:loginBtn];
-//    [loginBtn addTarget:self action:@selector(nextAction) forControlEvents:UIControlEventTouchUpInside];
+    [loginBtn addTarget:self action:@selector(okAction) forControlEvents:UIControlEventTouchUpInside];
     
     if ([self.title isEqualToString:@"修改密码"]) {
         
         _phone.placeholder = @"原密码";
         _validate.placeholder = @"新密码，6-16位";
-        
+        _phone.secureTextEntry = YES;
+        _validate.secureTextEntry = YES;
+
         rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12+13, _phone.height)];
-        rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        rightBtn.frame = CGRectMake(0, 0, 12, 20);
-        rightBtn.center = rightView.center;
+        UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        rightBtn.frame = rightView.bounds;
+        //    rightBtn.center = rightView.center;
         [rightBtn setImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
         [rightBtn setImage:[UIImage imageNamed:@"14"] forState:UIControlStateSelected];
         [rightView addSubview:rightBtn];
+        [rightBtn addTarget:self action:@selector(viewAction:) forControlEvents:UIControlEventTouchUpInside];
         _validate.rightView = rightView;
 
     }
 
+}
+
+- (void)viewAction:(UIButton *)btn
+{
+    btn.selected = !btn.selected;
+    if (btn.selected) {
+        _validate.secureTextEntry = NO;
+    }
+    else {
+        _validate.secureTextEntry = YES;
+        
+    }
+}
+
+- (void)okAction
+{
+    [self.view endEditing:YES];
+    
+    if (self.phone.text.length == 0 || self.validate.text == 0) {
+        [self.view makeToast:@"您还有内容未填写完整"];
+        return;
+    }
+    
+    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    [paramDic  setValue:self.phone.text forKey:@"passwd"];
+    [paramDic  setValue:self.validate.text forKey:@"passwd_new"];
+    
+    NSString *registStr = nil;
+    
+    if ([self.title isEqualToString:@"修改密码"]) {
+
+        registStr = Alter_passwd;
+
+    }
+    else {
+        
+    }
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:registStr dic:paramDic showHUD:YES Succed:^(id responseObject) {
+        
+        NSNumber *code = [responseObject objectForKey:@"status"];
+        if (1 == [code integerValue]) {
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,14 +141,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

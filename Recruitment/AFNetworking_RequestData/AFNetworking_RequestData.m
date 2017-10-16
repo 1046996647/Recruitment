@@ -112,6 +112,11 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
                     [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:message];
 
                 }
+                
+                if ([message isEqualToString:@""]) {
+                    
+                    
+                }
             }
             Succed(responseObject);
 

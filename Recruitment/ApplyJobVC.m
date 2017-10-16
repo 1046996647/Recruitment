@@ -36,6 +36,7 @@
 
 @implementation ApplyJobVC
 
+
 - (JobView *)jobview
 {
     if (!_jobview) {
@@ -177,7 +178,6 @@
     }
     NSString *string = [idArr componentsJoinedByString:@","]; //,为分隔符
     [paraDic setValue:string forKey:@"id"];
-    
     
     // 有问题：申请成功后 收藏字段还是0
     [AFNetworking_RequestData requestMethodPOSTUrl:Send_resume dic:paraDic showHUD:YES Succed:^(id responseObject) {

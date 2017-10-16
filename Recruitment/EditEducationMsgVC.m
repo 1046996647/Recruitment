@@ -46,7 +46,7 @@
     view.layer.borderWidth = 1;
     [footerView addSubview:view];
     
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(8, 0, view.width-8, 72)];
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(8, 0, view.width-8, view.height)];
     textView.font = [UIFont systemFontOfSize:12];
     [view addSubview:textView];
     textView.delegate = self;
@@ -65,7 +65,8 @@
         
         if (_model) {
             self.dataArr = @[@[@{@"image":@"68",@"title":@"求职类型",@"text":_model.requestjobtype,@"key":@"requestjobtype"},
-                               @{@"image":@"68",@"title":@"岗位类别",@"text":@"",@"key":@"no"}],
+//                               @{@"image":@"68",@"title":@"岗位类别",@"text":@"",@"key":@"no"}
+                               ],
                              @[@{@"image":@"67",@"title":@"期望地区",@"text":_model.hopelocation,@"key":@"hopelocation"},
                                @{@"image":@"67",@"title":@"期望职位",@"text":_model.hopepostion,@"key":@"hopepostion"},
                                @{@"image":@"67",@"title":@"待遇要求",@"text":_model.requestsalary,@"key":@"requestsalary"}],
@@ -92,7 +93,8 @@
         if (_model) {
             self.dataArr = @[@[@{@"image":@"68",@"title":@"学校名称",@"text":_model.graduatedfrom,@"key":@"graduatedfrom"},
                                @{@"image":@"67",@"title":@"专业名称",@"text":_model.speciality,@"key":@"speciality"}],
-                             @[@{@"image":@"67",@"title":@"入学时间",@"text":@"",@"key":@"no"},
+                             @[
+//  @{@"image":@"67",@"title":@"入学时间",@"text":@"",@"key":@"no"},
                                @{@"image":@"67",@"title":@"毕业时间",@"text":_model.graduatetime,@"key":@"graduatetime"}],
                              @[@{@"image":@"67",@"title":@"学历",@"text":_model.education,@"key":@"education"}]
                              ];
@@ -157,8 +159,10 @@
                                @{@"image":@"67",@"title":@"职位",@"text":_model.position,@"key":@"position"}],
                              @[@{@"image":@"67",@"title":@"入职时间",@"text":_model.begin_time,@"key":@"begin_time"},
                                @{@"image":@"67",@"title":@"离职时间",@"text":_model.end_time,@"key":@"end_time"}],
-                             @[@{@"image":@"67",@"title":@"工作经验",@"text":@"",@"key":@"no"},
-                               @{@"image":@"67",@"title":@"公司性质",@"text":_model.company_nature,@"key":@"company_nature"}]
+                             @[
+//  @{@"image":@"67",@"title":@"工作经验",@"text":@"",@"key":@"no"},
+                               @{@"image":@"67",@"title":@"公司性质",@"text":_model.company_nature,@"key":@"company_nature"}
+                               ]
                              ];
             self.textView.text = _model.skill;
         }

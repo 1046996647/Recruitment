@@ -44,6 +44,7 @@
 		F70EF5381F5FBB4B001C65A7 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF5371F5FBB4B001C65A7 /* TabBarController.m */; };
 		F70EF53B1F5FC7E2001C65A7 /* PersonalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF53A1F5FC7E2001C65A7 /* PersonalCell.m */; };
 		F70EF53F1F5FD964001C65A7 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF53E1F5FD964001C65A7 /* LoginVC.m */; };
+		F72CC5BE1F8B194500DDE151 /* MessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F72CC5BD1F8B194500DDE151 /* MessageTableView.m */; };
 		F72FF8B61F62314100E3AA92 /* ApplyJobVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8B51F62314100E3AA92 /* ApplyJobVC.m */; };
 		F72FF8B91F6234F000E3AA92 /* JobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8B81F6234F000E3AA92 /* JobModel.m */; };
 		F72FF8BC1F625EA600E3AA92 /* JobView.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8BB1F625EA600E3AA92 /* JobView.m */; };
@@ -106,6 +107,7 @@
 		F74F4AE71F667C81007736BA /* SubscriptionManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AE61F667C81007736BA /* SubscriptionManageCell.m */; };
 		F74F4AEA1F667DEC007736BA /* SubscriptionManageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AE91F667DEC007736BA /* SubscriptionManageModel.m */; };
 		F75624BA1F79EA2E006D4174 /* DiySearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F75624B91F79EA2D006D4174 /* DiySearchBar.m */; };
+		F75861571F8F12950065FE56 /* EmergencyEnterpriseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75861561F8F12950065FE56 /* EmergencyEnterpriseVC.m */; };
 		F75A453D1F67B6DC00B0790C /* ResumeManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453C1F67B6DC00B0790C /* ResumeManageVC.m */; };
 		F75A45401F67BD4F00B0790C /* JobRecommandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */; };
 		F75A45431F67BEA000B0790C /* JobRecommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A45421F67BEA000B0790C /* JobRecommandCell.m */; };
@@ -187,6 +189,8 @@
 		F70EF53A1F5FC7E2001C65A7 /* PersonalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCell.m; sourceTree = "<group>"; };
 		F70EF53D1F5FD964001C65A7 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		F70EF53E1F5FD964001C65A7 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		F72CC5BC1F8B194500DDE151 /* MessageTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageTableView.h; sourceTree = "<group>"; };
+		F72CC5BD1F8B194500DDE151 /* MessageTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageTableView.m; sourceTree = "<group>"; };
 		F72FF8B41F62314100E3AA92 /* ApplyJobVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyJobVC.h; sourceTree = "<group>"; };
 		F72FF8B51F62314100E3AA92 /* ApplyJobVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyJobVC.m; sourceTree = "<group>"; };
 		F72FF8B71F6234F000E3AA92 /* JobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobModel.h; sourceTree = "<group>"; };
@@ -309,6 +313,8 @@
 		F74F4AE91F667DEC007736BA /* SubscriptionManageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionManageModel.m; sourceTree = "<group>"; };
 		F75624B81F79EA2D006D4174 /* DiySearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiySearchBar.h; sourceTree = "<group>"; };
 		F75624B91F79EA2D006D4174 /* DiySearchBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiySearchBar.m; sourceTree = "<group>"; };
+		F75861551F8F12950065FE56 /* EmergencyEnterpriseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmergencyEnterpriseVC.h; sourceTree = "<group>"; };
+		F75861561F8F12950065FE56 /* EmergencyEnterpriseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmergencyEnterpriseVC.m; sourceTree = "<group>"; };
 		F75A453B1F67B6DC00B0790C /* ResumeManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResumeManageVC.h; sourceTree = "<group>"; };
 		F75A453C1F67B6DC00B0790C /* ResumeManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResumeManageVC.m; sourceTree = "<group>"; };
 		F75A453E1F67BD4F00B0790C /* JobRecommandVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobRecommandVC.h; sourceTree = "<group>"; };
@@ -627,6 +633,8 @@
 		F73C37C31F6124C200027289 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F76EDA231F7C9BB0006B9627 /* HomeModel.h */,
+				F76EDA241F7C9BB0006B9627 /* HomeModel.m */,
 				F72FF8B71F6234F000E3AA92 /* JobModel.h */,
 				F72FF8B81F6234F000E3AA92 /* JobModel.m */,
 				F73382D81F72370A0097158C /* JobViewModel.h */,
@@ -667,6 +675,8 @@
 				F70EF52B1F5FBAB3001C65A7 /* HomeVC.m */,
 				F73C37D01F61362200027289 /* SearchVC.h */,
 				F73C37D11F61362200027289 /* SearchVC.m */,
+				F75861551F8F12950065FE56 /* EmergencyEnterpriseVC.h */,
+				F75861561F8F12950065FE56 /* EmergencyEnterpriseVC.m */,
 				F72FF8B41F62314100E3AA92 /* ApplyJobVC.h */,
 				F72FF8B51F62314100E3AA92 /* ApplyJobVC.m */,
 				F72FF8C01F62755C00E3AA92 /* JobDetailVC.h */,
@@ -677,8 +687,6 @@
 				F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */,
 				F70253231F73B27100F5E025 /* ShareVC.h */,
 				F70253241F73B27100F5E025 /* ShareVC.m */,
-				F76EDA231F7C9BB0006B9627 /* HomeModel.h */,
-				F76EDA241F7C9BB0006B9627 /* HomeModel.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -793,6 +801,8 @@
 		F74F4AB11F66272E007736BA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F72CC5BC1F8B194500DDE151 /* MessageTableView.h */,
+				F72CC5BD1F8B194500DDE151 /* MessageTableView.m */,
 				F73C37B21F60EFCA00027289 /* MessageCell.h */,
 				F73C37B31F60EFCA00027289 /* MessageCell.m */,
 				F74F4AB41F662773007736BA /* InvitedCell.h */,
@@ -1020,6 +1030,7 @@
 				F74197651F63797100AD5F2C /* PersonModel.m in Sources */,
 				F72FF8C21F62755C00E3AA92 /* JobDetailVC.m in Sources */,
 				F74197621F63781E00AD5F2C /* PersonalMessageCell.m in Sources */,
+				F72CC5BE1F8B194500DDE151 /* MessageTableView.m in Sources */,
 				F74F4AAF1F6626CD007736BA /* InvitedVC.m in Sources */,
 				F7353DBA1F74A9CF009F086E /* MWWaveCycleAnimationView.m in Sources */,
 				F72FF8C51F6282EB00E3AA92 /* JobDetailCell.m in Sources */,
@@ -1047,6 +1058,7 @@
 				F73C37B41F60EFCA00027289 /* MessageCell.m in Sources */,
 				F70EF4F21F5F85F7001C65A7 /* UIViewExt.m in Sources */,
 				F72FF8BF1F6270BF00E3AA92 /* JobView1.m in Sources */,
+				F75861571F8F12950065FE56 /* EmergencyEnterpriseVC.m in Sources */,
 				F73507681F78CC0C00F4F4A2 /* SystemMsgDetailVC.m in Sources */,
 				F70EF5131F5F8616001C65A7 /* TAAbstractDotView.m in Sources */,
 				F70EF4F11F5F85F7001C65A7 /* UIViewController+UIViewControllerExt.m in Sources */,
@@ -1221,6 +1233,7 @@
 			baseConfigurationReference = 8033F8F664516D663532CDA7 /* Pods-Recruitment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D59VU3JG9L;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1240,6 +1253,7 @@
 			baseConfigurationReference = 7C157134079D20305100C898 /* Pods-Recruitment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D59VU3JG9L;

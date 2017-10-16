@@ -32,8 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
+
     UIButton *btn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width, 90) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
     [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -219,7 +218,7 @@
         
         if (indexPath.row == 0) {
             
-
+            [self callAction];
             
         }
         if (indexPath.row == 1) {
@@ -328,6 +327,15 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)callAction
+{
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"0579-83830000"];
+    UIWebView *callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [[UIApplication sharedApplication].keyWindow addSubview:callWebview];
+    
 }
 
 

@@ -1,13 +1,12 @@
 //
 //  AppDelegate.m
-//  Recruitment
+//  RecruitmentEnterPrise
 //
-//  Created by ZhangWeiLiang on 2017/9/6.
+//  Created by ZhangWeiLiang on 2017/10/14.
 //  Copyright © 2017年 ZhangWeiLiang. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "IQKeyboardManager.h"
 
 @interface AppDelegate ()
 
@@ -15,39 +14,9 @@
 
 @implementation AppDelegate
 
-+ (AppDelegate *)share
-{
-    return (AppDelegate *)[UIApplication sharedApplication].delegate;
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2"];
-    [self.window makeKeyAndVisible];
-    
-    [NSThread sleepForTimeInterval:1];
-    
-    TabBarController *tabVC = [[TabBarController alloc] init];
-    self.tabVC = tabVC;
-    self.window.rootViewController = tabVC;
-    
-    // 键盘遮盖处理第三方库
-    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    manager.enable = YES;
-    manager.shouldResignOnTouchOutside = YES;
-    manager.shouldToolbarUsesTextFieldTintColor = YES;
-    manager.enableAutoToolbar = NO;
-    
-    
-    // 适配iOS11(iOS11后隐藏导航栏的MJRefresh下拉刷新控件会漏出来，但以下方法造成UIImagePickerController有问题)
-//    if (@available(iOS 11.0, *)){
-//        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-//
-//    }
-    
-    
     return YES;
 }
 

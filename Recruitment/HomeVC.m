@@ -16,6 +16,7 @@
 #import "PlaceView.h"
 #import "JobRecommandVC.h"
 #import "HomeModel.h"
+#import "EmergencyEnterpriseVC.h"
 
 
 @interface HomeVC ()<UITextFieldDelegate,SDCycleScrollViewDelegate>
@@ -27,6 +28,7 @@
 @property(nonatomic,strong) UITextField *searchTF;
 @property(nonatomic,strong) PlaceView *placeView;
 @property(nonatomic,strong) UIImageView *imgView;
+@property(nonatomic,strong) UIButton *placeBtn;
 @property (nonatomic,assign) BOOL isRefresh;
 
 @property(nonatomic,strong) NSMutableArray *urlArr;
@@ -40,7 +42,21 @@
 - (PlaceView *)placeView
 {
     if (!_placeView) {
+        
+        __weak typeof(self) weakSelf = self;
         _placeView = [[PlaceView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64)];
+        _placeView.block = ^(NSString *place) {
+            
+            
+            [weakSelf.placeView removeFromSuperview];
+            weakSelf.imgView.image = [UIImage imageNamed:@"55"];
+            weakSelf.placeBtn.selected = NO;
+            if (place) {
+                [weakSelf.placeBtn setTitle:place forState:UIControlStateNormal];
+                [weakSelf.tableView.mj_header beginRefreshing];
+
+            }
+        };
     }
     return _placeView;
 }
@@ -53,11 +69,14 @@
     
     UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 26+17, 17)];
 
-    UIButton *placeBtn = [UIButton buttonWithframe:CGRectMake(0, 0, baseView.width, baseView.height) text:@"永康" font:SystemFont(12) textColor:@"FFFFFF" backgroundColor:nil normal:nil selected:nil];
+    UIButton *placeBtn = [UIButton buttonWithframe:CGRectMake(0, 0, baseView.width-5, baseView.height) text:@"永康" font:SystemFont(12) textColor:@"FFFFFF" backgroundColor:nil normal:nil selected:nil];
     placeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [baseView addSubview:placeBtn];
+    self.placeBtn = placeBtn;
+    [placeBtn addTarget:self action:@selector(placeAction:) forControlEvents:UIControlEventTouchUpInside];
+
     
-    UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(baseView.width-12, 0, 12, placeBtn.height) icon:@"55"];
+    UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(baseView.width-7, 0, 12, placeBtn.height) icon:@"55"];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     [baseView addSubview:imgView];
 
@@ -66,7 +85,6 @@
 
     // iOS11的原因不能直接用UIButton，得用UIView
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:baseView];
-    [placeBtn addTarget:self action:@selector(placeAction:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *imgView1 = [UIImageView imgViewWithframe:CGRectMake(0, 0, 22, 12) icon:@"39"];
     imgView1.contentMode = UIViewContentModeScaleAspectFit;
@@ -286,7 +304,9 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     else {
-        
+        EmergencyEnterpriseVC *vc = [[EmergencyEnterpriseVC alloc] init];
+        vc.title = @"详情";
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

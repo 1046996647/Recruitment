@@ -18,8 +18,11 @@
         
         self.backgroundColor = [UIColor colorWithRed:108/255.0 green:108/255.0 blue:108/255.0 alpha:.4];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
-        [self addGestureRecognizer:tap];
+        self.dataArr = @[@"永康",@"金华",@"武义",@"中国五金人才网",];
+        
+        // 这样会有冲突
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+//        [self addGestureRecognizer:tap];
         
         UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 0)];
         baseView.backgroundColor = [UIColor whiteColor];
@@ -59,31 +62,40 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    //    return self.model.images.count;
-    return 6;
+    return self.dataArr.count;
+//    return 6;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self removeFromSuperview];
-    self.imgView.image = [UIImage imageNamed:@"55"];
 
+    if (self.block) {
+        self.block(self.dataArr[indexPath.row]);
+    }
 }
 
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HotJobCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellID" forIndexPath:indexPath];
-    cell.jobLab.text = @"义乌";
+    cell.jobLab.text = self.dataArr[indexPath.row];
     return cell;
     
 }
 
-- (void)tapAction
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self removeFromSuperview];
-    self.imgView.image = [UIImage imageNamed:@"55"];
 
+    if (self.block) {
+        self.block(nil);
+    }
 }
+
+//- (void)tapAction
+//{
+//    [self removeFromSuperview];
+//    self.imgView.image = [UIImage imageNamed:@"55"];
+//
+//}
 
 @end

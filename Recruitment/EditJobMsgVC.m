@@ -42,17 +42,21 @@
         self.dataArr = @[@[@{@"image":@"68",@"title":@"E-mail",@"text":_model.email,@"key":@"email"},
                            @{@"image":@"68",@"title":@"姓名",@"text":_model.name,@"key":@"name"},
                            @{@"image":@"67",@"title":@"性别",@"text":_model.sex,@"key":@"sex"},
-                           @{@"image":@"67",@"title":@"人才类型",@"text":_model.type,@"key":@"type"},
+//                           @{@"image":@"67",@"title":@"人才类型",@"text":_model.type,@"key":@"type"},
                            @{@"image":@"68",@"title":@"身高(选填)",@"text":_model.height,@"key":@"height"},
-                           @{@"image":@"67",@"title":@"民族",@"text":_model.nation,@"key":@"nation"}],
+//                           @{@"image":@"67",@"title":@"民族",@"text":_model.nation,@"key":@"nation"}
+                           ],
                          @[@{@"image":@"67",@"title":@"生日",@"text":_model.birth,@"key":@"birth"},
                            @{@"image":@"68",@"title":@"籍贯",@"text":_model.jiguan,@"key":@"jiguan"},
-                           @{@"image":@"67",@"title":@"婚姻状况",@"text":_model.marry,@"key":@"marry"}],
-                         @[@{@"image":@"67",@"title":@"证件类型(选填)",@"text":@"",@"key":@"cred"},
-                           @{@"image":@"68",@"title":@"证件号码(选填)",@"text":@"",@"key":@"credid"}],
+                           @{@"image":@"67",@"title":@"婚姻状况",@"text":_model.marry,@"key":@"marry"}
+                           ],
+//                         @[@{@"image":@"67",@"title":@"证件类型(选填)",@"text":@"",@"key":@"cred"},
+//                           @{@"image":@"68",@"title":@"证件号码(选填)",@"text":@"",@"key":@"credid"}
+//                           ],
                          @[@{@"image":@"67",@"title":@"政治面貌(选填)",@"text":_model.political,@"key":@"political"},
                            @{@"image":@"67",@"title":@"体重(选填)",@"text":_model.weight,@"key":@"weight"},
-                           @{@"image":@"68",@"title":@"所在地",@"text":_model.home,@"key":@"home"}]
+                           @{@"image":@"68",@"title":@"所在地",@"text":_model.home,@"key":@"home"}
+                           ]
                          ];
     }
 //    else {

@@ -156,35 +156,40 @@
     [AFNetworking_RequestData requestMethodPOSTUrl:Get_ui_info dic:dic showHUD:isShow Succed:^(id responseObject) {
         
         PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
-        [InfoCache archiveObject:model toFile:Person];
-
         
-        self.perLabel.text = [NSString stringWithFormat:@"%@%%",model.form_percent];
-        self.waterWave.percent = model.form_percent.integerValue / 100.0;
-
-        if (model.form_percent.integerValue < 60) {
+        if (model) {
             
-            self.remindLabel.text = [NSString stringWithFormat:@"亲，完善度需要60%%才可以投递"];
-        }
-        else {
-            self.remindLabel.text = @"完善的简历会更加吸引公司的关注";
+            [InfoCache archiveObject:model toFile:Person];
+            
+            self.perLabel.text = [NSString stringWithFormat:@"%@%%",model.form_percent];
+            self.waterWave.percent = model.form_percent.integerValue / 100.0;
+            
+            if (model.form_percent.integerValue < 60) {
+                
+                self.remindLabel.text = [NSString stringWithFormat:@"亲，完善度需要60%%才可以投递"];
+            }
+            else {
+                self.remindLabel.text = @"完善的简历会更加吸引公司的关注";
+            }
+            
+            CGSize size = [NSString textLength:self.remindLabel.text font:self.remindLabel.font];
+            
+            self.remindLabel.width = size.width+20;
+            self.remindLabel.left = (kScreen_Width-self.remindLabel.width)/2;
+            
+            NSArray *titleArr = @[@"0",model.resumeNum];
+            int i=0;
+            for (UILabel *label in _labelArr) {
+                label.text = titleArr[i];
+                i++;
+            }
+            
+            if (isShow) {
+                [self.view makeToast:@"简历刷新成功"];
+            }
         }
         
-        CGSize size = [NSString textLength:self.remindLabel.text font:self.remindLabel.font];
         
-        self.remindLabel.width = size.width+20;
-        self.remindLabel.left = (kScreen_Width-self.remindLabel.width)/2;
-        
-        NSArray *titleArr = @[@"0",model.resumeNum];
-        int i=0;
-        for (UILabel *label in _labelArr) {
-            label.text = titleArr[i];
-            i++;
-        }
-        
-        if (isShow) {
-            [self.view makeToast:@"简历刷新成功"];
-        }
         
     } failure:^(NSError *error) {
         

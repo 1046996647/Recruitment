@@ -18,6 +18,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        
         _line = [[UIView alloc] initWithFrame:CGRectMake(_imgView.center.x-.5, 0, 1, 71)];
         _line.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
         [self.contentView addSubview:_line];
@@ -144,12 +145,22 @@
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
         
+        NSString *beginTime = [model.begin_time stringByReplacingOccurrencesOfString:@"-" withString:@"."];
+        NSString *endTime = [model.end_time stringByReplacingOccurrencesOfString:@"-" withString:@"."];
+
+        _timeLab.text = [NSString stringWithFormat:@"%@-%@",beginTime,endTime];
+        _jobLab.text = model.position;
+        _companyLab.text = [NSString stringWithFormat:@"%@ %@",model.company_name,model.company_nature];
+        
         _responsibilityLab.hidden = NO;
-        _responsibilityLab.frame = CGRectMake(_timeLab.left, _companyLab.bottom+6, kScreen_Width-50-_timeLab.left, 14);
+
+        CGSize size = [NSString textHeight:model.skill font:_responsibilityLab.font width:_responsibilityLab.width];
+        _responsibilityLab.frame = CGRectMake(_timeLab.left, _companyLab.bottom+6, kScreen_Width-_timeLab.left-12, size.height);
+        _responsibilityLab.text = model.skill;
         
         _hLine1.hidden = NO;
         _hLine1.frame = CGRectMake(_timeLab.left, _responsibilityLab.bottom+11, kScreen_Width-_timeLab.left-12, 1);
-
+        
         if (self.indexPath.row == 0) {
             _jobEditBtn.hidden = NO;
             _line.frame = CGRectMake(_imgView.center.x-.5, _imgView.bottom, 1, _hLine1.bottom-_imgView.bottom);
@@ -158,21 +169,10 @@
         else {
             _jobEditBtn.hidden = YES;
             _line.frame = CGRectMake(_imgView.center.x-.5, 0, 1, _hLine1.bottom);
-
+            
         }
         
-        NSString *beginTime = [model.begin_time stringByReplacingOccurrencesOfString:@"-" withString:@"."];
-        NSString *endTime = [model.end_time stringByReplacingOccurrencesOfString:@"-" withString:@"."];
-
-        _timeLab.text = [NSString stringWithFormat:@"%@-%@",beginTime,endTime];
-        _jobLab.text = model.position;
-        _companyLab.text = [NSString stringWithFormat:@"%@ %@",model.company_name,model.company_nature];
-        
-        CGSize size = [NSString textHeight:model.skill font:_responsibilityLab.font width:_responsibilityLab.width];
-        _responsibilityLab.height = size.height;
-        _responsibilityLab.text = model.skill;
-        
-        model.cellHeight = _responsibilityLab.bottom+12;
+        model.cellHeight = _hLine1.bottom+1;
 
 
     }
@@ -188,7 +188,7 @@
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
         _responsibilityLab.hidden = NO;
-        _responsibilityLab.frame = CGRectMake(12, _companyLab.bottom+6, kScreen_Width-50-12, 14);
+        _responsibilityLab.frame = CGRectMake(12, _companyLab.bottom+6, kScreen_Width-24, 14);
         
         _timeLab.text = model.graduatedfrom;
         _jobLab.text = [NSString stringWithFormat:@"%@ %@",model.education,model.speciality];
@@ -215,7 +215,7 @@
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
         _responsibilityLab.hidden = NO;
-        _responsibilityLab.frame = CGRectMake(_timeLab.left, _companyLab.bottom+6, _timeLab.width, _timeLab.height);
+        _responsibilityLab.frame = CGRectMake(12, _companyLab.bottom+6, kScreen_Width-12, 14);
         _extraLab.frame = CGRectMake(_timeLab.left, _responsibilityLab.bottom+6, _timeLab.width, _timeLab.height);
         
         _timeLab.text = [NSString stringWithFormat:@"%@ %@",model.foreignlanguage,model.foreignlanguagelevel];

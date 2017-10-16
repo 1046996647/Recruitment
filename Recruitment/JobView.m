@@ -21,7 +21,9 @@
         _tableView = [UITableView tableViewWithframe:CGRectMake(0, 0, kScreen_Width, 0)];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.rowHeight = 40;
         [self addSubview:_tableView];
+//        _tableView.backgroundColor = [UIColor redColor];
         
         UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.height-44, kScreen_Width, 44)];
         [self addSubview:bottomView];
@@ -76,9 +78,9 @@
     }
     
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 40;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 40;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -227,7 +229,6 @@
         
         self.bottomView.hidden = YES;
 
-        
         if (self.dataArr.count*40 > self.height) {
             _tableView.height = self.height;
 
@@ -247,6 +248,15 @@
     }
     
     [_tableView reloadData];
+
+//    _tableView.contentOffset = CGPointMake(0, 0);
+//    [_tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    
+    // 延迟一下修复偏移bug
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView setContentOffset:CGPointMake(0,0) animated:NO];
+
+    });
     
 }
 
