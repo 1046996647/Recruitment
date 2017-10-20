@@ -77,7 +77,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         
     }
-    cell.textLabel.font = [UIFont systemFontOfSize:10];
+    cell.textLabel.font = [UIFont systemFontOfSize:12];
     cell.textLabel.textColor = [UIColor colorWithHexString:@"#333333"];
     cell.textLabel.text = self.dataArr[indexPath.row];
     

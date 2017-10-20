@@ -18,8 +18,17 @@
 // 注册
 #define Regist  [NSString stringWithFormat:@"%@User/regist",BaseUrl]
 
+// 6.1    短信验证码
+#define VerifyCode  [NSString stringWithFormat:@"%@Tool/verify",BaseUrl]
+
+// 1.4    忘记密码
+#define Forget_passwd  [NSString stringWithFormat:@"%@User/forget_passwd",BaseUrl]
+
 // 1.3    修改密码
 #define Alter_passwd  [NSString stringWithFormat:@"%@User/alter_passwd",BaseUrl]
+
+// 1.5    修改手机
+#define Update_phone  [NSString stringWithFormat:@"%@User/update_phone",BaseUrl]
 
 // 注册时个人信息
 #define Update_peronal_info  [NSString stringWithFormat:@"%@User/update_peronal_info",BaseUrl]

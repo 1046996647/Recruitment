@@ -93,11 +93,11 @@
     [headView addSubview:companyLab];
     
     // @"五金机电"
-    UILabel *decLab = [UILabel labelWithframe:CGRectMake(companyLab.left, companyLab.bottom+5, kScreen_Width-26-(logoView.right+7), 14) text:self.model.cate_name font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+    UILabel *decLab = [UILabel labelWithframe:CGRectMake(companyLab.left, companyLab.bottom+5, kScreen_Width-26-(logoView.right+7), 14) text:self.model.cate_name font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [headView addSubview:decLab];
     
     // @"150人"
-    UILabel *addressLab = [UILabel labelWithframe:CGRectMake(companyLab.left, decLab.bottom+5, 100, 14) text:_model.persons font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+    UILabel *addressLab = [UILabel labelWithframe:CGRectMake(companyLab.left, decLab.bottom+5, 100, 14) text:_model.persons font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [headView addSubview:addressLab];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, logoView.bottom+7, kScreen_Width, 8)];
@@ -105,7 +105,7 @@
     [headView addSubview:view];
     
     // 性质和网址
-    UILabel *typeLab = [UILabel labelWithframe:CGRectMake(logoView.left, view.bottom+6, 100, 14) text:@"公司性质" font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+    UILabel *typeLab = [UILabel labelWithframe:CGRectMake(logoView.left, view.bottom+6, 100, 14) text:@"公司性质" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
     [headView addSubview:typeLab];
     
     // @"民营"
@@ -116,7 +116,7 @@
     line.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
     [headView addSubview:line];
     
-    UILabel *webLab = [UILabel labelWithframe:CGRectMake(line.right+14, typeLab.top, 100, 14) text:@"公司网址" font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+    UILabel *webLab = [UILabel labelWithframe:CGRectMake(line.right+14, typeLab.top, 100, 14) text:@"公司网址" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
     [headView addSubview:webLab];
     
     // 网址
@@ -133,7 +133,7 @@
     [headView addSubview:decBtn];
     
     // @"浙江省永嘉市网生路2号"
-    UILabel *jobDecLab = [UILabel labelWithframe:CGRectMake(decBtn.left, decBtn.bottom+9, kScreen_Width-24, 16) text:_model.address font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+    UILabel *jobDecLab = [UILabel labelWithframe:CGRectMake(decBtn.left, decBtn.bottom+9, kScreen_Width-24, 16) text:_model.address font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [headView addSubview:jobDecLab];
     
     view = [[UIView alloc] initWithFrame:CGRectMake(0, jobDecLab.bottom+7, kScreen_Width, 8)];
@@ -147,7 +147,7 @@
     [headView addSubview:sameBtn];
     
     // @"提供长期稳定的就业环境，不断提高员工的薪资水平。"
-    UILabel *companyDecLab = [UILabel labelWithframe:CGRectMake(sameBtn.left, sameBtn.bottom+9, kScreen_Width-24, 16) text:_model.info font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+    UILabel *companyDecLab = [UILabel labelWithframe:CGRectMake(sameBtn.left, sameBtn.bottom+9, kScreen_Width-24, 16) text:_model.info font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [headView addSubview:companyDecLab];
     
     view = [[UIView alloc] initWithFrame:CGRectMake(0, companyDecLab.bottom+9, kScreen_Width, 8)];

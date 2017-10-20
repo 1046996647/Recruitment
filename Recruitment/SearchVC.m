@@ -74,10 +74,10 @@
     // 尾视图
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 0)];
     
-    UILabel *hotLab = [UILabel labelWithframe:CGRectMake(16, 18, 50, 17) text:@"热门职位" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:@"#999999"];
+    UILabel *hotLab = [UILabel labelWithframe:CGRectMake(16, 18, 100, 17) text:@"热门职位" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [footView addSubview:hotLab];
     
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(hotLab.left, hotLab.bottom+7, kScreen_Width-hotLab.left*2, 1)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(hotLab.left, hotLab.bottom+10, kScreen_Width-hotLab.left*2, 1)];
     line.backgroundColor = [UIColor colorWithHexString:@"#C7C7C7"];
     [footView addSubview:line];
     
@@ -238,7 +238,7 @@
     cell.delBtn.tag = indexPath.row;
     cell.textLabel.text = self.hisArr[indexPath.row];
     cell.textLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-    cell.textLabel.font = [UIFont systemFontOfSize:12];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
     return cell;
 }
 

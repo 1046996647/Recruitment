@@ -73,7 +73,7 @@
     [self.view addSubview:perLabel];
     self.perLabel = perLabel;
     
-    UILabel *remindLabel = [UILabel labelWithframe:CGRectMake((kScreen_Width-111)/2, view.bottom+11, 111, 15) text:@"登入后可编辑简历" font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentCenter textColor:@"#FFFFFF"];
+    UILabel *remindLabel = [UILabel labelWithframe:CGRectMake((kScreen_Width-111)/2, view.bottom+11, 111, 20) text:@"登入后可编辑简历" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentCenter textColor:@"#FFFFFF"];
     remindLabel.backgroundColor = [UIColor colorWithHexString:@"#FF9634"];
     remindLabel.layer.cornerRadius = remindLabel.height/2;
     remindLabel.layer.masksToBounds = YES;
@@ -84,7 +84,7 @@
     NSArray *titleArr = @[@"HR查看",@"投递简历"];
     for (int i=0; i<titleArr.count; i++) {
         
-        UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(i*kScreen_Width/2, imgView.bottom, kScreen_Width/2, 52) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
+        UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(i*kScreen_Width/2, imgView.bottom, kScreen_Width/2, 54) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
         [self.view addSubview:forgetBtn];
         self.forgetBtn = forgetBtn;
         forgetBtn.tag = i;
@@ -95,7 +95,7 @@
         [_labelArr addObject:label1];
 
 
-        UILabel *label2 = [UILabel labelWithframe:CGRectMake(0, label1.bottom, forgetBtn.width, 20) text:titleArr[i] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentCenter textColor:@"#666666"];
+        UILabel *label2 = [UILabel labelWithframe:CGRectMake(0, label1.bottom, forgetBtn.width, 20) text:titleArr[i] font:[UIFont systemFontOfSize:15] textAlignment:NSTextAlignmentCenter textColor:@"#666666"];
         [forgetBtn addSubview:label2];
         
         if (i == 0) {
@@ -111,7 +111,7 @@
     NSArray *titleArr1 = @[@"编辑简历",@"预览简历",@"刷新简历"];
     for (int i=0; i<titleArr1.count; i++) {
         
-        UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(i*kScreen_Width/3, self.forgetBtn.bottom+14, kScreen_Width/3, 64) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
+        UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(i*kScreen_Width/3, self.forgetBtn.bottom+14, kScreen_Width/3, 66) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
         [self.view addSubview:forgetBtn];
         self.forgetBtn1 = forgetBtn;
         [forgetBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -121,7 +121,7 @@
         imgView.contentMode = UIViewContentModeScaleAspectFit;
         [forgetBtn addSubview:imgView];
         
-        UILabel *label1 = [UILabel labelWithframe:CGRectMake(0, imgView.bottom+6, forgetBtn.width, 18) text:titleArr1[i] font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentCenter textColor:@"#333333"];
+        UILabel *label1 = [UILabel labelWithframe:CGRectMake(0, imgView.bottom+6, forgetBtn.width, 18) text:titleArr1[i] font:[UIFont systemFontOfSize:15] textAlignment:NSTextAlignmentCenter textColor:@"#333333"];
         [forgetBtn addSubview:label1];
         
     }
@@ -129,13 +129,13 @@
     NSArray *titleArr2 = @[@"    委托投递",@"    简历状态"];
     for (int i=0; i<titleArr2.count; i++) {
         
-        UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(0, self.forgetBtn1.bottom+14+i*38, kScreen_Width, 38) text:titleArr2[i] font:[UIFont systemFontOfSize:13] textColor:@"#333333" backgroundColor:@"#FFFFFF" normal:nil selected:nil];
+        UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(0, self.forgetBtn1.bottom+14+i*44, kScreen_Width, 44) text:titleArr2[i] font:[UIFont systemFontOfSize:15] textColor:@"#333333" backgroundColor:@"#FFFFFF" normal:nil selected:nil];
         forgetBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [self.view addSubview:forgetBtn];
         [forgetBtn addTarget:self action:@selector(btnAction2:) forControlEvents:UIControlEventTouchUpInside];
         forgetBtn.tag = i;
         
-        UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(forgetBtn.width-5.4-14.6, 11, 5.4, 12.6) icon:@"98"];
+        UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(forgetBtn.width-5.4-14.6, (forgetBtn.height-13)/2, 5.4, 13) icon:@"98"];
         [forgetBtn addSubview:imgView];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(14, forgetBtn.height-.5, kScreen_Width-14, .5)];

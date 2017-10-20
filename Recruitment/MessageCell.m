@@ -16,10 +16,10 @@
     if (self) {
         
         
-        _textLab = [UILabel labelWithframe:CGRectMake(77, 11, 250, 17) text:nil font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+        _textLab = [UILabel labelWithframe:CGRectMake(77, 11, 250, 17) text:nil font:[UIFont systemFontOfSize:16] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
         [self.contentView addSubview:_textLab];
         
-        _detailLab = [UILabel labelWithframe:CGRectMake(77, _textLab.bottom+6, 250, 13) text:nil font:[UIFont systemFontOfSize:11] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+        _detailLab = [UILabel labelWithframe:CGRectMake(77, _textLab.bottom+8, 250, 13) text:nil font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
         [self.contentView addSubview:_detailLab];
         
         

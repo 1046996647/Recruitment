@@ -12,6 +12,7 @@
 #import "JobDetailVC.h"
 #import "LoginVC.h"
 #import "DiySearchBar.h"
+#import "NSStringExt.h"
 
 @interface ApplyJobVC ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property(nonatomic,strong) UIButton *forgetBtn1;
@@ -42,7 +43,7 @@
     if (!_jobview) {
         
         __weak typeof(self) weakSelf = self;
-        _jobview = [[JobView alloc] initWithFrame:CGRectMake(0, 31, kScreen_Width, kScreen_Height-(64+31))];
+        _jobview = [[JobView alloc] initWithFrame:CGRectMake(0, 40, kScreen_Width, kScreen_Height-(64+40))];
         _jobview.block = ^(id obj, NSInteger tag) {
             
             weakSelf.lastBtn.selected = NO;
@@ -242,7 +243,6 @@
     NSString *urlStr = [NSString stringWithFormat:@"%@/key/%@/p/%ld",Get_jobs_list,self.searchText,self.pageNO];
     
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
-    
     if (self.cate_id) {
         [paraDic setValue:self.cate_id forKey:@"cateId"];
     }
@@ -368,7 +368,7 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 31)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
     view.backgroundColor = [UIColor whiteColor];
     
     NSArray *titleArr1 = @[@"行业类型",@"排序",@"筛选"];
@@ -379,31 +379,34 @@
         [forgetBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         forgetBtn.tag = i;
         
-        UILabel *label1 = [UILabel labelWithframe:CGRectMake(forgetBtn.width/2-10, 0, 46, view.height) text:titleArr1[i] font:[UIFont systemFontOfSize:11] textAlignment:NSTextAlignmentCenter textColor:@"#333333"];
-        [forgetBtn addSubview:label1];
+        UIView *baseView = [[UIView alloc] initWithFrame:CGRectZero];
+        [forgetBtn addSubview:baseView];
+        baseView.userInteractionEnabled = NO;
+        
+        CGSize size = [NSString textLength:titleArr1[i] font:[UIFont systemFontOfSize:12]];
+        
+        UILabel *label1 = [UILabel labelWithframe:CGRectMake(0, 0, size.width, view.height) text:titleArr1[i] font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentCenter textColor:@"#333333"];
+        [baseView addSubview:label1];
         label1.tag = 100+forgetBtn.tag;
         
-        UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(0, (forgetBtn.height-3)/2, 6, 3) icon:@"33"];
+        UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(label1.right+8, (forgetBtn.height-3)/2, 8, 6) icon:@"33"];
         imgView.contentMode = UIViewContentModeScaleAspectFit;
-        [forgetBtn addSubview:imgView];
+        [baseView addSubview:imgView];
         imgView.tag = 101+forgetBtn.tag;
+        
+        baseView.frame = CGRectMake((forgetBtn.width-imgView.right)/2, 0, imgView.right, forgetBtn.height);
 
         
         if (i == 0) {
             
             self.lastBtn = forgetBtn;
-            
-            label1.frame = CGRectMake(forgetBtn.width/2-46+10, 0, 46, view.height);
-            imgView.frame = CGRectMake(forgetBtn.width/2+15, (forgetBtn.height-5)/2, 8, 5);
+
         }
-        else {
-            label1.frame = CGRectMake(forgetBtn.width/2-24, 0, 24, view.height);
-            imgView.frame = CGRectMake(forgetBtn.width/2+5, (forgetBtn.height-5)/2, 8, 5);
-        }
+
         
         if (i < titleArr1.count) {
             
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(forgetBtn.width-1, 8, 1, 16)];
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(forgetBtn.width-1, 8, 1, view.height-16)];
             line.backgroundColor = [UIColor colorWithHexString:@"#C7C7C7"];
             [forgetBtn addSubview:line];
 
@@ -420,7 +423,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 31;
+    return 40;
     
 }
 

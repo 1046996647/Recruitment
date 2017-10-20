@@ -86,7 +86,7 @@
     
     
     // 6-7k
-    UILabel *moneyLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-47-12, 9, 47, 18) text:[NSString stringWithFormat:@"%@k",self.model.pay] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentRight textColor:@"#CE4A12"];
+    UILabel *moneyLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-47-12, 9, 47, 18) text:[NSString stringWithFormat:@"%@",self.model.pay] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentRight textColor:@"#CE4A12"];
     [headView addSubview:moneyLab];
     
     // 职位 配货包装工
@@ -100,8 +100,9 @@
     NSArray *titleArr1 = @[self.model.area,self.model.years,self.model.edu,self.model.jobs];
     for (int i=0; i<titleArr1.count; i++) {
         
-        UIButton *okBtn = [UIButton buttonWithframe:CGRectMake(jobLab.left+(23+35)*i, jobLab.bottom+9, 45, 13) text:titleArr1[i] font:[UIFont systemFontOfSize:11] textColor:@"#333333" backgroundColor:nil normal:imgArr[i] selected:nil];
-//        okBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
+        UIButton *okBtn = [UIButton buttonWithframe:CGRectMake(jobLab.left+(23+35)*i, jobLab.bottom+9, 50, 13) text:titleArr1[i] font:[UIFont systemFontOfSize:11] textColor:@"#333333" backgroundColor:nil normal:imgArr[i] selected:nil];
+        okBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        okBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
         [headView addSubview:okBtn];
         self.okBtn = okBtn;
 
@@ -152,18 +153,18 @@
     [headView addSubview:companyLab];
     
     // @"五金机电 150-500人"
-    UILabel *decLab = [UILabel labelWithframe:CGRectMake(companyLab.left, companyLab.bottom+5, kScreen_Width-26-(logoView.right+7), 14) text:[NSString stringWithFormat:@"%@ %@",self.model.cate_name, _model.persons] font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+    UILabel *decLab = [UILabel labelWithframe:CGRectMake(companyLab.left, companyLab.bottom+5, kScreen_Width-26-(logoView.right+7), 14) text:[NSString stringWithFormat:@"%@ %@",self.model.cate_name, _model.persons] font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [headView addSubview:decLab];
     
     UIImageView *jiantouView = [UIImageView imgViewWithframe:CGRectMake(kScreen_Width-14-8, decLab.center.y-7, 8, 17) icon:@"24"];
     [headView addSubview:jiantouView];
     
     
-    UILabel *kmLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-32-14, decLab.bottom+5, 32, 14) text:@"5.2km" font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentRight textColor:@"#999999"];
+    UILabel *kmLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-32-14, decLab.bottom+5, 35, 14) text:@"5.2km" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:@"#999999"];
     [headView addSubview:kmLab];
     
     // @"永嘉国贸大厦612室"
-    UILabel *addressLab = [UILabel labelWithframe:CGRectMake(companyLab.left, decLab.bottom+5, kmLab.left-(logoView.right+7)-10, 14) text:_model.address font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+    UILabel *addressLab = [UILabel labelWithframe:CGRectMake(companyLab.left, decLab.bottom+5, kmLab.left-(logoView.right+7)-10, 14) text:_model.address font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [headView addSubview:addressLab];
     
     view = [[UIView alloc] initWithFrame:CGRectMake(0, logoView.bottom+7, kScreen_Width, 8)];
@@ -176,7 +177,7 @@
     [headView addSubview:decBtn];
     
     // @"工艺品包装，需要一年工作经验，永嘉本地人最好，大专以上即可。"
-    UILabel *jobDecLab = [UILabel labelWithframe:CGRectMake(decBtn.left, decBtn.bottom+9, kScreen_Width-24, 16) text:self.model.info font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+    UILabel *jobDecLab = [UILabel labelWithframe:CGRectMake(decBtn.left, decBtn.bottom+9, kScreen_Width-24, 16) text:self.model.info font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [headView addSubview:jobDecLab];
     jobDecLab.numberOfLines = 0;
     

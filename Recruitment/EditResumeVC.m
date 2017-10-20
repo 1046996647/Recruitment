@@ -56,7 +56,7 @@
     }
     
     // 天天
-    UILabel *signLabel = [UILabel labelWithframe:CGRectMake(userBtn.right+16, 11, 40, 18) text:@"" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+    UILabel *signLabel = [UILabel labelWithframe:CGRectMake(userBtn.right+16, 11, 40, 18) text:@"" font:[UIFont systemFontOfSize:16] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
     [headView addSubview:signLabel];
     self.signLabel = signLabel;
     
@@ -70,7 +70,7 @@
     [headView addSubview:infoLabel];
     self.infoLabel = infoLabel;
     
-    // 188426825
+    // 188426835
     UILabel *phoneLabel = [UILabel labelWithframe:CGRectMake(signLabel.left, infoLabel.bottom+5, 300, 14) text:@"" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
     [headView addSubview:phoneLabel];
     self.phoneLabel = phoneLabel;
@@ -352,12 +352,12 @@
             
         }
         
-        return 25;
+        return 35;
         
     }
     else {
         
-        return 25;
+        return 35;
     }
     
 }
@@ -365,7 +365,7 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSArray *imgArr = @[@"88",@"89",@"90",@"ic_grid",@"ic_call"];
-    HeaderView *headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 25)];
+    HeaderView *headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 35)];
     [headerView.btn setTitle:self.titleArr1[section] forState:UIControlStateNormal];
     [headerView.btn setImage:[UIImage imageNamed:imgArr[section]] forState:UIControlStateNormal];
     

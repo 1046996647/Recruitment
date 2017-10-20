@@ -151,7 +151,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell1"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:10];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
         cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#999999"];
         
         JobViewModel *model = self.lastArr[indexPath.row];
@@ -171,7 +171,7 @@
         cell.textLabel.text = self.dataArr[indexPath.row];
 
     }
-    cell.textLabel.font = [UIFont systemFontOfSize:10];
+    cell.textLabel.font = [UIFont systemFontOfSize:12];
     cell.textLabel.textColor = [UIColor colorWithHexString:@"#333333"];
 
 

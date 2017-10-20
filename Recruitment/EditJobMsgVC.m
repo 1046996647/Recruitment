@@ -25,15 +25,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-
-    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
     headerView.backgroundColor = [UIColor whiteColor];
     
     UILabel *leftLab = [UILabel labelWithframe:CGRectMake(14, (headerView.height-16)/2, 100, 16) text:@"登录账号" font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
     [headerView addSubview:leftLab];
     
-    UILabel *rightLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-100-12, (headerView.height-16)/2, 100, 16) text:self.model.phone font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentRight textColor:@"#333333"];
+    UILabel *rightLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-100-12, (headerView.height-16)/2, 100, 16) text:self.model.userid font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentRight textColor:@"#333333"];
     [headerView addSubview:rightLab];
     
     if ([self.title isEqualToString:@"基本信息"]) {

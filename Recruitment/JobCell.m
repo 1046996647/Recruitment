@@ -96,7 +96,7 @@
     _jobLab.text = model.job_name;
     _companyLab.text = model.company_name;
     _timeLab.text = model.update_time;
-    _moneyLab.text = [NSString stringWithFormat:@"%@k",model.pay];
+    _moneyLab.text = [NSString stringWithFormat:@"%@",model.pay];
     _selectBtn.selected = _model.isSelected;
 
 }

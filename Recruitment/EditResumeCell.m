@@ -26,7 +26,7 @@
         _imgView = [UIImageView imgViewWithframe:CGRectMake(10, (self.contentView.height-14)/2.0, 12, 12) icon:@"91"];
         [self.contentView addSubview:_imgView];
 
-        _timeLab = [UILabel labelWithframe:CGRectMake(_imgView.right+11, 10, 97, 14) text:@"2016.09-2017.09" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+        _timeLab = [UILabel labelWithframe:CGRectMake(_imgView.right+11, 10, 97, 20) text:@"2016.09-2017.09" font:[UIFont systemFontOfSize:16] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
         [self.contentView addSubview:_timeLab];
 //        _timeLab.backgroundColor = [UIColor greenColor];
 
@@ -35,17 +35,17 @@
         _hLine.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
         [self.contentView addSubview:_hLine];
         
-        _jobLab = [UILabel labelWithframe:CGRectMake(_timeLab.left, _timeLab.bottom+6, 150, _timeLab.height) text:@"福田店面销售代表" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+        _jobLab = [UILabel labelWithframe:CGRectMake(_timeLab.left, _timeLab.bottom+6, 150, _timeLab.height) text:@"福田店面销售代表" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
         [self.contentView addSubview:_jobLab];
         
-        _companyLab = [UILabel labelWithframe:CGRectMake(_jobLab.left, _jobLab.bottom+6, 150, _timeLab.height) text:@"福田龙飞进出口有限公司" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+        _companyLab = [UILabel labelWithframe:CGRectMake(_jobLab.left, _jobLab.bottom+6, 150, _timeLab.height) text:@"福田龙飞进出口有限公司" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
         [self.contentView addSubview:_companyLab];
         
-        _responsibilityLab = [UILabel labelWithframe:CGRectMake(_jobLab.left, _companyLab.bottom+6, kScreen_Width-12-(_jobLab.left), _timeLab.height) text:@"独立完成项目，从交互原型到效果图设计、切图标注等工作。" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+        _responsibilityLab = [UILabel labelWithframe:CGRectMake(_jobLab.left, _companyLab.bottom+6, kScreen_Width-12-(_jobLab.left), _timeLab.height) text:@"独立完成项目，从交互原型到效果图设计、切图标注等工作。" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
         _responsibilityLab.numberOfLines = 0;
         [self.contentView addSubview:_responsibilityLab];
         
-        _extraLab = [UILabel labelWithframe:CGRectMake(_jobLab.left, _responsibilityLab.bottom+6, kScreen_Width-12-(_jobLab.left), _timeLab.height) text:@"自我评价" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+        _extraLab = [UILabel labelWithframe:CGRectMake(_jobLab.left, _responsibilityLab.bottom+6, kScreen_Width-12-(_jobLab.left), _timeLab.height) text:@"自我评价" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
         _extraLab.numberOfLines = 0;
         [self.contentView addSubview:_extraLab];
     
@@ -118,7 +118,7 @@
         _hLine.hidden = NO;
         _extraLab.hidden = YES;
         
-        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 14);
+        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 20);
         _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 1);
         _jobLab.frame = CGRectMake(_timeLab.left, _hLine.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
@@ -140,7 +140,7 @@
         _hLine.hidden = YES;
         _extraLab.hidden = YES;
 
-        _timeLab.frame = CGRectMake(_imgView.right+12, 10, kScreen_Width-(_imgView.right+12), 14);
+        _timeLab.frame = CGRectMake(_imgView.right+12, 10, kScreen_Width-(_imgView.right+12), 20);
 //        _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 14);
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
@@ -183,7 +183,7 @@
         _hLine1.hidden = YES;
         _extraLab.hidden = YES;
 
-        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 14);
+        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 20);
         //        _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 14);
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
@@ -210,7 +210,7 @@
         _hLine1.hidden = YES;
         _extraLab.hidden = NO;
 
-        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 14);
+        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 20);
         //        _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 14);
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
@@ -238,7 +238,7 @@
         _hLine1.hidden = YES;
         _extraLab.hidden = YES;
 
-        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 14);
+        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 20);
         //        _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 14);
         _jobLab.frame = CGRectMake(_timeLab.left, _timeLab.bottom+6, _timeLab.width, _timeLab.height);
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);

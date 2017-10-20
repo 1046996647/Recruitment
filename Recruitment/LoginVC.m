@@ -141,6 +141,7 @@
 {
     self.phone.text = [InfoCache unarchiveObjectWithFile:@"userid"];
     self.password.text = [InfoCache unarchiveObjectWithFile:@"password"];
+    
     [self loginAction:notification];
 }
 
@@ -197,7 +198,15 @@
             
             NSNumber *code = [responseObject objectForKey:@"status"];
             if (1 == [code integerValue]) {
-                [self.navigationController popViewControllerAnimated:YES];
+                
+                if ([notification.object isEqualToString:@"忘记密码"] || [notification.object isEqualToString:@"个人信息"]) {
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+
+                }
+                else {
+                    [self.navigationController popViewControllerAnimated:YES];
+
+                }
 
             }
         }

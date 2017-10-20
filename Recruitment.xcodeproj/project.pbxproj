@@ -44,6 +44,7 @@
 		F70EF5381F5FBB4B001C65A7 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF5371F5FBB4B001C65A7 /* TabBarController.m */; };
 		F70EF53B1F5FC7E2001C65A7 /* PersonalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF53A1F5FC7E2001C65A7 /* PersonalCell.m */; };
 		F70EF53F1F5FD964001C65A7 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF53E1F5FD964001C65A7 /* LoginVC.m */; };
+		F71C04361F986B970024C1EC /* CountDownServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F71C04351F986B970024C1EC /* CountDownServer.m */; };
 		F72CC5BE1F8B194500DDE151 /* MessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F72CC5BD1F8B194500DDE151 /* MessageTableView.m */; };
 		F72FF8B61F62314100E3AA92 /* ApplyJobVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8B51F62314100E3AA92 /* ApplyJobVC.m */; };
 		F72FF8B91F6234F000E3AA92 /* JobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8B81F6234F000E3AA92 /* JobModel.m */; };
@@ -189,6 +190,8 @@
 		F70EF53A1F5FC7E2001C65A7 /* PersonalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCell.m; sourceTree = "<group>"; };
 		F70EF53D1F5FD964001C65A7 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		F70EF53E1F5FD964001C65A7 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		F71C04341F986B970024C1EC /* CountDownServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountDownServer.h; sourceTree = "<group>"; };
+		F71C04351F986B970024C1EC /* CountDownServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountDownServer.m; sourceTree = "<group>"; };
 		F72CC5BC1F8B194500DDE151 /* MessageTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageTableView.h; sourceTree = "<group>"; };
 		F72CC5BD1F8B194500DDE151 /* MessageTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageTableView.m; sourceTree = "<group>"; };
 		F72FF8B41F62314100E3AA92 /* ApplyJobVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyJobVC.h; sourceTree = "<group>"; };
@@ -530,6 +533,8 @@
 		F70EF51A1F5F862A001C65A7 /* RegexTool */ = {
 			isa = PBXGroup;
 			children = (
+				F71C04341F986B970024C1EC /* CountDownServer.h */,
+				F71C04351F986B970024C1EC /* CountDownServer.m */,
 				F70EF51B1F5F8631001C65A7 /* RegexTool.h */,
 				F70EF51C1F5F8631001C65A7 /* RegexTool.m */,
 			);
@@ -1090,6 +1095,7 @@
 				F73C37CF1F6129BA00027289 /* HXTagsView.m in Sources */,
 				F70EF5161F5F8616001C65A7 /* TAPageControl.m in Sources */,
 				F70EF5141F5F8616001C65A7 /* TAAnimatedDotView.m in Sources */,
+				F71C04361F986B970024C1EC /* CountDownServer.m in Sources */,
 				F75A453D1F67B6DC00B0790C /* ResumeManageVC.m in Sources */,
 				F73C37D51F613D1B00027289 /* HotJobCell.m in Sources */,
 				F74F4AA61F66210A007736BA /* SendHistoryVC.m in Sources */,

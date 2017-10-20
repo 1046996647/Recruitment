@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame ];
     if (self) {
         
-        UIButton *btn = [UIButton buttonWithframe:CGRectMake(8, 0, 60, 25) text:@"" font:[UIFont systemFontOfSize:10] textColor:@"#333333" backgroundColor:nil normal:@"" selected:nil];
+        UIButton *btn = [UIButton buttonWithframe:CGRectMake(8, 0, 92, 35) text:@"" font:[UIFont systemFontOfSize:16] textColor:@"#333333" backgroundColor:nil normal:@"" selected:nil];
         btn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
         [self addSubview:btn];
         self.btn = btn;
