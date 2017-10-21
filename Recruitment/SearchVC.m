@@ -207,7 +207,7 @@
     else {
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 12+28)];
-        UIButton *delBtn = [UIButton buttonWithframe:CGRectMake((kScreen_Width-150)/2, 12, 150, 28) text:@"删除所有记录" font:[UIFont systemFontOfSize:12] textColor:@"#C70000" backgroundColor:@"#FFFFFF" normal:@"37" selected:nil];
+        UIButton *delBtn = [UIButton buttonWithframe:CGRectMake((kScreen_Width-150)/2, 12, 150, 28) text:@"删除所有记录" font:[UIFont systemFontOfSize:14] textColor:@"#C70000" backgroundColor:@"#FFFFFF" normal:@"37" selected:nil];
         delBtn.layer.cornerRadius = 5;
         delBtn.layer.masksToBounds = YES;
         delBtn.layer.borderColor = [UIColor colorWithHexString:@"#C70000"].CGColor;

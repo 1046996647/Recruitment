@@ -257,13 +257,13 @@
         [forgetBtn addSubview:baseView];
         baseView.userInteractionEnabled = NO;
         
-        UILabel *label1 = [UILabel labelWithframe:CGRectMake(0, 0, baseView.width, 20) text:titleArr1[i] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#000000"];
+        UILabel *label1 = [UILabel labelWithframe:CGRectMake(0, 0, baseView.width, 20) text:titleArr1[i] font:[UIFont systemFontOfSize:16] textAlignment:NSTextAlignmentLeft textColor:@"#000000"];
         [baseView addSubview:label1];
         
-        UILabel *label2 = [UILabel labelWithframe:CGRectMake(label1.left, label1.bottom+13, baseView.width, 14) text:titleArr2[i] font:[UIFont systemFontOfSize:10] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+        UILabel *label2 = [UILabel labelWithframe:CGRectMake(label1.left, label1.bottom+13, baseView.width, 14) text:titleArr2[i] font:[UIFont systemFontOfSize:11] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
         [baseView addSubview:label2];
         
-        UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(baseView.width-19, 18, 19, 19) icon:imgArr[i]];
+        UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(baseView.width-15, 18, 19, 19) icon:imgArr[i]];
         imgView.contentMode = UIViewContentModeScaleAspectFit;
         [baseView addSubview:imgView];
         
