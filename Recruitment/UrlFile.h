@@ -127,8 +127,14 @@
 // 1.22    意见反馈
 #define Send_mess_admin  [NSString stringWithFormat:@"%@/User/send_mess_admin",BaseUrl]
 
-// 1.13	删除工作经历
-//#define Delete_jobhistory_info  [NSString stringWithFormat:@"%@User/delete_jobhistory_info",BaseUrl]
+// 4.7    是否有新消息（仅面试邀请）
+#define Is_new  [NSString stringWithFormat:@"%@message/is_new",BaseUrl]
+
+// 4.8    获取面试邀请列表
+#define Get_invite  [NSString stringWithFormat:@"%@message/get_invite",BaseUrl]
+
+// 4.9    获取面试邀请详情
+#define Invite_detail  [NSString stringWithFormat:@"%@message/invite_detail",BaseUrl]
 
 // 1.16	上传头像
 #define Upload_user_img  [NSString stringWithFormat:@"%@User/upload_user_img",BaseUrl]

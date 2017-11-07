@@ -36,4 +36,27 @@
     return self;
 }
 
+- (void)setModel:(JobModel *)model
+{
+    _model = model;
+    
+    _companyLab.text = model.title;
+    
+    NSString *str1 = model.jobName;
+    NSMutableAttributedString *attStr = [NSString text:str1 fullText:[NSString stringWithFormat:@"邀请你参加%@面试",str1] location:5 color:[UIColor colorWithHexString:@"#FF9123"] font:nil];
+    _jobLab.attributedText = attStr;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 @end

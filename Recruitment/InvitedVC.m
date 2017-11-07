@@ -8,6 +8,7 @@
 
 #import "InvitedVC.h"
 #import "InvitedCell.h"
+#import "InviteDetailVC.h"
 
 @interface InvitedVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -26,6 +27,57 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
+    
+    // 下拉刷新
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self headerRefresh];
+    }];
+    // 隐藏时间
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    
+    [self get_invite];
+}
+
+- (void)headerRefresh
+{
+
+    [self get_invite];
+}
+
+
+- (void)get_invite
+{
+    
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_invite dic:paraDic showHUD:NO Succed:^(id responseObject) {
+        
+        [self.tableView.mj_header endRefreshing];
+
+        NSNumber *code = [responseObject objectForKey:@"status"];
+        
+        if (code.boolValue) {
+
+            NSMutableArray *arrM = [NSMutableArray array];
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                
+                JobModel *model = [JobModel yy_modelWithJSON:dic];
+                [arrM addObject:model];
+            }
+            self.dataArr = arrM;
+            [_tableView reloadData];
+
+        }
+
+        
+        
+    } failure:^(NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,8 +88,8 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    return self.dataArr.count;
-    return 10;
+    return self.dataArr.count;
+//    return 10;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -48,9 +100,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    JobDetailVC *vc = [[JobDetailVC alloc] init];
-//    vc.title = @"职位详情";
-//    [self.viewController.navigationController pushViewController:vc animated:YES];
+    JobModel *model = self.dataArr[indexPath.row];
+
+    InviteDetailVC *vc = [[InviteDetailVC alloc] init];
+    vc.title = @"面试邀请详情";
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -64,7 +119,8 @@
         
     }
     
-    
+    JobModel *model = self.dataArr[indexPath.row];
+    cell.model = model;
     return cell;
 }
 

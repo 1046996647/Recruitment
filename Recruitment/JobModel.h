@@ -42,4 +42,11 @@
 @property (nonatomic,strong) NSString *web;
 //@property (nonatomic,strong) NSString *cid;
 
+// 面试邀请
+@property (nonatomic,strong) NSString *title;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *addTime;
+@property (nonatomic,strong) NSString *inviteId;
+@property (nonatomic,strong) NSString *jobName;
+
 @end

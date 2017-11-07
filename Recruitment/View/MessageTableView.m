@@ -29,6 +29,7 @@
         
         self.delegate  = self;
         self.dataSource = self;
+        self.isNew = YES;
     }
     return self;
 }
@@ -96,6 +97,10 @@
     cell.imageView.image = [UIImage imageNamed:dic[@"image"]];
     cell.textLab.text = dic[@"title"];
     cell.detailLab.text = dic[@"detailTitle"];
+    
+    if (indexPath.row == 2) {
+        cell.redDot.hidden = self.isNew;
+    }
     
     return cell;
 }

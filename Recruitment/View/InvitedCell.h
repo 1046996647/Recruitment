@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JobModel.h"
 
 @interface InvitedCell : UITableViewCell
 
 @property(nonatomic,strong) UILabel *jobLab;
 @property(nonatomic,strong) UILabel *companyLab;
 @property(nonatomic,strong) UILabel *timeLab;
+@property (nonatomic,strong) JobModel *model;
+
 
 @end

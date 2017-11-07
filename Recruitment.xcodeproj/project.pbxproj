@@ -89,6 +89,7 @@
 		F74197A01F63E15E00AD5F2C /* EditEducationMsgVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F741979F1F63E15E00AD5F2C /* EditEducationMsgVC.m */; };
 		F7420FE41F6B7638002A20B8 /* NSDate+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = F7420FE31F6B7638002A20B8 /* NSDate+BRAdd.m */; };
 		F74243111F68F959009AA2E5 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F73C37B01F60CF3D00027289 /* RegisterVC.m */; };
+		F74C64C91FB1630700C819C0 /* InviteDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74C64C81FB1630700C819C0 /* InviteDetailVC.m */; };
 		F74F4AA61F66210A007736BA /* SendHistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AA51F66210A007736BA /* SendHistoryVC.m */; };
 		F74F4AA91F66220E007736BA /* CheckedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AA81F66220E007736BA /* CheckedVC.m */; };
 		F74F4AAC1F6622C4007736BA /* CheckedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AAB1F6622C4007736BA /* CheckedCell.m */; };
@@ -98,7 +99,6 @@
 		F74F4ABC1F6630BB007736BA /* SubscriptionManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4ABB1F6630BB007736BA /* SubscriptionManageVC.m */; };
 		F74F4ABF1F6634C3007736BA /* SystemMassageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4ABE1F6634C3007736BA /* SystemMassageVC.m */; };
 		F74F4AC21F6634DA007736BA /* SystemMassageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AC11F6634DA007736BA /* SystemMassageCell.m */; };
-		F74F4AC41F66355D007736BA /* long.png in Resources */ = {isa = PBXBuildFile; fileRef = F74F4AC31F66355D007736BA /* long.png */; };
 		F74F4ACA1F664FA1007736BA /* MyCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AC91F664FA1007736BA /* MyCollectionVC.m */; };
 		F74F4ACD1F665104007736BA /* OpinionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4ACC1F665104007736BA /* OpinionVC.m */; };
 		F74F4AD01F6654A6007736BA /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4ACF1F6654A6007736BA /* SettingVC.m */; };
@@ -279,6 +279,8 @@
 		F7420FE21F6B7638002A20B8 /* NSDate+BRAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+BRAdd.h"; sourceTree = "<group>"; };
 		F7420FE31F6B7638002A20B8 /* NSDate+BRAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+BRAdd.m"; sourceTree = "<group>"; };
 		F74243101F68D5FD009AA2E5 /* UrlFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlFile.h; sourceTree = "<group>"; };
+		F74C64C71FB1630700C819C0 /* InviteDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteDetailVC.h; sourceTree = "<group>"; };
+		F74C64C81FB1630700C819C0 /* InviteDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteDetailVC.m; sourceTree = "<group>"; };
 		F74F4AA41F66210A007736BA /* SendHistoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendHistoryVC.h; sourceTree = "<group>"; };
 		F74F4AA51F66210A007736BA /* SendHistoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendHistoryVC.m; sourceTree = "<group>"; };
 		F74F4AA71F66220E007736BA /* CheckedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckedVC.h; sourceTree = "<group>"; };
@@ -297,7 +299,6 @@
 		F74F4ABE1F6634C3007736BA /* SystemMassageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMassageVC.m; sourceTree = "<group>"; };
 		F74F4AC01F6634DA007736BA /* SystemMassageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMassageCell.h; sourceTree = "<group>"; };
 		F74F4AC11F6634DA007736BA /* SystemMassageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMassageCell.m; sourceTree = "<group>"; };
-		F74F4AC31F66355D007736BA /* long.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = long.png; sourceTree = "<group>"; };
 		F74F4AC81F664FA1007736BA /* MyCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionVC.h; sourceTree = "<group>"; };
 		F74F4AC91F664FA1007736BA /* MyCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionVC.m; sourceTree = "<group>"; };
 		F74F4ACB1F665104007736BA /* OpinionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionVC.h; sourceTree = "<group>"; };
@@ -812,7 +813,6 @@
 				F73C37B31F60EFCA00027289 /* MessageCell.m */,
 				F74F4AB41F662773007736BA /* InvitedCell.h */,
 				F74F4AB51F662773007736BA /* InvitedCell.m */,
-				F74F4AC31F66355D007736BA /* long.png */,
 				F74F4AC01F6634DA007736BA /* SystemMassageCell.h */,
 				F74F4AC11F6634DA007736BA /* SystemMassageCell.m */,
 				F74F4AE51F667C81007736BA /* SubscriptionManageCell.h */,
@@ -836,6 +836,8 @@
 				F74F4ABE1F6634C3007736BA /* SystemMassageVC.m */,
 				F73507661F78CC0C00F4F4A2 /* SystemMsgDetailVC.h */,
 				F73507671F78CC0C00F4F4A2 /* SystemMsgDetailVC.m */,
+				F74C64C71FB1630700C819C0 /* InviteDetailVC.h */,
+				F74C64C81FB1630700C819C0 /* InviteDetailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -956,7 +958,6 @@
 			files = (
 				F70EF4841F5F7F8E001C65A7 /* LaunchScreen.storyboard in Resources */,
 				F70EF4811F5F7F8E001C65A7 /* Assets.xcassets in Resources */,
-				F74F4AC41F66355D007736BA /* long.png in Resources */,
 				F70EF47F1F5F7F8E001C65A7 /* Main.storyboard in Resources */,
 				F73C37C11F61136400027289 /* funKeyboardData.plist in Resources */,
 				F70EF4EC1F5F85F7001C65A7 /* nav-background@2x.png in Resources */,
@@ -1100,6 +1101,7 @@
 				F74F4AAC1F6622C4007736BA /* CheckedCell.m in Sources */,
 				F74F4AD91F66609A007736BA /* AboutUsVC.m in Sources */,
 				F70EF5351F5FBB0E001C65A7 /* PersonalCenterVC.m in Sources */,
+				F74C64C91FB1630700C819C0 /* InviteDetailVC.m in Sources */,
 				F73C37CF1F6129BA00027289 /* HXTagsView.m in Sources */,
 				F70EF5161F5F8616001C65A7 /* TAPageControl.m in Sources */,
 				F70EF5141F5F8616001C65A7 /* TAAnimatedDotView.m in Sources */,

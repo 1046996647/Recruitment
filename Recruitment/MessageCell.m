@@ -27,6 +27,7 @@
         _redDot.layer.masksToBounds = YES;
         _redDot.backgroundColor = [UIColor redColor];
         [self.imageView addSubview:_redDot];
+        _redDot.hidden = YES;
     }
     return self;
 }

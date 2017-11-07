@@ -214,8 +214,8 @@
         
         self.phoneLabel.text = [NSString stringWithFormat:@"%@  户籍：%@  所在地：%@",model.phone,model.jiguan,model.home];
 
-        self.hopeLabel.text = [NSString stringWithFormat:@"%@ %@ %@",model.marry,model.political,model.jobyear];
-        
+        self.hopeLabel.text = [NSString stringWithFormat:@"%@ %@ %@年工作经验",model.marry,model.political,model.jobyear];
+
 
 
         

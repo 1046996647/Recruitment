@@ -11,6 +11,7 @@
 @interface MessageTableView : UITableView<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray *dataArr;
+@property (nonatomic,assign) BOOL isNew;
 
 
 @end

@@ -46,7 +46,7 @@
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     
     [paraDic setValue:self.model.ID forKey:@"id"];
-    [paraDic setValue:self.model.job_name forKey:@"key"];
+//    [paraDic setValue:self.model.job_name forKey:@"key"];
     
     [AFNetworking_RequestData requestMethodPOSTUrl:Get_jobs_detail dic:paraDic showHUD:YES Succed:^(id responseObject) {
         
