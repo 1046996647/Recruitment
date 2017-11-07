@@ -41,6 +41,8 @@
     userBtn.layer.cornerRadius = userBtn.height/2;
     userBtn.layer.masksToBounds = YES;
     self.userBtn = userBtn;
+
+
     
     UILabel *label = [UILabel labelWithframe:CGRectMake(userBtn.right+12, (btn.height-18)/2, 100, 18) text:@"登录/注册" font:[UIFont systemFontOfSize:17] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
     self.label = label;
@@ -48,10 +50,16 @@
     [btn addSubview:userBtn];
     [btn addSubview:label];
     
-    self.dataArr = @[@[@{@"image":@"23",@"title":@"我的收藏"},@{@"image":@"109",@"title":@"我的关注"}],
-                     @[@{@"image":@"108",@"title":@"订阅管理"},@{@"image":@"107",@"title":@"薪资测评"}],
-                     @[@{@"image":@"106",@"title":@"联系客服"},@{@"image":@"105",@"title":@"意见反馈"}],
-                     @[@{@"image":@"104",@"title":@"设置"}]];
+    self.dataArr = @[@[@{@"image":@"23",@"title":@"我的收藏"},
+//                       @{@"image":@"109",@"title":@"我的关注"}
+                       ],
+                     @[@{@"image":@"108",@"title":@"订阅管理"},@{@"image":@"107",@"title":@"薪资测评"}
+                       ],
+                     @[@{@"image":@"106",@"title":@"联系客服"},@{@"image":@"105",@"title":@"意见反馈"}
+                       ],
+                     @[@{@"image":@"104",@"title":@"设置"}
+                       ]
+                     ];
     
     
     _tableView = [UITableView tableViewWithframe:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64-49)];
@@ -193,13 +201,13 @@
             [self.navigationController pushViewController:vc animated:YES];
             
         }
-        if (indexPath.row == 1) {
-            
+//        if (indexPath.row == 1) {
+//            
 //            MyAttentionVC *vc = [[MyAttentionVC alloc] init];
 //            vc.title = @"我的关注";
 //            [self.navigationController pushViewController:vc animated:YES];
-            
-        }
+//            
+//        }
     }
     if (indexPath.section == 1) {
         

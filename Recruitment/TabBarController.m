@@ -20,6 +20,17 @@
 @end
 
 @implementation TabBarController
+
+/*
+ 如果是tabBarController里好几个navigationBarController，可以这样：
+ 
+ UINavigationController *navVC = (UINavigationController *)tabVC.selectedViewController;
+ 
+ UIViewController *currentVC = self.navigationController.topViewController;
+ 
+ 先取到是哪个navVC，然后取这个navVC最顶部的currentVC；
+ */
+
 + (void)initialize{
    /**
     * 设置 TabBarItem的字体大小与颜色，可参考UIButton

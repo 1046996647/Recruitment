@@ -51,12 +51,12 @@
     [view addSubview:countLab];
     self.countLab = countLab;
     
-    UIButton *imgBtn = [UIButton buttonWithframe:CGRectMake(27, view.bottom+21, 40, 40) text:nil font:nil textColor:nil backgroundColor:nil normal:@"103" selected:@""];
-    [footerView addSubview:imgBtn];
-    [imgBtn addTarget:self action:@selector(imgAction) forControlEvents:UIControlEventTouchUpInside];
-    self.imgBtn = imgBtn;
+//    UIButton *imgBtn = [UIButton buttonWithframe:CGRectMake(27, view.bottom+21, 40, 40) text:nil font:nil textColor:nil backgroundColor:nil normal:@"103" selected:@""];
+//    [footerView addSubview:imgBtn];
+//    [imgBtn addTarget:self action:@selector(imgAction) forControlEvents:UIControlEventTouchUpInside];
+//    self.imgBtn = imgBtn;
     
-    footerView.height = imgBtn.bottom+19;
+    footerView.height = view.bottom+19;
     
     UIButton *saveBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 30, 17) text:@"保存" font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:nil selected:nil];
     [saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
@@ -71,6 +71,17 @@
         [self.view makeToast:@"请输入内容"];
         return;
     }
+    NSMutableDictionary *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    [paramDic  setValue:self.textView.text forKey:@"info"];
+
+    [AFNetworking_RequestData requestMethodPOSTUrl:Send_mess_admin dic:paramDic showHUD:YES Succed:^(id responseObject) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)imgAction

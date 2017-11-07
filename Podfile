@@ -6,5 +6,5 @@ target 'Recruitment' do
     pod 'MJRefresh'
     pod 'YYModel'
     pod 'IQKeyboardManager'
-    #pod 'WZLBadge' #小红点或消息数
+    pod 'WZLBadge' #小红点或消息数
 end

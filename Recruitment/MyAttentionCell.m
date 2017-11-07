@@ -15,7 +15,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        _imgView = [UIImageView imgViewWithframe:CGRectMake(12, (self.contentView.height-60)/2.0, 60, 60) icon:nil];
+        _imgView = [UIImageView imgViewWithframe:CGRectMake(12, (90-60)/2.0, 60, 60) icon:nil];
+        _imgView.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:_imgView];
         
         _companyLab = [UILabel labelWithframe:CGRectMake(_imgView.right+12, 9, kScreen_Width-(_imgView.right+12)-12, 20) text:@"福田龙飞进出口有限公司" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];

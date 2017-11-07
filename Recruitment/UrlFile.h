@@ -124,6 +124,9 @@
 // 获取用户工作经历
 #define Get_work_exp  [NSString stringWithFormat:@"%@QuickGet/get_work_exp",BaseUrl]
 
+// 1.22    意见反馈
+#define Send_mess_admin  [NSString stringWithFormat:@"%@/User/send_mess_admin",BaseUrl]
+
 // 1.13	删除工作经历
 //#define Delete_jobhistory_info  [NSString stringWithFormat:@"%@User/delete_jobhistory_info",BaseUrl]
 

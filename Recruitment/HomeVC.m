@@ -353,32 +353,32 @@
     return NO;
 }
     
-    - (void)getSelectItems
-    {
-        
-        [AFNetworking_RequestData requestMethodPOSTUrl:Get_setting dic:nil showHUD:NO Succed:^(id responseObject) {
-            
-            NSArray *selectArr = responseObject[@"data"];
-            [InfoCache archiveObject:selectArr toFile:SelectItem];
-            
-        } failure:^(NSError *error) {
-            
-        }];
-        
-    }
+- (void)getSelectItems
+{
     
-    - (void)getSelectItemJob
-    {
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_setting dic:nil showHUD:NO Succed:^(id responseObject) {
         
-        [AFNetworking_RequestData requestMethodPOSTUrl:Get_jobs_cate dic:nil showHUD:NO Succed:^(id responseObject) {
-            
-            NSArray *selectArr = responseObject[@"data"];
-            [InfoCache archiveObject:selectArr toFile:SelectItemJob];
-            
-        } failure:^(NSError *error) {
-            
-        }];
+        NSArray *selectArr = responseObject[@"data"];
+        [InfoCache archiveObject:selectArr toFile:SelectItem];
         
-    }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+
+- (void)getSelectItemJob
+{
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Get_jobs_cate dic:nil showHUD:NO Succed:^(id responseObject) {
+        
+        NSArray *selectArr = responseObject[@"data"];
+        [InfoCache archiveObject:selectArr toFile:SelectItemJob];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
 
 @end

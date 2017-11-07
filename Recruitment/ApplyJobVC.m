@@ -87,7 +87,10 @@
     [_searchBar setBackgroundImage:[UIImage new]];
     //    _searchBar.barTintColor = [UIColor colorWithHexString:@"#FFFFFF"];
 
-    _searchBar.text = self.searchText;
+    if (![self.searchText isEqualToString:@"附近工作"]) {
+        _searchBar.text = self.searchText;
+
+    }
 //    _searchBar.backgroundColor = [UIColor redColor];
     
     // 边框设置
@@ -264,7 +267,7 @@
         [self.tableView.mj_footer endRefreshing];
         
         NSArray *arr = responseObject[@"data"];
-        if ([arr isKindOfClass:[NSArray class]]) {
+        if ([arr count]) {
             
             NSMutableArray *arrM = [NSMutableArray array];
             for (NSDictionary *dic in arr) {

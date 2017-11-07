@@ -8,6 +8,9 @@
 
 
 #import "AFNetworking_RequestData.h"
+#import "AppDelegate.h"
+#import "LoginVC.h"
+#import "NavigationController.h"
 
 
 @implementation AFNetworking_RequestData
@@ -112,11 +115,7 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
                     [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:message];
 
                 }
-                
-                if ([message isEqualToString:@""]) {
-                    
-                    
-                }
+
             }
             Succed(responseObject);
 

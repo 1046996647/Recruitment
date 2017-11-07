@@ -12,6 +12,7 @@
 #import "SubscriptionJobVC.h"
 #import "SystemMassageVC.h"
 #import "LoginVC.h"
+#import "WZLBadgeImport.h"
 
 @implementation MessageTableView
 

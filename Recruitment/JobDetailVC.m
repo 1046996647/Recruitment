@@ -206,15 +206,19 @@
     _tableView.tableHeaderView = headView;
     
     // 右上角按钮
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+//    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 40)];
+
     [self.view addSubview:rightView];
     
-    UIButton *shareBtn = [UIButton buttonWithframe:CGRectMake(0, 10, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"25" selected:nil];
-    [rightView addSubview:shareBtn];
-    [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *shareBtn = [UIButton buttonWithframe:CGRectMake(0, 10, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"25" selected:nil];
+//    [rightView addSubview:shareBtn];
+//    [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
 
     
-    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(shareBtn.right, shareBtn.top, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:@"18"];
+//    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(shareBtn.right, shareBtn.top, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:@"18"];
+    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(0, 10, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:@"18"];
+
     [rightView addSubview:cellctionBtn];
     [cellctionBtn addTarget:self action:@selector(cellctionAction) forControlEvents:UIControlEventTouchUpInside];
     self.cellctionBtn = cellctionBtn;

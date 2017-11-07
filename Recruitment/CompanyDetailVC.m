@@ -149,6 +149,12 @@
     // @"提供长期稳定的就业环境，不断提高员工的薪资水平。"
     UILabel *companyDecLab = [UILabel labelWithframe:CGRectMake(sameBtn.left, sameBtn.bottom+9, kScreen_Width-24, 16) text:_model.info font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [headView addSubview:companyDecLab];
+    companyDecLab.numberOfLines = 0;
+    
+    // 计算高度
+    CGSize size = [NSString textHeight:_model.info font:companyDecLab.font width:companyDecLab.width];
+    
+    companyDecLab.height = size.height;
     
     view = [[UIView alloc] initWithFrame:CGRectMake(0, companyDecLab.bottom+9, kScreen_Width, 8)];
     view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
@@ -177,11 +183,11 @@
     UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:nil];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cellctionBtn];
     
-    // 底部视图
-    UIButton *sahreBtn = [UIButton buttonWithframe:CGRectMake(0, kScreen_Height-64-40, kScreen_Width, 40) text:@"分享" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:@"Group 7" selected:nil];
-    sahreBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
-    [self.view addSubview:sahreBtn];
-    [sahreBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+//    // 底部视图
+//    UIButton *sahreBtn = [UIButton buttonWithframe:CGRectMake(0, kScreen_Height-64-40, kScreen_Width, 40) text:@"分享" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:@"Group 7" selected:nil];
+//    sahreBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+//    [self.view addSubview:sahreBtn];
+//    [sahreBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
