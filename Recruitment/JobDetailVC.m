@@ -208,8 +208,6 @@
     // 右上角按钮
 //    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 40)];
-
-    [self.view addSubview:rightView];
     
 //    UIButton *shareBtn = [UIButton buttonWithframe:CGRectMake(0, 10, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"25" selected:nil];
 //    [rightView addSubview:shareBtn];
@@ -332,9 +330,9 @@
     }
     
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
-    [paraDic setValue:@"0" forKey:@"cid"];
+    [paraDic setValue:_model.companyId forKey:@"companyId"];
     [paraDic setValue:_model.ID forKey:@"id"];
-    
+
     [AFNetworking_RequestData requestMethodPOSTUrl:Send_resume dic:paraDic showHUD:YES Succed:^(id responseObject) {
         
         self.applyBtn.userInteractionEnabled = NO;

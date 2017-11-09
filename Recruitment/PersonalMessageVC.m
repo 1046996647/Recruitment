@@ -53,7 +53,7 @@
     [self.view addSubview:_tableView];
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 21*2+35)];
-    UIButton *upBtn = [UIButton buttonWithframe:CGRectMake(25, 21, kScreen_Width-50, 35) text:@"提交" font:[UIFont systemFontOfSize:13] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
+    UIButton *upBtn = [UIButton buttonWithframe:CGRectMake(25, 21, kScreen_Width-50, 35) text:@"提交" font:[UIFont systemFontOfSize:16] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
     upBtn.layer.cornerRadius = 7;
     upBtn.layer.masksToBounds = YES;
     [footerView addSubview:upBtn];

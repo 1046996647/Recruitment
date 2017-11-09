@@ -28,7 +28,7 @@
         [baseView addSubview:_selectBtn];
         [_selectBtn addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        _jobBtn = [UIButton buttonWithframe:CGRectMake(11, 5, kScreen_Width-11, 16) text:@"UI设计师" font:[UIFont systemFontOfSize:13] textColor:@"#999999" backgroundColor:nil normal:@"94" selected:@""];
+        _jobBtn = [UIButton buttonWithframe:CGRectMake(11, 5, kScreen_Width-11, 16) text:@"UI设计师" font:[UIFont systemFontOfSize:15] textColor:@"#999999" backgroundColor:nil normal:@"94" selected:@""];
         _jobBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _jobBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
         [baseView addSubview:_jobBtn];
@@ -39,7 +39,7 @@
         [baseView addSubview:view];
         self.view = view;
         
-        _jobBtn1 = [UIButton buttonWithframe:CGRectMake(_jobBtn.left, view.bottom+14, _jobBtn.width, 16) text:@"UI设计师" font:[UIFont systemFontOfSize:13] textColor:@"#333333" backgroundColor:nil normal:@"Oval" selected:@""];
+        _jobBtn1 = [UIButton buttonWithframe:CGRectMake(_jobBtn.left, view.bottom+14, _jobBtn.width, 16) text:@"UI设计师" font:[UIFont systemFontOfSize:15] textColor:@"#333333" backgroundColor:nil normal:@"Oval" selected:@""];
         _jobBtn1.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 
         _jobBtn1.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
@@ -47,7 +47,7 @@
         _jobBtn1.userInteractionEnabled = NO;
 
         
-        _addressBtn = [UIButton buttonWithframe:CGRectMake(_jobBtn.left, _jobBtn1.bottom+14, _jobBtn.width, 16) text:@"永嘉市" font:[UIFont systemFontOfSize:13] textColor:@"#333333" backgroundColor:nil normal:@"64" selected:@""];
+        _addressBtn = [UIButton buttonWithframe:CGRectMake(_jobBtn.left, _jobBtn1.bottom+14, _jobBtn.width, 16) text:@"永嘉市" font:[UIFont systemFontOfSize:15] textColor:@"#333333" backgroundColor:nil normal:@"64" selected:@""];
         _addressBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 
         _addressBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);

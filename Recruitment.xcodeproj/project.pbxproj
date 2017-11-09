@@ -19,7 +19,6 @@
 		F70EF4901F5F8591001C65A7 /* AFNetworking_RequestData.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF48F1F5F8591001C65A7 /* AFNetworking_RequestData.m */; };
 		F70EF4D81F5F85E4001C65A7 /* InfoCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF4D71F5F85E4001C65A7 /* InfoCache.m */; };
 		F70EF4DC1F5F85ED001C65A7 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF4DB1F5F85ED001C65A7 /* UIView+Toast.m */; };
-		F70EF4EC1F5F85F7001C65A7 /* nav-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F70EF4DE1F5F85F7001C65A7 /* nav-background@2x.png */; };
 		F70EF4ED1F5F85F7001C65A7 /* NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF4E01F5F85F7001C65A7 /* NSStringExt.m */; };
 		F70EF4EF1F5F85F7001C65A7 /* UITableView+EmptyData.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF4E51F5F85F7001C65A7 /* UITableView+EmptyData.m */; };
 		F70EF4F01F5F85F7001C65A7 /* UIImage+UIImageExt.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF4E71F5F85F7001C65A7 /* UIImage+UIImageExt.m */; };
@@ -140,7 +139,6 @@
 		F70EF4D71F5F85E4001C65A7 /* InfoCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoCache.m; sourceTree = "<group>"; };
 		F70EF4DA1F5F85ED001C65A7 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		F70EF4DB1F5F85ED001C65A7 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
-		F70EF4DE1F5F85F7001C65A7 /* nav-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-background@2x.png"; sourceTree = "<group>"; };
 		F70EF4DF1F5F85F7001C65A7 /* NSStringExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringExt.h; sourceTree = "<group>"; };
 		F70EF4E01F5F85F7001C65A7 /* NSStringExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringExt.m; sourceTree = "<group>"; };
 		F70EF4E41F5F85F7001C65A7 /* UITableView+EmptyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+EmptyData.h"; sourceTree = "<group>"; };
@@ -461,7 +459,6 @@
 		F70EF4DD1F5F85F7001C65A7 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				F70EF4DE1F5F85F7001C65A7 /* nav-background@2x.png */,
 				F70EF4DF1F5F85F7001C65A7 /* NSStringExt.h */,
 				F70EF4E01F5F85F7001C65A7 /* NSStringExt.m */,
 				F70EF4E11F5F85F7001C65A7 /* TableView+Gategory */,
@@ -960,7 +957,6 @@
 				F70EF4811F5F7F8E001C65A7 /* Assets.xcassets in Resources */,
 				F70EF47F1F5F7F8E001C65A7 /* Main.storyboard in Resources */,
 				F73C37C11F61136400027289 /* funKeyboardData.plist in Resources */,
-				F70EF4EC1F5F85F7001C65A7 /* nav-background@2x.png in Resources */,
 				F7353DBC1F74A9CF009F086E /* wave.bundle in Resources */,
 				F74197801F63895C00AD5F2C /* BRCity.plist in Resources */,
 			);

@@ -56,8 +56,8 @@
     
     
     // 手机
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45+10, 35)];
-    UIView *leftView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 35)];
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45+10, 45)];
+    UIView *leftView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
     leftView1.backgroundColor = [UIColor colorWithHexString:@"#FDA326"];
     
     UIImageView *imgView1 = [UIImageView imgViewWithframe:CGRectMake(0, 0, 45, 17) icon:@"13"];
@@ -67,7 +67,7 @@
     [leftView1 addSubview:imgView1];
     [leftView addSubview:leftView1];
     
-    _phone = [UITextField textFieldWithframe:CGRectMake(25, label.bottom+41, kScreen_Width-50, 35) placeholder:@"请输入手机号" font:nil leftView:leftView backgroundColor:@"#FFFFFF"];
+    _phone = [UITextField textFieldWithframe:CGRectMake(25, label.bottom+41, kScreen_Width-50, 45) placeholder:@"请输入手机号" font:nil leftView:leftView backgroundColor:@"#FFFFFF"];
     _phone.keyboardType = UIKeyboardTypeNumberPad;
     _phone.layer.cornerRadius = 7;
     //    [tf addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventEditingChanged];
@@ -77,8 +77,8 @@
     _phone.leftView = leftView;
     
     // 密码
-    leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45+10, 35)];
-    leftView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 35)];
+    leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45+10, 45)];
+    leftView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
     leftView1.backgroundColor = [UIColor colorWithHexString:@"#FDA326"];
     
     UIImageView *imgView2 = [UIImageView imgViewWithframe:CGRectMake(0, 0, 45, 17) icon:@"12"];
@@ -110,8 +110,8 @@
     _password.secureTextEntry = YES;
     
     // 验证码
-    leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45+10, 35)];
-    leftView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 35)];
+    leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45+10, 45)];
+    leftView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
     leftView1.backgroundColor = [UIColor colorWithHexString:@"#FDA326"];
     
     UIImageView *imgView3 = [UIImageView imgViewWithframe:CGRectMake(0, 0, 45, 17) icon:@"8"];
@@ -147,7 +147,7 @@
     _validate.leftView = leftView;
 //    _validate.secureTextEntry = YES;
     
-    UIButton *loginBtn = [UIButton buttonWithframe:CGRectMake(_password.left, _validate.bottom+23, _phone.width, _phone.height) text:@"下一步" font:[UIFont systemFontOfSize:13] textColor:@"FFFFFF" backgroundColor:@"#FDA326" normal:nil selected:nil];
+    UIButton *loginBtn = [UIButton buttonWithframe:CGRectMake(_password.left, _validate.bottom+23, _phone.width, _phone.height) text:@"下一步" font:[UIFont systemFontOfSize:16] textColor:@"FFFFFF" backgroundColor:@"#FDA326" normal:nil selected:nil];
     loginBtn.layer.cornerRadius = 7;
     loginBtn.layer.masksToBounds = YES;
     [self.view addSubview:loginBtn];

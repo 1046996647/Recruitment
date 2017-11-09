@@ -24,26 +24,26 @@
     baseView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:baseView];
 
-    UILabel *comLab = [UILabel labelWithframe:CGRectMake(15, 11, kScreen_Width-15-12, 17) text:_model.title font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+    UILabel *comLab = [UILabel labelWithframe:CGRectMake(15, 11, kScreen_Width-15-12, 17) text:_model.title font:[UIFont systemFontOfSize:15] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
     [baseView addSubview:comLab];
     
-    UILabel *jobLab = [UILabel labelWithframe:CGRectMake(comLab.left, comLab.bottom+12, comLab.width, 13) text:@"" font:[UIFont systemFontOfSize:11] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+    UILabel *jobLab = [UILabel labelWithframe:CGRectMake(comLab.left, comLab.bottom+12, comLab.width, 13) text:@"" font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
     [baseView addSubview:jobLab];
     
     NSString *str1 = _model.jobName;
     NSMutableAttributedString *attStr = [NSString text:str1 fullText:[NSString stringWithFormat:@"邀请你参加%@面试",str1] location:5 color:[UIColor colorWithHexString:@"#FF9123"] font:nil];
     jobLab.attributedText = attStr;
     
-    UILabel *contactLab = [UILabel labelWithframe:CGRectMake(comLab.left, jobLab.bottom+7, comLab.width, 13) text:[NSString stringWithFormat:@"联系人：%@",_model.name] font:[UIFont systemFontOfSize:11] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+    UILabel *contactLab = [UILabel labelWithframe:CGRectMake(comLab.left, jobLab.bottom+7, comLab.width, 13) text:[NSString stringWithFormat:@"联系人：%@",_model.name] font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
     [baseView addSubview:contactLab];
     
-    UILabel *teleLab = [UILabel labelWithframe:CGRectMake(comLab.left, contactLab.bottom+7, comLab.width, 13) text:[NSString stringWithFormat:@"联系电话：%@",_model.tele] font:[UIFont systemFontOfSize:11] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+    UILabel *teleLab = [UILabel labelWithframe:CGRectMake(comLab.left, contactLab.bottom+7, comLab.width, 13) text:[NSString stringWithFormat:@"联系电话：%@",_model.tele] font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
     [baseView addSubview:teleLab];
     
-    UILabel *addressLab = [UILabel labelWithframe:CGRectMake(comLab.left, teleLab.bottom+7, comLab.width, 13) text:[NSString stringWithFormat:@"面试地址：%@",_model.address] font:[UIFont systemFontOfSize:11] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+    UILabel *addressLab = [UILabel labelWithframe:CGRectMake(comLab.left, teleLab.bottom+7, comLab.width, 13) text:[NSString stringWithFormat:@"面试地址：%@",_model.address] font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
     [baseView addSubview:addressLab];
     
-    UILabel *otherLab = [UILabel labelWithframe:CGRectMake(comLab.left, addressLab.bottom+7, comLab.width, 0) text:[NSString stringWithFormat:@"其他信息：%@",_model.address] font:[UIFont systemFontOfSize:11] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+    UILabel *otherLab = [UILabel labelWithframe:CGRectMake(comLab.left, addressLab.bottom+7, comLab.width, 0) text:[NSString stringWithFormat:@"其他信息：%@",_model.address] font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
     [baseView addSubview:otherLab];
     
     CGSize size = [NSString textHeight:[NSString stringWithFormat:@"其他信息：%@",_model.address] font:otherLab.font width:comLab.width];
@@ -62,7 +62,7 @@
     jobBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
     [jobBtn addTarget:self action:@selector(jobAction) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *phoneBtn = [UIButton buttonWithframe:CGRectMake(jobBtn.width, jobBtn.top, jobBtn.width, bottomView.height) text:@"联系电话" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:@"ic_call-1" selected:nil];
+    UIButton *phoneBtn = [UIButton buttonWithframe:CGRectMake(jobBtn.width, jobBtn.top, jobBtn.width, bottomView.height) text:@"联系电话" font:nil textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:@"ic_call-1" selected:nil];
     [bottomView addSubview:phoneBtn];
     phoneBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
     phoneBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
