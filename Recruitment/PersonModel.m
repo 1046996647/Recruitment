@@ -23,4 +23,12 @@
     return @{@"ID" : @"id"};
 }
 
+- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
+    
+    NSString *timeStr = [[dic[@"autoSendTime"] componentsSeparatedByString:@" "] firstObject];
+    _autoSendTime = timeStr;
+    
+    return YES;
+}
+
 @end

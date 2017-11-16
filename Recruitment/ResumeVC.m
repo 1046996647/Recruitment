@@ -23,7 +23,10 @@
 @property(nonatomic,strong) UILabel *remindLabel;
 @property(nonatomic,strong) MWWaveProgressView *waterWave;
 @property(nonatomic,strong) NSMutableArray *labelArr;
+@property(nonatomic,strong) NSMutableArray *labelArr1;
 
+@property(nonatomic,strong) PersonModel *model;
+@property(nonatomic,strong) NSString *titleStr;
 
 
 @end
@@ -126,6 +129,7 @@
         
     }
     
+    _labelArr1 = [NSMutableArray array];
     NSArray *titleArr2 = @[@"    委托投递",@"    简历状态"];
     for (int i=0; i<titleArr2.count; i++) {
         
@@ -137,6 +141,10 @@
         
         UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(forgetBtn.width-5.4-14.6, (forgetBtn.height-13)/2, 5.4, 13) icon:@"98"];
         [forgetBtn addSubview:imgView];
+        
+        UILabel *label2 = [UILabel labelWithframe:CGRectMake(imgView.left-200-5, 0, 200, forgetBtn.height) text:@"" font:[UIFont systemFontOfSize:15] textAlignment:NSTextAlignmentRight textColor:@"#666666"];
+        [forgetBtn addSubview:label2];
+        [_labelArr1 addObject:label2];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(14, forgetBtn.height-.5, kScreen_Width-14, .5)];
         line.backgroundColor = [UIColor colorWithHexString:@"#D3D3D3"];
@@ -156,6 +164,7 @@
     [AFNetworking_RequestData requestMethodPOSTUrl:Get_ui_info dic:dic showHUD:isShow Succed:^(id responseObject) {
         
         PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
+        self.model = model;
         
         if (model) {
             
@@ -177,11 +186,30 @@
             self.remindLabel.width = size.width+20;
             self.remindLabel.left = (kScreen_Width-self.remindLabel.width)/2;
             
-            NSArray *titleArr = @[@"0",model.resumeNum];
+            NSArray *titleArr = @[model.hrViewNum,model.resumeNum];
             int i=0;
             for (UILabel *label in _labelArr) {
                 label.text = titleArr[i];
                 i++;
+            }
+            
+            // 简历显示状态
+            UILabel *statusLab = _labelArr1[1];
+            if (model.is_hide.boolValue) {
+                statusLab.text = @"简历已隐藏";
+            }
+            else {
+                statusLab.text = @"简历已开放";
+
+            }
+            
+            UILabel *dayLab = _labelArr1[0];
+            if (model.autoSend.boolValue) {
+                dayLab.text = [NSString stringWithFormat:@"委托至%@",model.autoSendTime];
+            }
+            else {
+                dayLab.text = @"未开启";
+
             }
             
             if (isShow) {
@@ -224,58 +252,161 @@
     
     if (btn.tag == 0) {
         
-        NSArray *arr = @[@"3天",@"7天",@"14天",@"取消"];
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"设置委托投递后系统会根据你的求职意向自动投递，1小时候生效。" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        
-        for (int i=0; i<arr.count; i++) {
+        if (self.model.is_hide.boolValue) {
             
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:arr[i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"简历需要开放状态" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            return;
+            
+        }
+        
+        if (self.model.autoSend.boolValue) {
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"设置委托投递后系统会根据你的求职意向自动投递" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"关闭委托" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 
-                if ([action.title isEqualToString:@"3天"]) {
+                self.titleStr = @"0";
+                [self auto_send_resume];
+            }];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:cancelAction];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+        }
+        else {
+            
+            NSArray *arr = @[@"3天",@"7天",@"14天",@"取消"];
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"设置委托投递后系统会根据你的求职意向自动投递" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            
+            for (int i=0; i<arr.count; i++) {
+                
+                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:arr[i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     
+                    if ([action.title isEqualToString:@"取消"]) {
+                        return ;
+                    }
+                    
+                    self.titleStr = [action.title substringToIndex:action.title.length-1];
+                    
+                    
+                    [self auto_send_resume];
+                }];
+                
+                if (i<arr.count-1) {
+                    [defaultAction setValue:[UIColor colorWithHexString:@"#333333"] forKey:@"_titleTextColor"];
+                    
+                }
+                else {
+                    [defaultAction setValue:[UIColor colorWithHexString:@"#0076FF"] forKey:@"_titleTextColor"];
                     
                 }
                 
-            }];
-            
-            if (i<arr.count-1) {
-                [defaultAction setValue:[UIColor colorWithHexString:@"#333333"] forKey:@"_titleTextColor"];
-
-            }
-            else {
-                [defaultAction setValue:[UIColor colorWithHexString:@"#0076FF"] forKey:@"_titleTextColor"];
-
+                [alertController addAction:defaultAction];
             }
             
-            [alertController addAction:defaultAction];
+            // 由于它是一个控制器 直接modal出来就好了
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            
         }
         
-
-//        [alertController addAction:[UIAlertAction actionWithTitle:@"3天" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            
-//            
-//        }]];
-
-
-//        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-//            
-//            NSLog(@"添加一个textField就会调用 这个block");
-//            
-//        }];
-        // 由于它是一个控制器 直接modal出来就好了
-        [self presentViewController:alertController animated:YES completion:nil];
+        
 
     }
     else {
+        
+        if (self.model.autoSend.boolValue) {
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请先关闭委托投递" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            return;
+            
+        }
+        
 
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确定简历保密吗" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"简历保密" style:UIAlertActionStyleCancel handler:nil];
+        NSString *str = nil;
+        if (self.model.is_hide.boolValue) {
+            
+            str = @"简历开放";
+        }
+        else {
+            str = @"简历保密";
+
+        }
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"确定%@吗",str] message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:str style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+            
+            if (self.model.is_hide.boolValue) {
+                [paraDic setValue:@"0" forKey:@"is_hide"];
+            }
+            else {
+                [paraDic setValue:@"1" forKey:@"is_hide"];
+
+            }
+            
+            [AFNetworking_RequestData requestMethodPOSTUrl:Is_hide dic:paraDic showHUD:YES Succed:^(id responseObject) {
+                
+                [self get_ui_info:NO];
+                
+            } failure:^(NSError *error) {
+                
+                
+            }];
+        }];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:cancelAction];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }
+}
+
+- (void)auto_send_resume
+{
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    NSString *url = Auto_send_resume;
+    [paraDic setValue:self.titleStr forKey:@"days"];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:url dic:paraDic showHUD:YES Succed:^(id responseObject) {
+        
+        NSNumber *code = [responseObject objectForKey:@"status"];
+        if (1 == [code integerValue]) {
+            UILabel *dayLab = _labelArr1[0];
+            
+            if (self.model.autoSend.boolValue) {
+                
+                self.model.autoSend = @"0";
+                dayLab.text = @"未开启";
+                
+            }
+            else {
+                
+                self.model.autoSend = @"1";
+                
+                NSString *timeStr = [[responseObject[@"autoSendTime"] componentsSeparatedByString:@" "] firstObject];
+                
+                dayLab.text = [NSString stringWithFormat:@"委托至%@",timeStr];
+            }
+        }
+        
+        
+        
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 - (void)btnAction1:(UIButton *)btn
@@ -365,6 +496,12 @@
             label.text = titleArr[i];
             i++;
         }
+        
+        
+        for (UILabel *label in _labelArr1) {
+            label.text = @"";
+        }
+
     }
 
     

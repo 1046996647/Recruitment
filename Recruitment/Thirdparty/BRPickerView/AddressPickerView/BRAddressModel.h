@@ -20,13 +20,14 @@
 @interface BRCityModel : NSObject
 
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, strong) NSArray *town;
+//@property (nonatomic, strong) NSArray *town;
 
 @end
+//
+//
+//@interface BRTownModel : NSObject
+//
+//@property (nonatomic, copy) NSString *name;
+//
+//@end
 
-
-@interface BRTownModel : NSObject
-
-@property (nonatomic, copy) NSString *name;
-
-@end

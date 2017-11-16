@@ -40,6 +40,7 @@
         self.dataArr = @[@[@{@"image":@"68",@"title":@"E-mail",@"text":_model.email,@"key":@"email"},
                            @{@"image":@"68",@"title":@"姓名",@"text":_model.name,@"key":@"name"},
                            @{@"image":@"67",@"title":@"性别",@"text":_model.sex,@"key":@"sex"},
+                           @{@"image":@"67",@"title":@"工作经验",@"text":_model.jobyear,@"key":@"jobyear"},
 //                           @{@"image":@"67",@"title":@"人才类型",@"text":_model.type,@"key":@"type"},
                            @{@"image":@"68",@"title":@"身高(选填)",@"text":_model.height,@"key":@"height"},
 //                           @{@"image":@"67",@"title":@"民族",@"text":_model.nation,@"key":@"nation"}

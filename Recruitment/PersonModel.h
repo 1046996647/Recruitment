@@ -39,6 +39,7 @@
 @property(nonatomic,strong) NSString *qq;
 @property(nonatomic,strong) NSString *address;// 地址
 @property(nonatomic,strong) NSString *requestjobtype;// 求职类型
+@property(nonatomic,strong) NSString *cateName;// 岗位类别
 @property(nonatomic,strong) NSString *requestsalary;// 待遇要求
 @property(nonatomic,strong) NSString *requeststay;// 住房要求
 @property(nonatomic,strong) NSString *jobstatus;// 到岗状况
@@ -57,10 +58,14 @@
 @property(nonatomic,strong) NSString *jobyear;// 工作年限
 @property(nonatomic,strong) NSString *selfevaluation;// 自我评价
 @property(nonatomic,strong) NSString *views;// 简历浏览数
-@property(nonatomic,strong) NSString *is_locks;// 是否锁定
+@property(nonatomic,strong) NSString *autoSend;// 是否锁定
+@property(nonatomic,strong) NSString *autoSendTime;
+
 @property(nonatomic,strong) NSString *is_hide;// 是否隐藏
 @property(nonatomic,strong) NSString *form_percent;// 简历完善度
 @property(nonatomic,strong) NSString *resumeNum;// 投递过的简历数量
+@property(nonatomic,strong) NSString *hrViewNum;// hr查看次数
+
 
 
 @property(nonatomic,strong) NSArray *jobhistory;// 工作经历

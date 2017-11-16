@@ -253,7 +253,9 @@
         [paraDic setValue:self.order forKey:@"order"];
     }
     if (self.data) {
-        [paraDic setValue:self.data forKey:@"data"];
+        
+        NSString *jsonStr = [NSString dictionaryToJson:self.data];
+        [paraDic setValue:jsonStr forKey:@"data"];
     }
 //    [paraDic setValue:@87 forKey:@"cateid"];
 

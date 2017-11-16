@@ -205,12 +205,12 @@
         
         if (!self.lastArr) {
             
-            self.lastArr = @[@{@"title":@"发布时间",@"subTitle":@"不限",@"content":@"0",@"key":@"order"},
+            self.lastArr = @[@{@"title":@"发布时间",@"subTitle":@"不限",@"content":@"0",@"key":@"time"},
                              @{@"title":@"经验要求",@"subTitle":@"不限",@"content":@"0",@"key":@"years"},
                              @{@"title":@"学历要求",@"subTitle":@"不限",@"content":@"0",@"key":@"eduid"},
                              @{@"title":@"薪资范围",@"subTitle":@"不限",@"content":@"0",@"key":@"pay"},
                              @{@"title":@"职位类型",@"subTitle":@"不限",@"content":@"0",@"key":@"jobs"},
-                             @{@"title":@"公司性质",@"subTitle":@"不限",@"content":@"",@"key":@"type"}];
+                             @{@"title":@"公司性质",@"subTitle":@"不限",@"content":@"0",@"key":@"type"}];
             
             NSMutableArray *arrM = [NSMutableArray array];
             for (NSDictionary *dic in self.lastArr) {

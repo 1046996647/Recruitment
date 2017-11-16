@@ -172,56 +172,61 @@
 // 返回用户表该用户相关信息
 - (void)get_user_info
 {
-    
-    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
-    
-    [AFNetworking_RequestData requestMethodPOSTUrl:Get_user_info dic:paramDic showHUD:YES Succed:^(id responseObject) {
+    // 登录才请求，因为在viewWillAppear里
+    PersonModel *model = [InfoCache unarchiveObjectWithFile:Person];
+
+    if (model) {
+        NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
         
-        PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
-        self.model = model;
-        
-//        [InfoCache archiveObject:model toFile:Person];
-        
-        NSMutableArray *arrM = [NSMutableArray array];
-        NSArray *arr = responseObject[@"data"][@"jobhistory"];
-        
-        if ([arr isKindOfClass:[NSArray class]]) {
-            for (NSDictionary *dic in arr) {
-                PersonModel *model1 = [PersonModel yy_modelWithJSON:dic];
-                [arrM addObject:model1];
+        [AFNetworking_RequestData requestMethodPOSTUrl:Get_user_info dic:paramDic showHUD:YES Succed:^(id responseObject) {
+            
+            PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
+            self.model = model;
+            
+            //        [InfoCache archiveObject:model toFile:Person];
+            
+            NSMutableArray *arrM = [NSMutableArray array];
+            NSArray *arr = responseObject[@"data"][@"jobhistory"];
+            
+            if ([arr isKindOfClass:[NSArray class]]) {
+                for (NSDictionary *dic in arr) {
+                    PersonModel *model1 = [PersonModel yy_modelWithJSON:dic];
+                    [arrM addObject:model1];
+                }
             }
-        }
-        
-        if (model) {
-            self.dataArr = @[@[model],arrM,@[model],@[model],@[model]];
-
-        }
-        
-        [_tableView reloadData];
-
-
-
-        [self.userBtn sd_setImageWithURL:[NSURL URLWithString:self.model.img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"96"]];
-
-        
-        CGSize size = [NSString textLength:model.name font:self.signLabel.font];
-        self.signLabel.width = size.width;
-        self.signLabel.text = model.name;
-        
-        self.editBtn.left = self.signLabel.right+11;
-
-        self.infoLabel.text = [NSString stringWithFormat:@"%@|%@cm|%@kg",model.sex,model.height,model.weight];
-        
-        self.phoneLabel.text = [NSString stringWithFormat:@"%@  户籍：%@  所在地：%@",model.phone,model.jiguan,model.home];
-
-        self.hopeLabel.text = [NSString stringWithFormat:@"%@ %@ %@年工作经验",model.marry,model.political,model.jobyear];
-
-
-
-        
-    } failure:^(NSError *error) {
-        
-    }];
+            
+            if (model) {
+                self.dataArr = @[@[model],arrM,@[model],@[model],@[model]];
+                
+            }
+            
+            [_tableView reloadData];
+            
+            
+            
+            [self.userBtn sd_setImageWithURL:[NSURL URLWithString:self.model.img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"96"]];
+            
+            
+            CGSize size = [NSString textLength:model.name font:self.signLabel.font];
+            self.signLabel.width = size.width;
+            self.signLabel.text = model.name;
+            
+            self.editBtn.left = self.signLabel.right+11;
+            
+            self.infoLabel.text = [NSString stringWithFormat:@"%@|%@cm|%@kg",model.sex,model.height,model.weight];
+            
+            self.phoneLabel.text = [NSString stringWithFormat:@"%@  户籍：%@  所在地：%@",model.phone,model.jiguan,model.home];
+            
+            self.hopeLabel.text = [NSString stringWithFormat:@"%@ %@ %@年工作经验",model.marry,model.political,model.jobyear];
+            
+            
+            
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+    
 }
 
 

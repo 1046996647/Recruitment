@@ -15,7 +15,7 @@
 {
     NSInteger rowOfProvince; // 保存省份对应的下标
     NSInteger rowOfCity;     // 保存市对应的下标
-    NSInteger rowOfTown;     // 保存区对应的下标
+//    NSInteger rowOfTown;     // 保存区对应的下标
 }
 
 // 时间选择器（默认大小: 320px × 216px）
@@ -43,10 +43,10 @@
 - (instancetype)initWithDefaultSelected:(NSArray *)defaultSelectedArr isAutoSelect:(BOOL)isAutoSelect resultBlock:(BRAddressResultBlock)resultBlock {
     if (self = [super init]) {
         // 默认选中
-        if (defaultSelectedArr.count == 3) {
+        if (defaultSelectedArr.count == 2) {
             self.defaultSelectedArr = defaultSelectedArr;
         } else {
-            self.defaultSelectedArr = @[@10, @0, @0];
+            self.defaultSelectedArr = @[@0, @0];
         }
         self.isAutoSelect = isAutoSelect;
         self.resultBlock = resultBlock;
@@ -58,8 +58,10 @@
 
 #pragma mark - 获取地址数据
 - (void)loadData {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"BRCity" ofType:@"plist"];
-    NSArray *arrData = [NSArray arrayWithContentsOfFile:filePath];
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"BRCity" ofType:@"plist"];
+//    NSArray *arrData = [NSArray arrayWithContentsOfFile:filePath];
+    NSArray *arrData = [InfoCache unarchiveObjectWithFile:SelectItemJob];;
+
     for (NSDictionary *dic in arrData) {
         // 此处用 YYModel 进行解析
         BRProvinceModel *proviceModel = [BRProvinceModel yy_modelWithDictionary:dic];
@@ -70,7 +72,7 @@
 #pragma mark - 初始化子视图
 - (void)initUI {
     [super initUI];
-    self.titleLabel.text = @"请选择城市";
+//    self.titleLabel.text = @"请选择城市";
     // 添加时间选择器
     [self.alertView addSubview:self.pickerView];
 }
@@ -101,10 +103,10 @@
     
     NSInteger recordRowOfProvince = [self.defaultSelectedArr[0] integerValue];
     NSInteger recordRowOfCity = [self.defaultSelectedArr[1] integerValue];
-    NSInteger recordRowOfTown = [self.defaultSelectedArr[2] integerValue];
+//    NSInteger recordRowOfTown = [self.defaultSelectedArr[2] integerValue];
     
     // 2.滚动到默认行
-    [self scrollToRow:recordRowOfProvince secondRow:recordRowOfCity thirdRow:recordRowOfTown];
+    [self scrollToRow:recordRowOfProvince secondRow:recordRowOfCity];
     
 }
 
@@ -167,12 +169,12 @@
 
 #pragma mark - UIPickerViewDataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 3;
+    return self.defaultSelectedArr.count;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     BRProvinceModel *provinceModel = self.addressModelArr[rowOfProvince];
-    BRCityModel *cityModel = provinceModel.city[rowOfCity];
+//    BRCityModel *cityModel = provinceModel.city[rowOfCity];
     if (component == 0) {
         //返回省个数
         return self.addressModelArr.count;
@@ -181,10 +183,7 @@
         //返回市个数
         return provinceModel.city.count;
     }
-    if (component == 2) {
-        //返回区个数
-        return cityModel.town.count;
-    }
+
     return 0;
     
 }
@@ -201,12 +200,7 @@
         BRCityModel *cityModel = provinceModel.city[row];
         showTitleValue = cityModel.name;
     }
-    if (component == 2) {//区
-        BRProvinceModel *provinceModel = self.addressModelArr[rowOfProvince];
-        BRCityModel *cityModel = provinceModel.city[rowOfCity];
-        BRTownModel *townModel = cityModel.town[row];
-        showTitleValue = townModel.name;
-    }
+
     return showTitleValue;
 }
 
@@ -222,15 +216,11 @@
     if (component == 0) {
         rowOfProvince = row;
         rowOfCity = 0;
-        rowOfTown = 0;
     } else if (component == 1) {
         rowOfCity = row;
-        rowOfTown = 0;
-    } else if (component == 2) {
-        rowOfTown = row;
     }
     // 滚动到指定行
-    [self scrollToRow:rowOfProvince secondRow:rowOfCity thirdRow:rowOfTown];
+    [self scrollToRow:rowOfProvince secondRow:rowOfCity];
     
     // 自动获取数据，滚动完就回调
     if (self.isAutoSelect) {
@@ -248,36 +238,28 @@
         BRProvinceModel *provinceModel = self.addressModelArr[rowOfProvince];
         if (rowOfCity < provinceModel.city.count) {
             BRCityModel *cityModel = provinceModel.city[rowOfCity];
-            if (rowOfTown < cityModel.town.count) {
-                BRTownModel *townModel = cityModel.town[rowOfTown];
-                arr = @[provinceModel.name, cityModel.name, townModel.name];
-            }
+            arr = @[cityModel.name];
+
         }
     }
     return arr;
 }
 
 #pragma mark - 滚动到指定行
-- (void)scrollToRow:(NSInteger)firstRow secondRow:(NSInteger)secondRow thirdRow:(NSInteger)thirdRow {
+- (void)scrollToRow:(NSInteger)firstRow secondRow:(NSInteger)secondRow  {
     if (firstRow < self.addressModelArr.count) {
         rowOfProvince = firstRow;
         BRProvinceModel *provinceModel = self.addressModelArr[firstRow];
         if (secondRow < provinceModel.city.count) {
             rowOfCity = secondRow;
             [self.pickerView reloadComponent:1];
-            BRCityModel *cityModel = provinceModel.city[secondRow];
-            if (thirdRow < cityModel.town.count) {
-                rowOfTown = thirdRow;
-                [self.pickerView reloadComponent:2];
-                [self.pickerView selectRow:firstRow inComponent:0 animated:YES];
-                [self.pickerView selectRow:secondRow inComponent:1 animated:YES];
-                [self.pickerView selectRow:thirdRow inComponent:2 animated:YES];
-            }
+            [self.pickerView selectRow:firstRow inComponent:0 animated:YES];
+            [self.pickerView selectRow:secondRow inComponent:1 animated:YES];
         }
     }
     
     // 是否自动滚动回调
-    if (false) {
+    if (_isAutoSelect) {
         NSArray *arr = [self getChooseCityArr];
         if (self.resultBlock != nil) {
             self.resultBlock(arr);

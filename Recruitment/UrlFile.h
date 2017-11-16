@@ -110,7 +110,7 @@
 #define Get_setting  [NSString stringWithFormat:@"%@Tool/get_setting",BaseUrl]
 
 // 选择项(岗位)
-#define Get_jobs_cate  [NSString stringWithFormat:@"%@User/get_jobs_cate",BaseUrl]
+#define Get_jobs_cate  [NSString stringWithFormat:@"%@QuickGet/get_jobs_cate",BaseUrl]
 
 // 登录
 #define Login  [NSString stringWithFormat:@"%@User/login",BaseUrl]
@@ -120,6 +120,15 @@
 
 // 获取部分用户信息
 #define Get_ui_info  [NSString stringWithFormat:@"%@User/get_ui_info",BaseUrl]
+
+// 2.9    获取HR已查看简历
+#define Get_viewresume  [NSString stringWithFormat:@"%@Resume/get_viewresume",BaseUrl]
+
+// 1.8    修改状态
+#define Is_hide  [NSString stringWithFormat:@"%@User/is_hide",BaseUrl]
+
+// 2.7    开启自动投递或关闭
+#define Auto_send_resume  [NSString stringWithFormat:@"%@Resume/auto_send_resume",BaseUrl]
 
 // 获取用户工作经历
 #define Get_work_exp  [NSString stringWithFormat:@"%@QuickGet/get_work_exp",BaseUrl]

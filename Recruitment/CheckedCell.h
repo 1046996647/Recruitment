@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JobModel.h"
 
 @interface CheckedCell : UITableViewCell
 
@@ -16,5 +16,6 @@
 @property(nonatomic,strong) UILabel *peopleLab;
 //@property(nonatomic,strong) UILabel *timeLab;
 @property(nonatomic,strong) UIImageView *imgView;
+@property(nonatomic,strong) JobModel *model;
 
 @end

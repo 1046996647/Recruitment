@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "LoginVC.h"
 #import "NavigationController.h"
+#import "TabBarController.h"
 
 
 @implementation AFNetworking_RequestData
@@ -72,7 +73,9 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     manager.requestSerializer.timeoutInterval = kDefaultTimeoutInterval; //默认网络请求时间
-     manager.responseSerializer = [AFJSONResponseSerializer serializer]; //申明返回的结果是json类型
+    manager.responseSerializer = [AFJSONResponseSerializer serializer]; //申明返回的结果是json类型
+//    //申明请求的数据是json类型
+//    manager.requestSerializer=[AFJSONRequestSerializer serializer];
     
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/json", @"text/javascript",@"text/html", nil];
     
@@ -107,13 +110,29 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
             [SVProgressHUD dismiss];
 
             NSNumber *code = [responseObject objectForKey:@"status"];
-            if (0 == [code integerValue]) {
+            if (0 == [code integerValue] || 3 == [code integerValue]) {
+                
+                if (3 == [code integerValue]) {
+                    
+                    [InfoCache archiveObject:nil toFile:Person];
+                    [InfoCache archiveObject:nil toFile:@"token"];
+                    
+                    [[UIApplication sharedApplication].keyWindow makeToast:@"您已被挤下线，请重新登陆!"];
+                    
+                    AppDelegate *delegate = [AppDelegate share];
+                    NavigationController *navVC = (NavigationController *)delegate.tabVC.selectedViewController;
+                
+                    
+                    LoginVC *loginVC = [[LoginVC alloc] init];
+                    [navVC pushViewController:loginVC animated:YES];
+                    return ;
+                }
                 
                 NSString *message = [responseObject objectForKey:@"message"];
                 
                 if (message.length > 0) {
                     [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:message];
-
+                    
                 }
 
             }

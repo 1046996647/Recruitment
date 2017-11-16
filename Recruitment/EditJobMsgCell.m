@@ -153,18 +153,18 @@
         
         if ([_model.title isEqualToString:@"工作年限"]||
             [_model.title isEqualToString:@"工作经验"]) {
-            NSMutableArray *arrM = [NSMutableArray array];
+//            NSMutableArray *arrM = [NSMutableArray array];
             for (NSDictionary *dic in self.selectArr) {
                 if ([dic[@"name"] isEqualToString:@"comp_years"]) {
                     
                     NSString *str = dic[@"data"];
                     NSArray *arr = [str componentsSeparatedByString:@","];
-                    
-                    for (NSString *s in arr) {
-                        NSString *s1 = [NSString stringWithFormat:@"%@年",s];
-                        [arrM addObject:s1];
-                    }
-                    self.dataSource = arrM;
+//
+//                    for (NSString *s in arr) {
+//                        NSString *s1 = [NSString stringWithFormat:@"%@年",s];
+//                        [arrM addObject:s1];
+//                    }
+                    self.dataSource = arr;
                     break;
                 }
             }
@@ -279,14 +279,12 @@
         // 岗位类别
         if ([_model.title isEqualToString:@"岗位类别"]) {
             
-            NSMutableArray *arrM = [NSMutableArray array];
-            
-            for (NSDictionary *dic in self.selectJobArr) {
-                
-                [arrM addObject:dic[@"name"]];
-                
-            }
-            self.dataSource = arrM;
+            [BRAddressPickerView showAddressPickerWithDefaultSelected:@[@0, @0] isAutoSelect:NO resultBlock:^(NSArray *selectAddressArr) {
+                _tf.text = selectAddressArr[0];
+                _model.text = selectAddressArr[0];
+                //            weakSelf.addressTF.text = [NSString stringWithFormat:@"%@%@%@", selectAddressArr[0], selectAddressArr[1], selectAddressArr[2]];
+            }];
+            return;
         }
         
         [BRStringPickerView showStringPickerWithTitle:nil dataSource:self.dataSource defaultSelValue:self.dataSource[0] isAutoSelect:NO resultBlock:^(id selectValue) {
@@ -294,13 +292,13 @@
             _tf.text = selectValue;
             _model.text = selectValue;
             
-            if ([_model.title isEqualToString:@"工作年限"]||
-                [_model.title isEqualToString:@"工作经验"]) {
-                
-                _model.text = [_model.text substringToIndex:_model.text.length-1];
-                NSLog(@"-----%@",selectValue);
-                
-            }
+//            if ([_model.title isEqualToString:@"工作年限"]||
+//                [_model.title isEqualToString:@"工作经验"]) {
+//
+//                _model.text = [_model.text substringToIndex:_model.text.length-1];
+//                NSLog(@"-----%@",selectValue);
+//
+//            }
             ////        if ([_model.title isEqualToString:@"性别"] ||
             ////            [_model.title isEqualToString:@"人才类型"]||
             ////            [_model.title isEqualToString:@"意向城市"]||

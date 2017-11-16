@@ -65,7 +65,7 @@
         
         if (_model) {
             self.dataArr = @[@[@{@"image":@"68",@"title":@"求职类型",@"text":_model.requestjobtype,@"key":@"requestjobtype"},
-//                               @{@"image":@"68",@"title":@"岗位类别",@"text":@"",@"key":@"no"}
+                               @{@"image":@"68",@"title":@"岗位类别",@"text":_model.cateName,@"key":@"cateName"}
                                ],
                              @[@{@"image":@"67",@"title":@"期望地区",@"text":_model.hopelocation,@"key":@"hopelocation"},
                                @{@"image":@"67",@"title":@"期望职位",@"text":_model.hopepostion,@"key":@"hopepostion"},
@@ -76,7 +76,7 @@
         }
         else {
             self.dataArr = @[@[@{@"image":@"68",@"title":@"求职类型",@"text":@"",@"key":@"requestjobtype"},
-                               @{@"image":@"68",@"title":@"岗位类别",@"text":@"",@"key":@"no"}],
+                               @{@"image":@"68",@"title":@"岗位类别",@"text":@"",@"key":@"cateName"}],
                              @[@{@"image":@"67",@"title":@"期望地区",@"text":@"",@"key":@"hopelocation"},
                                @{@"image":@"67",@"title":@"期望职位",@"text":@"",@"key":@"hopepostion"},
                                @{@"image":@"67",@"title":@"待遇要求",@"text":@"",@"key":@"requestsalary"}],

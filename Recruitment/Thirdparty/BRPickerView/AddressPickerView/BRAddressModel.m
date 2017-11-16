@@ -12,8 +12,8 @@
 
 + (NSDictionary *)modelCustomPropertyMapper {
     return @{
-             @"name": @"v",
-             @"city": @"n"
+//             @"name": @"v",
+             @"city": @"children"
              };
 }
 
@@ -28,28 +28,29 @@
 
 @implementation BRCityModel
 
-+ (NSDictionary *)modelCustomPropertyMapper {
-    return @{
-             @"name": @"v",
-             @"town": @"n"
-             };
-}
+//+ (NSDictionary *)modelCustomPropertyMapper {
+//    return @{
+//             @"name": @"v",
+//             @"town": @"n"
+//             };
+//}
 
-+ (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{
-             @"town": [BRTownModel class]
-             };
-}
-
-@end
-
-
-@implementation BRTownModel
-
-+ (NSDictionary *)modelCustomPropertyMapper {
-    return @{
-             @"name": @"v"
-             };
-}
+//+ (NSDictionary *)modelContainerPropertyGenericClass {
+//    return @{
+//             @"town": [BRTownModel class]
+//             };
+//}
 
 @end
+
+
+//@implementation BRTownModel
+//
+//+ (NSDictionary *)modelCustomPropertyMapper {
+//    return @{
+//             @"name": @"v"
+//             };
+//}
+
+//@end
+

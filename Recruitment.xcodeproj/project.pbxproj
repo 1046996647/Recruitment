@@ -72,8 +72,6 @@
 		F741975C1F63706900AD5F2C /* PersonalMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F741975B1F63706900AD5F2C /* PersonalMessageVC.m */; };
 		F74197621F63781E00AD5F2C /* PersonalMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F74197611F63781E00AD5F2C /* PersonalMessageCell.m */; };
 		F74197651F63797100AD5F2C /* PersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F74197641F63797100AD5F2C /* PersonModel.m */; };
-		F741977E1F63895C00AD5F2C /* BRAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F74197691F63895C00AD5F2C /* BRAddressModel.m */; };
-		F741977F1F63895C00AD5F2C /* BRAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F741976B1F63895C00AD5F2C /* BRAddressPickerView.m */; };
 		F74197801F63895C00AD5F2C /* BRCity.plist in Resources */ = {isa = PBXBuildFile; fileRef = F741976C1F63895C00AD5F2C /* BRCity.plist */; };
 		F74197811F63895C00AD5F2C /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F741976F1F63895C00AD5F2C /* BaseView.m */; };
 		F74197821F63895C00AD5F2C /* BRDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F74197731F63895C00AD5F2C /* BRDatePickerView.m */; };
@@ -106,6 +104,8 @@
 		F74F4AD91F66609A007736BA /* AboutUsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AD81F66609A007736BA /* AboutUsVC.m */; };
 		F74F4AE71F667C81007736BA /* SubscriptionManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AE61F667C81007736BA /* SubscriptionManageCell.m */; };
 		F74F4AEA1F667DEC007736BA /* SubscriptionManageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F74F4AE91F667DEC007736BA /* SubscriptionManageModel.m */; };
+		F752330C1FBC31CE002D4AF9 /* BRAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F75233091FBC31CE002D4AF9 /* BRAddressPickerView.m */; };
+		F752330D1FBC31CE002D4AF9 /* BRAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F752330A1FBC31CE002D4AF9 /* BRAddressModel.m */; };
 		F75624BA1F79EA2E006D4174 /* DiySearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F75624B91F79EA2D006D4174 /* DiySearchBar.m */; };
 		F75861571F8F12950065FE56 /* EmergencyEnterpriseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75861561F8F12950065FE56 /* EmergencyEnterpriseVC.m */; };
 		F75A453D1F67B6DC00B0790C /* ResumeManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453C1F67B6DC00B0790C /* ResumeManageVC.m */; };
@@ -246,10 +246,6 @@
 		F74197611F63781E00AD5F2C /* PersonalMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalMessageCell.m; sourceTree = "<group>"; };
 		F74197631F63797100AD5F2C /* PersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonModel.h; sourceTree = "<group>"; };
 		F74197641F63797100AD5F2C /* PersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonModel.m; sourceTree = "<group>"; };
-		F74197681F63895C00AD5F2C /* BRAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddressModel.h; sourceTree = "<group>"; };
-		F74197691F63895C00AD5F2C /* BRAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddressModel.m; sourceTree = "<group>"; };
-		F741976A1F63895C00AD5F2C /* BRAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddressPickerView.h; sourceTree = "<group>"; };
-		F741976B1F63895C00AD5F2C /* BRAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddressPickerView.m; sourceTree = "<group>"; };
 		F741976C1F63895C00AD5F2C /* BRCity.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BRCity.plist; sourceTree = "<group>"; };
 		F741976E1F63895C00AD5F2C /* BaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
 		F741976F1F63895C00AD5F2C /* BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
@@ -313,6 +309,10 @@
 		F74F4AE61F667C81007736BA /* SubscriptionManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionManageCell.m; sourceTree = "<group>"; };
 		F74F4AE81F667DEC007736BA /* SubscriptionManageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionManageModel.h; sourceTree = "<group>"; };
 		F74F4AE91F667DEC007736BA /* SubscriptionManageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionManageModel.m; sourceTree = "<group>"; };
+		F75233081FBC31CE002D4AF9 /* BRAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddressModel.h; sourceTree = "<group>"; };
+		F75233091FBC31CE002D4AF9 /* BRAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddressPickerView.m; sourceTree = "<group>"; };
+		F752330A1FBC31CE002D4AF9 /* BRAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddressModel.m; sourceTree = "<group>"; };
+		F752330B1FBC31CE002D4AF9 /* BRAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddressPickerView.h; sourceTree = "<group>"; };
 		F75624B81F79EA2D006D4174 /* DiySearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiySearchBar.h; sourceTree = "<group>"; };
 		F75624B91F79EA2D006D4174 /* DiySearchBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiySearchBar.m; sourceTree = "<group>"; };
 		F75861551F8F12950065FE56 /* EmergencyEnterpriseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmergencyEnterpriseVC.h; sourceTree = "<group>"; };
@@ -592,7 +592,6 @@
 				F74197611F63781E00AD5F2C /* PersonalMessageCell.m */,
 				F74197631F63797100AD5F2C /* PersonModel.h */,
 				F74197641F63797100AD5F2C /* PersonModel.m */,
-				F74243101F68D5FD009AA2E5 /* UrlFile.h */,
 			);
 			name = "登录注册";
 			sourceTree = "<group>";
@@ -690,6 +689,7 @@
 				F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */,
 				F70253231F73B27100F5E025 /* ShareVC.h */,
 				F70253241F73B27100F5E025 /* ShareVC.m */,
+				F74243101F68D5FD009AA2E5 /* UrlFile.h */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -720,10 +720,10 @@
 		F74197671F63895C00AD5F2C /* AddressPickerView */ = {
 			isa = PBXGroup;
 			children = (
-				F74197681F63895C00AD5F2C /* BRAddressModel.h */,
-				F74197691F63895C00AD5F2C /* BRAddressModel.m */,
-				F741976A1F63895C00AD5F2C /* BRAddressPickerView.h */,
-				F741976B1F63895C00AD5F2C /* BRAddressPickerView.m */,
+				F75233081FBC31CE002D4AF9 /* BRAddressModel.h */,
+				F752330A1FBC31CE002D4AF9 /* BRAddressModel.m */,
+				F752330B1FBC31CE002D4AF9 /* BRAddressPickerView.h */,
+				F75233091FBC31CE002D4AF9 /* BRAddressPickerView.m */,
 				F741976C1F63895C00AD5F2C /* BRCity.plist */,
 			);
 			path = AddressPickerView;
@@ -1026,6 +1026,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F73C37BE1F61134500027289 /* UIView+WJExtension.m in Sources */,
+				F752330C1FBC31CE002D4AF9 /* BRAddressPickerView.m in Sources */,
 				F72FF8C81F628D5C00E3AA92 /* CompanyDetailVC.m in Sources */,
 				F72FF8B61F62314100E3AA92 /* ApplyJobVC.m in Sources */,
 				F74243111F68F959009AA2E5 /* RegisterVC.m in Sources */,
@@ -1033,7 +1034,6 @@
 				F7420FE41F6B7638002A20B8 /* NSDate+BRAdd.m in Sources */,
 				F73C37C81F61252E00027289 /* JobTableView.m in Sources */,
 				F72FF8B91F6234F000E3AA92 /* JobModel.m in Sources */,
-				F741977F1F63895C00AD5F2C /* BRAddressPickerView.m in Sources */,
 				F70EF51D1F5F8631001C65A7 /* RegexTool.m in Sources */,
 				F75A45431F67BEA000B0790C /* JobRecommandCell.m in Sources */,
 				F70EF53F1F5FD964001C65A7 /* LoginVC.m in Sources */,
@@ -1045,6 +1045,7 @@
 				F7353DBA1F74A9CF009F086E /* MWWaveCycleAnimationView.m in Sources */,
 				F72FF8C51F6282EB00E3AA92 /* JobDetailCell.m in Sources */,
 				F70EF4DC1F5F85ED001C65A7 /* UIView+Toast.m in Sources */,
+				F752330D1FBC31CE002D4AF9 /* BRAddressModel.m in Sources */,
 				F70EF5191F5F8616001C65A7 /* UIView+SDExtension.m in Sources */,
 				F741979A1F63CD3B00AD5F2C /* EditJobMsgCell.m in Sources */,
 				F70EF5381F5FBB4B001C65A7 /* TabBarController.m in Sources */,
@@ -1107,7 +1108,6 @@
 				F74F4AA61F66210A007736BA /* SendHistoryVC.m in Sources */,
 				F73507651F78C91500F4F4A2 /* SystemModel.m in Sources */,
 				F74197911F63B97E00AD5F2C /* EditResumeCell.m in Sources */,
-				F741977E1F63895C00AD5F2C /* BRAddressModel.m in Sources */,
 				F70EF4901F5F8591001C65A7 /* AFNetworking_RequestData.m in Sources */,
 				F702531F1F73A09100F5E025 /* MyAttentionVC.m in Sources */,
 				F72FF8BC1F625EA600E3AA92 /* JobView.m in Sources */,

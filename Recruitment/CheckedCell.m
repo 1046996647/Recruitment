@@ -26,7 +26,8 @@
         _typeLab = [UILabel labelWithframe:CGRectMake(_companyLab.left, _companyLab.bottom+8, _companyLab.width, _companyLab.height) text:@"私营企业|饰品" font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
         [self.contentView addSubview:_typeLab];
         
-        _peopleLab = [UILabel labelWithframe:CGRectMake(_companyLab.left, _typeLab.bottom+8, _companyLab.width, _companyLab.height) text:@"150-500人" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
+        // 150-500人
+        _peopleLab = [UILabel labelWithframe:CGRectMake(_companyLab.left, _typeLab.bottom+8, _companyLab.width, _companyLab.height) text:@"" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
         [self.contentView addSubview:_peopleLab];
         
 
@@ -39,5 +40,21 @@
     }
     return self;
 }
+
+- (void)setModel:(JobModel *)model
+{
+    _model = model;
+    
+    _companyLab.text = model.company_name;
+    _typeLab.text = model.cate_name;
+    
+}
+
+
+
+
+
+
+
 
 @end
