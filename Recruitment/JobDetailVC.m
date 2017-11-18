@@ -47,6 +47,8 @@
     
     [paraDic setValue:self.model.ID forKey:@"id"];
 //    [paraDic setValue:self.model.job_name forKey:@"key"];
+    [paraDic setValue:[InfoCache unarchiveObjectWithFile:@"siteId"] forKey:@"siteId"];
+
     
     [AFNetworking_RequestData requestMethodPOSTUrl:Get_jobs_detail dic:paraDic showHUD:YES Succed:^(id responseObject) {
         
@@ -86,7 +88,7 @@
     
     
     // 6-7k
-    UILabel *moneyLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-47-12, 9, 47, 18) text:[NSString stringWithFormat:@"%@",self.model.pay] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentRight textColor:@"#CE4A12"];
+    UILabel *moneyLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-90-12, 9, 90, 18) text:[NSString stringWithFormat:@"%@",self.model.pay] font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentRight textColor:@"#CE4A12"];
     [headView addSubview:moneyLab];
     
     // 职位 配货包装工
@@ -160,7 +162,7 @@
     [headView addSubview:jiantouView];
     
     
-    UILabel *kmLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-32-14, decLab.bottom+5, 35, 14) text:@"5.2km" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:@"#999999"];
+    UILabel *kmLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-87-14, decLab.bottom+5, 90, 14) text:_model.area font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:@"#999999"];
     [headView addSubview:kmLab];
     
     // @"永嘉国贸大厦612室"
@@ -312,7 +314,8 @@
 
 - (void)callAction
 {
-    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",_model.tele];
+//    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",_model.tele];
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"17736273234"];
     UIWebView *callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [[UIApplication sharedApplication].keyWindow addSubview:callWebview];

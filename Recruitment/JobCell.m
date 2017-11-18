@@ -21,8 +21,9 @@
 
         
         // 6-7k
-        _moneyLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-34-12, 12, 34, 18) text:@"" font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentRight textColor:@"#CE4A12"];
+        _moneyLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-90-12, 12, 90, 18) text:@"" font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentRight textColor:@"#CE4A12"];
         [self.contentView addSubview:_moneyLab];
+//        _moneyLab.backgroundColor = [UIColor redColor];
         
         // 福田店面销售代表
         _jobLab = [UILabel labelWithframe:CGRectMake(13, 10, _moneyLab.left-13-10, 20) text:@"" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
@@ -89,7 +90,7 @@
         _jobLab.left = _selectBtn.right;
         _companyLab.left = _jobLab.left;
 //        _tagsView.left = _jobLab.left;
-        
+
 
     }
     
@@ -98,6 +99,7 @@
     _timeLab.text = model.update_time;
     _moneyLab.text = [NSString stringWithFormat:@"%@",model.pay];
     _selectBtn.selected = _model.isSelected;
+    _kmLab.text = model.area;
 
 }
 

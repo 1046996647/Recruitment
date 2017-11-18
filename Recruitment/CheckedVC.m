@@ -84,7 +84,8 @@
         self.isRefresh = YES;
         [SVProgressHUD dismiss];
         [self.tableView.mj_footer endRefreshing];
-        
+        [self.tableView.mj_header endRefreshing];
+
         NSArray *arr = responseObject[@"data"];
         if ([arr isKindOfClass:[NSArray class]]) {
             
@@ -113,6 +114,8 @@
         
         [SVProgressHUD dismiss];
         [self.tableView.mj_footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+
     }];
 }
 

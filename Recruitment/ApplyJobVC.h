@@ -12,5 +12,6 @@
 
 @property(nonatomic,copy) NSString *searchText;
 
-
+@property(nonatomic,strong) NSString *city;
+@property(nonatomic,strong) NSString *siteId;
 @end

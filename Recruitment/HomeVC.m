@@ -18,6 +18,8 @@
 #import "HomeModel.h"
 #import "EmergencyEnterpriseVC.h"
 
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
+#import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入检索功能所有的头文件
 
 @interface HomeVC ()<UITextFieldDelegate,SDCycleScrollViewDelegate>
 
@@ -33,6 +35,10 @@
 
 @property(nonatomic,strong) NSMutableArray *urlArr;
 
+@property (strong, nonatomic) BMKLocationService *locService;
+@property (strong, nonatomic) BMKGeoCodeSearch *geocodesearch;
+@property(nonatomic,strong) NSString *city;
+@property(nonatomic,strong) NSString *siteId;
 
 
 @end
@@ -45,16 +51,19 @@
         
         __weak typeof(self) weakSelf = self;
         _placeView = [[PlaceView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-64)];
-        _placeView.block = ^(NSString *place) {
+        _placeView.block = ^(NSDictionary *dic) {
             
             
             [weakSelf.placeView removeFromSuperview];
             weakSelf.imgView.image = [UIImage imageNamed:@"55"];
             weakSelf.placeBtn.selected = NO;
-            if (place) {
-                [weakSelf.placeBtn setTitle:place forState:UIControlStateNormal];
+            if (dic) {
+                [weakSelf.placeBtn setTitle:dic[@"site"] forState:UIControlStateNormal];
                 [weakSelf.tableView.mj_header beginRefreshing];
+                
+                weakSelf.siteId = dic[@"siteId"];
 
+                [InfoCache archiveObject:weakSelf.siteId toFile:@"siteId"];
             }
         };
     }
@@ -64,6 +73,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
     
     self.navigationItem.title = nil;
     
@@ -120,11 +131,29 @@
      // 选择项数据
     [self getSelectItems];
     [self getSelectItemJob];
+    
+    //初始化BMKLocationService定位服务
+    _locService = [[BMKLocationService alloc]init];
+    //    _locService.delegate = self;
+    
+    // 反检索
+    _geocodesearch = [[BMKGeoCodeSearch alloc] init];
+    //    _geocodesearch.delegate = self;
+    
+    //启动LocationService
+    [_locService startUserLocationService];
+
+//    self.siteId = @"2";
+    [InfoCache archiveObject:@"2" toFile:@"siteId"];
+    
 
 }
 
 - (void)headerRefresh
 {
+    [_locService startUserLocationService];
+
+    
     [self homepage_info];
     self.isRefresh = YES;
 }
@@ -137,6 +166,8 @@
     }
     
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    [paraDic setValue:[InfoCache unarchiveObjectWithFile:@"siteId"] forKey:@"siteId"];
     
     [AFNetworking_RequestData requestMethodPOSTUrl:Homepage_info dic:paraDic showHUD:NO Succed:^(id responseObject) {
         
@@ -238,6 +269,8 @@
         
         ApplyJobVC *vc = [[ApplyJobVC alloc] init];
         vc.searchText = dic[@"name"];
+        vc.siteId = weakSelf.siteId;
+        vc.city = weakSelf.city;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     
@@ -321,6 +354,8 @@
 -(void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    _locService.delegate = self;
+    _geocodesearch.delegate = self;
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#FF9123"];
 
@@ -330,6 +365,9 @@
 -(void)viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:animated];
+    
+    _locService.delegate = nil;
+    _geocodesearch.delegate = nil;
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#F2F2F2"];
 //
@@ -351,6 +389,77 @@
 {
     [self searchTFAction];
     return NO;
+}
+
+
+//实现相关delegate 处理位置信息更新
+//处理方向变更信息
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+    NSLog(@"heading is %@",userLocation.heading);
+}
+
+//处理位置坐标更新
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    //    [_locService stopUserLocationService];//定位完成停止位置更新(导致反检索失败)
+    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    
+    
+    //地理反编码
+    BMKReverseGeoCodeOption *reverseGeocodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
+    
+    reverseGeocodeSearchOption.reverseGeoPoint = userLocation.location.coordinate;
+    
+    BOOL flag = [_geocodesearch reverseGeoCode:reverseGeocodeSearchOption];
+    
+    if(flag){
+        
+        NSLog(@"反geo检索发送成功");
+        
+        [_locService stopUserLocationService];
+        
+    }else{
+        
+        NSLog(@"反geo检索发送失败");
+        
+    }
+}
+
+
+#pragma mark -------------地理反编码的delegate---------------
+
+-(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
+
+{
+    NSLog(@"%@----%i",result,error);
+    
+    if (result) {
+        
+        self.city = result.addressDetail.city;
+        //        NSLog(@"address:%@----%@",result.addressDetail,result.address);
+
+        
+
+    }
+
+    
+    
+    //addressDetail:     层次化地址信息
+    
+    //address:    地址名称
+    
+    //businessCircle:  商圈名称
+    
+    // location:  地址坐标
+    
+    //  poiList:   地址周边POI信息，成员类型为BMKPoiInfo
+    
+    //    for (BMKPoiInfo *info in result.poiList) {
+    //        NSLog(@"address:%@----%@",info.name,info.address);
+    //
+    //    }
+    
 }
     
 - (void)getSelectItems
@@ -380,5 +489,8 @@
     }];
     
 }
+
+
+
 
 @end

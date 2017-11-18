@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^PlaceBlock)(NSString *place);
+typedef void(^PlaceBlock)(NSDictionary *dic);
 
 @interface PlaceView : UIView<UICollectionViewDelegate,UICollectionViewDataSource>
 

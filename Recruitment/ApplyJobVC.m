@@ -91,6 +91,9 @@
         _searchBar.text = self.searchText;
 
     }
+    else {
+        self.searchText = @"";
+    }
 //    _searchBar.backgroundColor = [UIColor redColor];
     
     // 边框设置
@@ -257,7 +260,10 @@
         NSString *jsonStr = [NSString dictionaryToJson:self.data];
         [paraDic setValue:jsonStr forKey:@"data"];
     }
-//    [paraDic setValue:@87 forKey:@"cateid"];
+    
+    
+    [paraDic setValue:self.city forKey:@"city"];
+    [paraDic setValue:[InfoCache unarchiveObjectWithFile:@"siteId"] forKey:@"siteId"];
 
     NSLog(@"paraDic:%@",paraDic);
     

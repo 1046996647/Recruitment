@@ -18,8 +18,11 @@
         
         self.backgroundColor = [UIColor colorWithRed:108/255.0 green:108/255.0 blue:108/255.0 alpha:.4];
         
-        self.dataArr = @[@"永康",@"金华",@"武义",@"中国五金人才网",];
-        
+        self.dataArr = @[@{@"site":@"永康",@"siteId":@"2"},
+                         @{@"site":@"金华",@"siteId":@"6"},
+                         @{@"site":@"武义",@"siteId":@"4"},
+                         @{@"site":@"中国五金人才网",@"siteId":@"4"}];
+
         // 这样会有冲突
 //        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
 //        [self addGestureRecognizer:tap];
@@ -78,7 +81,9 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HotJobCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellID" forIndexPath:indexPath];
-    cell.jobLab.text = self.dataArr[indexPath.row];
+    
+    NSDictionary *dic = self.dataArr[indexPath.row];
+    cell.jobLab.text = dic[@"site"];
     return cell;
     
 }
