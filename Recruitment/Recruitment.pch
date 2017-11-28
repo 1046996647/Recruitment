@@ -12,6 +12,14 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <NIMSDK/NIMSDK.h>
+//#import <NIMAVChat/NIMAVChat.h>
+#import "NTESGlobalMacro.h"
+#import "NIMKit.h"
+
 #define Person @"Person"
 #define SelectItem @"SelectItem"
 #define SelectItemJob @"SelectItemJob"
@@ -35,3 +43,4 @@
 
 
 #endif /* HealthManagement_pch */
+#endif

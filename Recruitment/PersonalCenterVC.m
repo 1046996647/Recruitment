@@ -50,10 +50,11 @@
     [btn addSubview:userBtn];
     [btn addSubview:label];
     
-    self.dataArr = @[@[@{@"image":@"23",@"title":@"我的收藏"},
-//                       @{@"image":@"109",@"title":@"我的关注"}
+    self.dataArr = @[@[@{@"image":@"23",@"title":@"我的收藏"}
+//                       ,@{@"image":@"109",@"title":@"我的关注"}
                        ],
-                     @[@{@"image":@"108",@"title":@"订阅管理"},@{@"image":@"107",@"title":@"薪资测评"}
+                     @[@{@"image":@"108",@"title":@"订阅管理"}
+//                       ,@{@"image":@"107",@"title":@"薪资测评"}
                        ],
                      @[@{@"image":@"106",@"title":@"联系客服"},@{@"image":@"105",@"title":@"意见反馈"}
                        ],

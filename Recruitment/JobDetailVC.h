@@ -14,5 +14,6 @@
 @property(nonatomic,assign) NSInteger type;
 
 @property (nonatomic,strong) JobModel *model;
+@property (nonatomic,strong) NSString *compChatId;
 
 @end

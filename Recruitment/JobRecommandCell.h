@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HXTagsView.h"
+#import "JobModel.h"
 
 @interface JobRecommandCell : UITableViewCell
 
@@ -20,5 +21,6 @@
 
 @property(nonatomic,strong) UIImageView *chatView;
 @property(nonatomic,strong) HXTagsView *tagsView;
+@property(nonatomic,strong) JobModel *model;
 
 @end

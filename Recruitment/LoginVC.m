@@ -8,6 +8,8 @@
 
 #import "LoginVC.h"
 #import "RegisterVC.h"
+#import "AppDelegate.h"
+
 
 @interface LoginVC ()
 
@@ -66,8 +68,6 @@
     //    [tf addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventEditingChanged];
     _phone.layer.masksToBounds = YES;
     [self.view addSubview:_phone];
-    _phone.leftViewMode = UITextFieldViewModeAlways;
-    _phone.leftView = leftView;
     
     _phone.text = [InfoCache unarchiveObjectWithFile:@"userid"];
 
@@ -100,8 +100,6 @@
     [self.view addSubview:_password];
     _password.rightViewMode = UITextFieldViewModeAlways;
     _password.rightView = rightView;
-    _password.leftViewMode = UITextFieldViewModeAlways;
-    _password.leftView = leftView;
     _password.secureTextEntry = YES;
     
     UIButton *loginBtn = [UIButton buttonWithframe:CGRectMake(_password.left, _password.bottom+23, _phone.width, _phone.height) text:@"登录" font:[UIFont systemFontOfSize:16] textColor:@"FFFFFF" backgroundColor:@"#FDA326" normal:nil selected:nil];
@@ -174,6 +172,19 @@
             [InfoCache archiveObject:responseObject[@"token"] toFile:@"token"];
             
             [self get_ui_info:notification];
+            
+            // 云信
+            [InfoCache archiveObject:responseObject[@"data"][@"accToken"] toFile:@"accToken"];
+            [InfoCache archiveObject:responseObject[@"data"][@"accid"] toFile:@"accid"];
+            [[NIMSDK sharedSDK].loginManager login:responseObject[@"data"][@"accid"] token:responseObject[@"data"][@"accToken"] completion:^(NSError *error) {
+                if (!error) {
+                    NSLog(@"登录成功");
+                    
+                }else{
+                    NSLog(@"登录失败");
+                }
+            }];
+
         }
         
 

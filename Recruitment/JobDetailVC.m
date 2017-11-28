@@ -14,6 +14,7 @@
 #import "NSStringExt.h"
 #import "ShareVC.h"
 #import "LoginVC.h"
+#import "NTESSessionViewController.h"
 
 
 @interface JobDetailVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -237,21 +238,59 @@
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreen_Height-64-40, kScreen_Width, 40)];
     [self.view addSubview:bottomView];
     
-    UIButton *phoneBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width/2, bottomView.height) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:@"19" selected:nil];
-    [bottomView addSubview:phoneBtn];
-    [phoneBtn addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *phoneBtn = nil;
+    UIButton *chatBtn = nil;
+    if (self.compChatId) {
+        phoneBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width/2/2, bottomView.height) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:@"19" selected:nil];
+        [bottomView addSubview:phoneBtn];
+        [phoneBtn addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        chatBtn = [UIButton buttonWithframe:CGRectMake(phoneBtn.right, 0, kScreen_Width/2/2, bottomView.height) text:@"和他聊天" font:[UIFont systemFontOfSize:14] textColor:@"#FF9123" backgroundColor:@"#FFFFFF" normal:@"20" selected:nil];
+        [bottomView addSubview:chatBtn];
+        [chatBtn addTarget:self action:@selector(chatAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(chatBtn.right, phoneBtn.top, kScreen_Width/2, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
+        [bottomView addSubview:applyBtn];
+        [applyBtn addTarget:self action:@selector(applyAction) forControlEvents:UIControlEventTouchUpInside];
+        applyBtn.userInteractionEnabled = YES;
+        self.applyBtn = applyBtn;
+    }
+    else {
+        phoneBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width/2, bottomView.height) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:@"19" selected:nil];
+        [bottomView addSubview:phoneBtn];
+        [phoneBtn addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(phoneBtn.width, phoneBtn.top, phoneBtn.width, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
+        [bottomView addSubview:applyBtn];
+        [applyBtn addTarget:self action:@selector(applyAction) forControlEvents:UIControlEventTouchUpInside];
+        applyBtn.userInteractionEnabled = YES;
+        self.applyBtn = applyBtn;
+    }
+
     
-    UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(phoneBtn.width, phoneBtn.top, phoneBtn.width, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
-    [bottomView addSubview:applyBtn];
-    [applyBtn addTarget:self action:@selector(applyAction) forControlEvents:UIControlEventTouchUpInside];
-    applyBtn.userInteractionEnabled = YES;
-    self.applyBtn = applyBtn;
     
     if (self.model.resume.integerValue == 1) {
-        applyBtn.userInteractionEnabled = NO;
-        applyBtn.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
+        self.applyBtn.userInteractionEnabled = NO;
+        self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
 
     }
+}
+
+- (void)chatAction
+{
+    
+    PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
+    if (!person) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
+    
+    //构造会话
+    NIMSession *session = [NIMSession session:self.compChatId type:NIMSessionTypeP2P];
+    NTESSessionViewController *sessionVC = [[NTESSessionViewController alloc] initWithSession:session];
+    [self.navigationController pushViewController:sessionVC animated:YES];
 }
 
 - (void)shareAction

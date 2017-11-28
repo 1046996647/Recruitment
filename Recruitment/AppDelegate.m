@@ -10,6 +10,13 @@
 #import "IQKeyboardManager.h"
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
 
+#import <UserNotifications/UserNotifications.h>
+
+
+#import "NTESCellLayoutConfig.h"
+#define NIMSDKAppKey @"a99978b70ffcf627c58dcada5eb78921"
+#define NIMSDKCerName @"Recruitment"
+
 @interface AppDelegate ()<BMKGeneralDelegate>
 
 @property (strong, nonatomic) BMKMapManager *mapManager;
@@ -52,10 +59,81 @@
         NSLog(@"manager start failed!");
     }
     
+    // 云信
+    [[NIMSDKConfig sharedConfig] setEnabledHttpsForInfo:NO];
+    
+    //注册APP，请将 NIMSDKAppKey 换成您自己申请的App Key
+    [[NIMSDK sharedSDK] registerWithAppID:NIMSDKAppKey cerName:NIMSDKCerName];
+    
+    //    //需要自定义消息时使用
+    //    [NIMCustomObject registerCustomDecoder:[[NTESAttachmentDecoder alloc]init]];
+    
+    //开启控制台调试
+    [[NIMSDK sharedSDK] enableConsoleLog];
+    
+    //注入 NIMKit 布局管理器
+    [[NIMKit sharedKit] registerLayoutConfig:[NTESCellLayoutConfig new]];
+    
+    // 推送注册
+    [self registerPushService];
+    
+    // 登录网易云
+    [self loginNetCloud];
     
     return YES;
 }
 
+
+- (void)loginNetCloud
+{
+    NSString *account = [InfoCache unarchiveObjectWithFile:@"accid"];
+    NSString *token = [InfoCache unarchiveObjectWithFile:@"accToken"];
+    
+
+    if (account.length>0 && token.length>0) {
+        [[[NIMSDK sharedSDK] loginManager] autoLogin:account token:token];
+
+    }
+    
+}
+
+#pragma mark - misc
+- (void)registerPushService
+{
+    if (@available(iOS 11.0, *))
+    {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (!granted)
+            {
+                //                [[UIApplication sharedApplication].keyWindow makeToast:@"请开启推送功能否则无法收到推送通知" duration:2.0 position:CSToastPositionCenter];
+            }
+        }];
+    }
+    else
+    {
+        UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types
+                                                                                 categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    
+    //pushkit
+    //    PKPushRegistry *pushRegistry = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
+    //    pushRegistry.delegate = self;
+    //    pushRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+    
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [[NIMSDK sharedSDK] updateApnsToken:deviceToken];
+    
+    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken:  %@", deviceToken);
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -66,6 +144,9 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    NSInteger count = [[[NIMSDK sharedSDK] conversationManager] allUnreadCount];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
 }
 
 

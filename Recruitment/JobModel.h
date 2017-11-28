@@ -36,6 +36,8 @@
 @property (nonatomic,strong) NSArray *related_work;
 @property (nonatomic,strong) NSString *resume; // 1已投递  0 未投递
 
+@property (nonatomic,strong) NSString *compChatId; 
+
 
 // 公司详情
 @property (nonatomic,strong) NSString *type;

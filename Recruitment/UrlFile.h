@@ -42,6 +42,9 @@
 // 2.1	搜索职位
 #define Get_jobs_list  [NSString stringWithFormat:@"%@Jobs/get_jobs_list",BaseUrl]
 
+// 2.10    查看可约聊职位
+#define Get_chatable_job  [NSString stringWithFormat:@"%@Jobs/get_chatable_job",BaseUrl]
+
 // 2.1    申请职位
 #define Send_resume  [NSString stringWithFormat:@"%@Resume/send_resume",BaseUrl]
 

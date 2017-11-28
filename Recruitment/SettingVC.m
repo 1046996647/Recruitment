@@ -61,6 +61,11 @@
 //    AppDelegate *appDelegate = [AppDelegate share];
 //    [appDelegate.tabVC selectController:0];
     
+    [[[NIMSDK sharedSDK] loginManager] logout:^(NSError *error)
+     {
+         //                 extern NSString *NTESNotificationLogout;
+         //                 [[NSNotificationCenter defaultCenter] postNotificationName:NTESNotificationLogout object:nil];
+     }];
 }
 
 #pragma mark - UITableViewDataSource

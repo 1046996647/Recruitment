@@ -32,12 +32,13 @@
         bottomBtn.tag = 1;
         [self.contentView addSubview:bottomBtn];
         [bottomBtn addTarget:self action:@selector(pushAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-        _jobLab = [UILabel labelWithframe:CGRectMake(13, 10, 150, 20) text:@"福田店面销售代表" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
-        [self.contentView addSubview:_jobLab];
+
         
-        _moneyLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-34-12, 12, 34, 18) text:@"6-7k" font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentRight textColor:@"#CE4A12"];
+        _moneyLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-90-12, 12, 90, 18) text:@"" font:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentRight textColor:@"#CE4A12"];
         [self.contentView addSubview:_moneyLab];
+        
+        _jobLab = [UILabel labelWithframe:CGRectMake(13, 10, _moneyLab.left-13-10, 20) text:@"" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#333333"];
+        [self.contentView addSubview:_jobLab];
         
 //        //单行滚动  ===============
 //        NSArray *tagAry = @[@"薪假",@"公游",@"保险"];
@@ -71,7 +72,7 @@
         [self.contentView addSubview:_companyLab];
         
         // 公司地址
-        UIButton *decBtn = [UIButton buttonWithframe:CGRectMake(_companyLab.left, _companyLab.bottom+6, 82, 17) text:@"永嘉" font:[UIFont systemFontOfSize:12] textColor:@"#999999" backgroundColor:nil normal:@"Shape" selected:nil];
+        UIButton *decBtn = [UIButton buttonWithframe:CGRectMake(_companyLab.left, _companyLab.bottom+6, 120, 17) text:@"永嘉" font:[UIFont systemFontOfSize:12] textColor:@"#999999" backgroundColor:nil normal:@"Shape" selected:nil];
         decBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
         [self.contentView addSubview:decBtn];
         self.decBtn = decBtn;
@@ -96,14 +97,27 @@
     if (btn.tag == 0) {
         JobDetailVC *vc = [[JobDetailVC alloc] init];
         vc.title = @"职位详情";
-        vc.type = 1;
+        vc.compChatId = _model.compChatId;
+        vc.model = _model;
         [self.viewController.navigationController pushViewController:vc animated:YES];
     }
     else {
         CompanyDetailVC *vc = [[CompanyDetailVC alloc] init];
         vc.title = @"公司详情";
+        vc.compChatId = _model.compChatId;
+        vc.model = _model;
         [self.viewController.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)setModel:(JobModel *)model
+{
+    _model = model;
+    
+    _jobLab.text = model.job_name;
+    _companyLab.text = model.company_name;
+    _moneyLab.text = [NSString stringWithFormat:@"%@",model.pay];
+    [self.decBtn setTitle:model.area forState:UIControlStateNormal];
 }
 
 @end

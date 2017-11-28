@@ -73,8 +73,7 @@
     //    [tf addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventEditingChanged];
     _phone.layer.masksToBounds = YES;
     [self.view addSubview:_phone];
-    _phone.leftViewMode = UITextFieldViewModeAlways;
-    _phone.leftView = leftView;
+
     
     // 密码
     leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45+10, 45)];
@@ -105,8 +104,6 @@
     [self.view addSubview:_password];
     _password.rightViewMode = UITextFieldViewModeAlways;
     _password.rightView = rightView;
-    _password.leftViewMode = UITextFieldViewModeAlways;
-    _password.leftView = leftView;
     _password.secureTextEntry = YES;
     
     // 验证码
@@ -143,8 +140,7 @@
     [self.view addSubview:_validate];
     _validate.rightViewMode = UITextFieldViewModeAlways;
     _validate.rightView = rightView;
-    _validate.leftViewMode = UITextFieldViewModeAlways;
-    _validate.leftView = leftView;
+
 //    _validate.secureTextEntry = YES;
     
     UIButton *loginBtn = [UIButton buttonWithframe:CGRectMake(_password.left, _validate.bottom+23, _phone.width, _phone.height) text:@"下一步" font:[UIFont systemFontOfSize:16] textColor:@"FFFFFF" backgroundColor:@"#FDA326" normal:nil selected:nil];
@@ -163,7 +159,7 @@
     }
     else {
         [loginBtn setTitle:@"确定" forState:UIControlStateNormal];
-
+        _password.placeholder = @"请输入6-16位新密码";
     }
     
     //倒计时通知事件
@@ -182,7 +178,7 @@
     }
     
     // 开始计时
-    [CountDownServer startCountDown:10 identifier:kCountDownForVerifyCode];
+    [CountDownServer startCountDown:60 identifier:kCountDownForVerifyCode];
     
     NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
     [paramDic  setValue:self.phone.text forKey:@"phone"];

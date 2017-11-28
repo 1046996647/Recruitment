@@ -10,6 +10,8 @@
 #import "JobDetailCell.h"
 #import "JobDetailVC.h"
 #import "ShareVC.h"
+#import "NTESSessionViewController.h"
+#import "LoginVC.h"
 
 
 @interface CompanyDetailVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -183,12 +185,40 @@
 //    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:nil];
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cellctionBtn];
     
-//    // 底部视图
+    // 底部视图
 //    UIButton *sahreBtn = [UIButton buttonWithframe:CGRectMake(0, kScreen_Height-64-40, kScreen_Width, 40) text:@"分享" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:@"Group 7" selected:nil];
 //    sahreBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
 //    [self.view addSubview:sahreBtn];
 //    [sahreBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (self.compChatId) {
+        
+        _tableView.height = kScreen_Height-64-40;
+        
+        UIButton *chatBtn = [UIButton buttonWithframe:CGRectMake(0, kScreen_Height-64-40, kScreen_Width, 40) text:@"和他聊天" font:[UIFont systemFontOfSize:14] textColor:@"#ffffff" backgroundColor:@"#FF9123" normal:@"chat" selected:nil];
+        chatBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+        chatBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
+        [self.view addSubview:chatBtn];
+        [chatBtn addTarget:self action:@selector(chatAction) forControlEvents:UIControlEventTouchUpInside];
+    }
 
+
+}
+
+- (void)chatAction
+{
+    PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
+    if (!person) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
+    
+    //构造会话
+    NIMSession *session = [NIMSession session:self.compChatId type:NIMSessionTypeP2P];
+    NTESSessionViewController *sessionVC = [[NTESSessionViewController alloc] initWithSession:session];
+    [self.navigationController pushViewController:sessionVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

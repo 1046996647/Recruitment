@@ -4,7 +4,7 @@
 
 --------------------------------------------------------------------------------------
 
-iOS 地图 SDK v3.3.1是适用于iOS系统移动设备的矢量地图开发包
+iOS 地图 SDK v3.4.2是适用于iOS系统移动设备的矢量地图开发包
 
 --------------------------------------------------------------------------------------
 
@@ -35,20 +35,23 @@ LBS云检索：支持查询存储在LBS云内的自有数据；
 
 --------------------------------------------------------------------------------------
  
-【 新 版 提 示 】
-【 注 意 】
-1、自v3.2.0起，百度地图iOS SDK全面支持HTTPS，需要广大开发者导入第三方openssl静态库：libssl.a和libcrypto.a（存放于thirdlib目录下）
-添加方法：在 TARGETS->Build Phases-> Link Binary With Libaries中点击“+”按钮，在弹出的窗口中点击“Add Other”按钮，选择libssl.a和libcrypto.a添加到工程中 。
-
-2、支持CocoaPods导入
-pod setup //更新CocoPods的本地库
-pod search BaiduMapKit  //下载最新地图SDK
-
-【 新 增 】
-[ 检 索 ]
-逆地理编码返回结果新增2个属性：cityCode(城市编码) 和adCode（行政区域编码）
-【 优 化 】
-1.增加重试机制，优化鉴权时长
-2.解决Xcode8.3编译时出现大量warning的问题
-3.swift Demo：swift语言升级为 swift v3.1，优化升级swift Demo。
+ 
+ 【 新 版 提 示 】
+ 【 注 意 】
+ 1、自v3.2.0起，百度地图iOS SDK全面支持HTTPS，需要广大开发者导入第三方openssl静态库：libssl.a和libcrypto.a（存放于thirdlib目录下）
+ 添加方法：在 TARGETS->Build Phases-> Link Binary With Libaries中点击“+”按钮，在弹出的窗口中点击“Add Other”按钮，选择libssl.a和libcrypto.a添加到工程中 。
+ 
+ 2、支持CocoaPods导入
+ pod setup //更新CocoPods的本地库
+ pod search BaiduMapKit  //查看最新地图SDK
+ 
+ 【修复】
+ 1.修复多页面多地图场景下，切换页面导致的crash问题。
+ 2.修复检索对象对delegate的强引用问题。
+ 3.修复在一些罕见场景下，Bugly报告的crash问题。
+ 4.修复第一次通过setBuildingsEnabled接口设置不显示3D楼块效果失效的BUG。
+ 
+ 【优化】
+ 1.删除annotation后，不再删除其对应的annotationView的subView。开发者dequeue出可重用的annotationView后，为了避免内容堆叠问题，可以自行去避免，如remove subview或者使用不同的reuseIdentifier等。
+ 2.每个reuseIdentifier可缓存多个annotationView，当开发者removeAnnotation时，SDK会将对应的annotationView加入缓存队列。
 

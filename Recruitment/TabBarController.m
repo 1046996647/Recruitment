@@ -11,7 +11,7 @@
 
 #import "HomeVC.h"
 #import "ResumeVC.h"
-#import "MessageVC.h"
+#import "SessionListViewController.h"
 #import "PersonalCenterVC.h"
 
 @interface TabBarController ()<UITabBarControllerDelegate,UINavigationControllerDelegate>
@@ -60,7 +60,7 @@
     self.delegate = self;
     
     [self setChildViewController:[[HomeVC alloc]init] Title:@"首页" Image:@"62" SelectedImage:@"63"];
-    [self setChildViewController:[[MessageVC alloc]init] Title:@"消息" Image:@"61" SelectedImage:@"60"];
+    [self setChildViewController:[[SessionListViewController alloc]init] Title:@"消息" Image:@"61" SelectedImage:@"60"];
 
     [self setChildViewController:[[ResumeVC alloc]init] Title:@"简历" Image:@"59" SelectedImage:@"58"];
     

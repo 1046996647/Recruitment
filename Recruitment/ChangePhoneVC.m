@@ -109,7 +109,7 @@
     }
     
     // 开始计时
-    [CountDownServer startCountDown:10 identifier:kCountDownForVerifyCode];
+    [CountDownServer startCountDown:60 identifier:kCountDownForVerifyCode];
     
     NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
     [paramDic  setValue:self.phone.text forKey:@"phone"];

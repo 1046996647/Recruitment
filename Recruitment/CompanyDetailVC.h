@@ -13,6 +13,7 @@
 @interface CompanyDetailVC : BaseViewController
 
 @property (nonatomic,strong) JobModel *model;
+@property (nonatomic,strong) NSString *compChatId;
 
 
 @end
