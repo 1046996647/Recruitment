@@ -147,6 +147,8 @@
 		F75A453D1F67B6DC00B0790C /* ResumeManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453C1F67B6DC00B0790C /* ResumeManageVC.m */; };
 		F75A45401F67BD4F00B0790C /* JobRecommandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */; };
 		F75A45431F67BEA000B0790C /* JobRecommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A45421F67BEA000B0790C /* JobRecommandCell.m */; };
+		F762FF0A1FD4DC8A00A722AB /* JobView1cell.m in Sources */ = {isa = PBXBuildFile; fileRef = F762FF091FD4DC8A00A722AB /* JobView1cell.m */; };
+		F762FF0D1FD50E5C00A722AB /* JobViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F762FF0C1FD50E5C00A722AB /* JobViewCell.m */; };
 		F76EDA251F7C9BB0006B9627 /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F76EDA241F7C9BB0006B9627 /* HomeModel.m */; };
 /* End PBXBuildFile section */
 
@@ -431,6 +433,10 @@
 		F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobRecommandVC.m; sourceTree = "<group>"; };
 		F75A45411F67BEA000B0790C /* JobRecommandCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobRecommandCell.h; sourceTree = "<group>"; };
 		F75A45421F67BEA000B0790C /* JobRecommandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobRecommandCell.m; sourceTree = "<group>"; };
+		F762FF081FD4DC8A00A722AB /* JobView1cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobView1cell.h; sourceTree = "<group>"; };
+		F762FF091FD4DC8A00A722AB /* JobView1cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobView1cell.m; sourceTree = "<group>"; };
+		F762FF0B1FD50E5C00A722AB /* JobViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobViewCell.h; sourceTree = "<group>"; };
+		F762FF0C1FD50E5C00A722AB /* JobViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobViewCell.m; sourceTree = "<group>"; };
 		F76806AA1FC562EC00981F25 /* NTESGlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESGlobalMacro.h; sourceTree = "<group>"; };
 		F76EDA231F7C9BB0006B9627 /* HomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
 		F76EDA241F7C9BB0006B9627 /* HomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
@@ -758,8 +764,12 @@
 				F73C37D41F613D1B00027289 /* HotJobCell.m */,
 				F72FF8BA1F625EA600E3AA92 /* JobView.h */,
 				F72FF8BB1F625EA600E3AA92 /* JobView.m */,
+				F762FF0B1FD50E5C00A722AB /* JobViewCell.h */,
+				F762FF0C1FD50E5C00A722AB /* JobViewCell.m */,
 				F72FF8BD1F6270BF00E3AA92 /* JobView1.h */,
 				F72FF8BE1F6270BF00E3AA92 /* JobView1.m */,
+				F762FF081FD4DC8A00A722AB /* JobView1cell.h */,
+				F762FF091FD4DC8A00A722AB /* JobView1cell.m */,
 				F72FF8C31F6282EB00E3AA92 /* JobDetailCell.h */,
 				F72FF8C41F6282EB00E3AA92 /* JobDetailCell.m */,
 				F74197861F63AB8E00AD5F2C /* PlaceView.h */,
@@ -1289,6 +1299,7 @@
 				F72FF8B61F62314100E3AA92 /* ApplyJobVC.m in Sources */,
 				F74243111F68F959009AA2E5 /* RegisterVC.m in Sources */,
 				F73C37BF1F61134500027289 /* CustomerScrollView.m in Sources */,
+				F762FF0A1FD4DC8A00A722AB /* JobView1cell.m in Sources */,
 				F7571AE71FC5677C00EAE623 /* NTESVideoViewController.m in Sources */,
 				F7420FE41F6B7638002A20B8 /* NSDate+BRAdd.m in Sources */,
 				F73C37C81F61252E00027289 /* JobTableView.m in Sources */,
@@ -1341,6 +1352,7 @@
 				F73C37B41F60EFCA00027289 /* MessageCell.m in Sources */,
 				F70EF4F21F5F85F7001C65A7 /* UIViewExt.m in Sources */,
 				F7571ACF1FC5677C00EAE623 /* UIImage+NTESColor.m in Sources */,
+				F762FF0D1FD50E5C00A722AB /* JobViewCell.m in Sources */,
 				F72FF8BF1F6270BF00E3AA92 /* JobView1.m in Sources */,
 				F75861571F8F12950065FE56 /* EmergencyEnterpriseVC.m in Sources */,
 				F73507681F78CC0C00F4F4A2 /* SystemMsgDetailVC.m in Sources */,

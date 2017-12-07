@@ -15,10 +15,12 @@ typedef void(^JobSendBlock1)(NSString *text, NSInteger index);
 
 @property(nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSArray *dataArr;
+@property (nonatomic,strong) UIView *bottomView;
 
 @property (nonatomic,strong) JobSendBlock1 block;
 @property(nonatomic,assign) NSInteger aTag;
 @property (nonatomic,strong) NSArray *selectArr;
+@property (nonatomic,strong) NSString *content;
 
 
 @end

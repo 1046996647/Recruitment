@@ -46,27 +46,34 @@
         _timeLab = [UILabel labelWithframe:CGRectMake(kScreen_Width-39-12, _kmLab.bottom+6, 39, 17) text:@"" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:@"#999999"];
         [self.contentView addSubview:_timeLab];
         
-//        //单行滚动  ===============
-//        NSArray *tagAry = @[@"薪假",@"公游",@"保险"];
-//        //    单行不需要设置高度,内部根据初始化参数自动计算高度
-//        _tagsView = [[HXTagsView alloc] initWithFrame:CGRectMake(_jobLab.left, _companyLab.bottom, 150, 0)];
-//        _tagsView.type = 1;
-//        _tagsView.tagHorizontalSpace = 5.0;
-//        _tagsView.showsHorizontalScrollIndicator = NO;
-//        _tagsView.tagHeight = 15.0;
-//        _tagsView.titleSize = 10.0;
-//        _tagsView.tagOriginX = 0.0;
-//        _tagsView.titleColor = [UIColor colorWithHexString:@"#666666"];
-//        _tagsView.cornerRadius = _tagsView.tagHeight/2;
-//        _tagsView.userInteractionEnabled = NO;
-//        _tagsView.backgroundColor = [UIColor clearColor];
-//        _tagsView.borderColor = [UIColor colorWithHexString:@"#FFDDB0"];
-//        [_tagsView setTagAry:tagAry delegate:nil];
-//        [self.contentView addSubview:_tagsView];
-        
+        [self.contentView addSubview:self.tagsView];
+
         
     }
     return self;
+}
+
+- (HXTagsView *)tagsView
+{
+    if (!_tagsView) {
+        //        NSArray *tagAry = @[@"薪假",@"公游",@"保险"];
+        //    单行不需要设置高度,内部根据初始化参数自动计算高度
+        _tagsView = [[HXTagsView alloc] initWithFrame:CGRectMake(13, _companyLab.bottom, _timeLab.left-13-5, 0)];
+        _tagsView.type = 0;
+        _tagsView.tagHorizontalSpace = 8.0;
+        _tagsView.showsHorizontalScrollIndicator = NO;
+        _tagsView.tagHeight = 22;
+        _tagsView.titleSize = 12.0;
+        _tagsView.tagOriginX = 0.0;
+        _tagsView.titleColor = [UIColor colorWithHexString:@"#666666"];
+        _tagsView.cornerRadius = _tagsView.tagHeight/2;
+        _tagsView.userInteractionEnabled = NO;
+        _tagsView.backgroundColor = [UIColor clearColor];
+        _tagsView.borderColor = [UIColor colorWithHexString:@"#FFDDB0"];
+        //        [_tagsView setTagAry:tagAry delegate:nil];
+    }
+    
+    return _tagsView;
 }
 
 - (void)selectAction:(UIButton *)btn
@@ -93,6 +100,25 @@
 
 
     }
+    
+    if (_model.tag) {
+        
+        _tagsView.hidden = NO;
+        
+        NSArray *tagArr = [_model.tag componentsSeparatedByString:@","];
+
+        [_tagsView setTagAry:tagArr delegate:nil];
+        
+        
+        _model.cellHeight = _tagsView.bottom;
+
+
+    }
+    else {
+        _tagsView.hidden = YES;
+
+    }
+    
     
     _jobLab.text = model.job_name;
     _companyLab.text = model.company_name;

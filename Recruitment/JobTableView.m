@@ -48,8 +48,15 @@
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90;
-}
+    
+    JobModel *model = self.dataArr[indexPath.row];
+    if (model.cellHeight > 0) {
+        return model.cellHeight;
+    }
+    else {
+        return 90;
+        
+    }}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -18,6 +18,8 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) NSMutableArray *modelArr;
+@property(nonatomic,strong) UIButton *cellctionBtn;
+@property(nonatomic,strong) NSString *companyId;
 
 
 @end
@@ -31,7 +33,7 @@
     
     [self get_company_detail];
     
-
+    self.companyId = self.model.companyId;
 }
 
 // 3.1	公司详情
@@ -142,6 +144,26 @@
     view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
     [headView addSubview:view];
     
+    // 联系电话
+    UIButton *phoneBtn = [UIButton buttonWithframe:CGRectMake(logoView.left, view.bottom+9, 82, 17) text:@"联系电话" font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:@"19" selected:nil];
+    phoneBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+    [headView addSubview:phoneBtn];
+    
+    UIButton *phoneBtn1 = [UIButton buttonWithframe:CGRectMake(0, phoneBtn.top, kScreen_Width, 60) text:nil font:nil textColor:nil backgroundColor:@"" normal:nil selected:nil];
+    [headView addSubview:phoneBtn1];
+    [phoneBtn1 addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.model.tele = @"17736273234";
+    UILabel *phoneLab = [UILabel labelWithframe:CGRectMake(decBtn.left, phoneBtn.bottom+9, kScreen_Width-24, 16) text:self.model.tele font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+    [headView addSubview:phoneLab];
+    
+    
+    UIImageView *jiantouView = [UIImageView imgViewWithframe:CGRectMake(kScreen_Width-14-8, phoneBtn.top+15, 8, 17) icon:@"24"];
+    [headView addSubview:jiantouView];
+    
+    view = [[UIView alloc] initWithFrame:CGRectMake(0, phoneLab.bottom+7, kScreen_Width, 8)];
+    view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
+    [headView addSubview:view];
     
     // 公司介绍
     UIButton *sameBtn = [UIButton buttonWithframe:CGRectMake(jobDecLab.left, view.bottom+9, 82, 17) text:@"公司介绍" font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:@"21" selected:nil];
@@ -181,9 +203,20 @@
     [self.view addSubview:_tableView];
     _tableView.tableHeaderView = headView;
     
-//    // 右上角按钮
-//    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:nil];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cellctionBtn];
+    // 右上角按钮
+    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(0, 0, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:@"18"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cellctionBtn];
+    self.cellctionBtn = cellctionBtn;
+    [cellctionBtn addTarget:self action:@selector(cellctionAction) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    if (_model.favs.integerValue == 0) {
+        cellctionBtn.selected = NO;
+    }
+    else {
+        cellctionBtn.selected = YES;
+        
+    }
     
     // 底部视图
 //    UIButton *sahreBtn = [UIButton buttonWithframe:CGRectMake(0, kScreen_Height-64-40, kScreen_Width, 40) text:@"分享" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:@"Group 7" selected:nil];
@@ -203,6 +236,60 @@
     }
 
 
+}
+
+- (void)cellctionAction
+
+{
+    PersonModel *model = [InfoCache unarchiveObjectWithFile:Person];
+    if (!model) {
+        LoginVC *vc = [[LoginVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
+    
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setValue:self.companyId forKey:@"companyId"];
+    
+    if (_model.favs.integerValue == 0) {
+        //        [paraDic setValue:@"0" forKey:@"del"];
+    }
+    else {
+        [paraDic setValue:@(1) forKey:@"del"];// 取消收藏
+        
+    }
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Company_concern dic:paraDic showHUD:YES Succed:^(id responseObject) {
+        
+        if ([responseObject[@"message"] isEqualToString:@"关注成功"]) {
+            self.cellctionBtn.selected = YES;
+            _model.favs = @"1";
+        }
+        else {
+            self.cellctionBtn.selected = NO;
+            _model.favs = @"0";
+            
+        }
+        
+        [self.view makeToast:responseObject[@"message"]];
+        
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
+}
+
+- (void)callAction
+{
+    //    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",_model.tele];
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.model.tele];
+    UIWebView *callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [[UIApplication sharedApplication].keyWindow addSubview:callWebview];
+    
 }
 
 - (void)chatAction

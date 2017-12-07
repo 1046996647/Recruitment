@@ -18,6 +18,7 @@
 @property (nonatomic,strong) NSString *job_name;
 @property (nonatomic,strong) NSString *pay;
 @property (nonatomic,strong) NSString *nums;
+@property (nonatomic,strong) NSString *tag;
 @property (nonatomic,strong) NSString *update_time;
 @property (nonatomic,assign) BOOL isSelected;
 
@@ -50,5 +51,8 @@
 @property (nonatomic,strong) NSString *addTime;
 @property (nonatomic,strong) NSString *inviteId;
 @property (nonatomic,strong) NSString *jobName;
+
+@property(nonatomic,assign) NSInteger cellHeight;
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JobModel.h"
 
 @interface MyAttentionCell : UITableViewCell
 
@@ -14,6 +15,7 @@
 @property(nonatomic,strong) UILabel *jobLab;
 @property(nonatomic,strong) UILabel *companyLab;
 @property(nonatomic,strong) UILabel *personsLab;
-//@property(nonatomic,strong) UILabel *kmLab;
 @property(nonatomic,strong) UILabel *timeLab;
+@property(nonatomic,strong) JobModel *model;
+
 @end

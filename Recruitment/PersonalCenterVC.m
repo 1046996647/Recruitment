@@ -51,7 +51,7 @@
     [btn addSubview:label];
     
     self.dataArr = @[@[@{@"image":@"23",@"title":@"我的收藏"}
-//                       ,@{@"image":@"109",@"title":@"我的关注"}
+                       ,@{@"image":@"109",@"title":@"我的关注"}
                        ],
                      @[@{@"image":@"108",@"title":@"订阅管理"}
 //                       ,@{@"image":@"107",@"title":@"薪资测评"}
@@ -202,13 +202,13 @@
             [self.navigationController pushViewController:vc animated:YES];
             
         }
-//        if (indexPath.row == 1) {
-//            
-//            MyAttentionVC *vc = [[MyAttentionVC alloc] init];
-//            vc.title = @"我的关注";
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//        }
+        if (indexPath.row == 1) {
+            
+            MyAttentionVC *vc = [[MyAttentionVC alloc] init];
+            vc.title = @"我的关注";
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
     }
     if (indexPath.section == 1) {
         

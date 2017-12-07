@@ -57,11 +57,14 @@
 // 2.4    收藏职位
 #define Favs_job  [NSString stringWithFormat:@"%@Jobs/favs_job",BaseUrl]
 
-// 2.5    查看收藏职位
-#define Get_favs_job  [NSString stringWithFormat:@"%@Jobs/get_favs_job",BaseUrl]
+// 3.2    关注公司（删除关注）
+#define Company_concern  [NSString stringWithFormat:@"%@Company/company_concern",BaseUrl]
 
 // 2.5    查看收藏职位
 #define Get_favs_job  [NSString stringWithFormat:@"%@Jobs/get_favs_job",BaseUrl]
+
+// 3.3    获取关注列表
+#define Get_concern_list  [NSString stringWithFormat:@"%@/Company/get_concern_list",BaseUrl]
 
 // 3.1	公司详情
 #define Get_company_detail  [NSString stringWithFormat:@"%@Company/detail",BaseUrl]

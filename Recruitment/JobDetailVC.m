@@ -156,7 +156,7 @@
     [headView addSubview:companyLab];
     
     // @"五金机电 150-500人"
-    UILabel *decLab = [UILabel labelWithframe:CGRectMake(companyLab.left, companyLab.bottom+5, kScreen_Width-26-(logoView.right+7), 14) text:[NSString stringWithFormat:@"%@ %@",self.model.cate_name, _model.persons] font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+    UILabel *decLab = [UILabel labelWithframe:CGRectMake(companyLab.left, companyLab.bottom+5, kScreen_Width-26-(logoView.right+7), 14) text:self.model.cate_name font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [headView addSubview:decLab];
     
     UIImageView *jiantouView = [UIImageView imgViewWithframe:CGRectMake(kScreen_Width-14-8, decLab.center.y-7, 8, 17) icon:@"24"];
@@ -188,6 +188,31 @@
     jobDecLab.height = size.height;
     
     view = [[UIView alloc] initWithFrame:CGRectMake(0, jobDecLab.bottom+7, kScreen_Width, 8)];
+    view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
+    [headView addSubview:view];
+    
+    // 联系电话
+    UIButton *phoneBtn = [UIButton buttonWithframe:CGRectMake(logoView.left, view.bottom+9, 82, 17) text:@"联系电话" font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:@"19" selected:nil];
+    phoneBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+    [headView addSubview:phoneBtn];
+    
+    UIButton *phoneBtn1 = [UIButton buttonWithframe:CGRectMake(0, phoneBtn.top, kScreen_Width, 60) text:nil font:nil textColor:nil backgroundColor:@"" normal:nil selected:nil];
+    [headView addSubview:phoneBtn1];
+    [phoneBtn1 addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.model.tele = @"17736273234";
+    UILabel *phoneLab = [UILabel labelWithframe:CGRectMake(decBtn.left, phoneBtn.bottom+9, kScreen_Width-24, 16) text:self.model.tele font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+    [headView addSubview:phoneLab];
+    
+
+    
+    jiantouView = [UIImageView imgViewWithframe:CGRectMake(kScreen_Width-14-8, phoneBtn.top+15, 8, 17) icon:@"24"];
+    [headView addSubview:jiantouView];
+    
+
+    
+    // 相似职位
+    view = [[UIView alloc] initWithFrame:CGRectMake(0, phoneLab.bottom+7, kScreen_Width, 8)];
     view.backgroundColor = [UIColor colorWithHexString:@"#EFEFEF"];
     [headView addSubview:view];
     
@@ -238,29 +263,31 @@
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreen_Height-64-40, kScreen_Width, 40)];
     [self.view addSubview:bottomView];
     
-    UIButton *phoneBtn = nil;
+//    UIButton *phoneBtn = nil;
     UIButton *chatBtn = nil;
     if (self.compChatId) {
-        phoneBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width/2/2, bottomView.height) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:@"19" selected:nil];
-        [bottomView addSubview:phoneBtn];
-        [phoneBtn addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
+//        phoneBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width/2/2, bottomView.height) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:@"19" selected:nil];
+//        [bottomView addSubview:phoneBtn];
+//        [phoneBtn addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
         
-        chatBtn = [UIButton buttonWithframe:CGRectMake(phoneBtn.right, 0, kScreen_Width/2/2, bottomView.height) text:@"和他聊天" font:[UIFont systemFontOfSize:14] textColor:@"#FF9123" backgroundColor:@"#FFFFFF" normal:@"20" selected:nil];
+//        chatBtn = [UIButton buttonWithframe:CGRectMake(phoneBtn.right, 0, kScreen_Width/2/2, bottomView.height) text:@"和他聊天" font:[UIFont systemFontOfSize:14] textColor:@"#FF9123" backgroundColor:@"#FFFFFF" normal:@"20" selected:nil];
+        chatBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width/2, bottomView.height) text:@"和他聊天" font:[UIFont systemFontOfSize:14] textColor:@"#FF9123" backgroundColor:@"#FFFFFF" normal:@"20" selected:nil];
         [bottomView addSubview:chatBtn];
         [chatBtn addTarget:self action:@selector(chatAction) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(chatBtn.right, phoneBtn.top, kScreen_Width/2, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
+        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(chatBtn.right, chatBtn.top, kScreen_Width/2, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
         [bottomView addSubview:applyBtn];
         [applyBtn addTarget:self action:@selector(applyAction) forControlEvents:UIControlEventTouchUpInside];
         applyBtn.userInteractionEnabled = YES;
         self.applyBtn = applyBtn;
     }
     else {
-        phoneBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width/2, bottomView.height) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:@"19" selected:nil];
-        [bottomView addSubview:phoneBtn];
-        [phoneBtn addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
+//        phoneBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width/2, bottomView.height) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:@"19" selected:nil];
+//        [bottomView addSubview:phoneBtn];
+//        [phoneBtn addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(phoneBtn.width, phoneBtn.top, phoneBtn.width, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
+//        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(phoneBtn.width, phoneBtn.top, phoneBtn.width, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
+        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
         [bottomView addSubview:applyBtn];
         [applyBtn addTarget:self action:@selector(applyAction) forControlEvents:UIControlEventTouchUpInside];
         applyBtn.userInteractionEnabled = YES;
@@ -354,7 +381,7 @@
 - (void)callAction
 {
 //    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",_model.tele];
-    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"17736273234"];
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.model.tele];
     UIWebView *callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [[UIApplication sharedApplication].keyWindow addSubview:callWebview];

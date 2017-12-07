@@ -13,12 +13,15 @@
 #import "LoginVC.h"
 #import "NSStringExt.h"
 #import "MWWaveProgressView.h"
+#import "InvitedVC.h"
+#import "MyCollectionVC.h"
 
 
 @interface ResumeVC ()
 
 @property(nonatomic,strong) UIButton *forgetBtn;
 @property(nonatomic,strong) UIButton *forgetBtn1;
+@property(nonatomic,strong) UIButton *forgetBtn2;
 @property(nonatomic,strong) UILabel *perLabel;
 @property(nonatomic,strong) UILabel *remindLabel;
 @property(nonatomic,strong) MWWaveProgressView *waterWave;
@@ -37,15 +40,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-49)];
+    [self.view addSubview:scrollView];
+    // 适配iOS11(iOS11后隐藏导航栏的MJRefresh下拉刷新控件会漏出来)
+    if (@available(iOS 11.0, *)){
+        
+        [scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    }
+    
     UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(0, 0, kScreen_Width, 203) icon:@"111"];
-    [self.view addSubview:imgView];
+    [scrollView addSubview:imgView];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake((kScreen_Width-90)/2, 56, 90, 90)];
     view.layer.cornerRadius = view.height/2;
     view.layer.masksToBounds = YES;
     view.layer.borderColor = [UIColor colorWithHexString:@"#FF9938"].CGColor;
     view.layer.borderWidth = 1;
-    [self.view addSubview:view];
+    [scrollView addSubview:view];
     
     
     UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
@@ -53,7 +64,7 @@
     view1.layer.masksToBounds = YES;
     view1.backgroundColor = [UIColor colorWithHexString:@"#FF9634"];
     view1.center = view.center;
-    [self.view addSubview:view1];
+    [scrollView addSubview:view1];
     
     MWWaveProgressView *waterWave = [[MWWaveProgressView alloc] init];
     waterWave.frame = CGRectMake(0, 0, 80, 80);
@@ -64,7 +75,7 @@
     waterWave.speed = 0.07;
     waterWave.peak = 3;
     waterWave.backgroundColor = [UIColor colorWithHexString:@"#FF9634"];
-    [self.view addSubview:waterWave];
+    [scrollView addSubview:waterWave];
     self.waterWave = waterWave;
     [waterWave startWave];
     
@@ -73,22 +84,22 @@
     
     UILabel *perLabel = [UILabel labelWithframe:CGRectMake(0, 0, view1.width, 25) text:@"0%" font:[UIFont systemFontOfSize:18] textAlignment:NSTextAlignmentCenter textColor:@"#FFFFFF"];
     perLabel.center = view1.center;
-    [self.view addSubview:perLabel];
+    [scrollView addSubview:perLabel];
     self.perLabel = perLabel;
     
     UILabel *remindLabel = [UILabel labelWithframe:CGRectMake((kScreen_Width-111)/2, view.bottom+11, 111, 20) text:@"登入后可编辑简历" font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentCenter textColor:@"#FFFFFF"];
     remindLabel.backgroundColor = [UIColor colorWithHexString:@"#FF9634"];
     remindLabel.layer.cornerRadius = remindLabel.height/2;
     remindLabel.layer.masksToBounds = YES;
-    [self.view addSubview:remindLabel];
+    [scrollView addSubview:remindLabel];
     self.remindLabel = remindLabel;
     
     _labelArr = [NSMutableArray array];
-    NSArray *titleArr = @[@"HR查看",@"投递简历"];
+    NSArray *titleArr = @[@"HR查看",@"应聘记录"];
     for (int i=0; i<titleArr.count; i++) {
         
         UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(i*kScreen_Width/2, imgView.bottom, kScreen_Width/2, 54) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
-        [self.view addSubview:forgetBtn];
+        [scrollView addSubview:forgetBtn];
         self.forgetBtn = forgetBtn;
         forgetBtn.tag = i;
         [forgetBtn addTarget:self action:@selector(btnAction1:) forControlEvents:UIControlEventTouchUpInside];
@@ -115,7 +126,7 @@
     for (int i=0; i<titleArr1.count; i++) {
         
         UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(i*kScreen_Width/3, self.forgetBtn.bottom+14, kScreen_Width/3, 66) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:nil selected:nil];
-        [self.view addSubview:forgetBtn];
+        [scrollView addSubview:forgetBtn];
         self.forgetBtn1 = forgetBtn;
         [forgetBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         forgetBtn.tag = i;
@@ -130,14 +141,15 @@
     }
     
     _labelArr1 = [NSMutableArray array];
-    NSArray *titleArr2 = @[@"    委托投递",@"    简历状态"];
+    NSArray *titleArr2 = @[@"    委托投递",@"    简历状态",@"    收到邀请",@"    职位收藏"];
     for (int i=0; i<titleArr2.count; i++) {
         
         UIButton *forgetBtn = [UIButton buttonWithframe:CGRectMake(0, self.forgetBtn1.bottom+14+i*44, kScreen_Width, 44) text:titleArr2[i] font:[UIFont systemFontOfSize:15] textColor:@"#333333" backgroundColor:@"#FFFFFF" normal:nil selected:nil];
         forgetBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [self.view addSubview:forgetBtn];
+        [scrollView addSubview:forgetBtn];
         [forgetBtn addTarget:self action:@selector(btnAction2:) forControlEvents:UIControlEventTouchUpInside];
         forgetBtn.tag = i;
+        self.forgetBtn2 = forgetBtn;
         
         UIImageView *imgView = [UIImageView imgViewWithframe:CGRectMake(forgetBtn.width-5.4-14.6, (forgetBtn.height-13)/2, 5.4, 13) icon:@"98"];
         [forgetBtn addSubview:imgView];
@@ -151,6 +163,9 @@
         [forgetBtn addSubview:line];
         
     }
+    
+    scrollView.contentSize = CGSizeMake(kScreen_Width, self.forgetBtn2.bottom);
+
     
 //    [self get_ui_info:NO];
 
@@ -199,7 +214,7 @@
                 statusLab.text = @"简历已隐藏";
             }
             else {
-                statusLab.text = @"简历已开放";
+                statusLab.text = @"简历已公开";
 
             }
             
@@ -254,7 +269,7 @@
         
         if (self.model.is_hide.boolValue) {
             
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"简历需要开放状态" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"简历需要公开状态" message:nil preferredStyle:UIAlertControllerStyleAlert];
             
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
             [alertController addAction:okAction];
@@ -319,7 +334,7 @@
         
 
     }
-    else {
+    else if (btn.tag == 1) {
         
         if (self.model.autoSend.boolValue) {
             
@@ -335,16 +350,19 @@
         
 
         NSString *str = nil;
+        NSString *str1 = nil;
         if (self.model.is_hide.boolValue) {
             
-            str = @"简历开放";
+            str = @"是否公开简历";
+            str1 = @"公开";
         }
         else {
-            str = @"简历保密";
+            str = @"是否隐藏简历";
+            str1 = @"隐藏";
 
         }
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"确定%@吗",str] message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:str style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"简历状态" message:str preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:str1 style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
             
@@ -365,10 +383,20 @@
                 
             }];
         }];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:cancelAction];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:okAction];
+        [alertController addAction:cancelAction];
         [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else if (btn.tag == 2) {
+        InvitedVC *vc = [[InvitedVC alloc] init];
+        vc.title = @"收到邀请";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else {
+        MyCollectionVC *vc = [[MyCollectionVC alloc] init];
+        vc.title = @"职位收藏";
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

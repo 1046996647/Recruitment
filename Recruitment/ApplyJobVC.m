@@ -246,8 +246,9 @@
     }
 
     // key/关键字/p/当前页码/size/每页显示条数
-    NSString *urlStr = [NSString stringWithFormat:@"%@/key/%@/p/%ld",Get_jobs_list,self.searchText,self.pageNO];
-    
+//    NSString *urlStr = [NSString stringWithFormat:@"%@/key/%@/p/%ld",Get_jobs_list,self.searchText,self.pageNO];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/p/%ld",Get_jobs_list,self.pageNO];
+
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     if (self.cate_id) {
         [paraDic setValue:self.cate_id forKey:@"cateId"];
@@ -262,7 +263,8 @@
     }
     
     
-    [paraDic setValue:self.city forKey:@"city"];
+    [paraDic setValue:self.city forKey:@"nearby"];
+    [paraDic setValue:self.searchText forKey:@"key"];
     [paraDic setValue:[InfoCache unarchiveObjectWithFile:@"siteId"] forKey:@"siteId"];
 
     NSLog(@"paraDic:%@",paraDic);
@@ -362,7 +364,15 @@
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90;
+    
+    JobModel *model = self.modelArr[indexPath.row];
+    if (model.cellHeight > 0) {
+        return model.cellHeight;
+    }
+    else {
+        return 90;
+
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -15,5 +15,9 @@
 @property(nonatomic,strong) NSString *content;
 @property(nonatomic,strong) NSString *key;
 
+@property(nonatomic,assign) BOOL isSelected;
+
+@property(nonatomic,assign) NSInteger cellHeight;
+
 
 @end

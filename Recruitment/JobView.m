@@ -8,6 +8,7 @@
 
 #import "JobView.h"
 #import "JobViewModel.h"
+#import "JobViewCell.h"
 
 @implementation JobView
 
@@ -78,9 +79,25 @@
     }
     
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 40;
-//}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (_aTag == 2) {
+        JobViewModel *model = self.lastArr[indexPath.row];
+        if (model.cellHeight > 40) {
+            return model.cellHeight;
+        }
+        else {
+            return 40;
+            
+        }
+
+    }
+    else {
+        return 40;
+        
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -92,6 +109,7 @@
         __weak typeof(self) weakSelf = self;
         
         _jobview1 = [[JobView1 alloc] initWithFrame:self.bounds];
+        _jobview1.content = model.content;
         [self addSubview:_jobview1];
         _jobview1.aTag = indexPath.row;
         _jobview1.block = ^(NSString *text, NSInteger index) {
@@ -141,14 +159,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = nil;
+    JobViewCell *cell = nil;
 
     if (_aTag == 2) {
         
         cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
         if (cell == nil) {
             
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell1"];
+            cell = [[JobViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell1"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
@@ -157,6 +175,7 @@
         JobViewModel *model = self.lastArr[indexPath.row];
         cell.textLabel.text = model.title;
         cell.detailTextLabel.text = model.subTitle;
+        cell.model = model;
 
     }
     else {
@@ -165,7 +184,7 @@
 
         if (cell == nil) {
             
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+            cell = [[JobViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
             
         }
         cell.textLabel.text = self.dataArr[indexPath.row];
@@ -210,7 +229,7 @@
                              @{@"title":@"学历要求",@"subTitle":@"不限",@"content":@"0",@"key":@"eduid"},
                              @{@"title":@"薪资范围",@"subTitle":@"不限",@"content":@"0",@"key":@"pay"},
                              @{@"title":@"职位类型",@"subTitle":@"不限",@"content":@"0",@"key":@"jobs"},
-                             @{@"title":@"公司性质",@"subTitle":@"不限",@"content":@"0",@"key":@"type"}];
+                             @{@"title":@"公司性质",@"subTitle":@"不限",@"content":@"不限",@"key":@"type"}];
             
             NSMutableArray *arrM = [NSMutableArray array];
             for (NSDictionary *dic in self.lastArr) {

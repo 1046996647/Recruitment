@@ -20,6 +20,10 @@
     NSString *timeStr = [[dic[@"update_time"] componentsSeparatedByString:@" "] firstObject];
     timeStr = [timeStr substringFromIndex:5];
     _update_time = timeStr;
+    
+    NSString *timeStr1 = [[dic[@"addTime"] componentsSeparatedByString:@" "] firstObject];
+    timeStr1 = [timeStr1 substringFromIndex:5];
+    _addTime = timeStr1;
 
     return YES;
 }

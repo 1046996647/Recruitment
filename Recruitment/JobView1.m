@@ -7,6 +7,7 @@
 //
 
 #import "JobView1.h"
+#import "JobView1cell.h"
 
 @implementation JobView1
 
@@ -19,7 +20,7 @@
         
 //        self.dataArr = @[@"不限",@"保险",@"年终奖"];
 
-        _tableView = [UITableView tableViewWithframe:CGRectMake(kScreen_Width, 0, self.width, self.height)];
+        _tableView = [UITableView tableViewWithframe:CGRectMake(kScreen_Width, 0, self.width, self.height-44)];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [self addSubview:_tableView];
@@ -28,12 +29,68 @@
             _tableView.left = 0;
         }];
         
+        UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.height-44, kScreen_Width, 44)];
+        [self addSubview:bottomView];
+        bottomView.hidden = YES;
+        self.bottomView = bottomView;
+        
+        UIButton *okBtn = [UIButton buttonWithframe:CGRectMake((bottomView.width-120)/2, 5, 120, 34) text:@"确定" font:[UIFont systemFontOfSize:16] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
+        okBtn.layer.cornerRadius = 10;
+        okBtn.layer.masksToBounds = YES;
+        [okBtn addTarget:self action:@selector(okAction) forControlEvents:UIControlEventTouchUpInside];
+        [bottomView addSubview:okBtn];
+
+        
         // 选择项数据
         NSArray *selectArr = [InfoCache unarchiveObjectWithFile:SelectItem];;
         self.selectArr = selectArr;
         
     }
     return self;
+}
+
+- (void)okAction
+{
+    JobViewModel *model = self.dataArr[0];
+    NSString *content = nil;
+
+    if (model.isSelected) {
+        content = @"不限";
+
+    }
+    else {
+        NSMutableArray *arrM = [NSMutableArray array];
+        for (int i=1; i<self.dataArr.count; i++) {
+            
+            JobViewModel *model = self.dataArr[i];
+            if (model.isSelected == YES) {
+                [arrM addObject:model.content];
+            }
+            
+        }
+        content = [arrM componentsJoinedByString:@","];
+        
+        if (arrM.count == 0) {
+            [self makeToast:@"请选择公司性质"];
+            return;
+        }
+
+    }
+    
+    [UIView animateWithDuration:.35 animations:^{
+        _tableView.left = kScreen_Width;
+        
+    } completion:^(BOOL finished) {
+        
+        [self removeFromSuperview];
+    }];
+    if (self.block) {
+        if (self.block) {
+            self.block(content, 0);
+        }
+        
+    }
+    NSLog(@"content:%@",content);
 }
 
 #pragma mark - UITableViewDataSource
@@ -50,36 +107,76 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    JobViewModel *model = self.dataArr[indexPath.row];
 
-    [UIView animateWithDuration:.35 animations:^{
-        _tableView.left = kScreen_Width;
-
-    } completion:^(BOOL finished) {
+    if (_aTag == 5) {
         
-        [self removeFromSuperview];
-    }];
-    
-    if (self.block) {
-        self.block(self.dataArr[indexPath.row], indexPath.row);
+        model.isSelected = !model.isSelected;
+        if (indexPath.row == 0) {
+            if (model.isSelected) {
+                for (JobViewModel *model1 in self.dataArr) {
+                    model1.isSelected = YES;
+                }
+            }
+            else {
+                for (JobViewModel *model1 in self.dataArr) {
+                    model1.isSelected = NO;
+                }
+            }
+        }
+        else {
+            
+            BOOL allSelected = YES;
+            for (int i=1; i<self.dataArr.count; i++) {
+                
+                JobViewModel *model = self.dataArr[i];
+                if (model.isSelected == NO) {
+                    allSelected = NO;
+                    break;
+                }
+ 
+            }
+            JobViewModel *model1 = self.dataArr[0];
+            model1.isSelected = allSelected;
+        }
+        
+        [_tableView reloadData];
+        
     }
+    else {
+        [UIView animateWithDuration:.35 animations:^{
+            _tableView.left = kScreen_Width;
+            
+        } completion:^(BOOL finished) {
+            
+            [self removeFromSuperview];
+        }];
+        
+        if (self.block) {
+            self.block(model.content, indexPath.row);
+        }
+    }
+
+
     
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = nil;
+    JobView1cell *cell = nil;
     
     cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (cell == nil) {
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[JobView1cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         
     }
-    cell.textLabel.font = [UIFont systemFontOfSize:12];
-    cell.textLabel.textColor = [UIColor colorWithHexString:@"#333333"];
-    cell.textLabel.text = self.dataArr[indexPath.row];
+    
+//    cell.row = indexPath.row;
+    cell.tag = _aTag;
+    cell.model = self.dataArr[indexPath.row];
     
     return cell;
 }
@@ -92,6 +189,7 @@
     
     [arrM addObject:@"不限"];
 
+    _tableView.tableFooterView = [[UIView alloc] init];
 
     if (tag == 0) {
         
@@ -164,13 +262,14 @@
     
     if (tag == 5) {
 
+        self.bottomView.hidden = NO;
         for (NSDictionary *dic in self.selectArr) {
             
             if ([dic[@"name"] isEqualToString:@"user_company"]) {
                 NSString *str = dic[@"data"];
                 NSArray *arr = [str componentsSeparatedByString:@","];
                 [arrM addObjectsFromArray:arr];
-                
+
                 break;
                 
             }
@@ -178,7 +277,37 @@
         }
     }
     
-    self.dataArr = arrM;
+    NSMutableArray *arrM1 = [NSMutableArray array];
+
+    for (NSString *title in arrM) {
+        JobViewModel *model = [[JobViewModel alloc] init];
+        model.content = title;
+        [arrM1 addObject:model];
+    }
+    self.dataArr = arrM1;
+    
+    if (tag == 5) {
+        
+        if ([self.content isEqualToString:@"不限"]) {
+            for (JobViewModel *model in arrM1) {
+                model.isSelected = YES;
+            }
+        }
+        else {
+            NSArray *contentArr = [self.content componentsSeparatedByString:@","];
+            for (NSString *text in contentArr) {
+                
+                for (JobViewModel *model in arrM1) {
+                    
+                    if ([text isEqualToString:model.content]) {
+                        model.isSelected = YES;
+
+                    }
+                }
+
+            }
+        }
+    }
 
     [_tableView reloadData];
     
