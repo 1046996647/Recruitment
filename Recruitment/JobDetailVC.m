@@ -192,7 +192,7 @@
     [headView addSubview:view];
     
     // 联系电话
-    UIButton *phoneBtn = [UIButton buttonWithframe:CGRectMake(logoView.left, view.bottom+9, 82, 17) text:@"联系电话" font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:@"19" selected:nil];
+    UIButton *phoneBtn = [UIButton buttonWithframe:CGRectMake(logoView.left, view.bottom+9, 82, 17) text:@"联系人    " font:[UIFont systemFontOfSize:14] textColor:@"#333333" backgroundColor:nil normal:@"19" selected:nil];
     phoneBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
     [headView addSubview:phoneBtn];
     
@@ -200,8 +200,14 @@
     [headView addSubview:phoneBtn1];
     [phoneBtn1 addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
     
-    self.model.tele = @"17736273234";
-    UILabel *phoneLab = [UILabel labelWithframe:CGRectMake(decBtn.left, phoneBtn.bottom+9, kScreen_Width-24, 16) text:self.model.tele font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
+//    self.model.tele = @"17736273234";
+    if (!self.model.tele) {
+        self.model.tele = @"";
+    }
+    if (!self.model.contactName) {
+        self.model.contactName = @"";
+    }
+    UILabel *phoneLab = [UILabel labelWithframe:CGRectMake(decBtn.left, phoneBtn.bottom+9, kScreen_Width-24, 16) text:[NSString stringWithFormat:@"%@ %@",self.model.contactName, self.model.tele] font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
     [headView addSubview:phoneLab];
     
 
@@ -380,11 +386,13 @@
 
 - (void)callAction
 {
-//    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",_model.tele];
-    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.model.tele];
-    UIWebView *callWebview = [[UIWebView alloc] init];
-    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-    [[UIApplication sharedApplication].keyWindow addSubview:callWebview];
+    if (self.model.tele) {
+        //    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",_model.tele];
+        NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.model.tele];
+        UIWebView *callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [[UIApplication sharedApplication].keyWindow addSubview:callWebview];
+    }
     
 }
 
@@ -404,6 +412,7 @@
 
     [AFNetworking_RequestData requestMethodPOSTUrl:Send_resume dic:paraDic showHUD:YES Succed:^(id responseObject) {
         
+        [self.view makeToast:@"申请成功"];
         self.applyBtn.userInteractionEnabled = NO;
         self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
         

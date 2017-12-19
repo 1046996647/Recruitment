@@ -28,6 +28,7 @@
 @property (nonatomic,strong) NSString *cate_name;
 @property (nonatomic,strong) NSString *jobs;// 职业类型
 @property (nonatomic,strong) NSString *tele;
+@property (nonatomic,strong) NSString *contactName;
 @property (nonatomic,strong) NSString *logo;
 @property (nonatomic,strong) NSString *years;
 @property (nonatomic,strong) NSString *persons;

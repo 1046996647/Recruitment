@@ -91,6 +91,7 @@
             return 40;
             
         }
+        
 
     }
     else {
@@ -109,7 +110,7 @@
         __weak typeof(self) weakSelf = self;
         
         _jobview1 = [[JobView1 alloc] initWithFrame:self.bounds];
-        _jobview1.content = model.content;
+//        _jobview1.content = model.content;
         [self addSubview:_jobview1];
         _jobview1.aTag = indexPath.row;
         _jobview1.block = ^(NSString *text, NSInteger index) {

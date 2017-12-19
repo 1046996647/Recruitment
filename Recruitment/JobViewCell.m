@@ -58,6 +58,9 @@
             self.detailTextLabel.text = @"";
             NSArray *tagArr = [model.content componentsSeparatedByString:@","];
             
+            [_tagsView removeFromSuperview];
+            _tagsView = nil;
+            [self.contentView addSubview:self.tagsView];
             [_tagsView setTagAry:tagArr delegate:nil];
             
             

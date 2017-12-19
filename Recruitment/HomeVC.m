@@ -75,7 +75,6 @@
     // Do any additional setup after loading the view.
     
     
-    
     self.navigationItem.title = nil;
     
     UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 26+17, 17)];
@@ -146,6 +145,7 @@
 //    self.siteId = @"2";
     [InfoCache archiveObject:@"2" toFile:@"siteId"];
     
+    [self.view makeToast:@"请记得刷新你的简历~" duration:1.5 position:@"12"];
 
 }
 
