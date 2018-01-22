@@ -242,10 +242,16 @@
             
         }
 
-
     }
     
     if (tag < 2) {
+        
+        [UIView animateWithDuration:.35 animations:^{
+            _jobview1.tableView.left = kScreen_Width;
+
+        } completion:^(BOOL finished) {
+            [_jobview1 removeFromSuperview];
+        }];
         
         self.bottomView.hidden = YES;
 

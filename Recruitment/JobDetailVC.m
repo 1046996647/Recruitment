@@ -14,7 +14,9 @@
 #import "NSStringExt.h"
 #import "ShareVC.h"
 #import "LoginVC.h"
+#import "EditResumeVC.h"
 #import "NTESSessionViewController.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 
 @interface JobDetailVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -240,16 +242,16 @@
     _tableView.tableHeaderView = headView;
     
     // 右上角按钮
-//    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 40)];
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 40)];
+//    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 40)];
     
-//    UIButton *shareBtn = [UIButton buttonWithframe:CGRectMake(0, 10, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"25" selected:nil];
-//    [rightView addSubview:shareBtn];
-//    [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *shareBtn = [UIButton buttonWithframe:CGRectMake(0, 10, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"25" selected:nil];
+    [rightView addSubview:shareBtn];
+    [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
 
     
-//    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(shareBtn.right, shareBtn.top, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:@"18"];
-    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(0, 10, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:@"18"];
+    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(shareBtn.right+10, shareBtn.top, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:@"18"];
+//    UIButton *cellctionBtn = [UIButton buttonWithframe:CGRectMake(0, 10, 20, 20) text:nil font:nil textColor:nil backgroundColor:nil normal:@"23" selected:@"18"];
 
     [rightView addSubview:cellctionBtn];
     [cellctionBtn addTarget:self action:@selector(cellctionAction) forControlEvents:UIControlEventTouchUpInside];
@@ -288,12 +290,12 @@
         self.applyBtn = applyBtn;
     }
     else {
-//        phoneBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width/2, bottomView.height) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:@"19" selected:nil];
-//        [bottomView addSubview:phoneBtn];
-//        [phoneBtn addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
+        phoneBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width/2, bottomView.height) text:nil font:nil textColor:nil backgroundColor:@"#FFFFFF" normal:@"19" selected:nil];
+        [bottomView addSubview:phoneBtn];
+        [phoneBtn addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
         
-//        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(phoneBtn.width, phoneBtn.top, phoneBtn.width, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
-        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
+        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(phoneBtn.width, phoneBtn.top, phoneBtn.width, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
+//        UIButton *applyBtn = [UIButton buttonWithframe:CGRectMake(0, 0, kScreen_Width, bottomView.height) text:@"申请职位" font:[UIFont systemFontOfSize:14] textColor:@"#FFFFFF" backgroundColor:@"#FF9123" normal:nil selected:nil];
         [bottomView addSubview:applyBtn];
         [applyBtn addTarget:self action:@selector(applyAction) forControlEvents:UIControlEventTouchUpInside];
         applyBtn.userInteractionEnabled = YES;
@@ -302,11 +304,11 @@
 
     
     
-    if (self.model.resume.integerValue == 1) {
-        self.applyBtn.userInteractionEnabled = NO;
-        self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
-
-    }
+//    if (self.model.resume.integerValue == 1) {
+//        self.applyBtn.userInteractionEnabled = NO;
+//        self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
+//
+//    }
 }
 
 - (void)chatAction
@@ -337,8 +339,84 @@
     [self presentViewController:vc animated:YES completion:nil];
     vc.clickBlock = ^(NSInteger indexRow) {
         
+        if (indexRow == 0) {
+            [self shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
+        }
+        else {
+            [self shareWebPageToPlatformType:UMSocialPlatformType_WechatTimeLine];
+
+        }
     };
 }
+
+//网页分享
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建网页内容对象
+    NSString* thumbURL =  _model.logo;
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:_model.job_name descr:_model.info thumImage:thumbURL];// UMS_Title不是输入的文本
+    //设置网页地址
+//    shareObject.webpageUrl = [NSString stringWithFormat:@"http://m.52dyjob.com/jobs/detail/%@.html",_model.ID];
+    shareObject.webpageUrl = @"http://m.52ykjob.com/jobs/detail/143094.html";
+    
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+        }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+        }
+        [self alertWithError:error];
+    }];
+}
+
+- (void)alertWithError:(NSError *)error
+{
+    NSString *result = nil;
+    if (!error) {
+        result = [NSString stringWithFormat:@"分享成功"];
+    }
+    else{
+        //        NSMutableString *str = [NSMutableString string];
+        //        if (error.userInfo) {
+        //            for (NSString *key in error.userInfo) {
+        //                [str appendFormat:@"%@ = %@\n", key, error.userInfo[key]];
+        //            }
+        //        }
+        //        if (error) {
+        //            result = [NSString stringWithFormat:@"Share fail with error code: %d\n%@",(int)error.code, str];
+        //        }
+        //        else{
+        //            result = [NSString stringWithFormat:@"Share fail"];
+        //        }
+        result = [NSString stringWithFormat:@"分享失败"];
+        
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享"
+                                                    message:result
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"确定", @"")
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+
 
 - (void)cellctionAction
 
@@ -398,6 +476,7 @@
 
 - (void)applyAction
 {
+
     PersonModel *model = [InfoCache unarchiveObjectWithFile:Person];
     if (!model) {
         LoginVC *vc = [[LoginVC alloc] init];
@@ -412,9 +491,29 @@
 
     [AFNetworking_RequestData requestMethodPOSTUrl:Send_resume dic:paraDic showHUD:YES Succed:^(id responseObject) {
         
-        [self.view makeToast:@"申请成功"];
-        self.applyBtn.userInteractionEnabled = NO;
-        self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
+        NSString *code = responseObject[@"status"];
+        if (code.integerValue == 1) {
+            [self.view makeToast:@"申请成功"];
+
+        }
+        if (code.integerValue == 2) {
+
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:responseObject[@"message"] message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"去完善" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                EditResumeVC *vc = [[EditResumeVC alloc] init];
+                vc.title = @"简历";
+                [self.navigationController pushViewController:vc animated:YES];
+            }];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okAction];
+            [alertController addAction:cancelAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+//            return ;
+            
+        }
+//        self.applyBtn.userInteractionEnabled = NO;
+//        self.applyBtn.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
         
     } failure:^(NSError *error) {
         

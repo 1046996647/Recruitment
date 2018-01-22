@@ -21,7 +21,7 @@
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入检索功能所有的头文件
 
-@interface HomeVC ()<UITextFieldDelegate,SDCycleScrollViewDelegate>
+@interface HomeVC ()<UITextFieldDelegate,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
 
 @property (nonatomic,strong) SDCycleScrollView *cycleScrollView2;
 @property (nonatomic,strong) CustomerScrollView * btnScrollView;

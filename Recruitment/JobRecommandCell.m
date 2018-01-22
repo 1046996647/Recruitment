@@ -114,6 +114,8 @@
 {
     _model = model;
     
+    [_logoView sd_setImageWithURL:[NSURL URLWithString:model.logo] placeholderImage:[UIImage imageNamed:@"102"]];
+
     _jobLab.text = model.job_name;
     _companyLab.text = model.company_name;
     _moneyLab.text = [NSString stringWithFormat:@"%@",model.pay];

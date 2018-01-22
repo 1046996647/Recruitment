@@ -9,6 +9,7 @@
 #import "LoginVC.h"
 #import "RegisterVC.h"
 #import "AppDelegate.h"
+#import "RegexTool.h"
 
 
 @interface LoginVC ()
@@ -154,6 +155,11 @@
     
     [self.view endEditing:YES];
     
+//    if (![RegexTool checkPhone:self.phone.text]) {
+//        [self.view makeToast:@"无效的手机号"];
+//        return;
+//    }
+    
     if (self.phone.text.length == 0 || self.password.text == 0) {
         [self.view makeToast:@"您还有内容未填写完整"];
         return;
@@ -204,6 +210,14 @@
         
         PersonModel *model = [PersonModel yy_modelWithJSON:responseObject[@"data"]];
         [InfoCache archiveObject:model toFile:Person];
+        
+        [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{@(NIMUserInfoUpdateTagNick) : model.name} completion:^(NSError *error) {
+            
+        }];
+        
+        [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{@(NIMUserInfoUpdateTagAvatar) : model.img} completion:^(NSError *error) {
+            
+        }];
         
         if (![notification.object isEqualToString:@"注册"]) {
             

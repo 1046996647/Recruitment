@@ -17,6 +17,10 @@
 #define NIMSDKAppKey @"a99978b70ffcf627c58dcada5eb78921"
 #define NIMSDKCerName @"Recruitment"
 
+#import <UMSocialCore/UMSocialCore.h>
+#define USHARE_DEMO_APPKEY @"5a4ae4fbf29d981a430000b8"
+
+
 @interface AppDelegate ()<BMKGeneralDelegate>
 
 @property (strong, nonatomic) BMKMapManager *mapManager;
@@ -80,7 +84,50 @@
     // 登录网易云
     [self loginNetCloud];
     
+    // 友盟第三方登录或分享----------------
+    /* 打开调试日志 */
+    [[UMSocialManager defaultManager] openLog:YES];
+    
+    /* 设置友盟appkey */
+    [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_DEMO_APPKEY];
+    
+    [self configUSharePlatforms];
+    
+    [self confitUShareSettings];
+    
     return YES;
+}
+
+// ------------登录或分享
+- (void)confitUShareSettings
+{
+    /*
+     * 打开图片水印
+     */
+    //[UMSocialGlobal shareInstance].isUsingWaterMark = YES;
+    
+    /*
+     * 关闭强制验证https，可允许http图片分享，但需要在info.plist设置安全域名
+     <key>NSAppTransportSecurity</key>
+     <dict>
+     <key>NSAllowsArbitraryLoads</key>
+     <true/>
+     </dict>
+     */
+    [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
+    
+}
+
+- (void)configUSharePlatforms
+{
+    /*
+     设置微信的appKey和appSecret
+     [微信平台从U-Share 4/5升级说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_1
+     */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx2e3acc98adb6399f" appSecret:@"93d8e66beb369eb6bb6981056eeee09e" redirectURL:nil];
+    
+    
+
 }
 
 
@@ -162,6 +209,18 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+// 支持所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
+    if (!result) {
+        // 其他如支付等SDK的回调
+        
+    }
+    return result;
 }
 
 #pragma mark - BMKGeneralDelegate

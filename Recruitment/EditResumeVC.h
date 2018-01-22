@@ -10,4 +10,7 @@
 
 @interface EditResumeVC : BaseViewController
 
+@property (nonatomic,assign) NSInteger mark;
+
+
 @end

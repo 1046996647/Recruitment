@@ -31,7 +31,7 @@
     // 不要用NSHomeDirectory，不然失败
     NSString *stringPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex: 0];
     path = [stringPath stringByAppendingPathComponent:path];//添加储存的文件名
-   BOOL success = [NSKeyedArchiver archiveRootObject:obj toFile:path];
+    BOOL success = [NSKeyedArchiver archiveRootObject:obj toFile:path];
     if (success) {
         NSLog(@"归档成功");
     }

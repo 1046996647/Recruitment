@@ -14,6 +14,10 @@
 #import "NTESVideoViewController.h"
 #import "NTESGalleryViewController.h"
 
+#import "CompanyDetailVC.h"
+#import "JobModel.h"
+
+
 
 @interface NTESSessionViewController ()
 
@@ -47,6 +51,29 @@
     [self.navigationController.navigationBar setTintColor:UIColorFromRGB(0x000000)];
     self.navigationItem.backBarButtonItem = backItem;
     
+    // 右上角按钮
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
+
+    UIButton *viewBtn = [UIButton buttonWithframe:rightView.bounds text:@"" font:SystemFont(14) textColor:@"#FFFFFF" backgroundColor:nil normal:@"更多" selected:nil];
+    [rightView addSubview:viewBtn];
+    [viewBtn addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightView];
+    
+}
+
+- (void)moreAction
+{
+    
+    NSLog(@"%@",self.session.sessionId);
+    NSString *comID = [self.session.sessionId stringByReplacingOccurrencesOfString:@"comp_" withString:@""];
+    
+    JobModel *model = [[JobModel alloc] init];
+    model.companyId = comID;
+    
+    CompanyDetailVC *vc = [[CompanyDetailVC alloc] init];
+    vc.title = @"公司详情";
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

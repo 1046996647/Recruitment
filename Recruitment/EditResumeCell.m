@@ -37,6 +37,7 @@
         
         _jobLab = [UILabel labelWithframe:CGRectMake(_timeLab.left, _timeLab.bottom+6, 150, _timeLab.height) text:@"福田店面销售代表" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
         [self.contentView addSubview:_jobLab];
+        _jobLab.numberOfLines = 0;
         
         _companyLab = [UILabel labelWithframe:CGRectMake(_jobLab.left, _jobLab.bottom+6, 150, _timeLab.height) text:@"福田龙飞进出口有限公司" font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:@"#666666"];
         [self.contentView addSubview:_companyLab];
@@ -89,7 +90,7 @@
     }
     if (self.indexPath.section == 3) {
         EditEducationMsgVC *vc = [[EditEducationMsgVC alloc] init];
-        vc.title = @"技能特长";
+        vc.title = @"技能特长及自我评价";
         vc.model = self.model;
 
         [self.viewController.navigationController pushViewController:vc animated:YES];
@@ -118,17 +119,21 @@
         _hLine.hidden = NO;
         _extraLab.hidden = YES;
         
-        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12, 20);
+        _timeLab.frame = CGRectMake(12, 10, kScreen_Width-12-40, 20);
+        
         _hLine.frame = CGRectMake(14, _timeLab.bottom+6, kScreen_Width-28, 1);
         _jobLab.frame = CGRectMake(_timeLab.left, _hLine.bottom+6, _timeLab.width, _timeLab.height);
+        CGSize size = [NSString textHeight:[NSString stringWithFormat:@"工作类型：%@|意向地区：%@|月薪要求：%@|住宿要求：%@",model.requestjobtype,model.hopelocation,model.requestsalary,model.requeststay] font:_jobLab.font width:_jobLab.width];
+        _jobLab.height = size.height;
+        
         _companyLab.frame = CGRectMake(_timeLab.left, _jobLab.bottom+6, _timeLab.width, _timeLab.height);
         _responsibilityLab.hidden = YES;
 
 //        _responsibilityLab.frame = CGRectMake(12, 10, kScreen_Width-50, 14);
         
-        _timeLab.text = model.hopepostion;
-        _jobLab.text = [NSString stringWithFormat:@"%@|%@|%@|%@",model.requestjobtype,model.hopelocation,model.requestsalary,model.requeststay];
-        _companyLab.text = model.jobstatus;
+        _timeLab.text = [NSString stringWithFormat:@"意向岗位：%@",model.hopepostion];
+        _jobLab.text = [NSString stringWithFormat:@"工作类型：%@|意向地区：%@|月薪要求：%@|住宿要求：%@",model.requestjobtype,model.hopelocation,model.requestsalary,model.requeststay];
+        _companyLab.text = [NSString stringWithFormat:@"到岗时间：%@",model.jobstatus];
 
         
         model.cellHeight = _companyLab.bottom+12;
@@ -148,16 +153,16 @@
         NSString *beginTime = [model.begin_time stringByReplacingOccurrencesOfString:@"-" withString:@"."];
         NSString *endTime = [model.end_time stringByReplacingOccurrencesOfString:@"-" withString:@"."];
 
-        _timeLab.text = [NSString stringWithFormat:@"%@-%@",beginTime,endTime];
-        _jobLab.text = model.position;
-        _companyLab.text = [NSString stringWithFormat:@"%@ %@",model.company_name,model.company_nature];
+        _timeLab.text = [NSString stringWithFormat:@"入离职时间：%@-%@",beginTime,endTime];
+        _jobLab.text = [NSString stringWithFormat:@"职位：%@",model.position];
+        _companyLab.text = [NSString stringWithFormat:@"公司名称：%@ 公司性质：%@",model.company_name,model.company_nature];
         
         _responsibilityLab.hidden = NO;
 
         CGSize size = [NSString textHeight:model.skill font:_responsibilityLab.font width:_responsibilityLab.width];
         _responsibilityLab.frame = CGRectMake(_timeLab.left, _companyLab.bottom+6, kScreen_Width-_timeLab.left-12, size.height);
-        _responsibilityLab.text = model.skill;
-        
+        _responsibilityLab.text = [NSString stringWithFormat:@"工作描述：%@",model.skill];
+
         _hLine1.hidden = NO;
         _hLine1.frame = CGRectMake(_timeLab.left, _responsibilityLab.bottom+11, kScreen_Width-_timeLab.left-12, 1);
         
@@ -190,16 +195,16 @@
         _responsibilityLab.hidden = NO;
         _responsibilityLab.frame = CGRectMake(12, _companyLab.bottom+6, kScreen_Width-24, 14);
         
-        _timeLab.text = model.graduatedfrom;
-        _jobLab.text = [NSString stringWithFormat:@"%@ %@",model.education,model.speciality];
+        _timeLab.text = [NSString stringWithFormat:@"毕业学校：%@",model.graduatedfrom];
+        _jobLab.text = [NSString stringWithFormat:@"学历：%@ 所学专业：%@",model.education,model.speciality];
         
         NSString *graduatetime = [model.graduatetime stringByReplacingOccurrencesOfString:@"-" withString:@"."];
-        _companyLab.text = graduatetime;
-        
+        _companyLab.text = [NSString stringWithFormat:@"毕业时间：%@",graduatetime];
+
         CGSize size = [NSString textHeight:model.educationhistory font:_responsibilityLab.font width:_responsibilityLab.width];
         _responsibilityLab.height = size.height;
-        _responsibilityLab.text = model.educationhistory;
-        
+        _responsibilityLab.text = [NSString stringWithFormat:@"培训经历：%@",model.educationhistory];
+
         model.cellHeight = _responsibilityLab.bottom+12;
     }
     
@@ -218,15 +223,15 @@
         _responsibilityLab.frame = CGRectMake(12, _companyLab.bottom+6, kScreen_Width-12, 14);
         _extraLab.frame = CGRectMake(_timeLab.left, _responsibilityLab.bottom+6, _timeLab.width, _timeLab.height);
         
-        _timeLab.text = [NSString stringWithFormat:@"%@ %@",model.foreignlanguage,model.foreignlanguagelevel];
-        _jobLab.text = [NSString stringWithFormat:@"计算机水平 %@",model.computerlevel];
+        _timeLab.text = [NSString stringWithFormat:@"第一外语：%@ 外语水平：%@",model.foreignlanguage,model.foreignlanguagelevel];
+        _jobLab.text = [NSString stringWithFormat:@"计算机水平：%@",model.computerlevel];
         _companyLab.text = [NSString stringWithFormat:@"相关证书：%@",model.certificate];
         _responsibilityLab.text = [NSString stringWithFormat:@"其他能力：%@",model.otherability];
 
         CGSize size = [NSString textHeight:model.selfevaluation font:_extraLab.font width:_extraLab.width];
         _extraLab.height = size.height;
-        _extraLab.text = model.selfevaluation;
-        
+        _extraLab.text = [NSString stringWithFormat:@"自我评价：%@",model.selfevaluation];
+
         model.cellHeight = _extraLab.bottom+12;
 
         
@@ -245,10 +250,10 @@
         _responsibilityLab.hidden = YES;
 //        _responsibilityLab.frame = CGRectMake(12, 10, kScreen_Width-50, 14);
         
-        _timeLab.text = model.phone;
-        _jobLab.text = [NSString stringWithFormat:@"QQ:%@ %@",model.qq,model.email];
-        _companyLab.text = model.address;
-        
+        _timeLab.text = [NSString stringWithFormat:@"手机：%@",model.phone];
+        _jobLab.text = [NSString stringWithFormat:@"QQ：%@ 邮箱：%@",model.qq,model.email];
+        _companyLab.text = [NSString stringWithFormat:@"地址：%@",model.address];
+
         model.cellHeight = _companyLab.bottom+12;
 
         

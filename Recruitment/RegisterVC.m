@@ -70,7 +70,7 @@
     _phone = [UITextField textFieldWithframe:CGRectMake(25, label.bottom+41, kScreen_Width-50, 45) placeholder:@"请输入手机号" font:nil leftView:leftView backgroundColor:@"#FFFFFF"];
     _phone.keyboardType = UIKeyboardTypeNumberPad;
     _phone.layer.cornerRadius = 7;
-    //    [tf addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventEditingChanged];
+    [_phone addTarget:self action:@selector(endAction:) forControlEvents:UIControlEventEditingDidEnd];
     _phone.layer.masksToBounds = YES;
     [self.view addSubview:_phone];
 
@@ -168,6 +168,41 @@
 
 }
 
+- (void)endAction:(UITextField *)tf
+{
+    if (![RegexTool checkPhone:self.phone.text]) {
+        [self.view makeToast:@"无效的手机号"];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.view endEditing:YES];
+
+        });
+
+        return;
+    }
+    
+    
+    NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
+    [paramDic  setValue:self.phone.text forKey:@"phone"];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Phone_registed dic:paramDic showHUD:NO Succed:^(id responseObject) {
+        
+        NSNumber *code = [responseObject objectForKey:@"status"];
+        if (0 == [code integerValue]) {
+            
+//            NSString *message = [responseObject objectForKey:@"message"];
+//            [self.view makeToast:message];
+            [self.view endEditing:YES];
+
+            
+        }
+        
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 - (void)getCodeAction
 {
     [self.view endEditing:YES];
@@ -214,6 +249,12 @@
 - (void)nextAction
 {
     [self.view endEditing:YES];
+    
+//    PersonalMessageVC *vc = [[PersonalMessageVC alloc] init];
+//    vc.title = @"个人信息";
+//    [self.navigationController pushViewController:vc animated:YES];
+//    return;
+
     
     if (self.phone.text.length == 0 || self.password.text == 0 || self.validate.text.length == 0) {
         [self.view makeToast:@"您还有内容未填写完整"];

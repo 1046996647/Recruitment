@@ -273,7 +273,16 @@
         if ([_model.title isEqualToString:@"意向城市"]||
             [_model.title isEqualToString:@"所在地"]||
             [_model.title isEqualToString:@"期望地区"]) {
-            self.dataSource = @[@"义乌市", @"东阳市", @"金华市",@"浦江县",@"永康市",@"慈溪市",@"余姚市"];
+            
+            for (NSDictionary *dic in self.selectArr) {
+                if ([dic[@"name"] isEqualToString:@"citys"]) {
+                    
+                    NSString *str = dic[@"data"];
+                    self.dataSource = [str componentsSeparatedByString:@","];
+                    break;
+                }
+            }
+//            self.dataSource = @[@"义乌市", @"东阳市", @"金华市",@"浦江县",@"永康市",@"慈溪市",@"余姚市"];
         }
         
         // 岗位类别
@@ -328,7 +337,13 @@
 
 - (void)changeAction:(UITextField *)tf
 {
+    if ([_model.title isEqualToString:@"公司名称"]) {
+        if (tf.text.length > 30) {
+            tf.text  = [tf.text substringToIndex:30];
+        }
+    }
     _model.text = tf.text;
+
 
 }
 

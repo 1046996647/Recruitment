@@ -71,8 +71,10 @@
         content = [arrM componentsJoinedByString:@","];
         
         if (arrM.count == 0) {
-            [self makeToast:@"请选择公司性质"];
-            return;
+//            [self makeToast:@"请选择公司性质"];
+//            return;
+            content = @"不限";
+
         }
 
     }
@@ -115,29 +117,32 @@
         if (indexPath.row == 0) {
             if (model.isSelected) {
                 for (JobViewModel *model1 in self.dataArr) {
-                    model1.isSelected = YES;
-                }
-            }
-            else {
-                for (JobViewModel *model1 in self.dataArr) {
                     model1.isSelected = NO;
                 }
+                model.isSelected = YES;
+            }
+            else {
+//                for (JobViewModel *model1 in self.dataArr) {
+//                    model1.isSelected = NO;
+//                }
+//                model.isSelected = NO;
+
             }
         }
         else {
             
-            BOOL allSelected = YES;
-            for (int i=1; i<self.dataArr.count; i++) {
-                
-                JobViewModel *model = self.dataArr[i];
-                if (model.isSelected == NO) {
-                    allSelected = NO;
-                    break;
-                }
- 
-            }
+//            BOOL allSelected = YES;
+//            for (int i=1; i<self.dataArr.count; i++) {
+//
+//                JobViewModel *model = self.dataArr[i];
+//                if (model.isSelected == NO) {
+//                    allSelected = NO;
+//                    break;
+//                }
+//
+//            }
             JobViewModel *model1 = self.dataArr[0];
-            model1.isSelected = allSelected;
+            model1.isSelected = NO;
         }
         
         [_tableView reloadData];

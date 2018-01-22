@@ -8,6 +8,8 @@
 
 #import "PersonalMessageVC.h"
 #import "PersonalMessageCell.h"
+#import "EditResumeVC.h"
+
 
 @interface PersonalMessageVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -24,6 +26,7 @@
     
     self.dataArr = @[@[@{@"image":@"3",@"title":@"姓名",@"key":@"name"},
                        @{@"image":@"4",@"title":@"最高学历",@"key":@"education"},
+                       @{@"image":@"群蜂性别",@"title":@"性别",@"key":@"sex"},
                        @{@"image":@"6",@"title":@"工作年限",@"key":@"jobyear"}],
                      @[@{@"image":@"5",@"title":@"意向岗位",@"key":@"hopepostion"},
                        @{@"image":@"2",@"title":@"期望薪资",@"key":@"requestsalary"},
@@ -71,6 +74,12 @@
 - (void)upAction:(UIButton *)btn
 {
     [self.view endEditing:YES];
+    
+//    EditResumeVC *vc = [[EditResumeVC alloc] init];
+//    vc.title = @"简历";
+//    vc.mark = 1;
+//    [self.navigationController pushViewController:vc animated:YES];
+//    return;
 
     NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
 
@@ -93,8 +102,13 @@
     
     [AFNetworking_RequestData requestMethodPOSTUrl:Update_peronal_info dic:paramDic showHUD:YES Succed:^(id responseObject) {
         
-        // 登录通知
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginNotification" object:self.title];
+//        // 登录通知
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginNotification" object:self.title];
+        
+        EditResumeVC *vc = [[EditResumeVC alloc] init];
+        vc.title = @"简历";
+        vc.mark = 1;
+        [self.navigationController pushViewController:vc animated:YES];
         
     } failure:^(NSError *error) {
         

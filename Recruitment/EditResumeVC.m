@@ -82,7 +82,7 @@
     
     headView.height = hopeLabel.bottom+12;
     
-    NSArray *titleArr1 = @[@"求职意向",@"工作经历",@"教育经历",@"技能特长",@"联系方式"];
+    NSArray *titleArr1 = @[@"求职意向",@"工作经历",@"教育经历",@"技能特长及自我评价",@"联系方式"];
     self.titleArr1 = titleArr1;
     
 
@@ -215,9 +215,10 @@
             
             self.infoLabel.text = [NSString stringWithFormat:@"%@|%@cm|%@kg",model.sex,model.height,model.weight];
             
-            self.phoneLabel.text = [NSString stringWithFormat:@"%@  户籍：%@  所在地：%@",model.phone,model.jiguan,model.home];
-            
-            self.hopeLabel.text = [NSString stringWithFormat:@"%@ %@ %@年工作经验",model.marry,model.political,model.jobyear];
+//            self.phoneLabel.text = [NSString stringWithFormat:@"%@  户籍：%@  所在地：%@",model.phone,model.jiguan,model.home];
+            self.phoneLabel.text = [NSString stringWithFormat:@"户籍：%@  所在地：%@",model.jiguan,model.home];
+
+            self.hopeLabel.text = [NSString stringWithFormat:@"婚姻状况：%@ 政治面貌：%@ %@年工作经验",model.marry,model.political,model.jobyear];
             
             
             
@@ -481,7 +482,7 @@
     }
     else {
         
-        NSArray *titleArr = @[@"+ 增加求职意向",@"+ 增加工作经历",@"+ 增加教育经历",@"+ 增加技能特长",@"+ 增加联系方式"];
+        NSArray *titleArr = @[@"+ 增加求职意向",@"+ 增加工作经历",@"+ 增加教育经历",@"+ 增加技能特长及自我评价",@"+ 增加联系方式"];
         UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 62)];
         footView.backgroundColor = [UIColor whiteColor];
         
@@ -572,7 +573,7 @@
 
         
     } else if (btn.tag == 3) {
-        vc.title = @"技能特长";
+        vc.title = @"技能特长及自我评价";
 
     } else if (btn.tag == 4) {
 
@@ -622,6 +623,18 @@
 //此方法就在UIImageWriteToSavedPhotosAlbum的上方
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     NSLog(@"已保存");
+}
+
+- (void)back{
+    
+    if (self.mark == 1) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }
 }
 
 @end

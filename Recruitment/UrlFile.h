@@ -21,6 +21,9 @@
 // 6.1    短信验证码
 #define VerifyCode  [NSString stringWithFormat:@"%@Tool/verify",BaseUrl]
 
+// 6.2    验证手机号码是否已注册
+#define Phone_registed  [NSString stringWithFormat:@"%@Tool/phone_registed",BaseUrl]
+
 // 1.4    忘记密码
 #define Forget_passwd  [NSString stringWithFormat:@"%@User/forget_passwd",BaseUrl]
 

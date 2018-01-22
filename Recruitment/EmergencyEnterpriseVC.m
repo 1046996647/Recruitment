@@ -141,7 +141,9 @@
             CompanyDetailVC *vc = [[CompanyDetailVC alloc] init];
             vc.title = @"公司详情";
             vc.model = model;
-            [self.navigationController pushViewController:vc animated:YES];        });
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        });
 
     };
 }

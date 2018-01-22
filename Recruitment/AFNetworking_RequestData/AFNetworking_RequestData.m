@@ -96,6 +96,8 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
             [dic  setValue:userid forKey:@"userid"];
 
         }
+        
+        NSLog(@"%@",dic);
 
         [manager POST:url parameters:dic progress:^(NSProgress * _Nonnull uploadProgress) {
             
@@ -117,7 +119,7 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
                     [InfoCache archiveObject:nil toFile:Person];
                     [InfoCache archiveObject:nil toFile:@"token"];
                     
-                    [[UIApplication sharedApplication].keyWindow makeToast:@"您已被挤下线，请重新登陆!"];
+                    [[UIApplication sharedApplication].keyWindow makeToast:@"账号异常，请重新登陆!!"];
                     
                     AppDelegate *delegate = [AppDelegate share];
                     NavigationController *navVC = (NavigationController *)delegate.tabVC.selectedViewController;

@@ -14,4 +14,7 @@ target 'Recruitment' do
     #pod 'FMDB', '~> 2.7.2'
     pod 'Reachability', '~> 3.2'
     pod 'Toast', '~> 3.0'
+    
+    # 集成微信(完整版14.4M)
+    pod ‘UMengUShare/Social/WeChat'
 end

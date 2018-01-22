@@ -34,7 +34,7 @@
     
     if (self.tag == 5) {
         
-        _selectBtn.frame = CGRectMake(kScreen_Width-15-12, 8, 15, 15);
+        _selectBtn.frame = CGRectMake(kScreen_Width-15-10, (40-10)/2, 10, 10);
         
 //        _jobLab.left = _selectBtn.right;
         _selectBtn.selected = _model.isSelected;

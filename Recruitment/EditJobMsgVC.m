@@ -8,6 +8,7 @@
 
 #import "EditJobMsgVC.h"
 #import "EditJobMsgCell.h"
+#import "RegexTool.h"
 
 @interface EditJobMsgVC ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate>
 
@@ -116,6 +117,7 @@
     for (NSArray *arr in self.dataArr) {
         
         for (PersonModel *model in arr) {
+
             
             if (!([model.title isEqualToString:@"身高(选填)"]||
                 [model.title isEqualToString:@"证件类型(选填)"]||
@@ -125,6 +127,15 @@
                 
                 if (model.text.length == 0) {
                     [self.view makeToast:@"您还有必填项未填写"];
+                    return;
+                }
+            }
+            
+            if ([model.title isEqualToString:@"E-mail"]) {
+                
+                if (![RegexTool validateEmail:model.text]) {
+                    [self.view makeToast:@"邮箱格式不正确"];
+                    
                     return;
                 }
             }

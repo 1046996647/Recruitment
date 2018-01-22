@@ -45,6 +45,7 @@
 {
     _model = model;
     
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:model.logo] placeholderImage:[UIImage imageNamed:@"102"]];
     _companyLab.text = model.company_name;
     _typeLab.text = model.cate_name;
     

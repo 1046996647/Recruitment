@@ -48,6 +48,11 @@
 
     });
     
+    if ([_model.title isEqualToString:@"性别"]) {
+        self.dataSource = @[@"男",@"女"];
+        
+    }
+    
     if ([_model.title isEqualToString:@"最高学历"]) {
         
         for (NSDictionary *dic in self.selectArr) {
@@ -88,7 +93,16 @@
         }
     }
     if ([_model.title isEqualToString:@"意向城市"]) {
-        self.dataSource = @[@"义乌市", @"东阳市", @"金华市",@"浦江县",@"永康市",@"慈溪市",@"余姚市"];
+        
+        for (NSDictionary *dic in self.selectArr) {
+            if ([dic[@"name"] isEqualToString:@"citys"]) {
+                
+                NSString *str = dic[@"data"];
+                self.dataSource = [str componentsSeparatedByString:@","];
+                break;
+            }
+        }
+//        self.dataSource = @[@"义乌市", @"东阳市", @"金华市",@"浦江县",@"永康市",@"慈溪市",@"余姚市"];
     }
 
     [BRStringPickerView showStringPickerWithTitle:nil dataSource:self.dataSource defaultSelValue:self.dataSource[0] isAutoSelect:NO resultBlock:^(id selectValue) {

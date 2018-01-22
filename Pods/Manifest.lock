@@ -15,17 +15,17 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - BaiduMapKit (3.4.2)
-  - IQKeyboardManager (5.0.6)
+  - IQKeyboardManager (5.0.7)
   - M80AttributedLabel (1.6.3)
-  - MJRefresh (3.1.15)
-  - NIMKit (2.1.0):
-    - NIMKit/Lite (= 2.1.0)
-  - NIMKit/Core (2.1.0):
+  - MJRefresh (3.1.15.1)
+  - NIMKit (2.1.1):
+    - NIMKit/Lite (= 2.1.1)
+  - NIMKit/Core (2.1.1):
     - M80AttributedLabel (~> 1.6.3)
     - SDWebImage (~> 4.0.0)
     - Toast (~> 3.0)
     - TZImagePickerController (~> 1.9.0)
-  - NIMKit/Lite (2.1.0):
+  - NIMKit/Lite (2.1.1):
     - NIMKit/Core
     - NIMSDK_LITE (~> 4.4.0)
   - NIMSDK_LITE (4.4.0)
@@ -35,7 +35,15 @@ PODS:
   - SDWebImage/Core (4.0.0)
   - SVProgressHUD (2.2.2)
   - Toast (3.1.0)
-  - TZImagePickerController (1.9.5)
+  - TZImagePickerController (1.9.8)
+  - UMengUShare/Core (6.4.8):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.4.8)
+  - UMengUShare/Social/ReducedWeChat (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/WeChat (6.4.8):
+    - UMengUShare/Core
+    - UMengUShare/Social/ReducedWeChat
   - YYModel (1.0.4)
 
 DEPENDENCIES:
@@ -48,23 +56,25 @@ DEPENDENCIES:
   - SDWebImage
   - SVProgressHUD
   - Toast (~> 3.0)
+  - UMengUShare/Social/WeChat
   - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   BaiduMapKit: f61b19ecf07a3f2deede72b221b366bf698739ed
-  IQKeyboardManager: 077b7f691dfa9d69db9cff66f2bed68ebfc02d9b
+  IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   M80AttributedLabel: d06543195d3e451d2ea62ad76d04aa9cea7661d4
-  MJRefresh: 9af70f5f9327a2cf87f0fb5929f35fcc2fa638ea
-  NIMKit: c2b330547129a59651e4e886adf503a9a9578e5f
+  MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
+  NIMKit: f3100811ad44abdc585ad7bf06d67bac0afc07db
   NIMSDK_LITE: 8ca6e4de3d3a6a93a317b59414893026c81a36d0
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
-  TZImagePickerController: 3f735f4ad5ca6a292a762216d404f9d7a83adad4
+  TZImagePickerController: 3b9413ae5d049b1fdc5b0c720ad283f35b679a50
+  UMengUShare: 7a0ab762ccd445ccfcf11bde8e7f81b29b9f5e1c
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: d1eae88fa9bea0145af489613c535ec0192c4da2
+PODFILE CHECKSUM: 7c11238f9cc0a9b68668abcab8797c20477e7d24
 
 COCOAPODS: 1.4.0.beta.1

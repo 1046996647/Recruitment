@@ -75,9 +75,9 @@
                              ];
         }
         else {
-            self.dataArr = @[@[@{@"image":@"68",@"title":@"求职类型",@"text":@"",@"key":@"requestjobtype"},
+            self.dataArr = @[@[@{@"image":@"68",@"title":@"求职类型",@"text":@"全职",@"key":@"requestjobtype"},
                                @{@"image":@"68",@"title":@"岗位类别",@"text":@"",@"key":@"cateName"}],
-                             @[@{@"image":@"67",@"title":@"期望地区",@"text":@"",@"key":@"hopelocation"},
+                             @[@{@"image":@"67",@"title":@"期望地区",@"text":@"永康市",@"key":@"hopelocation"},
                                @{@"image":@"67",@"title":@"期望职位",@"text":@"",@"key":@"hopepostion"},
                                @{@"image":@"67",@"title":@"待遇要求",@"text":@"",@"key":@"requestsalary"}],
                              @[@{@"image":@"67",@"title":@"住房要求",@"text":@"",@"key":@"requeststay"},
@@ -115,7 +115,7 @@
         remindLab1.text = @"格式：年 月 至 年 月 学校/培训机构名称 专业/科目名称 获得和中证书";
         
 
-    }else if ([self.title isEqualToString:@"技能特长"]) {
+    }else if ([self.title isEqualToString:@"技能特长及自我评价"]) {
         
         if (_model) {
             self.dataArr = @[@[@{@"image":@"67",@"title":@"第一外语",@"text":_model.foreignlanguage,@"key":@"foreignlanguage"},
@@ -172,7 +172,7 @@
                              @[@{@"image":@"67",@"title":@"入职时间",@"text":@"",@"key":@"begin_time"},
                                @{@"image":@"67",@"title":@"离职时间",@"text":@"",@"key":@"end_time"}],
                              @[@{@"image":@"67",@"title":@"工作经验",@"text":@"",@"key":@"no"},
-                               @{@"image":@"67",@"title":@"公司性质",@"text":@"",@"key":@"company_nature"}]
+                               @{@"image":@"67",@"title":@"公司性质",@"text":@"私营企业",@"key":@"company_nature"}]
                              ];
             self.textView.text = @"";
         }
@@ -253,6 +253,8 @@
 {
     [self.view endEditing:YES];
     
+
+    
     NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
     
     NSString *urlStr = nil;
@@ -266,7 +268,7 @@
         urlStr = Update_educate_info;
 
 
-    }else if ([self.title isEqualToString:@"技能特长"]) {
+    }else if ([self.title isEqualToString:@"技能特长及自我评价"]) {
         urlStr = Update_skill_info;
 
     }else if ([self.title isEqualToString:@"联系方式"]) {
@@ -302,6 +304,8 @@
     for (NSArray *arr in self.dataArr) {
         
         for (PersonModel *model in arr) {
+            
+
 
             if (!([model.title isEqualToString:@"电话(选填)"]||
                   [model.title isEqualToString:@"QQ号码(选填)"]||
