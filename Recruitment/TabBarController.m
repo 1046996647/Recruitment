@@ -14,12 +14,22 @@
 #import "SessionListViewController.h"
 #import "PersonalCenterVC.h"
 
+#import "UITabBar+badge.h"
+
+
 @interface TabBarController ()<UITabBarControllerDelegate,UINavigationControllerDelegate>
+
+@property(nonatomic,strong) UIView *redDot;
 
 
 @end
 
 @implementation TabBarController
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 /*
  如果是tabBarController里好几个navigationBarController，可以这样：
@@ -69,7 +79,64 @@
 
     
 //    [self selectController:2];
+    //显示
+
     
+    // 面试邀请和我的信箱
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(is_new) name:@"KInterviewNotification" object:nil];
+    
+    [self is_new];
+
+
+}
+
+
+
+- (void)is_new
+{
+    
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Is_new dic:paraDic showHUD:NO Succed:^(id responseObject) {
+        
+//        {
+//            countInvite = 12;
+//            countMess = 7;
+//            message = "";
+//            status = 1;
+//        }
+        NSNumber *countInvite = [responseObject objectForKey:@"countInvite"];
+        NSNumber *countMess = [responseObject objectForKey:@"countMess"];
+
+        if (countInvite.integerValue > 0) {
+            
+            //显示
+            [self.tabBar showBadgeOnItemIndex:1];
+            [self.tabBar showBadgeOnItemIndex:2];
+
+        }
+        else {
+            //隐藏
+            [self.tabBar hideBadgeOnItemIndex:1];
+            [self.tabBar hideBadgeOnItemIndex:2];
+        }
+        
+        if (countMess.integerValue > 0) {
+            
+            [self.tabBar showBadgeOnItemIndex:3];
+
+        }
+        else {
+            
+            [self.tabBar hideBadgeOnItemIndex:3];
+
+        }
+//        [_msgView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 
@@ -91,6 +158,13 @@
     NavigationController *nav = [[NavigationController alloc]initWithRootViewController:childVC];
 //    nav.delegate = self;
     [self addChildViewController:nav];
+    
+//    _redDot = [[UIView alloc] initWithFrame:CGRectMake(childVC.tabBarItem, 0, 8, 8)];
+//    _redDot.layer.cornerRadius = _redDot.height/2;
+//    _redDot.layer.masksToBounds = YES;
+//    _redDot.backgroundColor = [UIColor redColor];
+//    [childVC.tabBarItem addSubview:_redDot];
+//    _redDot.hidden = YES;
 
 }
 - (void)didReceiveMemoryWarning {
@@ -119,14 +193,6 @@
 //    [navigationController setNavigationBarHidden:isHomePage animated:YES];
 //}
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

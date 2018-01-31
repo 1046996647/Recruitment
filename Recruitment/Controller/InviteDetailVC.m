@@ -84,6 +84,8 @@
     [paraDic setValue:_model.inviteId forKey:@"inviteId"];
     [AFNetworking_RequestData requestMethodPOSTUrl:Invite_detail dic:paraDic showHUD:NO Succed:^(id responseObject) {
         
+        //面试邀请和我的信箱通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"KInterviewNotification" object:nil];
         
     } failure:^(NSError *error) {
         

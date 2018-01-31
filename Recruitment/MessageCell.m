@@ -22,9 +22,12 @@
         _detailLab = [UILabel labelWithframe:CGRectMake(77, _textLab.bottom+8, 250, 13) text:nil font:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:@"#999999"];
         [self.contentView addSubview:_detailLab];
         
-        _redDot = [[UIView alloc] initWithFrame:CGRectMake(40, 0, 8, 8)];
+        _redDot = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 18, 18)];
         _redDot.layer.cornerRadius = _redDot.height/2;
         _redDot.layer.masksToBounds = YES;
+        _redDot.font = [UIFont systemFontOfSize:12];
+        _redDot.textAlignment = NSTextAlignmentCenter;
+        _redDot.textColor = [UIColor whiteColor];
         _redDot.backgroundColor = [UIColor redColor];
         [self.imageView addSubview:_redDot];
         _redDot.hidden = YES;

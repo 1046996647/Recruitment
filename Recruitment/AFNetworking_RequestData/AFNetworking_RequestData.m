@@ -116,17 +116,22 @@ static const NSUInteger kDefaultTimeoutInterval = 20;
                 
                 if (3 == [code integerValue]) {
                     
+                    PersonModel *person = [InfoCache unarchiveObjectWithFile:Person];
+                    if (person) {
+                        [[UIApplication sharedApplication].keyWindow makeToast:@"账号异常，请重新登陆!!"];
+                        
+                        AppDelegate *delegate = [AppDelegate share];
+                        NavigationController *navVC = (NavigationController *)delegate.tabVC.selectedViewController;
+                        
+                        
+                        LoginVC *loginVC = [[LoginVC alloc] init];
+                        [navVC pushViewController:loginVC animated:YES];
+                    }
+
                     [InfoCache archiveObject:nil toFile:Person];
                     [InfoCache archiveObject:nil toFile:@"token"];
                     
-                    [[UIApplication sharedApplication].keyWindow makeToast:@"账号异常，请重新登陆!!"];
-                    
-                    AppDelegate *delegate = [AppDelegate share];
-                    NavigationController *navVC = (NavigationController *)delegate.tabVC.selectedViewController;
-                
-                    
-                    LoginVC *loginVC = [[LoginVC alloc] init];
-                    [navVC pushViewController:loginVC animated:YES];
+
                     return ;
                 }
                 

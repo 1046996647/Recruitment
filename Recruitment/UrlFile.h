@@ -148,11 +148,26 @@
 // 4.7    是否有新消息（仅面试邀请）
 #define Is_new  [NSString stringWithFormat:@"%@message/is_new",BaseUrl]
 
+// 4.7    是否有新消息（我的信箱）
+#define Is_mess_new  [NSString stringWithFormat:@"%@message/is_mess_new",BaseUrl]
+
 // 4.8    获取面试邀请列表
 #define Get_invite  [NSString stringWithFormat:@"%@message/get_invite",BaseUrl]
 
 // 4.9    获取面试邀请详情
 #define Invite_detail  [NSString stringWithFormat:@"%@message/invite_detail",BaseUrl]
+
+// 1.24    我的信箱（收到的消息）
+#define Get_message_tome  [NSString stringWithFormat:@"%@User/get_message_tome",BaseUrl]
+
+// 1.25    我的信箱（发出的消息）
+#define Get_message_fromme  [NSString stringWithFormat:@"%@User/get_message_fromme",BaseUrl]
+
+// 1.26    删除消息）
+#define Delete_mess  [NSString stringWithFormat:@"%@User/delete_mess",BaseUrl]
+
+// 1.23    回复/发送留言
+#define Send_mess_comp  [NSString stringWithFormat:@"%@User/send_mess_comp",BaseUrl]
 
 // 1.16	上传头像
 #define Upload_user_img  [NSString stringWithFormat:@"%@User/upload_user_img",BaseUrl]

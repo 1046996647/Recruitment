@@ -20,11 +20,15 @@
 #import <UMSocialCore/UMSocialCore.h>
 #define USHARE_DEMO_APPKEY @"5a4ae4fbf29d981a430000b8"
 
+// 友盟推送
+#import "UMessage.h"
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
+#import <UserNotifications/UserNotifications.h>
+#endif
 
 @interface AppDelegate ()<BMKGeneralDelegate>
 
 @property (strong, nonatomic) BMKMapManager *mapManager;
-
 
 @end
 
@@ -94,6 +98,15 @@
     [self configUSharePlatforms];
     
     [self confitUShareSettings];
+    
+    // 友盟推送
+    [UMessage startWithAppkey:USHARE_DEMO_APPKEY launchOptions:launchOptions];
+    //注册通知，如果要使用category的自定义策略，可以参考demo中的代码。
+    [UMessage registerForRemoteNotifications];
+    
+    
+    //打开日志，方便调试
+    [UMessage setLogEnabled:YES];
     
     return YES;
 }
@@ -175,11 +188,123 @@
     
 }
 
+// ------------推送
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [[NIMSDK sharedSDK] updateApnsToken:deviceToken];
     
-    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken:  %@", deviceToken);
+    NSString *pushToken = [self stringDevicetoken:deviceToken];
+    NSLog(@"deviceToken:%@",pushToken);
+    
+    [InfoCache archiveObject:pushToken toFile:@"pushToken"];
+}
+
+#pragma mark 以下的
+-(NSString *)stringDevicetoken:(NSData *)deviceToken
+{
+    NSString *token = [deviceToken description];
+    NSString *pushToken = [[[token stringByReplacingOccurrencesOfString:@"<"withString:@""]                   stringByReplacingOccurrencesOfString:@">"withString:@""] stringByReplacingOccurrencesOfString:@" "withString:@""];
+    return pushToken;
+}
+
+//iOS10以下使用这个方法接收通知
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    
+    //关闭友盟自带的弹出框
+    [UMessage setAutoAlert:NO];
+    [UMessage didReceiveRemoteNotification:userInfo];
+    
+//    NSString *pushValue = userInfo[@"type"];
+    
+    //面试邀请和我的信箱
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"KInterviewNotification" object:nil];
+    
+//    if ([pushValue isEqualToString:@"interview"]) {
+//        //面试邀请
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"KInterviewNotification" object:nil];
+//    }
+//    else {
+//        // 我的信箱通知
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"kIs_mess_newNotification" object:nil];
+//
+//
+//    }
+    
+//    if ([pushValue isEqualToString:@"ArriveOrder"]) {
+//        //完成订单通知事件(弹出评价视图)
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"kFinishOrderNotification" object:userInfo[@"orderId"]];
+//    }
+    
+    //    self.userInfo = userInfo;
+    //定制自定的的弹出框
+    if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
+    {
+        //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"标题"
+        //                                                                message:@"Test On ApplicationStateActive"
+        //                                                               delegate:self
+        //                                                      cancelButtonTitle:@"确定"
+        //                                                      otherButtonTitles:nil];
+        //
+        //            [alertView show];
+        
+        //            [[ZAlertViewManager shareManager] showWithType:AlertViewTypeSuccess];
+        
+    }
+}
+
+
+
+//iOS10新增：处理前台收到通知的代理方法
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于前台时的远程推送接受
+        //关闭U-Push自带的弹出框
+        [UMessage setAutoAlert:NO];
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+        
+        NSString *pushValue = userInfo[@"type"];
+        
+        if ([pushValue isEqualToString:@"interview"]) {
+            //面试邀请
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"KInterviewNotification" object:nil];
+        }
+        else {
+            // 我的信箱通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"kIs_mess_newNotification" object:nil];
+
+            
+        }
+
+        //        //定制自定的的弹出框
+        //        if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
+        //        {
+        //            [[ZAlertViewManager shareManager] showWithType:AlertViewTypeSuccess];
+        //
+        //        }
+        
+    }else{
+        //应用处于前台时的本地推送接受
+    }
+    //当应用处于前台时提示设置，需要哪个可以设置哪一个
+    completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);
+    //    completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge);
+    
+}
+
+//iOS10后新增：处理后台点击通知的代理方法
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler{
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于后台时的远程推送接受
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+        
+    }else{
+        //应用处于后台时的本地推送接受
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -204,6 +329,12 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    //面试邀请和我的信箱通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"KInterviewNotification" object:nil];
+    
+//    // 我的信箱通知
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"kIs_mess_newNotification" object:nil];
 }
 
 

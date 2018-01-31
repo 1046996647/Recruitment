@@ -168,6 +168,8 @@
     NSMutableDictionary  *paramDic=[[NSMutableDictionary  alloc]initWithCapacity:0];
     [paramDic  setValue:self.phone.text forKey:@"userid"];// userid和手机一样
     [paramDic  setValue:self.password.text forKey:@"passwd"];
+    [paramDic  setValue:[InfoCache unarchiveObjectWithFile:@"pushToken"] forKey:@"deviceToken"];
+    [paramDic  setValue:@"ios" forKey:@"deviceType"];
     
     [AFNetworking_RequestData requestMethodPOSTUrl:Login dic:paramDic showHUD:YES Succed:^(id responseObject) {
         

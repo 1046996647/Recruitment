@@ -31,10 +31,18 @@
 @property(nonatomic,strong) PersonModel *model;
 @property(nonatomic,strong) NSString *titleStr;
 
+@property (nonatomic,assign) BOOL isNew;
+@property(nonatomic,strong) UILabel *redDot;
+
 
 @end
 
 @implementation ResumeVC
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -162,13 +170,60 @@
         line.backgroundColor = [UIColor colorWithHexString:@"#D3D3D3"];
         [forgetBtn addSubview:line];
         
+        if (i==2) {
+            
+            _redDot = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, 18, 18)];
+            _redDot.layer.cornerRadius = _redDot.height/2;
+            _redDot.layer.masksToBounds = YES;
+            _redDot.font = [UIFont systemFontOfSize:12];
+            _redDot.textAlignment = NSTextAlignmentCenter;
+            _redDot.textColor = [UIColor whiteColor];
+            _redDot.backgroundColor = [UIColor redColor];
+            [forgetBtn addSubview:_redDot];
+            _redDot.hidden = YES;
+        }
     }
     
     scrollView.contentSize = CGSizeMake(kScreen_Width, self.forgetBtn2.bottom);
 
     
 //    [self get_ui_info:NO];
+    
+    // 面试邀请和信箱
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(is_new) name:@"KInterviewNotification" object:nil];
 
+}
+
+
+- (void)is_new
+{
+    
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Is_new dic:paraDic showHUD:NO Succed:^(id responseObject) {
+        
+        //        {
+        //            countInvite = 12;
+        //            countMess = 7;
+        //            message = "";
+        //            status = 1;
+        //        }
+        NSNumber *countInvite = [responseObject objectForKey:@"countInvite"];
+        NSNumber *countMess = [responseObject objectForKey:@"countMess"];
+        
+        if (countInvite.integerValue > 0) {
+            self.redDot.hidden = NO;
+            self.redDot.text = [NSString stringWithFormat:@"%@",countInvite];
+        }
+        else {
+            self.redDot.hidden = YES;
+            
+        }
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 // 获取部分用户信息
@@ -498,6 +553,9 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
+    [self is_new];
+
     
     //带动画结果在切换tabBar的时候viewController会有闪动的效果不建议这样写
     //    [self.navigationController setNavigationBarHidden:YES animated:YES];

@@ -42,8 +42,8 @@
 		F70EF5381F5FBB4B001C65A7 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF5371F5FBB4B001C65A7 /* TabBarController.m */; };
 		F70EF53B1F5FC7E2001C65A7 /* PersonalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF53A1F5FC7E2001C65A7 /* PersonalCell.m */; };
 		F70EF53F1F5FD964001C65A7 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F70EF53E1F5FD964001C65A7 /* LoginVC.m */; };
+		F7198B712015959C000A6EB5 /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7198B6F2015959B000A6EB5 /* libUMessage_Sdk_1.5.0a.a */; };
 		F71C04361F986B970024C1EC /* CountDownServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F71C04351F986B970024C1EC /* CountDownServer.m */; };
-		F72CC5BE1F8B194500DDE151 /* MessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F72CC5BD1F8B194500DDE151 /* MessageTableView.m */; };
 		F72FF8B61F62314100E3AA92 /* ApplyJobVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8B51F62314100E3AA92 /* ApplyJobVC.m */; };
 		F72FF8B91F6234F000E3AA92 /* JobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8B81F6234F000E3AA92 /* JobModel.m */; };
 		F72FF8BC1F625EA600E3AA92 /* JobView.m in Sources */ = {isa = PBXBuildFile; fileRef = F72FF8BB1F625EA600E3AA92 /* JobView.m */; };
@@ -143,12 +143,35 @@
 		F7571AE71FC5677C00EAE623 /* NTESVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7571AC31FC5677C00EAE623 /* NTESVideoViewController.m */; };
 		F7571AE81FC5677C00EAE623 /* NTESVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7571AC41FC5677C00EAE623 /* NTESVideoViewController.xib */; };
 		F7571AEE1FC5679800EAE623 /* NTESSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7571AEB1FC5679800EAE623 /* NTESSessionViewController.m */; };
+		F757ED262016E8E200904448 /* MJCChildMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED0E2016E8E200904448 /* MJCChildMainView.m */; };
+		F757ED272016E8E200904448 /* MJCIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED102016E8E200904448 /* MJCIndicatorView.m */; };
+		F757ED282016E8E200904448 /* MJCTabItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED122016E8E200904448 /* MJCTabItem.m */; };
+		F757ED292016E8E200904448 /* MJCTitlesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED142016E8E200904448 /* MJCTitlesView.m */; };
+		F757ED2A2016E8E200904448 /* MJCAlertMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED172016E8E200904448 /* MJCAlertMessage.m */; };
+		F757ED2B2016E8E200904448 /* MJCCommonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED192016E8E200904448 /* MJCCommonTools.m */; };
+		F757ED2C2016E8E200904448 /* MJCOrdinaryLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED1B2016E8E200904448 /* MJCOrdinaryLayout.m */; };
+		F757ED2D2016E8E200904448 /* UIButton+MJCClassExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED1D2016E8E200904448 /* UIButton+MJCClassExtension.m */; };
+		F757ED2E2016E8E200904448 /* UIColor+MJCClassExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED1F2016E8E200904448 /* UIColor+MJCClassExtension.m */; };
+		F757ED2F2016E8E200904448 /* UILabel+MJCClassExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED212016E8E200904448 /* UILabel+MJCClassExtension.m */; };
+		F757ED302016E8E200904448 /* UIView+MJCClassExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED232016E8E200904448 /* UIView+MJCClassExtension.m */; };
+		F757ED312016E8E200904448 /* MJCSegmentInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED252016E8E200904448 /* MJCSegmentInterface.m */; };
+		F757ED362016E94800904448 /* MyMailboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED322016E94700904448 /* MyMailboxVC.m */; };
+		F757ED372016E94800904448 /* ReceiveMsgVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED352016E94800904448 /* ReceiveMsgVC.m */; };
+		F757ED3A2016E95200904448 /* SendMsgVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED392016E95200904448 /* SendMsgVC.m */; };
+		F757ED3D2016E9B400904448 /* ReceiveMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED3C2016E9B400904448 /* ReceiveMsgCell.m */; };
+		F757ED432016E9CF00904448 /* ZFShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED402016E9CE00904448 /* ZFShareView.m */; };
+		F757ED442016E9CF00904448 /* ZFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED422016E9CE00904448 /* ZFTableViewCell.m */; };
+		F757ED472016E9F300904448 /* ReceiveMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED462016E9F300904448 /* ReceiveMsgModel.m */; };
+		F757ED4A2016EA0900904448 /* MsgDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED492016EA0900904448 /* MsgDetailVC.m */; };
+		F757ED4D2017118800904448 /* WordsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F757ED4C2017118800904448 /* WordsVC.m */; };
 		F75861571F8F12950065FE56 /* EmergencyEnterpriseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75861561F8F12950065FE56 /* EmergencyEnterpriseVC.m */; };
 		F75A453D1F67B6DC00B0790C /* ResumeManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453C1F67B6DC00B0790C /* ResumeManageVC.m */; };
 		F75A45401F67BD4F00B0790C /* JobRecommandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A453F1F67BD4F00B0790C /* JobRecommandVC.m */; };
 		F75A45431F67BEA000B0790C /* JobRecommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A45421F67BEA000B0790C /* JobRecommandCell.m */; };
 		F762FF0A1FD4DC8A00A722AB /* JobView1cell.m in Sources */ = {isa = PBXBuildFile; fileRef = F762FF091FD4DC8A00A722AB /* JobView1cell.m */; };
 		F762FF0D1FD50E5C00A722AB /* JobViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F762FF0C1FD50E5C00A722AB /* JobViewCell.m */; };
+		F76E9FE2201AD9FC0076F3E0 /* MessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F76E9FE1201AD9FC0076F3E0 /* MessageTableView.m */; };
+		F76EA00B201B06B10076F3E0 /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = F76EA00A201B06B10076F3E0 /* UITabBar+badge.m */; };
 		F76EDA251F7C9BB0006B9627 /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F76EDA241F7C9BB0006B9627 /* HomeModel.m */; };
 /* End PBXBuildFile section */
 
@@ -224,10 +247,10 @@
 		F70EF53A1F5FC7E2001C65A7 /* PersonalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCell.m; sourceTree = "<group>"; };
 		F70EF53D1F5FD964001C65A7 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		F70EF53E1F5FD964001C65A7 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		F7198B6F2015959B000A6EB5 /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
+		F7198B702015959B000A6EB5 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		F71C04341F986B970024C1EC /* CountDownServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountDownServer.h; sourceTree = "<group>"; };
 		F71C04351F986B970024C1EC /* CountDownServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountDownServer.m; sourceTree = "<group>"; };
-		F72CC5BC1F8B194500DDE151 /* MessageTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageTableView.h; sourceTree = "<group>"; };
-		F72CC5BD1F8B194500DDE151 /* MessageTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageTableView.m; sourceTree = "<group>"; };
 		F72FF8B41F62314100E3AA92 /* ApplyJobVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyJobVC.h; sourceTree = "<group>"; };
 		F72FF8B51F62314100E3AA92 /* ApplyJobVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyJobVC.m; sourceTree = "<group>"; };
 		F72FF8B71F6234F000E3AA92 /* JobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobModel.h; sourceTree = "<group>"; };
@@ -425,6 +448,48 @@
 		F7571AC41FC5677C00EAE623 /* NTESVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESVideoViewController.xib; sourceTree = "<group>"; };
 		F7571AEA1FC5679800EAE623 /* NTESSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSessionViewController.h; sourceTree = "<group>"; };
 		F7571AEB1FC5679800EAE623 /* NTESSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESSessionViewController.m; sourceTree = "<group>"; };
+		F757ED0D2016E8E200904448 /* MJCChildMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJCChildMainView.h; sourceTree = "<group>"; };
+		F757ED0E2016E8E200904448 /* MJCChildMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJCChildMainView.m; sourceTree = "<group>"; };
+		F757ED0F2016E8E200904448 /* MJCIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJCIndicatorView.h; sourceTree = "<group>"; };
+		F757ED102016E8E200904448 /* MJCIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJCIndicatorView.m; sourceTree = "<group>"; };
+		F757ED112016E8E200904448 /* MJCTabItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJCTabItem.h; sourceTree = "<group>"; };
+		F757ED122016E8E200904448 /* MJCTabItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJCTabItem.m; sourceTree = "<group>"; };
+		F757ED132016E8E200904448 /* MJCTitlesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJCTitlesView.h; sourceTree = "<group>"; };
+		F757ED142016E8E200904448 /* MJCTitlesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJCTitlesView.m; sourceTree = "<group>"; };
+		F757ED162016E8E200904448 /* MJCAlertMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJCAlertMessage.h; sourceTree = "<group>"; };
+		F757ED172016E8E200904448 /* MJCAlertMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJCAlertMessage.m; sourceTree = "<group>"; };
+		F757ED182016E8E200904448 /* MJCCommonTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJCCommonTools.h; sourceTree = "<group>"; };
+		F757ED192016E8E200904448 /* MJCCommonTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJCCommonTools.m; sourceTree = "<group>"; };
+		F757ED1A2016E8E200904448 /* MJCOrdinaryLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJCOrdinaryLayout.h; sourceTree = "<group>"; };
+		F757ED1B2016E8E200904448 /* MJCOrdinaryLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJCOrdinaryLayout.m; sourceTree = "<group>"; };
+		F757ED1C2016E8E200904448 /* UIButton+MJCClassExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+MJCClassExtension.h"; sourceTree = "<group>"; };
+		F757ED1D2016E8E200904448 /* UIButton+MJCClassExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+MJCClassExtension.m"; sourceTree = "<group>"; };
+		F757ED1E2016E8E200904448 /* UIColor+MJCClassExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MJCClassExtension.h"; sourceTree = "<group>"; };
+		F757ED1F2016E8E200904448 /* UIColor+MJCClassExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MJCClassExtension.m"; sourceTree = "<group>"; };
+		F757ED202016E8E200904448 /* UILabel+MJCClassExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+MJCClassExtension.h"; sourceTree = "<group>"; };
+		F757ED212016E8E200904448 /* UILabel+MJCClassExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+MJCClassExtension.m"; sourceTree = "<group>"; };
+		F757ED222016E8E200904448 /* UIView+MJCClassExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJCClassExtension.h"; sourceTree = "<group>"; };
+		F757ED232016E8E200904448 /* UIView+MJCClassExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJCClassExtension.m"; sourceTree = "<group>"; };
+		F757ED242016E8E200904448 /* MJCSegmentInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJCSegmentInterface.h; sourceTree = "<group>"; };
+		F757ED252016E8E200904448 /* MJCSegmentInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJCSegmentInterface.m; sourceTree = "<group>"; };
+		F757ED322016E94700904448 /* MyMailboxVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMailboxVC.m; sourceTree = "<group>"; };
+		F757ED332016E94700904448 /* ReceiveMsgVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveMsgVC.h; sourceTree = "<group>"; };
+		F757ED342016E94700904448 /* MyMailboxVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMailboxVC.h; sourceTree = "<group>"; };
+		F757ED352016E94800904448 /* ReceiveMsgVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveMsgVC.m; sourceTree = "<group>"; };
+		F757ED382016E95200904448 /* SendMsgVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMsgVC.h; sourceTree = "<group>"; };
+		F757ED392016E95200904448 /* SendMsgVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMsgVC.m; sourceTree = "<group>"; };
+		F757ED3B2016E9B300904448 /* ReceiveMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveMsgCell.h; sourceTree = "<group>"; };
+		F757ED3C2016E9B400904448 /* ReceiveMsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveMsgCell.m; sourceTree = "<group>"; };
+		F757ED3F2016E9CE00904448 /* ZFShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFShareView.h; sourceTree = "<group>"; };
+		F757ED402016E9CE00904448 /* ZFShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFShareView.m; sourceTree = "<group>"; };
+		F757ED412016E9CE00904448 /* ZFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFTableViewCell.h; sourceTree = "<group>"; };
+		F757ED422016E9CE00904448 /* ZFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFTableViewCell.m; sourceTree = "<group>"; };
+		F757ED452016E9F300904448 /* ReceiveMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveMsgModel.h; sourceTree = "<group>"; };
+		F757ED462016E9F300904448 /* ReceiveMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveMsgModel.m; sourceTree = "<group>"; };
+		F757ED482016EA0900904448 /* MsgDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgDetailVC.h; sourceTree = "<group>"; };
+		F757ED492016EA0900904448 /* MsgDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgDetailVC.m; sourceTree = "<group>"; };
+		F757ED4B2017118700904448 /* WordsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordsVC.h; sourceTree = "<group>"; };
+		F757ED4C2017118800904448 /* WordsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordsVC.m; sourceTree = "<group>"; };
 		F75861551F8F12950065FE56 /* EmergencyEnterpriseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmergencyEnterpriseVC.h; sourceTree = "<group>"; };
 		F75861561F8F12950065FE56 /* EmergencyEnterpriseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmergencyEnterpriseVC.m; sourceTree = "<group>"; };
 		F75A453B1F67B6DC00B0790C /* ResumeManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResumeManageVC.h; sourceTree = "<group>"; };
@@ -438,6 +503,10 @@
 		F762FF0B1FD50E5C00A722AB /* JobViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobViewCell.h; sourceTree = "<group>"; };
 		F762FF0C1FD50E5C00A722AB /* JobViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobViewCell.m; sourceTree = "<group>"; };
 		F76806AA1FC562EC00981F25 /* NTESGlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESGlobalMacro.h; sourceTree = "<group>"; };
+		F76E9FE0201AD9FB0076F3E0 /* MessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableView.h; sourceTree = "<group>"; };
+		F76E9FE1201AD9FC0076F3E0 /* MessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableView.m; sourceTree = "<group>"; };
+		F76EA009201B06B10076F3E0 /* UITabBar+badge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITabBar+badge.h"; sourceTree = "<group>"; };
+		F76EA00A201B06B10076F3E0 /* UITabBar+badge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
 		F76EDA231F7C9BB0006B9627 /* HomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
 		F76EDA241F7C9BB0006B9627 /* HomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -448,6 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5945D95BFF5ABC906AC8BCE4 /* libPods-Recruitment.a in Frameworks */,
+				F7198B712015959C000A6EB5 /* libUMessage_Sdk_1.5.0a.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +562,7 @@
 		F70EF4731F5F7F8E001C65A7 /* Recruitment */ = {
 			isa = PBXGroup;
 			children = (
+				F7198B6E2015959B000A6EB5 /* UMessage_Sdk_1.5.0a */,
 				F74B8FE61FC65C13004B1A19 /* Recruitment.entitlements */,
 				F7571A751FC5677C00EAE623 /* Classes */,
 				F70EF48D1F5F8591001C65A7 /* AFNetworking_RequestData */,
@@ -576,6 +647,8 @@
 				F70EF4E91F5F85F7001C65A7 /* UIViewController+UIViewControllerExt.m */,
 				F70EF4EA1F5F85F7001C65A7 /* UIViewExt.h */,
 				F70EF4EB1F5F85F7001C65A7 /* UIViewExt.m */,
+				F76EA009201B06B10076F3E0 /* UITabBar+badge.h */,
+				F76EA00A201B06B10076F3E0 /* UITabBar+badge.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -704,6 +777,15 @@
 			name = "登录注册";
 			sourceTree = "<group>";
 		};
+		F7198B6E2015959B000A6EB5 /* UMessage_Sdk_1.5.0a */ = {
+			isa = PBXGroup;
+			children = (
+				F7198B6F2015959B000A6EB5 /* libUMessage_Sdk_1.5.0a.a */,
+				F7198B702015959B000A6EB5 /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.5.0a;
+			sourceTree = "<group>";
+		};
 		F7353DB41F74A9CF009F086E /* MWWaterWaveProgressView */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,6 +801,8 @@
 		F73C37B51F61130300027289 /* CustomClass */ = {
 			isa = PBXGroup;
 			children = (
+				F757ED3E2016E9CE00904448 /* ZFTableViewCell */,
+				F757ED0B2016E8E200904448 /* MJCSlideInterface */,
 				F75624B81F79EA2D006D4174 /* DiySearchBar.h */,
 				F75624B91F79EA2D006D4174 /* DiySearchBar.m */,
 				F73C37B61F61132C00027289 /* Lib */,
@@ -916,8 +1000,8 @@
 		F74F4AB11F66272E007736BA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F72CC5BC1F8B194500DDE151 /* MessageTableView.h */,
-				F72CC5BD1F8B194500DDE151 /* MessageTableView.m */,
+				F76E9FE0201AD9FB0076F3E0 /* MessageTableView.h */,
+				F76E9FE1201AD9FC0076F3E0 /* MessageTableView.m */,
 				F73C37B21F60EFCA00027289 /* MessageCell.h */,
 				F73C37B31F60EFCA00027289 /* MessageCell.m */,
 				F74F4AB41F662773007736BA /* InvitedCell.h */,
@@ -967,6 +1051,8 @@
 		F74F4AC51F664F2B007736BA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F757ED452016E9F300904448 /* ReceiveMsgModel.h */,
+				F757ED462016E9F300904448 /* ReceiveMsgModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -978,6 +1064,8 @@
 				F70EF53A1F5FC7E2001C65A7 /* PersonalCell.m */,
 				F70253201F73A13900F5E025 /* MyAttentionCell.h */,
 				F70253211F73A13900F5E025 /* MyAttentionCell.m */,
+				F757ED3B2016E9B300904448 /* ReceiveMsgCell.h */,
+				F757ED3C2016E9B400904448 /* ReceiveMsgCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1001,6 +1089,16 @@
 				F74F4AD51F665A7E007736BA /* ChangePhoneVC.m */,
 				F74F4AD71F66609A007736BA /* AboutUsVC.h */,
 				F74F4AD81F66609A007736BA /* AboutUsVC.m */,
+				F757ED342016E94700904448 /* MyMailboxVC.h */,
+				F757ED322016E94700904448 /* MyMailboxVC.m */,
+				F757ED332016E94700904448 /* ReceiveMsgVC.h */,
+				F757ED352016E94800904448 /* ReceiveMsgVC.m */,
+				F757ED382016E95200904448 /* SendMsgVC.h */,
+				F757ED392016E95200904448 /* SendMsgVC.m */,
+				F757ED482016EA0900904448 /* MsgDetailVC.h */,
+				F757ED492016EA0900904448 /* MsgDetailVC.m */,
+				F757ED4B2017118700904448 /* WordsVC.h */,
+				F757ED4C2017118800904448 /* WordsVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1145,6 +1243,64 @@
 				F7571AC41FC5677C00EAE623 /* NTESVideoViewController.xib */,
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		F757ED0B2016E8E200904448 /* MJCSlideInterface */ = {
+			isa = PBXGroup;
+			children = (
+				F757ED0C2016E8E200904448 /* childs */,
+				F757ED152016E8E200904448 /* common */,
+				F757ED242016E8E200904448 /* MJCSegmentInterface.h */,
+				F757ED252016E8E200904448 /* MJCSegmentInterface.m */,
+			);
+			path = MJCSlideInterface;
+			sourceTree = "<group>";
+		};
+		F757ED0C2016E8E200904448 /* childs */ = {
+			isa = PBXGroup;
+			children = (
+				F757ED0D2016E8E200904448 /* MJCChildMainView.h */,
+				F757ED0E2016E8E200904448 /* MJCChildMainView.m */,
+				F757ED0F2016E8E200904448 /* MJCIndicatorView.h */,
+				F757ED102016E8E200904448 /* MJCIndicatorView.m */,
+				F757ED112016E8E200904448 /* MJCTabItem.h */,
+				F757ED122016E8E200904448 /* MJCTabItem.m */,
+				F757ED132016E8E200904448 /* MJCTitlesView.h */,
+				F757ED142016E8E200904448 /* MJCTitlesView.m */,
+			);
+			path = childs;
+			sourceTree = "<group>";
+		};
+		F757ED152016E8E200904448 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				F757ED162016E8E200904448 /* MJCAlertMessage.h */,
+				F757ED172016E8E200904448 /* MJCAlertMessage.m */,
+				F757ED182016E8E200904448 /* MJCCommonTools.h */,
+				F757ED192016E8E200904448 /* MJCCommonTools.m */,
+				F757ED1A2016E8E200904448 /* MJCOrdinaryLayout.h */,
+				F757ED1B2016E8E200904448 /* MJCOrdinaryLayout.m */,
+				F757ED1C2016E8E200904448 /* UIButton+MJCClassExtension.h */,
+				F757ED1D2016E8E200904448 /* UIButton+MJCClassExtension.m */,
+				F757ED1E2016E8E200904448 /* UIColor+MJCClassExtension.h */,
+				F757ED1F2016E8E200904448 /* UIColor+MJCClassExtension.m */,
+				F757ED202016E8E200904448 /* UILabel+MJCClassExtension.h */,
+				F757ED212016E8E200904448 /* UILabel+MJCClassExtension.m */,
+				F757ED222016E8E200904448 /* UIView+MJCClassExtension.h */,
+				F757ED232016E8E200904448 /* UIView+MJCClassExtension.m */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		F757ED3E2016E9CE00904448 /* ZFTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				F757ED3F2016E9CE00904448 /* ZFShareView.h */,
+				F757ED402016E9CE00904448 /* ZFShareView.m */,
+				F757ED412016E9CE00904448 /* ZFTableViewCell.h */,
+				F757ED422016E9CE00904448 /* ZFTableViewCell.m */,
+			);
+			path = ZFTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1295,11 +1451,14 @@
 			files = (
 				F73C37BE1F61134500027289 /* UIView+WJExtension.m in Sources */,
 				F752330C1FBC31CE002D4AF9 /* BRAddressPickerView.m in Sources */,
+				F757ED3A2016E95200904448 /* SendMsgVC.m in Sources */,
+				F757ED4A2016EA0900904448 /* MsgDetailVC.m in Sources */,
 				F7571ADD1FC5677C00EAE623 /* NTESAVNotifier.m in Sources */,
 				F72FF8C81F628D5C00E3AA92 /* CompanyDetailVC.m in Sources */,
 				F72FF8B61F62314100E3AA92 /* ApplyJobVC.m in Sources */,
 				F74243111F68F959009AA2E5 /* RegisterVC.m in Sources */,
 				F73C37BF1F61134500027289 /* CustomerScrollView.m in Sources */,
+				F757ED2D2016E8E200904448 /* UIButton+MJCClassExtension.m in Sources */,
 				F762FF0A1FD4DC8A00A722AB /* JobView1cell.m in Sources */,
 				F7571AE71FC5677C00EAE623 /* NTESVideoViewController.m in Sources */,
 				F7420FE41F6B7638002A20B8 /* NSDate+BRAdd.m in Sources */,
@@ -1313,14 +1472,17 @@
 				F72FF8C21F62755C00E3AA92 /* JobDetailVC.m in Sources */,
 				F7571ACB1FC5677C00EAE623 /* NSString+NTES.m in Sources */,
 				F74197621F63781E00AD5F2C /* PersonalMessageCell.m in Sources */,
-				F72CC5BE1F8B194500DDE151 /* MessageTableView.m in Sources */,
+				F757ED362016E94800904448 /* MyMailboxVC.m in Sources */,
 				F7571ADA1FC5677C00EAE623 /* NTESContentView.m in Sources */,
 				F7571AD81FC5677C00EAE623 /* NTESAttachment.m in Sources */,
+				F757ED2B2016E8E200904448 /* MJCCommonTools.m in Sources */,
+				F757ED432016E9CF00904448 /* ZFShareView.m in Sources */,
 				F74F4AAF1F6626CD007736BA /* InvitedVC.m in Sources */,
 				F7353DBA1F74A9CF009F086E /* MWWaveCycleAnimationView.m in Sources */,
 				F72FF8C51F6282EB00E3AA92 /* JobDetailCell.m in Sources */,
 				F752330D1FBC31CE002D4AF9 /* BRAddressModel.m in Sources */,
 				F70EF5191F5F8616001C65A7 /* UIView+SDExtension.m in Sources */,
+				F757ED312016E8E200904448 /* MJCSegmentInterface.m in Sources */,
 				F7571ADF1FC5677C00EAE623 /* NTESClientUtil.m in Sources */,
 				F741979A1F63CD3B00AD5F2C /* EditJobMsgCell.m in Sources */,
 				F70EF5381F5FBB4B001C65A7 /* TabBarController.m in Sources */,
@@ -1335,11 +1497,14 @@
 				F74197811F63895C00AD5F2C /* BaseView.m in Sources */,
 				F7571AE61FC5677C00EAE623 /* NTESUserUtil.m in Sources */,
 				F7571AD11FC5677C00EAE623 /* UIScrollView+NTESDirection.m in Sources */,
+				F757ED2F2016E8E200904448 /* UILabel+MJCClassExtension.m in Sources */,
 				F7571AC51FC5677C00EAE623 /* NTESChartletAttachment.m in Sources */,
 				F74F4ACD1F665104007736BA /* OpinionVC.m in Sources */,
 				F74F4AEA1F667DEC007736BA /* SubscriptionManageModel.m in Sources */,
 				F74F4AD01F6654A6007736BA /* SettingVC.m in Sources */,
+				F757ED2E2016E8E200904448 /* UIColor+MJCClassExtension.m in Sources */,
 				F741979D1F63CD4E00AD5F2C /* EditJobMsgModel.m in Sources */,
+				F757ED442016E9CF00904448 /* ZFTableViewCell.m in Sources */,
 				F70EF4ED1F5F85F7001C65A7 /* NSStringExt.m in Sources */,
 				F74197831F63895C00AD5F2C /* BRStringPickerView.m in Sources */,
 				F74F4AE71F667C81007736BA /* SubscriptionManageCell.m in Sources */,
@@ -1349,6 +1514,7 @@
 				F7353DBB1F74A9CF009F086E /* MWWaveProgressView.m in Sources */,
 				F7571AD91FC5677C00EAE623 /* NTESAttachmentDecoder.m in Sources */,
 				F70EF53B1F5FC7E2001C65A7 /* PersonalCell.m in Sources */,
+				F757ED282016E8E200904448 /* MJCTabItem.m in Sources */,
 				F70EF4D81F5F85E4001C65A7 /* InfoCache.m in Sources */,
 				F73C37B41F60EFCA00027289 /* MessageCell.m in Sources */,
 				F70EF4F21F5F85F7001C65A7 /* UIViewExt.m in Sources */,
@@ -1358,17 +1524,20 @@
 				F75861571F8F12950065FE56 /* EmergencyEnterpriseVC.m in Sources */,
 				F73507681F78CC0C00F4F4A2 /* SystemMsgDetailVC.m in Sources */,
 				F7571ADE1FC5677C00EAE623 /* NTESCADisplayLinkHolder.m in Sources */,
+				F76EA00B201B06B10076F3E0 /* UITabBar+badge.m in Sources */,
 				F7571AD51FC5677C00EAE623 /* NTESGalleryViewController.m in Sources */,
 				F70EF5131F5F8616001C65A7 /* TAAbstractDotView.m in Sources */,
 				F70EF4F11F5F85F7001C65A7 /* UIViewController+UIViewControllerExt.m in Sources */,
 				F74F4AC21F6634DA007736BA /* SystemMassageCell.m in Sources */,
 				F70EF5171F5F8616001C65A7 /* SDCollectionViewCell.m in Sources */,
 				F74F4AD31F665905007736BA /* MyCountVC.m in Sources */,
+				F757ED272016E8E200904448 /* MJCIndicatorView.m in Sources */,
 				F73907B31F71165C00103809 /* SearchCell.m in Sources */,
 				F741975C1F63706900AD5F2C /* PersonalMessageVC.m in Sources */,
 				F74F4ACA1F664FA1007736BA /* MyCollectionVC.m in Sources */,
 				F70253251F73B27100F5E025 /* ShareVC.m in Sources */,
 				F73382DA1F72370A0097158C /* JobViewModel.m in Sources */,
+				F757ED2A2016E8E200904448 /* MJCAlertMessage.m in Sources */,
 				F7571AC91FC5677C00EAE623 /* NSData+NTES.m in Sources */,
 				F70EF4791F5F7F8E001C65A7 /* AppDelegate.m in Sources */,
 				F73C37BD1F61134500027289 /* NSString+WJExtension.m in Sources */,
@@ -1377,11 +1546,15 @@
 				F74F4ABF1F6634C3007736BA /* SystemMassageVC.m in Sources */,
 				F75624BA1F79EA2E006D4174 /* DiySearchBar.m in Sources */,
 				F70EF4F61F5F85FE001C65A7 /* UIColor+Expend.m in Sources */,
+				F757ED302016E8E200904448 /* UIView+MJCClassExtension.m in Sources */,
 				F74197821F63895C00AD5F2C /* BRDatePickerView.m in Sources */,
+				F757ED262016E8E200904448 /* MJCChildMainView.m in Sources */,
 				F7571AEE1FC5679800EAE623 /* NTESSessionViewController.m in Sources */,
 				F74F4AB91F662B5E007736BA /* SubscriptionJobVC.m in Sources */,
+				F757ED2C2016E8E200904448 /* MJCOrdinaryLayout.m in Sources */,
 				F70EF4F01F5F85F7001C65A7 /* UIImage+UIImageExt.m in Sources */,
 				F70253221F73A13900F5E025 /* MyAttentionCell.m in Sources */,
+				F757ED292016E8E200904448 /* MJCTitlesView.m in Sources */,
 				F74F4AD61F665A7E007736BA /* ChangePhoneVC.m in Sources */,
 				F7571ACC1FC5677C00EAE623 /* UIActionSheet+NTESBlock.m in Sources */,
 				F7571ADC1FC5677C00EAE623 /* NTESSessionConfig.m in Sources */,
@@ -1397,13 +1570,18 @@
 				F70EF5161F5F8616001C65A7 /* TAPageControl.m in Sources */,
 				F70EF5141F5F8616001C65A7 /* TAAnimatedDotView.m in Sources */,
 				F7571AD31FC5677C00EAE623 /* UIView+NTES.m in Sources */,
+				F76E9FE2201AD9FC0076F3E0 /* MessageTableView.m in Sources */,
 				F71C04361F986B970024C1EC /* CountDownServer.m in Sources */,
+				F757ED3D2016E9B400904448 /* ReceiveMsgCell.m in Sources */,
 				F75A453D1F67B6DC00B0790C /* ResumeManageVC.m in Sources */,
+				F757ED472016E9F300904448 /* ReceiveMsgModel.m in Sources */,
 				F7571ACA1FC5677C00EAE623 /* NSDictionary+NTESJson.m in Sources */,
 				F73C37D51F613D1B00027289 /* HotJobCell.m in Sources */,
+				F757ED4D2017118800904448 /* WordsVC.m in Sources */,
 				F74F4AA61F66210A007736BA /* SendHistoryVC.m in Sources */,
 				F73507651F78C91500F4F4A2 /* SystemModel.m in Sources */,
 				F7571AE41FC5677C00EAE623 /* NTESSessionUtil.m in Sources */,
+				F757ED372016E94800904448 /* ReceiveMsgVC.m in Sources */,
 				F74197911F63B97E00AD5F2C /* EditResumeCell.m in Sources */,
 				F70EF4901F5F8591001C65A7 /* AFNetworking_RequestData.m in Sources */,
 				F702531F1F73A09100F5E025 /* MyAttentionVC.m in Sources */,
@@ -1558,6 +1736,10 @@
 				INFOPLIST_FILE = Recruitment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Recruitment/UMessage_Sdk_1.5.0a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.HongHu.Recruitment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "705f9b4d-ef2f-4a6b-86cd-f9ecae869728";
@@ -1580,6 +1762,10 @@
 				INFOPLIST_FILE = Recruitment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Recruitment/UMessage_Sdk_1.5.0a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.HongHu.Recruitment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "af511b27-e362-4c2a-a59d-af351bbcd717";

@@ -17,7 +17,7 @@ PODS:
   - BaiduMapKit (3.4.2)
   - IQKeyboardManager (5.0.7)
   - M80AttributedLabel (1.6.3)
-  - MJRefresh (3.1.15.1)
+  - MJRefresh (3.1.15.3)
   - NIMKit (2.1.1):
     - NIMKit/Lite (= 2.1.1)
   - NIMKit/Core (2.1.1):
@@ -36,12 +36,12 @@ PODS:
   - SVProgressHUD (2.2.2)
   - Toast (3.1.0)
   - TZImagePickerController (1.9.8)
-  - UMengUShare/Core (6.4.8):
+  - UMengUShare/Core (6.4.8.1):
     - UMengUShare/Network
-  - UMengUShare/Network (6.4.8)
-  - UMengUShare/Social/ReducedWeChat (6.4.8):
+  - UMengUShare/Network (6.4.8.1)
+  - UMengUShare/Social/ReducedWeChat (6.4.8.1):
     - UMengUShare/Core
-  - UMengUShare/Social/WeChat (6.4.8):
+  - UMengUShare/Social/WeChat (6.4.8.1):
     - UMengUShare/Core
     - UMengUShare/Social/ReducedWeChat
   - YYModel (1.0.4)
@@ -64,7 +64,7 @@ SPEC CHECKSUMS:
   BaiduMapKit: f61b19ecf07a3f2deede72b221b366bf698739ed
   IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   M80AttributedLabel: d06543195d3e451d2ea62ad76d04aa9cea7661d4
-  MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   NIMKit: f3100811ad44abdc585ad7bf06d67bac0afc07db
   NIMSDK_LITE: 8ca6e4de3d3a6a93a317b59414893026c81a36d0
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
@@ -72,7 +72,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
   TZImagePickerController: 3b9413ae5d049b1fdc5b0c720ad283f35b679a50
-  UMengUShare: 7a0ab762ccd445ccfcf11bde8e7f81b29b9f5e1c
+  UMengUShare: 9e2d22f32aeaf09702ca833ec530895aab995c4f
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
 PODFILE CHECKSUM: 7c11238f9cc0a9b68668abcab8797c20477e7d24

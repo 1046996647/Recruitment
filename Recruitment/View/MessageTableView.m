@@ -28,7 +28,7 @@
         
         self.delegate  = self;
         self.dataSource = self;
-        self.isNew = YES;
+
     }
     return self;
 }
@@ -45,7 +45,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row == 0) {
         SystemMassageVC *vc = [[SystemMassageVC alloc] init];
@@ -98,7 +98,19 @@
     cell.detailLab.text = dic[@"detailTitle"];
     
     if (indexPath.row == 2) {
-        cell.redDot.hidden = self.isNew;
+        
+        if (self.number > 0) {
+            cell.redDot.hidden = NO;
+            cell.redDot.text = [NSString stringWithFormat:@"%ld",self.number];
+        }
+        else {
+            cell.redDot.hidden = YES;
+
+        }
+    }
+    else {
+        cell.redDot.hidden = YES;
+
     }
     
     return cell;

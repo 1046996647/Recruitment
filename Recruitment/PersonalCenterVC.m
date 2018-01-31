@@ -15,6 +15,7 @@
 #import "SubscriptionManageVC.h"
 #import "UIImage+UIImageExt.h"
 #import "MyAttentionVC.h"
+#import "MyMailboxVC.h"
 
 
 @interface PersonalCenterVC ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -23,11 +24,18 @@
 @property (nonatomic,strong) NSArray *dataArr;
 @property (nonatomic,strong) UILabel *label;
 @property (nonatomic,strong) UIButton *userBtn;
+@property (nonatomic,assign) BOOL isNew;
+@property (nonatomic,assign) NSInteger number;
 
 
 @end
 
 @implementation PersonalCenterVC
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,7 +64,9 @@
                      @[@{@"image":@"108",@"title":@"订阅管理"}
 //                       ,@{@"image":@"107",@"title":@"薪资测评"}
                        ],
-                     @[@{@"image":@"106",@"title":@"联系客服"},@{@"image":@"105",@"title":@"意见反馈"}
+                     @[@{@"image":@"106",@"title":@"联系客服"},
+                       @{@"image":@"105",@"title":@"意见反馈"},
+                       @{@"image":@"信封",@"title":@"我的信箱"}
                        ],
                      @[@{@"image":@"104",@"title":@"设置"}
                        ]
@@ -69,8 +79,39 @@
     [self.view addSubview:_tableView];
     _tableView.tableHeaderView = btn;
     
+    self.isNew = YES;
 
+    // 我的信箱通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(is_new) name:@"KInterviewNotification" object:nil];
 }
+
+
+- (void)is_new
+{
+    
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    [AFNetworking_RequestData requestMethodPOSTUrl:Is_new dic:paraDic showHUD:NO Succed:^(id responseObject) {
+        
+        //        {
+        //            countInvite = 12;
+        //            countMess = 7;
+        //            message = "";
+        //            status = 1;
+        //        }
+        NSNumber *countInvite = [responseObject objectForKey:@"countInvite"];
+        NSNumber *countMess = [responseObject objectForKey:@"countMess"];
+        
+        self.number = countMess.integerValue;
+        [_tableView reloadData];
+        
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+
 
 - (void)btnAction:(UIButton *)btn
 {
@@ -156,6 +197,8 @@
         [self.userBtn setImage:[UIImage imageNamed:@"96"] forState:UIControlStateNormal];
         self.label.text = @"登录/注册";
     }
+    
+    [self is_new];
 
 }
 
@@ -237,6 +280,13 @@
             [self.navigationController pushViewController:vc animated:YES];
             
         }
+        if (indexPath.row == 2) {
+            
+            MyMailboxVC *vc = [[MyMailboxVC alloc] init];
+            vc.title = @"我的信箱";
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
     }
     if (indexPath.section == 3) {
         
@@ -276,6 +326,21 @@
     NSDictionary *dic = self.dataArr[indexPath.section][indexPath.row];
     cell.imgView.image = [UIImage imageNamed:dic[@"image"]];
     cell.label.text = dic[@"title"];
+    
+    if (indexPath.section == 2 && indexPath.row == 2) {
+        if (self.number > 0) {
+            cell.redDot.hidden = NO;
+            cell.redDot.text = [NSString stringWithFormat:@"%ld",self.number];
+        }
+        else {
+            cell.redDot.hidden = YES;
+            
+        }
+    }
+    else {
+        cell.redDot.hidden = YES;
+        
+    }
     
     return cell;
 }

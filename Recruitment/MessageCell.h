@@ -10,7 +10,7 @@
 
 @interface MessageCell : UITableViewCell
 
-@property(nonatomic,strong) UIView *redDot;
+@property(nonatomic,strong) UILabel *redDot;
 @property(nonatomic,strong) UILabel *textLab;
 @property(nonatomic,strong) UILabel *detailLab;
 

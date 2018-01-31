@@ -12,6 +12,7 @@
 
 @property(nonatomic,strong) UIImageView *imgView;
 @property(nonatomic,strong) UILabel *label;
+@property(nonatomic,strong) UILabel *redDot;
 
 
 @end
