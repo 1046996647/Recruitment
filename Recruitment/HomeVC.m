@@ -145,7 +145,10 @@
 //    self.siteId = @"2";
     [InfoCache archiveObject:@"2" toFile:@"siteId"];
     
-    [self.view makeToast:@"请记得刷新你的简历~" duration:1.5 position:@"12"];
+    PersonModel *model = [InfoCache unarchiveObjectWithFile:Person];
+    if (model) {
+        [self.view makeToast:@"请记得刷新你的简历~" duration:1.5 position:@"12"];
+    }
 
 }
 

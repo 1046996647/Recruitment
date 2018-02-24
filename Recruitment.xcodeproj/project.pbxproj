@@ -1740,10 +1740,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Recruitment/UMessage_Sdk_1.5.0a",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.HongHu.Recruitment;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HongHu.Recruitment1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "705f9b4d-ef2f-4a6b-86cd-f9ecae869728";
-				PROVISIONING_PROFILE_SPECIFIER = Recruitment;
+				PROVISIONING_PROFILE = "915e1fbf-bf35-4cc9-b6a5-0e3b3b7b002c";
+				PROVISIONING_PROFILE_SPECIFIER = com.HongHu.Recruitment1;
 			};
 			name = Debug;
 		};
@@ -1766,7 +1766,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Recruitment/UMessage_Sdk_1.5.0a",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.HongHu.Recruitment;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HongHu.Recruitment1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "af511b27-e362-4c2a-a59d-af351bbcd717";
 				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_8_11;
