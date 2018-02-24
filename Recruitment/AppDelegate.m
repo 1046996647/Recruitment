@@ -265,18 +265,21 @@
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
         
-        NSString *pushValue = userInfo[@"type"];
+        //面试邀请和我的信箱
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"KInterviewNotification" object:nil];
         
-        if ([pushValue isEqualToString:@"interview"]) {
-            //面试邀请
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"KInterviewNotification" object:nil];
-        }
-        else {
-            // 我的信箱通知
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"kIs_mess_newNotification" object:nil];
-
-            
-        }
+//        NSString *pushValue = userInfo[@"type"];
+        
+//        if ([pushValue isEqualToString:@"interview"]) {
+//            //面试邀请
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"KInterviewNotification" object:nil];
+//        }
+//        else {
+//            // 我的信箱通知
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"kIs_mess_newNotification" object:nil];
+//
+//
+//        }
 
         //        //定制自定的的弹出框
         //        if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
